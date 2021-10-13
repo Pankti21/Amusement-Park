@@ -10,6 +10,9 @@ stages:
 
 test:
   stage: test
+  tags: 
+    - dalfcs_docker_kvm
+    - dalfcs_gitlab_docker_ci
   script:
     - cd HAPark
     - mvn clean test
@@ -17,6 +20,9 @@ test:
 
 build:
   stage: build
+  tags: 
+    - dalfcs_docker_kvm
+    - dalfcs_gitlab_docker_ci
   script:
     - cd HAPark
     - mvn package
