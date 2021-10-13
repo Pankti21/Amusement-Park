@@ -1,0 +1,26 @@
+image: maven:3-jdk-11-slim
+
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script:
+    - cd HAPark
+    - mvn clean test
+  when: always
+
+build:
+  stage: build
+  script:
+    - cd HAPark
+    - mvn package
+  artifacts:
+    paths:
+      - target/*.jari
+  when: always
