@@ -15,7 +15,13 @@ test:
     - dalfcs_gitlab_docker_ci
   script:
     - cd HAPark
-    - mvn clean test
+    - mvn clean test surefire-report:report
+  artifacts:
+    when: always
+    expire_in: 1 week
+    reports:
+      junit:
+        - HAPark/target/surefire-reports/TEST-*.xml
   when: always
 
 build:
@@ -28,5 +34,5 @@ build:
     - mvn package
   artifacts:
     paths:
-      - target/*.jari
+      - HAPark/target/*.jar
   when: always
