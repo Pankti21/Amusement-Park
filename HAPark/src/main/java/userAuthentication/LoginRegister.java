@@ -23,6 +23,16 @@ public class LoginRegister {
     }
 
     public boolean validateEmailFormat(){
+        String email = user.getEmail();
+        String[] emailSplit = email.split("@");
+        if (emailSplit.length == 2 && emailSplit[0].length()<65){
+            String[] domainSplit = emailSplit[1].split("\\.");
+            if (domainSplit.length >= 2) {
+                if (Character.toString(email.charAt(email.length()-1)).matches("[0-9a-zA-Z]")) {
+                    return user.getEmail().matches("[0-9a-zA-Z][0-9a-zA-Z.!#$%&'*+-/=?^_`{|]*@[0-9a-zA-Z!#$%&'*+-/=?^_`{|]*.[0-9a-zA-Z.!#$%&'*+-/=?^_`{|]*");
+                }
+            }
+        }
         return false;
     }
 

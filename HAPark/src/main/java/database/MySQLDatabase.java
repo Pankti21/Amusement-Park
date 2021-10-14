@@ -1,14 +1,16 @@
 package database;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MySQLDatabase implements IDataBase{
 
-    String connectionURL = "";
-    String user = "";
-    String password = "";
+    private String connectionURL = "";
+    private String user = "";
+    private String password = "";
+    private ResultSet resultSet;
 
     @Override
     public void connect() {
@@ -20,8 +22,17 @@ public class MySQLDatabase implements IDataBase{
     }
 
     @Override
-    public ResultSet query(String query) {
-        //TODO
+    public void query(String query) {
+
+    }
+
+    @Override
+    public List getResults() {
         return null;
+    }
+
+    @Override
+    public void close() {
+
     }
 }

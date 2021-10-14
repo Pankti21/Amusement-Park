@@ -1,8 +1,10 @@
 package database;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public interface IDataBase {
     public void connect();
-    public ResultSet query(String query); //what should return type be??
+    public void query(String query);
+    public List getResults();
+    public void close();
 }
