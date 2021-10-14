@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LoginRegisterTest {
+    LoginRegister loginRegister = new LoginRegister();
 
-    @Test
+  /*  @Test
     void login() {
         //need to mock db
         //create class to hold loggedin user
@@ -16,13 +17,33 @@ class LoginRegisterTest {
     @Test
     void register() {
     }
+*/
+
+    /* Test cases for Password Validation */
+    @Test
+    void validatePasswordFormatHasMinimum8Chars() {
+        assertFalse(loginRegister.validatePasswordFormat("Dal@123"));
+    }
+    @Test
+    void validatePasswordFormatHasMaximum12Chars() {
+        assertFalse(loginRegister.validatePasswordFormat("Dalhousie@123"));
+    }
+    @Test
+    void validatePasswordFormatHasAtleastOneUpperCaseChar() {
+        assertFalse(loginRegister.validatePasswordFormat("dal@1234"));
+    }
+    @Test
+    void validatePasswordFormatHasAtleastOneLowerCaseChar(){
+        assertFalse(loginRegister.validatePasswordFormat("DAL@1234"));
+    }
+    @Test
+    void validatePasswordFormatHasAtleastOneNumber() {
+        assertFalse(loginRegister.validatePasswordFormat("Dal@housie"));
+    }
 
     @Test
-    void validateEmailFormatValidEmail() {
-        User user = new User();
-        user.setEmail("emailsample@email.com");
-        LoginRegister loginRegister = new LoginRegister(user);
-        assertTrue(loginRegister.validateEmailFormat());
+    void validatePasswordFormatHasAtleastOneSpecialChar() {
+        assertFalse(loginRegister.validatePasswordFormat("Dalhousie123"));
     }
 
     @Test
@@ -73,8 +94,11 @@ class LoginRegisterTest {
         assertFalse(loginRegister.validateEmailFormat());
     }
 
-
     @Test
-    void validatePasswordFormat() {
+    void validateEmailFormatValidEmail() {
+        User user = new User();
+        user.setEmail("emailsample@email.com");
+        LoginRegister loginRegister = new LoginRegister(user);
+        assertTrue(loginRegister.validateEmailFormat());
     }
 }
