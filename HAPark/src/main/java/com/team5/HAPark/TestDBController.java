@@ -17,8 +17,7 @@ public class TestDBController {
     public List<Map<String, Object>> dbTest() throws SQLException {
         IDataBase db = new MySQLDatabase();
         db.connect();
-        List<Map<String, Object>> rows = db.query("SELECT*FROM users");
-        System.out.println("method called");
+        List<Map<String, Object>> rows = db.query("SELECT*FROM user");
         db.connect();
         db.close();
         return rows;

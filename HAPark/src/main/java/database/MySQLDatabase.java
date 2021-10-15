@@ -15,7 +15,6 @@ public class MySQLDatabase implements IDataBase{
     private Connection conn;
     private Statement statement;
 
-
     @Override
     public void connect() {
         user = System.getenv("DB_USER");
@@ -54,9 +53,9 @@ public class MySQLDatabase implements IDataBase{
             int col = metaData.getColumnCount();
             while (resultSet.next()) {
                 Map<String, Object> row = new HashMap<>();
-                for (int i = 0; i<col; i++) {
-                    String key = metaData.getColumnName(col);
-                    Object value = resultSet.getObject(col);
+                for (int i = 1; i<=col; i++) {
+                    String key = metaData.getColumnName(i);
+                    Object value = resultSet.getObject(i);
                     row.put(key,value);
                 }
                 rows.add(row);
