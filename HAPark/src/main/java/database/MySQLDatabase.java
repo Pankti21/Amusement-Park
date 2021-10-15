@@ -69,11 +69,6 @@ public class MySQLDatabase implements IDataBase{
     }
 
     @Override
-    public List getResults() {
-        return null;
-    }
-
-    @Override
     public void close() {
 
         if (resultSet != null) {
