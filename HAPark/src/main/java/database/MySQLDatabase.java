@@ -1,8 +1,9 @@
 package database;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MySQLDatabase implements IDataBase{
 
@@ -43,8 +44,8 @@ public class MySQLDatabase implements IDataBase{
     }
 
     @Override
-    public List<LinkedHashMap<String, Object>> query(String query) {
-        List<LinkedHashMap<String, Object>> rows = new ArrayList<>();
+    public List<Map<String, Object>> query(String query) {
+        List<Map<String, Object>> rows = new ArrayList<>();
 
         try {
             statement = conn.createStatement();
@@ -52,7 +53,7 @@ public class MySQLDatabase implements IDataBase{
             ResultSetMetaData metaData = resultSet.getMetaData();
             int col = metaData.getColumnCount();
             while (resultSet.next()) {
-                LinkedHashMap<String, Object> row = new LinkedHashMap<>();
+                Map<String, Object> row = new HashMap<>();
                 for (int i = 0; i<col; i++) {
                     String key = metaData.getColumnName(col);
                     Object value = resultSet.getObject(col);
