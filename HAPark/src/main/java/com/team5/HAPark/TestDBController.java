@@ -18,9 +18,7 @@ public class TestDBController {
         IDataBase db = new MySQLDatabase();
         db.connect();
         List<Map<String, Object>> rows = db.query("SELECT*FROM user");
-        db.connect();
         db.close();
         return rows;
-
     }
 }
