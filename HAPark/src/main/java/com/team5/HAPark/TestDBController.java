@@ -21,6 +21,5 @@ public class TestDBController {
         db.connect();
         db.close();
         return rows;
-
     }
 }

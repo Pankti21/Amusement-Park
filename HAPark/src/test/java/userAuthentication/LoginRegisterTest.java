@@ -34,7 +34,6 @@ class LoginRegisterTest {
 
         @BeforeEach
         void resetUser(){
-            System.out.println("HELLO");
             CurrentUser.getInstance().setUser(null);
         }
 
@@ -87,6 +86,13 @@ class LoginRegisterTest {
             loginRegister.login(userPersistenceMock);
             assertNotEquals(CurrentUser.getInstance().getUser(),user);
         }
+    }
+
+    @Test
+    void logout() {
+        CurrentUser.getInstance().setUser(user);
+        loginRegister.logout();
+        assertNull(CurrentUser.getInstance().getUser());
     }
 
     /*

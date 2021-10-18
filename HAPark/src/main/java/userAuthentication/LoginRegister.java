@@ -21,6 +21,10 @@ public class LoginRegister {
         return loggedIn;
     }
 
+    public void logout(){
+        CurrentUser.getInstance().setUser(null);
+    }
+
     public void register(IUserPersistence userPersistence){
         //check email format
         //check pw format
