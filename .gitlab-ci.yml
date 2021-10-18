@@ -4,9 +4,15 @@ cache:
   paths:
     - .m2/repository
 
+before_script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+
 stages:
   - test
   - build
+  - deploy
 
 test:
   stage: test
@@ -36,3 +42,16 @@ build:
     paths:
       - HAPark/target/*.jar
   when: always
+
+deploy_stage:
+  stage: deploy
+  tags: 
+    - dalfcs_docker_kvm
+    - dalfcs_gitlab_docker_ci
+  image: ruby:latest
+  script:
+    - cd HAPark
+    - dpl --provider=heroku --app=$HEROKU_APP_STAGE --api-key=$HEROKU_API_KEY
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+      when: manual
