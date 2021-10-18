@@ -9,14 +9,16 @@ public class LoginRegister {
         this.user = user;
     }
 
-    public LoginRegister() {
-
-    }
-
-    public void login(IUserPersistence userPersistence){
-        //check if email in db
-        //if so compare pw
-        //add user to context
+    public boolean login(IUserPersistence userPersistence){
+        boolean loggedIn = false;
+        if (userPersistence.doesUserExist(user.getEmail())) {
+            String password = userPersistence.getPassword(user.getEmail());
+            if (user.getPassword().equals(password)){
+                CurrentUser.getInstance().setUser(user);
+                loggedIn = true;
+            }
+        }
+        return loggedIn;
     }
 
     public void register(IUserPersistence userPersistence){
