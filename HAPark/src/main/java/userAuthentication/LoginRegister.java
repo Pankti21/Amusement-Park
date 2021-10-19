@@ -48,9 +48,6 @@ public class LoginRegister {
         return false;
     }
 
-
-
-
     /* Password validation */
     public  boolean validatePasswordFormat(String userPassword)
     {

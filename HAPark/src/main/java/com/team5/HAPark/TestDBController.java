@@ -1,25 +1,34 @@
 package com.team5.HAPark;
 
-import database.IDataBase;
-import database.MySQLDatabase;
+import database.IUserPersistence;
+import database.mysql.MySQLDatabase;
+import database.mysql.MySQLUserPersistence;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
-@RestController
+
+@Controller
 
 public class TestDBController {
 
-    @GetMapping(value = "/testdb")
-    public List<Map<String, Object>> dbTest() throws SQLException {
-        IDataBase db = new MySQLDatabase();
+    @GetMapping(value = "/testdb") //url to map to
+    public String dbTest(Model model) throws SQLException {
+
+        MySQLDatabase db = new MySQLDatabase();
         db.connect();
-        List<Map<String, Object>> rows = db.query("SELECT*FROM user");
-        db.connect();
+
+        IUserPersistence userPersistence = new MySQLUserPersistence(db);
+        String email = "a.robertson@gmail.com";
+
+        //data added to model will be accessible in html file
+        model.addAttribute("email",email);
+        model.addAttribute("doesUserExist",userPersistence.doesUserExist(email));
+        model.addAttribute("password",userPersistence.getPassword(email));
+
         db.close();
-        return rows;
+        return "testui"; //name of html file in resources/templates
     }
 }
