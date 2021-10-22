@@ -2,28 +2,13 @@ package userAuthentication;
 
 import database.IUserPersistence;
 
-public class LoginRegister {
+public class Register {
     private User user;
 
-    public LoginRegister(User user){
+    public Register(User user) {
         this.user = user;
     }
 
-    public boolean login(IUserPersistence userPersistence){
-        boolean loggedIn = false;
-        if (userPersistence.doesUserExist(user.getEmail())) {
-            String password = userPersistence.getPassword(user.getEmail());
-            if (user.getPassword().equals(password)){
-                CurrentUser.getInstance().setUser(user);
-                loggedIn = true;
-            }
-        }
-        return loggedIn;
-    }
-
-    public void logout(){
-        CurrentUser.getInstance().setUser(null);
-    }
 
     public void register(IUserPersistence userPersistence){
         //check email format
@@ -49,34 +34,34 @@ public class LoginRegister {
     }
 
     /* Password validation */
-    public  boolean validatePasswordFormat(String userPassword)
-    {
+    public  boolean validatePasswordFormat(){
+        String password = user.getPassword();
         boolean passwordValid = true;
-        if (userPassword.length() < 8 || userPassword.length() > 12)
+        if (password.length() < 8 || password.length() > 12)
         {
             System.out.println("User password must be 8 characters in length and should be less than 12");
             passwordValid = false;
         }
         String oneUpperCaseChar = "(.*[A-Z].*)";
-        if (!userPassword.matches(oneUpperCaseChar))
+        if (!password.matches(oneUpperCaseChar))
         {
             System.out.println("User password must have atleast one uppercase character");
             passwordValid = false;
         }
         String oneLowerCaseChar = "(.*[a-z].*)";
-        if (!userPassword.matches(oneLowerCaseChar))
+        if (!password.matches(oneLowerCaseChar))
         {
             System.out.println("User password must have atleast one lowercase character");
             passwordValid = false;
         }
         String oneNumber = "(.*[0-9].*)";
-        if (!userPassword.matches(oneNumber))
+        if (!password.matches(oneNumber))
         {
             System.out.println("User password must have atleast one number");
             passwordValid = false;
         }
         String oneSpecialChars = "(.*[@,#,$,%].*$)";
-        if (!userPassword.matches(oneSpecialChars))
+        if (!password.matches(oneSpecialChars))
         {
             System.out.println("User password must have atleast one special character among @#$%");
             passwordValid = false;
