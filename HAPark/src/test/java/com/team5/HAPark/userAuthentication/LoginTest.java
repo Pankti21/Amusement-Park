@@ -1,4 +1,4 @@
-package userAuthentication;
+package com.team5.HAPark.userAuthentication;
 
 import database.IUserPersistence;
 import org.junit.jupiter.api.*;
@@ -6,18 +6,20 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.sql.SQLException;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 class LoginTest {
-    private static Login loginRegister;
+    private static Login login;
     private static User user;
     private static IUserPersistence userPersistenceMock;
 
     @BeforeAll
     static void init(){
-        loginRegister = new Login(new User());
+        login = new Login(new User());
         user = new User();
         user.setEmail("test@gmail.com");
         user.setPassword("password");
@@ -28,20 +30,15 @@ class LoginTest {
     @DisplayName("Login method tests")
     class LoginTests {
 
-        @BeforeEach
-        void resetUser(){
-            CurrentUser.getInstance().setUser(null);
-        }
-
         @Test
-        void loginUserDoesNotExist () {
+        void loginUserDoesNotExist () throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(false);
             Login loginRegister = new Login(user);
             assertFalse(loginRegister.login(userPersistenceMock));
         }
 
         @Test
-        void loginUserWrongPassword () {
+        void loginUserWrongPassword () throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
             when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("diffPassword");
             Login loginRegister = new Login(user);
@@ -49,47 +46,35 @@ class LoginTest {
         }
 
         @Test
-        void loginUserCorrectPassword () {
+        void loginUserCorrectPassword () throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
             when(userPersistenceMock.getPassword(user.getEmail())).thenReturn(user.getPassword());
-            Login loginRegister = new Login(user);
-            assertTrue(loginRegister.login(userPersistenceMock));
+            Login Login = new Login(user);
+            assertTrue(Login.login(userPersistenceMock));
+        }
+
+        void loginUserSuccessful() throws SQLException {
+            when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
+            when(userPersistenceMock.getPassword(user.getEmail())).thenReturn(user.getPassword());
+            when(userPersistenceMock.loadUser(user.getEmail())).thenReturn(new User("fname", "lname", user.getEmail(), user.getPassword()));
+            Login Login = new Login(user);
+            assertTrue(login.login(userPersistenceMock));
         }
 
         @Test
-        void loginUserSuccessUpdatesCurrentUser() {
-            CurrentUser.getInstance().setUser(null);
-            when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
-            when(userPersistenceMock.getPassword(user.getEmail())).thenReturn(user.getPassword());
-            Login loginRegister = new Login(user);
-            loginRegister.login(userPersistenceMock);
-            assertEquals(CurrentUser.getInstance().getUser(),user);
-        }
-
-        @Test
-        void loginUserFailsDueToEmail() {
+        void loginUserFailsDueToEmail() throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(false);
-            Login loginRegister = new Login(user);
-            loginRegister.login(userPersistenceMock);
-            assertNotEquals(CurrentUser.getInstance().getUser(),user);
+            Login login = new Login(user);
+            login.login(userPersistenceMock);
+            assertFalse(login.login(userPersistenceMock));
         }
 
         @Test
-        void loginUserFailsDueToPassword() {
+        void loginUserFailsDueToPassword() throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
             when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("wrongPassword");
-            Login loginRegister = new Login(user);
-            loginRegister.login(userPersistenceMock);
-            assertNotEquals(CurrentUser.getInstance().getUser(),user);
+            Login login = new Login(user);
+            assertFalse(login.login(userPersistenceMock));
         }
     }
-
-    @Test
-    void logout() {
-        CurrentUser.getInstance().setUser(user);
-        loginRegister.logout();
-        assertNull(CurrentUser.getInstance().getUser());
-    }
-
-
 }

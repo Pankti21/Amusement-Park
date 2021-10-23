@@ -1,8 +1,9 @@
-package userAuthentication;
+package com.team5.HAPark.userAuthentication;
 
 import database.IUserPersistence;
 
 public class Register {
+
     private User user;
 
     public Register(User user) {
@@ -20,8 +21,10 @@ public class Register {
     }
 
     public boolean validateEmailFormat(){
+
         String email = user.getEmail();
         String[] emailSplit = email.split("@");
+
         if (emailSplit.length == 2 && emailSplit[0].length()<65){
             String[] domainSplit = emailSplit[1].split("\\.");
             if (domainSplit.length >= 2) {
@@ -30,13 +33,16 @@ public class Register {
                 }
             }
         }
+
         return false;
     }
 
     /* Password validation */
     public  boolean validatePasswordFormat(){
+
         String password = user.getPassword();
         boolean passwordValid = true;
+
         if (password.length() < 8 || password.length() > 12)
         {
             System.out.println("User password must be 8 characters in length and should be less than 12");

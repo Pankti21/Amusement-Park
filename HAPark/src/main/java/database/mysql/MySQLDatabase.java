@@ -15,6 +15,7 @@ public class MySQLDatabase implements IDataBase {
 
     @Override
     public void connect() {
+
         if (conn != null){
             close();
         }
@@ -96,9 +97,11 @@ public class MySQLDatabase implements IDataBase {
     }
 
     public List<Map<String, Object>> convertResultSetToListOfMaps(ResultSet rs) throws SQLException {
+
         List<Map<String, Object>> rows = new ArrayList<>();
         ResultSetMetaData metaData = rs.getMetaData();
         int col = metaData.getColumnCount();
+
         while (rs.next()) {
             Map<String, Object> row = new HashMap<>();
             for (int i = 1; i<=col; i++) {
@@ -108,7 +111,9 @@ public class MySQLDatabase implements IDataBase {
             }
             rows.add(row);
         }
+
         return rows;
+
     }
 
 }

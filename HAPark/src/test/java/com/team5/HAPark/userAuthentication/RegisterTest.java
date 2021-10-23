@@ -1,16 +1,11 @@
-package userAuthentication;
+package com.team5.HAPark.userAuthentication;
 
 import database.IUserPersistence;
+
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import userAuthentication.Login;
-import userAuthentication.Register;
-import userAuthentication.User;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 class RegisterTest {
