@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class TestDBController {
 
     @GetMapping(value = "/testdb") //url to map to
-    public String dbTest(Model model) {
+    public String dbTest(Model model) throws SQLException {
 
         MySQLDatabase db = new MySQLDatabase();
         db.connect();
