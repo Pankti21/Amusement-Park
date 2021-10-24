@@ -2,6 +2,8 @@ package com.team5.HAPark.userAuthentication;
 
 import database.IUserPersistence;
 
+import java.sql.SQLException;
+
 public class Register {
 
     private User user;
@@ -10,14 +12,30 @@ public class Register {
         this.user = user;
     }
 
+    public boolean register(IUserPersistence userPersistence, String confirmedPassword){
 
-    public void register(IUserPersistence userPersistence){
-        //check email format
-        //check pw format
-        //boolean password = validatePasswordFormat(String password);
+        if (user.getPassword()!=null && !user.getPassword().isEmpty()
+                && user.getEmail()!=null && !user.getEmail().isEmpty()
+                && user.getFirstName()!=null && !user.getFirstName().isEmpty()
+                && user.getLastName()!=null && !user.getLastName().isEmpty()
+                && confirmedPassword!=null){
 
-        //check not in db
-        //save to db
+            if (validateEmailFormat() && validatePasswordFormat()) {
+
+                if (user.getPassword().matches(confirmedPassword)) {
+
+                    try {
+                        if (!userPersistence.doesUserExist(user.getEmail())) {
+                            userPersistence.saveUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+                            return true;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public boolean validateEmailFormat(){
