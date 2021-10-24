@@ -3,6 +3,7 @@ package com.team5.HAPark;
 import database.IUserPersistence;
 import database.mysql.MySQLDatabase;
 import database.mysql.MySQLUserPersistence;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,9 @@ public class TestDBController {
         MySQLDatabase db = new MySQLDatabase();
         db.connect();
 
+        //get logged in user's email
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         IUserPersistence userPersistence = new MySQLUserPersistence(db);
-        String email = "a.robertson@gmail.com";
 
         //data added to model will be accessible in html file
         model.addAttribute("email",email);

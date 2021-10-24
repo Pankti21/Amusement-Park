@@ -1,4 +1,4 @@
-package userAuthentication;
+package com.team5.HAPark.userAuthentication;
 
 public class User {
 

@@ -1,19 +1,18 @@
 package database.mysql;
 
 import database.IUserPersistence;
+import com.team5.HAPark.userAuthentication.User;
+
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 
 public class MySQLUserPersistence implements IUserPersistence {
+
     MySQLDatabase mySQLDatabase;
 
     public MySQLUserPersistence(MySQLDatabase mySQLDatabase){
         this.mySQLDatabase = mySQLDatabase;
-    }
-
-    @Override
-    public void saveUser(String firstName, String lastName, String email, String pw) {
     }
 
     @Override
@@ -22,19 +21,21 @@ public class MySQLUserPersistence implements IUserPersistence {
     }
 
     @Override
-    public boolean doesUserExist(String email) {
+    public boolean doesUserExist(String email) throws SQLException {
+
         CallableStatement statement = null;
         boolean userExists = false;
 
         try {
-            statement = mySQLDatabase.getConnection().prepareCall("{call does_user_exist(?,?)} ");
+
+            statement = mySQLDatabase.getConnection().prepareCall("{call does_user_exist(?,?)}");
             statement.setString(1,email);
             statement.registerOutParameter(2, Types.BOOLEAN);
             statement.execute();
             userExists = statement.getBoolean(2);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
         } finally {
+
             try{
                 if (statement != null){
                     statement.close();
@@ -42,24 +43,28 @@ public class MySQLUserPersistence implements IUserPersistence {
             } catch (SQLException e){
                 e.printStackTrace();
             }
+
         }
+
         return userExists;
     }
 
     @Override
-    public String getPassword(String email) {
+    public String getPassword(String email) throws SQLException {
+
         CallableStatement statement = null;
         String password = null;
 
         try {
-            statement = mySQLDatabase.getConnection().prepareCall("{call get_password_for_user(?,?)} ");
+
+            statement = mySQLDatabase.getConnection().prepareCall("{call get_password_for_user(?,?)}");
             statement.setString(1,email);
             statement.registerOutParameter(2, Types.VARCHAR);
             statement.execute();
             password = statement.getString(2);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
         } finally {
+
             try{
                 if (statement != null){
                     statement.close();
@@ -70,5 +75,73 @@ public class MySQLUserPersistence implements IUserPersistence {
         }
 
         return password;
+    }
+
+
+    @Override
+    public void saveUser(String email, String fname, String lname, String password) throws SQLException {
+
+        CallableStatement statement = null;
+
+        try {
+
+            statement = mySQLDatabase.getConnection().prepareCall("{call save_user(?,?,?,?)} ");
+
+            statement.setString(1,email);
+            statement.setString(2,fname);
+            statement.setString(3,lname);
+            statement.setString(4,password);
+
+            statement.execute();
+
+        } finally {
+
+            try{
+                if (statement != null){
+                    statement.close();
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    @Override
+    public User loadUser(String email) throws SQLException {
+
+        CallableStatement statement = null;
+        User loadedUser = null;
+
+        try {
+
+            statement = mySQLDatabase.getConnection().prepareCall("{call load_user(?,?,?,?)}");
+
+            statement.setString(1,email);
+            statement.registerOutParameter(2, Types.VARCHAR);
+            statement.registerOutParameter(3, Types.VARCHAR);
+            statement.registerOutParameter(4, Types.VARCHAR);
+
+            statement.execute();
+
+            String fname = statement.getString(2);
+            String lname = statement.getString(3);
+            String password = statement.getString(4);
+
+            loadedUser = new User(fname,lname,email,password);
+
+        } finally {
+
+            try{
+                if (statement != null){
+                    statement.close();
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+
+        }
+
+        return loadedUser;
     }
 }
