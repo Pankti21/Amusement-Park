@@ -1,27 +1,48 @@
-package userAuthentication;
+package com.team5.HAPark.userAuthentication;
 
 import database.IUserPersistence;
 
+import java.sql.SQLException;
+
 public class Register {
+
     private User user;
 
     public Register(User user) {
         this.user = user;
     }
 
+    public boolean register(IUserPersistence userPersistence, String confirmedPassword){
 
-    public void register(IUserPersistence userPersistence){
-        //check email format
-        //check pw format
-        //boolean password = validatePasswordFormat(String password);
+        if (user.getPassword()!=null && !user.getPassword().isEmpty()
+                && user.getEmail()!=null && !user.getEmail().isEmpty()
+                && user.getFirstName()!=null && !user.getFirstName().isEmpty()
+                && user.getLastName()!=null && !user.getLastName().isEmpty()
+                && confirmedPassword!=null){
 
-        //check not in db
-        //save to db
+            if (validateEmailFormat() && validatePasswordFormat()) {
+
+                if (user.getPassword().matches(confirmedPassword)) {
+
+                    try {
+                        if (!userPersistence.doesUserExist(user.getEmail())) {
+                            userPersistence.saveUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+                            return true;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public boolean validateEmailFormat(){
+
         String email = user.getEmail();
         String[] emailSplit = email.split("@");
+
         if (emailSplit.length == 2 && emailSplit[0].length()<65){
             String[] domainSplit = emailSplit[1].split("\\.");
             if (domainSplit.length >= 2) {
@@ -30,13 +51,16 @@ public class Register {
                 }
             }
         }
+
         return false;
     }
 
     /* Password validation */
     public  boolean validatePasswordFormat(){
+
         String password = user.getPassword();
         boolean passwordValid = true;
+
         if (password.length() < 8 || password.length() > 12)
         {
             System.out.println("User password must be 8 characters in length and should be less than 12");
