@@ -5,7 +5,8 @@ import database.IUserPersistence;
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.runners.MockitoJUnitRunner;
+
 
 import java.sql.SQLException;
 
