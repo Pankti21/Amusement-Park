@@ -30,4 +30,18 @@ public class RideService {
     public void addRide(Ride ride) {
         rides.add(ride);
     }
+
+    public void updateRide(Ride ride,int id) {
+        for(Ride r:rides){
+            if (r.getId() == id)
+                rides.set(id-1,ride);
+        }
+    }
+
+    public void deleteRide(int id) {
+        for(Ride r:rides){
+            if (r.getId() == id)
+                rides.remove(id-1);
+        }
+    }
 }

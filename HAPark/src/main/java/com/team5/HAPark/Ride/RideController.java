@@ -25,4 +25,15 @@ public class RideController {
     public void addRide(@RequestBody Ride ride){
         rideService.addRide(ride);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/rides/{id}")
+    public void updateRide(@RequestBody Ride ride,@PathVariable int id){
+        rideService.updateRide(ride,id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/rides/{id}")
+    public void deleteRide(@PathVariable int id){
+        rideService.deleteRide(id);
+    }
 }
+
