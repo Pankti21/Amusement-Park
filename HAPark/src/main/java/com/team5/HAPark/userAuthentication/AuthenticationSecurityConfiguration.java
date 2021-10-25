@@ -19,9 +19,9 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+            http.authorizeRequests().antMatchers("/rides").permitAll();
+            http.authorizeRequests().antMatchers("/rides/**").permitAll();
           http.authorizeRequests().antMatchers("/").permitAll().
-                  antMatchers("/rides").permitAll().
-                  antMatchers("/rides/*").permitAll().
                   antMatchers("/**").authenticated()
                   .and().formLogin();
           http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
