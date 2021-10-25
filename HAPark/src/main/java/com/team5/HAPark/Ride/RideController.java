@@ -19,7 +19,7 @@ public class RideController {
     }
 
     @RequestMapping("/rides/{id}")
-    public Ride getRide(@PathVariable String id){
+    public Ride getRide(@PathVariable int id){
         return rideService.getRide(id);
     }
 }
