@@ -26,7 +26,7 @@ public class Register {
 
                     try {
                         if (!userPersistence.doesUserExist(user.getEmail())) {
-                            userPersistence.saveUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+                            userPersistence.saveUser(user.getEmail(), user.getFirstName(), user.getLastName(),user.getPassword());
                             return true;
                         }
                     } catch (SQLException e) {
