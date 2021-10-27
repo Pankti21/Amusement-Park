@@ -1,6 +1,8 @@
 package com.team5.HAPark.userAuthentication;
 
 import database.IUserPersistence;
+
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class Login {
@@ -18,8 +20,10 @@ public class Login {
         try {
 
             if (userPersistence.doesUserExist(user.getEmail())) {
-                String password = userPersistence.getPassword(user.getEmail());
-                if (user.getPassword().equals(password)) {
+                Encryption encryption = new Encryption();
+                String enteredEncryptedPassword = encryption.encryptPassword(user.getPassword());
+                String savedPassword = userPersistence.getPassword(user.getEmail());
+                if (enteredEncryptedPassword.equals(savedPassword)) {
                     user = userPersistence.loadUser(user.getEmail());
                     loggedIn = true;
                 }
@@ -28,6 +32,8 @@ public class Login {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
         return loggedIn;
