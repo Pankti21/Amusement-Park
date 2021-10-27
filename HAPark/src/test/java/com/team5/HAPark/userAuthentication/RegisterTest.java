@@ -5,9 +5,7 @@ import database.IUserPersistence;
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-
+import org.mockito.junit.MockitoJUnitRunner;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -118,7 +116,7 @@ class RegisterTest {
             assertTrue(register.register(userPersistenceMock,"Password@123"));
             verify(userPersistenceMock,times(1)).doesUserExist(user.getEmail());
             Mockito.verify(userPersistenceMock, times(1))
-                    .saveUser(user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword());
+                    .saveUser(user.getEmail(),user.getFirstName(),user.getLastName(),"ff7bd97b1a7789ddd2775122fd6817f3173672da9f802ceec57f284325bf589f");
         }
     }
 

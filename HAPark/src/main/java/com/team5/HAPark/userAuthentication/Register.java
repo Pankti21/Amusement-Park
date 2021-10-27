@@ -2,6 +2,7 @@ package com.team5.HAPark.userAuthentication;
 
 import database.IUserPersistence;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class Register {
@@ -26,10 +27,14 @@ public class Register {
 
                     try {
                         if (!userPersistence.doesUserExist(user.getEmail())) {
-                            userPersistence.saveUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+                            Encryption encryption = new Encryption();
+                            userPersistence.saveUser(user.getEmail(), user.getFirstName(),
+                                    user.getLastName(),encryption.encryptPassword(user.getPassword()));
                             return true;
                         }
                     } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     }
                 }
