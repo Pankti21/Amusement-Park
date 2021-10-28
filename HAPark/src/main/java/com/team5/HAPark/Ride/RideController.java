@@ -3,6 +3,7 @@ package com.team5.HAPark.Ride;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -12,8 +13,13 @@ public class RideController {
     private RideService rideService;
 
     @RequestMapping("/rides")
-    public List<Ride> getALLRides(){
+    public List<Ride> getALLRides() {
         return rideService.getAllRides();
+    }
+
+    @RequestMapping("/test")
+    public void test() throws SQLException {
+        rideService.test();
     }
 
     @RequestMapping("/rides/{id}")

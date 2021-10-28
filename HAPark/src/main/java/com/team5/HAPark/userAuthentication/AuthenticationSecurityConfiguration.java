@@ -22,6 +22,7 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
             http.csrf().disable().authorizeRequests().antMatchers("/").permitAll().
                     antMatchers("/rides").permitAll().
                     antMatchers("/rides/*").permitAll().
+                    antMatchers("/test").permitAll().
                   antMatchers("/**").authenticated()
                   .and().formLogin();
           http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
