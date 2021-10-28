@@ -4,6 +4,6 @@ import java.sql.SQLException;
 
 public interface IRidePersistence {
 
-    void getRide(int id) throws SQLException;
+    String getRide(int id) throws SQLException;
 
 }

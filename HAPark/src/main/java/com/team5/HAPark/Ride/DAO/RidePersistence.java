@@ -1,7 +1,7 @@
 package com.team5.HAPark.Ride.DAO;
 
 import database.mysql.MySQLDatabase;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.*;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
@@ -14,7 +14,7 @@ public class RidePersistence implements IRidePersistence{
     MySQLDatabase mySQLDatabase = new MySQLDatabase();
 
     @Override
-    public void getRide(int id) throws SQLException {
+    public String getRide(int id) throws SQLException {
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id=1;");
@@ -23,5 +23,6 @@ public class RidePersistence implements IRidePersistence{
             ride_name = rs.getString("ride_name");
         }
         log.info("ride name: {}",ride_name);
+        return ride_name;
     }
 }

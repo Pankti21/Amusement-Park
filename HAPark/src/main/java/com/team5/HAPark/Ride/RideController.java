@@ -1,6 +1,8 @@
 package com.team5.HAPark.Ride;
 
+import com.team5.HAPark.Ride.DAO.RidePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -41,5 +43,13 @@ public class RideController {
     public void deleteRide(@PathVariable int id){
         rideService.deleteRide(id);
     }
-}
+
+    @RequestMapping(value = "/ridetest") //url to map to
+    public String rideTest(Model model) throws SQLException {
+        RidePersistence ridePersistence = new RidePersistence();
+        model.addAttribute("ride_name",ridePersistence.getRide(1));
+        return "rideui";
+    }
+
+    }
 

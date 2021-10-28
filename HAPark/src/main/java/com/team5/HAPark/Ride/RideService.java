@@ -27,7 +27,7 @@ public class RideService {
 
     public void test() throws SQLException {
         RidePersistence ridePersistence = new RidePersistence();
-        ridePersistence.getRide(1);
+        String ride_name=ridePersistence.getRide(1);
     }
 
     public Ride getRide(int id){
