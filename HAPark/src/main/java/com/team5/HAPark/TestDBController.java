@@ -1,5 +1,6 @@
 package com.team5.HAPark;
 
+import com.team5.HAPark.Ride.DAO.RidePersistence;
 import database.IUserPersistence;
 import database.mysql.MySQLDatabase;
 import database.mysql.MySQLUserPersistence;
@@ -24,11 +25,13 @@ public class TestDBController {
         //get logged in user's email
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         IUserPersistence userPersistence = new MySQLUserPersistence(db);
+        RidePersistence ridePersistence = new RidePersistence();
 
         //data added to model will be accessible in html file
         model.addAttribute("email",email);
         model.addAttribute("doesUserExist",userPersistence.doesUserExist(email));
         model.addAttribute("password",userPersistence.getPassword(email));
+        model.addAttribute("ride_name",ridePersistence.getRide(1));
 
         db.close();
         return "testui"; //name of html file in resources/templates
