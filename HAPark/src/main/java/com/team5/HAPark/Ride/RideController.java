@@ -15,20 +15,15 @@ public class RideController {
     private RideService rideService;
 
     @RequestMapping("/rides")
-    public List<Ride> getALLRides() {
+    public List<Ride> getALLRides() throws SQLException {
         return rideService.getAllRides();
     }
 
-    @RequestMapping("/test")
-    public void test() throws SQLException {
-        rideService.test();
-    }
-
     @RequestMapping("/rides/{id}")
-    public Ride getRide(@PathVariable int id){
+    public Ride getRide(@PathVariable int id) throws SQLException {
         return rideService.getRide(id);
     }
-
+    
     @RequestMapping(method = RequestMethod.POST, value = "/rides")
     public void addRide(@RequestBody Ride ride){
         rideService.addRide(ride);
@@ -42,13 +37,6 @@ public class RideController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/rides/{id}")
     public void deleteRide(@PathVariable int id){
         rideService.deleteRide(id);
-    }
-
-    @RequestMapping(value = "/ridetest") //url to map to
-    public String rideTest(Model model) throws SQLException {
-        RidePersistence ridePersistence = new RidePersistence();
-        model.addAttribute("ride_name",ridePersistence.getRide(1));
-        return "rideui";
     }
 
     }
