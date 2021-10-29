@@ -1,4 +1,4 @@
-package com.team5.HAPark.userAuthentication;
+package com.team5.HAPark.User;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,12 +19,12 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("/rides").permitAll();
-            http.authorizeRequests().antMatchers("/rides/**").permitAll();
-          http.authorizeRequests().antMatchers("/").permitAll().
-                  antMatchers("/**").authenticated()
-                  .and().formLogin();
-          http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+        http.authorizeRequests().antMatchers("/rides").permitAll();
+        http.authorizeRequests().antMatchers("/rides/**").permitAll();
+        http.authorizeRequests().antMatchers("/").permitAll().
+        antMatchers("/**").authenticated()
+        .and().formLogin();
+        http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
     }
 

@@ -1,6 +1,6 @@
-package com.team5.HAPark.userAuthentication;
+package com.team5.HAPark.User;
 
-import database.IUserPersistence;
+import com.team5.HAPark.User.DAO.IUserPersistence;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -18,7 +18,6 @@ public class Login {
         boolean loggedIn = false;
 
         try {
-
             if (userPersistence.doesUserExist(user.getEmail())) {
                 Encryption encryption = new Encryption();
                 String enteredEncryptedPassword = encryption.encryptPassword(user.getPassword());

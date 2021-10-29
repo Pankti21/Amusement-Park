@@ -1,8 +1,8 @@
 package com.team5.HAPark;
 
-import database.IUserPersistence;
+import com.team5.HAPark.User.DAO.IUserPersistence;
 import database.mysql.MySQLDatabase;
-import database.mysql.MySQLUserPersistence;
+import com.team5.HAPark.User.DAO.MySQLUserPersistence;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

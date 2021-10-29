@@ -1,7 +1,8 @@
-package database.mysql;
+package com.team5.HAPark.User.DAO;
 
-import database.IUserPersistence;
-import com.team5.HAPark.userAuthentication.User;
+import com.team5.HAPark.User.DAO.IUserPersistence;
+import com.team5.HAPark.User.User;
+import database.mysql.MySQLDatabase;
 
 import java.sql.CallableStatement;
 import java.sql.SQLException;

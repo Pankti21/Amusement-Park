@@ -1,6 +1,6 @@
-package database;
+package com.team5.HAPark.User.DAO;
 
-import com.team5.HAPark.userAuthentication.User;
+import com.team5.HAPark.User.User;
 
 import java.sql.SQLException;
 
