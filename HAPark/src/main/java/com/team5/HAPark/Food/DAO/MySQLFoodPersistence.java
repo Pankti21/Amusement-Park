@@ -14,7 +14,7 @@ public class MySQLFoodPersistence implements IFoodPersistence{
         this.database = database;
     }
 
-    public Food getFood(String id) throws SQLException {
+    public Food loadFood(String id) throws SQLException {
 
         Food food = null;
         Statement statement = null;
@@ -49,7 +49,7 @@ public class MySQLFoodPersistence implements IFoodPersistence{
         return food;
     }
 
-    public Menu getMenu() throws SQLException {
+    public Menu loadMenu() throws SQLException {
 
         Menu menu = new Menu();
         Statement statement = null;
