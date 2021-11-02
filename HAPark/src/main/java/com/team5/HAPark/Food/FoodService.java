@@ -15,7 +15,7 @@ public class FoodService {
     public Food getFood(String id) throws SQLException {
 
         Food food = null;
-        food = foodPersistence.getFood(id);
+        food = foodPersistence.loadFood(id);
 
         return food;
     }
@@ -24,7 +24,7 @@ public class FoodService {
 
         Menu menu = null;
 
-        menu = foodPersistence.getMenu();
+        menu = foodPersistence.loadMenu();
 
         return menu;
     }

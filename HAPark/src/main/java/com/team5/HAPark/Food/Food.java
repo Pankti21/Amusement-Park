@@ -1,6 +1,8 @@
 package com.team5.HAPark.Food;
 
-public class Food {
+import com.team5.HAPark.Order.IItem;
+
+public class Food implements IItem {
 
     private String name;
     private String id;

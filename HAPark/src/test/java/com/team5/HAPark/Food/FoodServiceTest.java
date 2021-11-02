@@ -24,9 +24,9 @@ class FoodServiceTest {
         menu.addFoodToMenu(pizza);
 
         IFoodPersistence foodPersistenceMock = Mockito.mock(IFoodPersistence.class);
-        Mockito.when(foodPersistenceMock.getMenu()).thenReturn(menu);
-        Mockito.when(foodPersistenceMock.getFood("1")).thenReturn(pizza);
-        Mockito.when(foodPersistenceMock.getFood("2")).thenReturn(null);
+        Mockito.when(foodPersistenceMock.loadMenu()).thenReturn(menu);
+        Mockito.when(foodPersistenceMock.loadFood("1")).thenReturn(pizza);
+        Mockito.when(foodPersistenceMock.loadFood("2")).thenReturn(null);
 
         foodService = new FoodService(foodPersistenceMock);
     }

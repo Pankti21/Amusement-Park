@@ -6,6 +6,6 @@ import com.team5.HAPark.Food.Menu;
 import java.sql.SQLException;
 
 public interface IFoodPersistence {
-    Food getFood(String id) throws SQLException;
-    Menu getMenu() throws SQLException;
+    Food loadFood(String id) throws SQLException;
+    Menu loadMenu() throws SQLException;
 }
