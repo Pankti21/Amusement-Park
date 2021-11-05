@@ -1,25 +1,25 @@
 package com.team5.HAPark.Ride;
 
 import java.sql.Time;
-import java.time.LocalTime;
 
 public class Ride {
     private int id;
     private String name;
     private String type;
     private int maxOccupancy;
-    private LocalTime duration;
-
+    private Time duration;
+    private TimeSlot timeSlot;
 
     public Ride() {
     }
 
-    public Ride(int id, String name, String type, int maxOccupancy, LocalTime duration) {
+    public Ride(int id, String name, String type, int maxOccupancy, Time duration, TimeSlot timeSlot) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.maxOccupancy = maxOccupancy;
         this.duration = duration;
+        this.timeSlot = timeSlot;
     }
 
     public int getId() {
@@ -54,12 +54,20 @@ public class Ride {
         this.maxOccupancy = maxOccupancy;
     }
 
-    public LocalTime getDuration() {
+    public Time getDuration() {
         return duration;
     }
 
-    public void setDuration(LocalTime duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
+    }
+
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
     }
 
     @Override

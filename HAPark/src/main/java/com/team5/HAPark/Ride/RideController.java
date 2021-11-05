@@ -23,7 +23,11 @@ public class RideController {
     public Ride getRide(@PathVariable int id) throws SQLException {
         return rideService.getRide(id);
     }
-    
+
+    @RequestMapping("/reserve/{id}")
+    public Ride reserveRide(@PathVariable int id) throws SQLException {
+        return rideService.reserveRide(id);
+    }
     @RequestMapping(method = RequestMethod.POST, value = "/rides")
     public void addRide(@RequestBody Ride ride){
         rideService.addRide(ride);

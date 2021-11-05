@@ -1,6 +1,7 @@
 package com.team5.HAPark.Ride.DAO;
 
 import com.team5.HAPark.Ride.Ride;
+import com.team5.HAPark.Ride.TimeSlot;
 import database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
 
@@ -27,7 +28,8 @@ public class RidePersistence implements IRidePersistence{
                 r.setName(rs.getString("ride_name"));
                 r.setType(rs.getString("ride_type"));
                 r.setMaxOccupancy(rs.getInt("max_occupancy"));
-                r.setDuration(LocalTime.of(00,00,00));
+                r.setDuration(rs.getTime("total_duration"));
+                r.setTimeSlot(getRideavailability(r.getId()));
             }
         return r;
     }
@@ -45,9 +47,24 @@ public class RidePersistence implements IRidePersistence{
             r.setName(rs.getString("ride_name"));
             r.setType(rs.getString("ride_type"));
             r.setMaxOccupancy(rs.getInt("max_occupancy"));
-            r.setDuration(LocalTime.of(00,00,00));
+            r.setDuration(rs.getTime("total_duration"));
+            r.setTimeSlot(getRideavailability(r.getId()));
             Rides.add(r);
         }
         return Rides;
     }
+
+    @Override
+    public TimeSlot getRideavailability(int id) throws SQLException {
+        Connection con=mySQLDatabase.getConnection();
+        Statement stmt= con.createStatement();
+        ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
+        TimeSlot timeSlot= new TimeSlot();
+        while (rs.next()){
+            timeSlot.getId().add(rs.getInt("timeslot_id"));
+            timeSlot.getAvailability().add(rs.getInt("availability"));
+        }
+        return timeSlot;
+    }
+
 }
