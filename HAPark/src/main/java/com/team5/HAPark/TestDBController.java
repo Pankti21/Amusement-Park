@@ -1,6 +1,6 @@
 package com.team5.HAPark;
 
-import com.team5.HAPark.Ride.DAO.RidePersistence;
+import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import database.IUserPersistence;
 import database.mysql.MySQLDatabase;
 import database.mysql.MySQLUserPersistence;

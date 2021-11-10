@@ -1,4 +1,4 @@
-package com.team5.HAPark.Ride;
+package com.team5.HAPark.Ride.Model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.team5.HAPark.Ride.DAO;
+package com.team5.HAPark.Ride.Persistence;
 
-import com.team5.HAPark.Ride.Ride;
-import com.team5.HAPark.Ride.TimeSlot;
+import com.team5.HAPark.Ride.Model.Ride;
+import com.team5.HAPark.Ride.Model.TimeSlot;
 
 import java.sql.SQLException;
 import java.util.List;

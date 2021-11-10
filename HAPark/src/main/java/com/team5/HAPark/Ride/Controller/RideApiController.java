@@ -1,15 +1,15 @@
-package com.team5.HAPark.Ride;
+package com.team5.HAPark.Ride.Controller;
 
-import com.team5.HAPark.Ride.DAO.RidePersistence;
+import com.team5.HAPark.Ride.Model.Ride;
+import com.team5.HAPark.Ride.Model.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-public class RideController {
+public class RideApiController {
 
     @Autowired
     private RideService rideService;

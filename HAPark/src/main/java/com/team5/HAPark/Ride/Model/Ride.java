@@ -1,4 +1,4 @@
-package com.team5.HAPark.Ride;
+package com.team5.HAPark.Ride.Model;
 
 import java.sql.Time;
 

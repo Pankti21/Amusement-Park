@@ -1,19 +1,17 @@
-package com.team5.HAPark.Ride;
+package com.team5.HAPark.Ride.Model;
 
-import com.team5.HAPark.Ride.DAO.RidePersistence;
+import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 @Slf4j
-public class RideService implements IRideService{
+public class RideService implements IRideService {
 
     public List<Ride> getAllRides() throws SQLException {
         RidePersistence ridePersistence=new RidePersistence();
