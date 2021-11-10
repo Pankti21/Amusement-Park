@@ -23,7 +23,9 @@ public class RideService implements IRideService {
             log.info("ride type: {}", ride.getType());
             log.info("ride max_occupancy: {}", ride.getMaxOccupancy());
             log.info("ride duration: {}", ride.getDuration());
-            log.info("timeslot: {}",ride.getTimeSlot().getAvailability());
+            log.info("timeslot: {}",ride.getTimeSlot().map.get(1));
+            log.info("timeslot: {}",ride.getTimeSlot().map.get(2));
+            log.info("timeslot: {}",ride.getTimeSlot().map.get(3));
         }
         return Rides;
     }
@@ -47,7 +49,7 @@ public class RideService implements IRideService {
    public Ride reserveRide(int id) throws SQLException {
         RidePersistence ridePersistence = new RidePersistence();
         Ride ride = ridePersistence.getRide(id);
-        ride.getTimeSlot().setAvailability();
+        //ride.getTimeSlot().setAvailability();
         return null;
         }
 

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -39,7 +40,6 @@ public class RidePersistence implements IRidePersistence{
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info;");
-        //String ride_name="";
         while (rs.next()){
             Ride r = new Ride();
             r.setId(rs.getInt("ride_id"));
@@ -58,11 +58,11 @@ public class RidePersistence implements IRidePersistence{
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
-        TimeSlot timeSlot= new TimeSlot();
+        HashMap<Integer,Integer> map= new HashMap<>();
         while (rs.next()){
-            timeSlot.getId().add(rs.getInt("timeslot_id"));
-            timeSlot.getAvailability().add(rs.getInt("availability"));
+            map.put(rs.getInt("timeslot_id"),rs.getInt("availability"));
         }
+        TimeSlot timeSlot=new TimeSlot(map);
         return timeSlot;
     }
 
