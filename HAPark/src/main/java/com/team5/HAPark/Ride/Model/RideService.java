@@ -23,6 +23,7 @@ public class RideService implements IRideService {
             log.info("ride type: {}", ride.getType());
             log.info("ride max_occupancy: {}", ride.getMaxOccupancy());
             log.info("ride duration: {}", ride.getDuration());
+            log.info("timeslot: {}",ride.getTimeSlot().getAvailability());
         }
         return Rides;
     }

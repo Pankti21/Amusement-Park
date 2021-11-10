@@ -17,7 +17,7 @@ public class RideController {
 
     @GetMapping("/rides")
     public String allrides(Model model) throws SQLException {
-        model.addAttribute("allrides", Arrays.asList(rideService.getAllRideNames()));
+        model.addAttribute("allrides", rideService.getAllRides());
         return "rideui";
     }
 }

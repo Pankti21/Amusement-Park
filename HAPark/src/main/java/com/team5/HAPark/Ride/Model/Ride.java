@@ -3,7 +3,7 @@ package com.team5.HAPark.Ride.Model;
 import java.sql.Time;
 
 public class Ride {
-    private int id;
+    int id;
     private String name;
     private String type;
     private int maxOccupancy;
@@ -11,6 +11,11 @@ public class Ride {
     private TimeSlot timeSlot;
 
     public Ride() {
+    }
+
+    public Ride(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Ride(int id, String name, String type, int maxOccupancy, Time duration, TimeSlot timeSlot) {
