@@ -35,13 +35,13 @@ public class RideService implements IRideService{
         return ride;
     }
 
-    public Ride reserveRide(int id) throws SQLException {
+   public Ride reserveRide(int id) throws SQLException {
         RidePersistence ridePersistence = new RidePersistence();
         Ride ride = ridePersistence.getRide(id);
         ride.getTimeSlot().setAvailability();
+        return null;
+        }
 
-
-    }
 
     private List<Ride> rides= new ArrayList<>(Arrays.asList(
            // new Ride(1,"RollarCoaster","Ground",5),

@@ -2,6 +2,7 @@
   <library name="Maven: ch.qos.logback:logback-classic:1.2.6">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.2.6/logback-classic-1.2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.26.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.2.6/logback-classic-1.2.6-javadoc.jar!/" />
