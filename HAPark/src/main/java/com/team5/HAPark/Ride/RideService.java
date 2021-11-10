@@ -29,6 +29,16 @@ public class RideService implements IRideService{
         return Rides;
     }
 
+    public List<String> getAllRideNames() throws SQLException {
+        List<String> names= new ArrayList<>();
+        RidePersistence ridePersistence=new RidePersistence();
+        List<Ride> Rides=ridePersistence.getAllRides();
+        for(Ride ride:Rides) {
+            names.add(ride.getName());
+        }
+        return names;
+    }
+
     public Ride getRide(int id) throws SQLException {
         RidePersistence ridePersistence = new RidePersistence();
         Ride ride=ridePersistence.getRide(id);

@@ -14,12 +14,12 @@ public class RideController {
     @Autowired
     private RideService rideService;
 
-    @RequestMapping("/rides")
+    @RequestMapping("/rides/api")
     public List<Ride> getALLRides() throws SQLException {
         return rideService.getAllRides();
     }
 
-    @RequestMapping("/rides/{id}")
+    @RequestMapping("/rides/api/{id}")
     public Ride getRide(@PathVariable int id) throws SQLException {
         return rideService.getRide(id);
     }
