@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -30,14 +31,28 @@ public class RideService implements IRideService {
         return Rides;
     }
 
-    public List<String> getAllRideNames() throws SQLException {
-        List<String> names= new ArrayList<>();
+    public List<Ride> getAllGroundRides() throws SQLException {
         RidePersistence ridePersistence=new RidePersistence();
         List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> groundRides=new ArrayList<>();
         for(Ride ride:Rides) {
-            names.add(ride.getName());
+            if(Objects.equals(ride.getType(), "Ground")){
+                groundRides.add(ride);
+            }
         }
-        return names;
+        return groundRides;
+    }
+
+    public List<Ride> getAllWaterRides() throws SQLException {
+        RidePersistence ridePersistence=new RidePersistence();
+        List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> waterRides=new ArrayList<>();
+        for(Ride ride:Rides) {
+            if(Objects.equals(ride.getType(), "Water")){
+                waterRides.add(ride);
+            }
+        }
+        return waterRides;
     }
 
     public Ride getRide(int id) throws SQLException {
@@ -79,5 +94,4 @@ public class RideService implements IRideService {
                 rides.remove(id-1);
         }
     }
-
 }

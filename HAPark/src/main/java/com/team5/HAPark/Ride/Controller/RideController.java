@@ -20,9 +20,15 @@ public class RideController {
         return "RideMainPage";
     }
 
-    @GetMapping("/rides/all")
-    public String allrides(Model model) throws SQLException {
-        model.addAttribute("allrides", rideService.getAllRides());
-        return "rideui";
+    @GetMapping("/rides/ground")
+    public String groungRides(Model model) throws SQLException {
+        model.addAttribute("groundrides",rideService.getAllGroundRides());
+        return "GroundRides";
+    }
+
+    @GetMapping("/rides/water")
+    public String waterRides(Model model) throws SQLException {
+        model.addAttribute("waterrides",rideService.getAllWaterRides());
+        return "WaterRides";
     }
 }
