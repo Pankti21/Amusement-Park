@@ -1,29 +1,34 @@
-package com.team5.HAPark.Ride;
+package com.team5.HAPark.Ride.Controller;
 
-import com.team5.HAPark.Ride.DAO.RidePersistence;
+import com.team5.HAPark.Ride.Model.Ride;
+import com.team5.HAPark.Ride.Model.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-public class RideController {
+public class RideApiController {
 
     @Autowired
     private RideService rideService;
 
-    @RequestMapping("/rides")
+    @RequestMapping("/rides/api")
     public List<Ride> getALLRides() throws SQLException {
         return rideService.getAllRides();
     }
 
-    @RequestMapping("/rides/{id}")
+    @RequestMapping("/rides/api/{id}")
     public Ride getRide(@PathVariable int id) throws SQLException {
         return rideService.getRide(id);
     }
-    
+
+    @RequestMapping("/reserve/{id}")
+    public Ride reserveRide(@PathVariable int id) throws SQLException {
+        //return rideService.reserveRide(id);
+        return null;
+    }
     @RequestMapping(method = RequestMethod.POST, value = "/rides")
     public void addRide(@RequestBody Ride ride){
         rideService.addRide(ride);
