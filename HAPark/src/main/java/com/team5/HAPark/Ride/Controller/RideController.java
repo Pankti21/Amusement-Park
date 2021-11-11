@@ -16,6 +16,11 @@ public class RideController {
     private RideService rideService;
 
     @GetMapping("/rides")
+    public String rides(Model model){
+        return "RideMainPage";
+    }
+
+    @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
         return "rideui";
