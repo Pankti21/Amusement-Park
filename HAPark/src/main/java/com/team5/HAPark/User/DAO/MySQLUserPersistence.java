@@ -1,5 +1,6 @@
 package com.team5.HAPark.User.DAO;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import com.team5.HAPark.User.DAO.IUserPersistence;
 import com.team5.HAPark.User.User;
 import database.mysql.MySQLDatabase;
@@ -14,11 +15,6 @@ public class MySQLUserPersistence implements IUserPersistence {
 
     public MySQLUserPersistence(MySQLDatabase mySQLDatabase){
         this.mySQLDatabase = mySQLDatabase;
-    }
-
-    @Override
-    public void updateUserInfo(String firstName, String lastName, String email, String pw) {
-
     }
 
     @Override
@@ -109,6 +105,32 @@ public class MySQLUserPersistence implements IUserPersistence {
     }
 
     @Override
+    public void userUpdatedPassword(String new_password, String email) throws SQLException {
+        CallableStatement statement = null;
+
+        try {
+
+            statement = mySQLDatabase.getConnection().prepareCall("{call update_user_password_info(?,?,?,?)} ");
+
+            statement.setString(1,new_password);
+            statement.setString(2,email);
+
+            statement.execute();
+        } finally {
+
+            try{
+                if (statement != null){
+                    statement.close();
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    @Override
     public User loadUser(String email) throws SQLException {
 
         CallableStatement statement = null;
@@ -145,4 +167,6 @@ public class MySQLUserPersistence implements IUserPersistence {
 
         return loadedUser;
     }
+
+
 }

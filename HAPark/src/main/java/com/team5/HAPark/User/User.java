@@ -6,9 +6,14 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-
+    private String confirmedPassword;
+    private String reconfirmedPassword;
     public User(){}
 
+    public User(String confirmedPassword, String reconfirmedPassword) {
+        this.confirmedPassword = confirmedPassword;
+        this.reconfirmedPassword = reconfirmedPassword;
+    }
     public User(String firstName, String lastName, String email, String password){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,5 +51,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmedPassword() {
+        return confirmedPassword;
+    }
+
+    public void setConfirmedPassword(String confirmedPassword) {
+        this.confirmedPassword = confirmedPassword;
+    }
+
+    public String getReconfirmedPassword() {
+        return reconfirmedPassword;
+    }
+
+    public void setReconfirmedPassword(String reconfirmedPassword) {
+        this.reconfirmedPassword = reconfirmedPassword;
     }
 }
