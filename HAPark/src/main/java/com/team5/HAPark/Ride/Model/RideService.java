@@ -3,10 +3,6 @@ package com.team5.HAPark.Ride.Model;
 import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -55,9 +51,10 @@ public class RideService implements IRideService {
         return ride;
     }
 
-   public Ride reserveRide(int id) throws SQLException {
-        Ride ride = ridePersistence.getRide(id);
-        //ride.getTimeSlot().setAvailability();
+   public Ride reserveRide(int rideId,int timeSlotId) throws SQLException {
+        int availability=ridePersistence.getRideAvailability(rideId,timeSlotId);
+        availability-=availability;
+        //ridePersistence.updateAvailability(int qty);
         return null;
         }
 

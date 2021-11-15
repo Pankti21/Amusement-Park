@@ -4,8 +4,6 @@ import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ride.Model.TimeSlot;
 import database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -33,7 +31,7 @@ public class RidePersistence implements IRidePersistence{
                 r.setType(rs.getString("ride_type"));
                 r.setMaxOccupancy(rs.getInt("max_occupancy"));
                 r.setDuration(rs.getTime("total_duration"));
-                r.setTimeSlot(getRideavailability(r.getId()));
+                r.setTimeSlot(getRideTimeSlot(r.getId()));
             }
         return r;
     }
@@ -51,14 +49,13 @@ public class RidePersistence implements IRidePersistence{
             r.setType(rs.getString("ride_type"));
             r.setMaxOccupancy(rs.getInt("max_occupancy"));
             r.setDuration(rs.getTime("total_duration"));
-            r.setTimeSlot(getRideavailability(r.getId()));
+            r.setTimeSlot(getRideTimeSlot(r.getId()));
             Rides.add(r);
         }
         return Rides;
     }
 
-    @Override
-    public TimeSlot getRideavailability(int id) throws SQLException {
+    public TimeSlot getRideTimeSlot(int id) throws SQLException {
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
@@ -70,4 +67,14 @@ public class RidePersistence implements IRidePersistence{
         return timeSlot;
     }
 
+    @Override
+    public int getRideAvailability(int rideId, int timeSlotId) throws SQLException {
+        IRidePersistence ridePersistence= new RidePersistence();
+        TimeSlot timeSlot=new TimeSlot();
+        timeSlot=ridePersistence.getRideTimeSlot(rideId);
+        HashMap<Integer,Integer> map = timeSlot.getMap();
+        int availability=map.get(timeSlotId);
+        return availability;
+    }
+    
 }

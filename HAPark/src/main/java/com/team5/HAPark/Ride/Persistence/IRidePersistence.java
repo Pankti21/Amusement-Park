@@ -10,6 +10,7 @@ public interface IRidePersistence {
 
     Ride getRide(int id) throws SQLException;
     List<Ride> getAllRides() throws SQLException;
-    TimeSlot getRideavailability(int id) throws SQLException;
+    TimeSlot getRideTimeSlot(int id) throws SQLException;
+    int getRideAvailability(int rideId, int timeSlotId) throws SQLException;
 }
 
