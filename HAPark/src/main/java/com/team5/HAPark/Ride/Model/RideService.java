@@ -1,7 +1,12 @@
 package com.team5.HAPark.Ride.Model;
 
+import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -9,12 +14,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Service
+
 @Slf4j
+@Service
 public class RideService implements IRideService {
 
+    private IRidePersistence ridePersistence= new RidePersistence();
+
+    public RideService(IRidePersistence ridePersistence) {
+        this.ridePersistence = ridePersistence;
+    }
+
     public List<Ride> getAllRides() throws SQLException {
-        RidePersistence ridePersistence=new RidePersistence();
         log.info("Hello world.");
         List<Ride> Rides=ridePersistence.getAllRides();
         for(Ride ride:Rides) {
@@ -32,7 +43,6 @@ public class RideService implements IRideService {
 
     public List<String> getAllRideNames() throws SQLException {
         List<String> names= new ArrayList<>();
-        RidePersistence ridePersistence=new RidePersistence();
         List<Ride> Rides=ridePersistence.getAllRides();
         for(Ride ride:Rides) {
             names.add(ride.getName());
@@ -41,13 +51,11 @@ public class RideService implements IRideService {
     }
 
     public Ride getRide(int id) throws SQLException {
-        RidePersistence ridePersistence = new RidePersistence();
         Ride ride=ridePersistence.getRide(id);
         return ride;
     }
 
    public Ride reserveRide(int id) throws SQLException {
-        RidePersistence ridePersistence = new RidePersistence();
         Ride ride = ridePersistence.getRide(id);
         //ride.getTimeSlot().setAvailability();
         return null;

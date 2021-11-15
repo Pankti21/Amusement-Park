@@ -4,6 +4,9 @@ import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ride.Model.TimeSlot;
 import database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
+@Component
 public class RidePersistence implements IRidePersistence{
     MySQLDatabase mySQLDatabase = new MySQLDatabase();
 
