@@ -1,6 +1,6 @@
 package com.team5.HAPark.Cart;
 
-import com.team5.HAPark.Ride.Ride;
+import com.team5.HAPark.Ride.Model.Ride;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
