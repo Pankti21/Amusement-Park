@@ -14,7 +14,7 @@ public class Register {
         this.user = user;
     }
 
-    public boolean register(IUserPersistence userPersistence, String confirmedPassword){
+    public boolean register(IUserPersistence userPersistence, String confirmedPassword) throws SQLException {
 
         if (user.getPassword()!=null && !user.getPassword().isEmpty()
                 && user.getEmail()!=null && !user.getEmail().isEmpty()
@@ -22,7 +22,7 @@ public class Register {
                 && user.getLastName()!=null && !user.getLastName().isEmpty()
                 && confirmedPassword!=null){
 
-            if (emailPasswordValidation.validateEmailFormat() && emailPasswordValidation.validatePasswordFormat()) {
+            if (emailPasswordValidation.validateEmailFormat() && emailPasswordValidation.validatePasswordFormat(userPersistence,user.getPassword())) {
 
                 if (user.getPassword().matches(confirmedPassword)) {
 

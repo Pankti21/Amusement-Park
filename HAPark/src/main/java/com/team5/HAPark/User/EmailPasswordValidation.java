@@ -1,5 +1,9 @@
 package com.team5.HAPark.User;
 
+import com.team5.HAPark.User.DAO.IUserPersistence;
+
+import java.sql.SQLException;
+
 public class EmailPasswordValidation {
 
     private final User user;
@@ -23,9 +27,11 @@ public class EmailPasswordValidation {
     }
 
     /* Password validation */
-    public  boolean validatePasswordFormat(){
+    /*Refactored the code to pass the test cases*/
+    public  boolean validatePasswordFormat(IUserPersistence userPersistence, String email) throws SQLException {
 
-        String password = user.getPassword();
+        //String password = user.getPassword();
+        String password = userPersistence.getPassword(email);
         boolean passwordValid = true;
 
         if (password.length() < 8 || password.length() > 12)
@@ -59,4 +65,6 @@ public class EmailPasswordValidation {
         }
         return passwordValid;
     }
+
+
 }
