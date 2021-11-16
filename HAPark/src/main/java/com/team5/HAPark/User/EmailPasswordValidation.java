@@ -1,9 +1,5 @@
 package com.team5.HAPark.User;
 
-import com.team5.HAPark.User.DAO.IUserPersistence;
-
-import java.sql.SQLException;
-
 public class EmailPasswordValidation {
 
     private final User user;
