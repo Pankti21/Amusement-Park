@@ -1,24 +1,18 @@
 package com.team5.HAPark.Cart;
 
-import com.team5.HAPark.Ride.Ride;
+/*import com.team5.HAPark.Ride.Ride;
+import com.team5.HAPark.Ticket.Ticket;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
 public class CartSummary {
    // Ride ride;
-        ArrayList<Ride> ride;
+        ArrayList<Ticket> ticket;
         double totalAmount;
-        double payableAmount;
-        double discount;
-        double tax;
-        String coupon;
         void CartItems() {
             this.ride = new ArrayList<Ride>();
-            this.coupon = "";
             this.totalAmount = 0;
-            this.payableAmount = 0;
-            this.discount = 0;
-            this.tax = 0;
+
         }
         public void addToCart(Ride ride) {
             this.ride.add(ride);
@@ -61,5 +55,6 @@ public class CartSummary {
             }
             System.out.println("\t\t\t" + "Total    : " + this.getTotalAmount());
             this.applyCoupon(this.coupon);
-*/
+
         }
+*/

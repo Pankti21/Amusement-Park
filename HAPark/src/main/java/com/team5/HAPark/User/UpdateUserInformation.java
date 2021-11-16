@@ -37,7 +37,7 @@ public class UpdateUserInformation {
 
         if ((reconfirmPassword.matches(confirmedPassword) )&& (!(currentPassword.matches(confirmedPassword)))) {
 
-            if (emailPasswordValidation.validatePasswordFormat(userPersistence,user.getPassword())) {
+            if (emailPasswordValidation.validatePasswordFormat()) {
                 userPersistence.userUpdatedPassword(confirmedPassword,email);
             }
 

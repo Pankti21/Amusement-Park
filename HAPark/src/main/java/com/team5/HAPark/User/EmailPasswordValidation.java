@@ -28,10 +28,10 @@ public class EmailPasswordValidation {
 
     /* Password validation */
     /*Refactored the code to pass the test cases*/
-    public  boolean validatePasswordFormat(IUserPersistence userPersistence, String email) throws SQLException {
+    public  boolean validatePasswordFormat() {
 
-        //String password = user.getPassword();
-        String password = userPersistence.getPassword(email);
+        String password = user.getPassword();
+
         boolean passwordValid = true;
 
         if (password.length() < 8 || password.length() > 12)

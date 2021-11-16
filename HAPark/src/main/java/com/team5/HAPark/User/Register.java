@@ -8,10 +8,11 @@ import java.sql.SQLException;
 public class Register {
 
     private User user;
-    private  EmailPasswordValidation emailPasswordValidation;
+    private  EmailPasswordValidation emailPasswordValidation ;
 
     public Register(User user) {
         this.user = user;
+        emailPasswordValidation = new EmailPasswordValidation(this.user);
     }
 
     public boolean register(IUserPersistence userPersistence, String confirmedPassword) throws SQLException {
@@ -22,7 +23,7 @@ public class Register {
                 && user.getLastName()!=null && !user.getLastName().isEmpty()
                 && confirmedPassword!=null){
 
-            if (emailPasswordValidation.validateEmailFormat() && emailPasswordValidation.validatePasswordFormat(userPersistence,user.getPassword())) {
+            if (emailPasswordValidation.validateEmailFormat() && emailPasswordValidation.validatePasswordFormat()) {
 
                 if (user.getPassword().matches(confirmedPassword)) {
 

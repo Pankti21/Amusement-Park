@@ -24,8 +24,6 @@ public class EmailPasswordValidationTest {
     void init(){
         user = new User();
         user.setEmail("emailsample@email.com@123");
-       // user.setConfirmedPassword("NewPassword@123");
-        //user.setReconfirmedPassword("NewPassword@123");
         emailPasswordValidation = new EmailPasswordValidation(user);
         userPersistenceMock = Mockito.mock(IUserPersistence.class);
     }
@@ -38,37 +36,37 @@ public class EmailPasswordValidationTest {
         @WithMockUser(username = "user123")
         void validatePasswordFormatHasMinimum8Chars() throws SQLException {
             user.setPassword("Dal@123");
-            assertEquals(false,emailPasswordValidation.validatePasswordFormat(userPersistenceMock,user.getPassword()));
+            assertEquals(false,emailPasswordValidation.validatePasswordFormat());
         }
 
         @Test
-        void validatePasswordFormatHasMaximum12Chars() throws SQLException {
+        void validatePasswordFormatHasMaximum12Chars(){
             user.setPassword("Dalhousie@123");
-            assertFalse(emailPasswordValidation.validatePasswordFormat(userPersistenceMock,user.getPassword()));
+            assertFalse(emailPasswordValidation.validatePasswordFormat());
         }
 
         @Test
-        void validatePasswordFormatHasAtleastOneUpperCaseChar() throws SQLException {
+        void validatePasswordFormatHasAtleastOneUpperCaseChar()  {
             user.setPassword("dal@1234");
-            assertFalse(emailPasswordValidation.validatePasswordFormat(userPersistenceMock,user.getPassword()));
+            assertFalse(emailPasswordValidation.validatePasswordFormat());
         }
 
         @Test
-        void validatePasswordFormatHasAtleastOneLowerCaseChar() throws SQLException {
+        void validatePasswordFormatHasAtleastOneLowerCaseChar()  {
             user.setPassword("DAL@1234");
-            assertFalse(emailPasswordValidation.validatePasswordFormat(userPersistenceMock,user.getPassword()));
+            assertFalse(emailPasswordValidation.validatePasswordFormat());
         }
 
         @Test
-        void validatePasswordFormatHasAtleastOneNumber() throws SQLException {
+        void validatePasswordFormatHasAtleastOneNumber()  {
             user.setPassword("Dal@housie");
-            assertFalse(emailPasswordValidation.validatePasswordFormat(userPersistenceMock,user.getPassword()));
+            assertFalse(emailPasswordValidation.validatePasswordFormat());
         }
 
         @Test
-        void validatePasswordFormatHasAtleastOneSpecialChar() throws SQLException {
+        void validatePasswordFormatHasAtleastOneSpecialChar() {
             user.setPassword("Dalhousie123");
-            assertFalse(emailPasswordValidation.validatePasswordFormat(userPersistenceMock,user.getPassword()));
+            assertFalse(emailPasswordValidation.validatePasswordFormat());
         }
     }
 
