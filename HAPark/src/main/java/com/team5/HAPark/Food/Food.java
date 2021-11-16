@@ -7,8 +7,9 @@ public class Food implements IItem {
     private String name;
     private String id;
     private double price;
+    private int quantity;
 
-    public Food(String name, String id, double price) {
+    public Food(String name, String id, double price, int quantity) {
         this.name = name;
         this.id = id;
         this.price = price;
@@ -36,5 +37,13 @@ public class Food implements IItem {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
