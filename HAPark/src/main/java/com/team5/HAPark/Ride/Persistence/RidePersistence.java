@@ -1,18 +1,23 @@
-package com.team5.HAPark.Ride.DAO;
+package com.team5.HAPark.Ride.Persistence;
 
-import com.team5.HAPark.Ride.Ride;
+import com.team5.HAPark.Ride.Model.Ride;
+import com.team5.HAPark.Ride.Model.TimeSlot;
 import database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
+@Component
 public class RidePersistence implements IRidePersistence{
     MySQLDatabase mySQLDatabase = new MySQLDatabase();
 
@@ -27,7 +32,8 @@ public class RidePersistence implements IRidePersistence{
                 r.setName(rs.getString("ride_name"));
                 r.setType(rs.getString("ride_type"));
                 r.setMaxOccupancy(rs.getInt("max_occupancy"));
-                r.setDuration(LocalTime.of(00,00,00));
+                r.setDuration(rs.getTime("total_duration"));
+                r.setTimeSlot(getRideavailability(r.getId()));
             }
         return r;
     }
@@ -38,16 +44,30 @@ public class RidePersistence implements IRidePersistence{
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info;");
-        //String ride_name="";
         while (rs.next()){
             Ride r = new Ride();
             r.setId(rs.getInt("ride_id"));
             r.setName(rs.getString("ride_name"));
             r.setType(rs.getString("ride_type"));
             r.setMaxOccupancy(rs.getInt("max_occupancy"));
-            r.setDuration(LocalTime.of(00,00,00));
+            r.setDuration(rs.getTime("total_duration"));
+            r.setTimeSlot(getRideavailability(r.getId()));
             Rides.add(r);
         }
         return Rides;
     }
+
+    @Override
+    public TimeSlot getRideavailability(int id) throws SQLException {
+        Connection con=mySQLDatabase.getConnection();
+        Statement stmt= con.createStatement();
+        ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
+        HashMap<Integer,Integer> map= new HashMap<>();
+        while (rs.next()){
+            map.put(rs.getInt("timeslot_id"),rs.getInt("availability"));
+        }
+        TimeSlot timeSlot=new TimeSlot(map);
+        return timeSlot;
+    }
+
 }
