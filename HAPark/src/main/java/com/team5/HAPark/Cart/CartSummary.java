@@ -40,7 +40,7 @@ public class CartSummary {
                 }
             }
         }
-        public double getTotalAmount() {
+   /*     public double getTotalAmount() {
             ListIterator<Ride> iterator2 = ride.listIterator();
             this.totalAmount = 0;
             while(iterator2.hasNext()) {
@@ -50,7 +50,7 @@ public class CartSummary {
             return this.totalAmount;
         }
 
-        public void printInvoice() {
+     /*   public void printInvoice() {
             ListIterator<Item> iterator3 = item.listIterator();
             while(iterator3.hasNext()) {
                 Item item4 = iterator3.next();
@@ -61,7 +61,5 @@ public class CartSummary {
             }
             System.out.println("\t\t\t" + "Total    : " + this.getTotalAmount());
             this.applyCoupon(this.coupon);
-
+*/
         }
-    }
-}
