@@ -1,21 +1,22 @@
 package com.team5.HAPark.Order;
 
-import com.team5.HAPark.Food.FoodOrderItem;
+import com.team5.HAPark.Ticket.TicketOrderItem;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class FoodOrder {
+public class TicketOrder {
+
     private Integer orderId;
     private String mailId;
     private LocalDate orderDate;
     private LocalTime orderTime;
-    private List<FoodOrderItem> orderItems;
+    private List<TicketOrderItem> orderItems;
 
-    public FoodOrder() {}
+    public TicketOrder() {}
 
-    public FoodOrder(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<FoodOrderItem> orderItems) {
+    public TicketOrder(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<TicketOrderItem> orderItems) {
         this.orderId = orderId;
         this.mailId = mailId;
         this.orderDate = orderDate;
@@ -55,11 +56,11 @@ public class FoodOrder {
         this.orderTime = orderTime;
     }
 
-    public List<FoodOrderItem> getOrderItems() {
+    public List<TicketOrderItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<FoodOrderItem> orderItems) {
+    public void setOrderItems(List<TicketOrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 }

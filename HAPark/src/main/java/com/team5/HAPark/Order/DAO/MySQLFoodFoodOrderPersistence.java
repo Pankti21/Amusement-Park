@@ -63,7 +63,7 @@ public class MySQLFoodFoodOrderPersistence implements IFoodOrderPersistence {
     }
 
     @Override
-    public void saveOrderItem(int orderID, String itemId, int quantity) throws SQLException {
+    public void saveOrderItem(int orderId, String itemId, int quantity) throws SQLException {
 
         CallableStatement statement = null;
 
@@ -71,7 +71,7 @@ public class MySQLFoodFoodOrderPersistence implements IFoodOrderPersistence {
 
             statement = mySQLDatabase.getConnection().prepareCall("{call save_food_order_item(?,?,?)} ");
 
-            statement.setInt(1,orderID);
+            statement.setInt(1,orderId);
             statement.setString(2, itemId);
             statement.setInt(3, quantity);
 
@@ -93,7 +93,7 @@ public class MySQLFoodFoodOrderPersistence implements IFoodOrderPersistence {
     @Override
     public FoodOrder loadOrder(int orderId) throws SQLException {
 
-        FoodOrder order = null;
+        FoodOrder order;
         CallableStatement statement = null;
 
         try {

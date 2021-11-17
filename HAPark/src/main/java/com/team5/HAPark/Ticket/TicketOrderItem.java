@@ -1,11 +1,11 @@
 package com.team5.HAPark.Ticket;
 
 public class TicketOrderItem {
-    Ticket ticket;
+    private Ticket ticket;
     private  int quantity;
 
 
-    TicketOrderItem(Ticket ticket, int quantity) {
+    public TicketOrderItem(Ticket ticket, int quantity) {
         this.ticket = ticket;
         this.quantity = quantity;
     }

@@ -81,10 +81,6 @@ class FoodOrderServiceTest {
         List<FoodOrderItem> orderItems = newOrder.getOrderItems();
 
         assertEquals("email",newOrder.getMailId());
-
-        assertNotNull(newOrder.getOrderDate());
-        assertNotNull(newOrder.getOrderDate());
-        assertNull(newOrder.getOrderId());
     }
 
     @Test
@@ -98,7 +94,7 @@ class FoodOrderServiceTest {
     }
 
     @Test
-    public void createOrderFromItemQuantitiesHasOrderId() {
+    public void createOrderFromItemQuantitiesDefaultHasNoOrderId() {
 
         FoodOrder newOrder = foodOrderService.createOrderFromItemQuantities("email", orderItems);
         List<FoodOrderItem> orderItems = newOrder.getOrderItems();
