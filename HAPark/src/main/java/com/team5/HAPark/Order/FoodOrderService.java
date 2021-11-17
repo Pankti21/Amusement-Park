@@ -1,38 +1,38 @@
 package com.team5.HAPark.Order;
 
-import com.team5.HAPark.Order.DAO.IOrderPersistence;
+import com.team5.HAPark.Food.FoodOrderItem;
+import com.team5.HAPark.Order.DAO.IFoodOrderPersistence;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class OrderService {
+public class FoodOrderService {
 
-    private IOrderPersistence orderPersistence;
+    private IFoodOrderPersistence orderPersistence;
 
-    public OrderService(IOrderPersistence orderPersistence){
+    public FoodOrderService(IFoodOrderPersistence orderPersistence){
         this.orderPersistence = orderPersistence;
     }
 
-    public Order createOrderFromItemQuantities(String userId, Map<IItem,Integer> items){
+    public FoodOrder createOrderFromItemQuantities(String userId, List<FoodOrderItem> foodOrderItems){
 
-        Order order = null;
+        FoodOrder order = null;
 
-        if (items != null && !items.isEmpty()){
-            order = new Order();
+        if (foodOrderItems != null && !foodOrderItems.isEmpty()){
+            order = new FoodOrder();
             order.setOrderDate(LocalDate.now());
             order.setOrderTime(LocalTime.now());
             order.setMailId(userId);
-            order.setOrderItemQuantities(items);
+            order.setOrderItems(foodOrderItems);
         }
 
         return order;
     }
 
-    public void saveOrder(Order order){
+    public void saveOrder(FoodOrder order){
         try {
             orderPersistence.saveOrder(order);
         } catch (SQLException e) {
@@ -40,9 +40,9 @@ public class OrderService {
         }
     }
 
-    public Order getOrder(int orderId){
+    public FoodOrder getOrder(int orderId){
 
-        Order order = null;
+        FoodOrder order = null;
 
         try {
             order = orderPersistence.loadOrder(orderId);
@@ -53,9 +53,9 @@ public class OrderService {
         return order;
     }
 
-    public List<Order> getAllOrdersForUser(String email) throws SQLException {
+    public List<FoodOrder> getAllOrdersForUser(String email) throws SQLException {
 
-        List<Order> orders = orderPersistence.loadAllOrders(email);
+        List<FoodOrder> orders = orderPersistence.loadAllOrders(email);
 
         if (orders == null){
             orders = new ArrayList<>();

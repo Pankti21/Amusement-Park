@@ -1,31 +1,29 @@
 package com.team5.HAPark.Order.DAO;
 
 import com.team5.HAPark.Food.Food;
+import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Food.FoodService;
-import com.team5.HAPark.Order.IItem;
-import com.team5.HAPark.Order.Order;
+import com.team5.HAPark.Order.FoodOrder;
 import database.mysql.MySQLDatabase;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class MySQLFoodOrderPersistence implements IOrderPersistence{
+public class MySQLFoodFoodOrderPersistence implements IFoodOrderPersistence {
 
     private MySQLDatabase mySQLDatabase;
     private FoodService foodService;
 
-    public MySQLFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
+    public MySQLFoodFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
         this.mySQLDatabase = mySQLDatabase;
         this.foodService = foodService;
     }
 
     @Override
-    public void saveOrder(Order order) throws SQLException {
+    public void saveOrder(FoodOrder order) throws SQLException {
 
         CallableStatement statement = null;
 
@@ -43,13 +41,13 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence{
             int orderId = statement.getInt(4);
             order.setOrderId(orderId);
 
-            Map<IItem,Integer> orderItemQuantities = order.getOrderItemQuantities();
-            for (Map.Entry<IItem,Integer> entry: orderItemQuantities.entrySet()){
+            List<FoodOrderItem> orderItems = order.getOrderItems();
+            for (FoodOrderItem foodOrderItem: orderItems){
 
-                IItem item = entry.getKey();
-                int quantity = entry.getValue();
+                String itemID = foodOrderItem.getId();
+                int quantity = foodOrderItem.getQuantity();
 
-                saveOrderItem(orderId,item.getId(),quantity);
+                saveOrderItem(orderId,itemID,quantity);
             }
 
         } finally {
@@ -93,9 +91,9 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence{
     }
 
     @Override
-    public Order loadOrder(int orderId) throws SQLException {
+    public FoodOrder loadOrder(int orderId) throws SQLException {
 
-        Order order = null;
+        FoodOrder order = null;
         CallableStatement statement = null;
 
         try {
@@ -109,15 +107,15 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence{
 
             statement.execute();
 
-            order = new Order();
+            order = new FoodOrder();
 
             order.setOrderId(orderId);
             order.setOrderDate(statement.getDate(2).toLocalDate());
             order.setOrderTime(statement.getTime(3).toLocalTime());
             order.setMailId(statement.getString(4));
 
-            Map<IItem,Integer> itemQuantities = loadOrderItems(orderId);
-            order.setOrderItemQuantities(itemQuantities);
+            List<FoodOrderItem> orderItems = loadOrderItems(orderId);
+            order.setOrderItems(orderItems);
 
         } finally {
 
@@ -134,10 +132,9 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence{
         return order;
     }
 
-    @Override
-    public Map<IItem,Integer> loadOrderItems(int orderId) throws SQLException {
+    public List<FoodOrderItem> loadOrderItems(int orderId) throws SQLException {
 
-        Map<IItem,Integer> orderItemQuantities = new HashMap<>();
+        List<FoodOrderItem> orderItems = new ArrayList<>();
 
         CallableStatement statement = null;
         ResultSet rs = null;
@@ -157,7 +154,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence{
                 String foodId = rs.getString("food_id");
                 Food food = foodService.getFood(foodId);
 
-                orderItemQuantities.put(food,quantity);
+                orderItems.add(new FoodOrderItem(food,quantity));
             }
 
         } finally {
@@ -174,13 +171,13 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence{
             }
         }
 
-        return orderItemQuantities;
+        return orderItems;
     }
 
     @Override
-    public List<Order> loadAllOrders(String email) throws SQLException {
+    public List<FoodOrder> loadAllOrders(String email) throws SQLException {
 
-        List<Order> orders = new ArrayList<>();
+        List<FoodOrder> orders = new ArrayList<>();
         CallableStatement statement = null;
         ResultSet rs = null;
 
@@ -198,15 +195,15 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence{
                 int orderId = rs.getInt("food_order_id");
                 LocalDate date = rs.getDate("order_date").toLocalDate();
                 LocalTime time = rs.getTime("order_time").toLocalTime();
-                Map<IItem,Integer> itemQuantities = loadOrderItems(orderId);
+                List<FoodOrderItem> orderItems = loadOrderItems(orderId);
 
-                Order order = new Order();
+                FoodOrder order = new FoodOrder();
 
                 order.setOrderId(orderId);
                 order.setMailId(email);
                 order.setOrderDate(date);
                 order.setOrderTime(time);
-                order.setOrderItemQuantities(itemQuantities);
+                order.setOrderItems(orderItems);
 
                 orders.add(order);
             }

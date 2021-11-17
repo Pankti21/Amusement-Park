@@ -1,24 +1,27 @@
 package com.team5.HAPark.Order;
 
+import com.team5.HAPark.Food.FoodOrderItem;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
-public class Order {
+public class FoodOrder {
     private Integer orderId;
     private String mailId;
     private LocalDate orderDate;
     private LocalTime orderTime;
-    private Map<IItem,Integer> orderItemQuantities;
+    private List<FoodOrderItem> orderItems;
 
-    public Order() {}
+    public FoodOrder() {}
 
-    public Order(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, Map<IItem, Integer> orderItemQuantities) {
+    public FoodOrder(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<FoodOrderItem> orderItems) {
         this.orderId = orderId;
         this.mailId = mailId;
         this.orderDate = orderDate;
         this.orderTime = orderTime;
-        this.orderItemQuantities = orderItemQuantities;
+        this.orderItems = orderItems;
     }
 
     public Integer getOrderId() {
@@ -53,11 +56,11 @@ public class Order {
         this.orderTime = orderTime;
     }
 
-    public Map<IItem, Integer> getOrderItemQuantities() {
-        return orderItemQuantities;
+    public List<FoodOrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setOrderItemQuantities(Map<IItem, Integer> orderItemQuantities) {
-        this.orderItemQuantities = orderItemQuantities;
+    public void setOrderItems(List<FoodOrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
