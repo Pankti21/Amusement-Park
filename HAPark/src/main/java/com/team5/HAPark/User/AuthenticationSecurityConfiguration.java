@@ -1,4 +1,4 @@
-package com.team5.HAPark.userAuthentication;
+package com.team5.HAPark.User;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,9 +32,7 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                   antMatchers("/**").authenticated()
                   .and().formLogin();
           http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-
     }
-
 }
 
 
