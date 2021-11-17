@@ -1,6 +1,6 @@
 package com.team5.HAPark.Cart;
 
-
+import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 import com.team5.HAPark.Food.Food;
 
@@ -9,33 +9,66 @@ import java.util.ListIterator;
 
 public class CartSummary {
     ArrayList<TicketOrderItem> ticket;
-    ArrayList<Food> food;
+
+    public ArrayList<TicketOrderItem> getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(ArrayList<TicketOrderItem> ticket) {
+        this.ticket = ticket;
+    }
+
+    public ArrayList<FoodOrderItem> getFood() {
+        return food;
+    }
+
+    public void setFood(ArrayList<FoodOrderItem> food) {
+        this.food = food;
+    }
+
+    public void setTicketAmount(double ticketAmount) {
+        this.ticketAmount = ticketAmount;
+    }
+
+    public void setFoodAmount(double foodAmount) {
+        this.foodAmount = foodAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    ArrayList<FoodOrderItem> food;
     double ticketAmount;
     double foodAmount;
     double totalAmount;
 
     void CartItems() {
         this.ticket = new ArrayList<TicketOrderItem>();
-        this.food = new ArrayList<Food>();
+        this.food = new ArrayList<FoodOrderItem>();
         double ticketAmount = 0;
         double foodAmount = 0;
         this.totalAmount = 0;
 
     }
 
-    //Adding the items to cart
-    public void addToCart(TicketOrderItem ticket, Food food) {
+    //Adding the tickets to cart
+    public void addTicketToCart(TicketOrderItem ticket) {
         this.ticket.add(ticket);
+    }
+
+    //Adding the food items to cart
+    public void addFoodToCart(FoodOrderItem food) {
         this.food.add(food);
     }
 
     //Display the cart items
     public void showCart() {
         ListIterator<TicketOrderItem> ticketIterator = ticket.listIterator();
-        ListIterator<Food> foodIterator = food.listIterator();
+        ListIterator<FoodOrderItem> foodIterator = food.listIterator();
         while ((ticketIterator.hasNext() || (foodIterator.hasNext()))){
             TicketOrderItem ticketItem = ticketIterator.next();
-            Food foodItem = foodIterator.next();
+            FoodOrderItem foodItem = foodIterator.next();
             System.out.println(ticketItem);
             System.out.println(foodItem);
         }
@@ -47,7 +80,10 @@ public class CartSummary {
         while (ticketIterator.hasNext()) {
             TicketOrderItem ticketItem = ticketIterator.next();
             if (ticketItem.getTicketType().equals(t.getTicketType())) {
-                this.ticket.remove(t);
+                ticketItem.setQuantity(ticketItem.getQuantity()-t.getQuantity());
+                if((ticketItem.getQuantity() <= 0 )) {
+                    ticket.remove(ticketItem);
+                }
                 break;
             }
         }
@@ -55,11 +91,14 @@ public class CartSummary {
 
     //Remove Food items from cart
     public void removeFoodFromCart(Food f) {
-        ListIterator<Food> foodIterator = food.listIterator();
+        ListIterator<FoodOrderItem> foodIterator = food.listIterator();
         while  (foodIterator.hasNext()){
-            Food foodItem = foodIterator.next();
+            FoodOrderItem foodItem = foodIterator.next();
             if (foodItem.getId().equals(f.getId())) {
-                this.food.remove(f);
+                foodItem.setQuantity(foodItem.getQuantity()-f.getQuantity());
+                if((foodItem.getQuantity() <= 0 )) {
+                    food.remove(foodItem);
+                }
                 break;
             }
         }
@@ -78,10 +117,10 @@ public class CartSummary {
 
     //Get the Food items amount
     public double getFoodAmount() {
-        ListIterator<Food> foodIterator = food.listIterator();
+        ListIterator<FoodOrderItem> foodIterator = food.listIterator();
         this.foodAmount = 0;
         while (foodIterator.hasNext()) {
-            Food foodItem = foodIterator.next();
+            FoodOrderItem foodItem = foodIterator.next();
             this.foodAmount = this.foodAmount + (foodItem.getPrice() * foodItem.getQuantity());
         }
         return this.foodAmount;
