@@ -1,6 +1,5 @@
 package com.team5.HAPark.Cart;
 
-
 import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 import com.team5.HAPark.Food.Food;
@@ -10,6 +9,35 @@ import java.util.ListIterator;
 
 public class CartSummary {
     ArrayList<TicketOrderItem> ticket;
+
+    public ArrayList<TicketOrderItem> getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(ArrayList<TicketOrderItem> ticket) {
+        this.ticket = ticket;
+    }
+
+    public ArrayList<FoodOrderItem> getFood() {
+        return food;
+    }
+
+    public void setFood(ArrayList<FoodOrderItem> food) {
+        this.food = food;
+    }
+
+    public void setTicketAmount(double ticketAmount) {
+        this.ticketAmount = ticketAmount;
+    }
+
+    public void setFoodAmount(double foodAmount) {
+        this.foodAmount = foodAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
     ArrayList<FoodOrderItem> food;
     double ticketAmount;
     double foodAmount;
@@ -52,7 +80,10 @@ public class CartSummary {
         while (ticketIterator.hasNext()) {
             TicketOrderItem ticketItem = ticketIterator.next();
             if (ticketItem.getTicketType().equals(t.getTicketType())) {
-                this.ticket.remove(t);
+                ticketItem.setQuantity(ticketItem.getQuantity()-t.getQuantity());
+                if((ticketItem.getQuantity() <= 0 )) {
+                    ticket.remove(ticketItem);
+                }
                 break;
             }
         }
@@ -64,7 +95,10 @@ public class CartSummary {
         while  (foodIterator.hasNext()){
             FoodOrderItem foodItem = foodIterator.next();
             if (foodItem.getId().equals(f.getId())) {
-                this.food.remove(f);
+                foodItem.setQuantity(foodItem.getQuantity()-f.getQuantity());
+                if((foodItem.getQuantity() <= 0 )) {
+                    food.remove(foodItem);
+                }
                 break;
             }
         }
