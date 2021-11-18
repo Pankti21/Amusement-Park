@@ -1,16 +1,13 @@
 package com.team5.HAPark.Ride.Controller;
 
-import com.team5.HAPark.Ride.Model.Ride;
+import com.team5.HAPark.Ride.Model.RideReserve;
 import com.team5.HAPark.Ride.Model.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 
 @org.springframework.stereotype.Controller
 @Slf4j
@@ -26,15 +23,15 @@ public class RideController {
 
     @GetMapping("/reserve")
     public String reserveForm(Model model){
-        model.addAttribute("ride",new Ride());
+        model.addAttribute("ride",new RideReserve());
         return "RideForm"; //create-project
     }
 
     @PostMapping("/reserved") //save-project
-    public String submitForm(@ModelAttribute Ride ride){
+    public String submitForm(@ModelAttribute("ride") RideReserve ride){
         //Save project to db
-        log.info("{}ride {}",ride.getId(),ride.getName());
-        System.out.println(ride);
+        log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
+        //System.out.println(ride);
         return "RideReserved"; // result
     }
 
