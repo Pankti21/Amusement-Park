@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Slf4j
@@ -27,15 +24,14 @@ public class RideService implements IRideService {
         List<Ride> Rides=ridePersistence.getAllRides();
         for(Ride ride:Rides) {
             log.info("ride id: {}", ride.getId());
-            log.info("ride name: {}", ride.getName());
-            log.info("ride type: {}", ride.getType());
-            log.info("ride max_occupancy: {}", ride.getMaxOccupancy());
-            log.info("ride duration: {}", ride.getDuration());
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(1));
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(2));
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(3));
         }
         return Rides;
+    }
+
+    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException{
+        List<HashMap<Integer,Integer>> maps= new ArrayList<>();
+        maps=ridePersistence.getAllTimeSlots();
+        return maps;
     }
 
     public List<String> getAllRideNames() throws SQLException {

@@ -55,6 +55,16 @@ public class RidePersistence implements IRidePersistence{
         return Rides;
     }
 
+    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
+        IRidePersistence ridePersistence=new RidePersistence();
+        List<Ride> Rides= ridePersistence.getAllRides();
+        List<HashMap<Integer,Integer>> maps = new ArrayList<>();
+        for (Ride ride:Rides){
+            maps.add(ridePersistence.getRideTimeSlot(ride.getId()).getMap());
+        }
+        return maps;
+    }
+
     public TimeSlot getRideTimeSlot(int id) throws SQLException {
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
@@ -76,5 +86,6 @@ public class RidePersistence implements IRidePersistence{
         int availability=map.get(timeSlotId);
         return availability;
     }
-    
+
+
 }

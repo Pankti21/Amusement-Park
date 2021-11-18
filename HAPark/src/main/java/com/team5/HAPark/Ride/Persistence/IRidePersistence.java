@@ -4,6 +4,7 @@ import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ride.Model.TimeSlot;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface IRidePersistence {
@@ -12,5 +13,6 @@ public interface IRidePersistence {
     List<Ride> getAllRides() throws SQLException;
     TimeSlot getRideTimeSlot(int id) throws SQLException;
     int getRideAvailability(int rideId, int timeSlotId) throws SQLException;
+    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException;
 }
 

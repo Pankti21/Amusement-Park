@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @org.springframework.stereotype.Controller
 @Slf4j
@@ -28,6 +29,7 @@ public class RideController {
     public String reserveForm(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
         model.addAttribute("ride",new RideReserve());
+        model.addAttribute("maps",rideService.getAllTimeSlots());
         return "RideForm"; //create-project
     }
 
@@ -39,13 +41,23 @@ public class RideController {
         String username = currentUser.getName();
         log.info("{}",username);
         log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
+        //rideService.reserveRide()
         return "RideReserved"; // result
     }
 
     @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
+        RidePersistence ridePersistence = new RidePersistence();
+        //List<Integer> keys=List.of(1,2,3);
+        model.addAttribute("maps",ridePersistence.getAllTimeSlots());
+        //model.addAttribute("alltimeslots", ridePersistence.getAllTimeSlots());
         return "rideui";
+    }
+
+    public void allTimeSlots(Model model) throws SQLException {
+        RidePersistence ridePersistence = new RidePersistence();
+        model.addAttribute("alltimeslots", ridePersistence.getAllTimeSlots());
     }
 
     @GetMapping("/rides/ground")
