@@ -2,7 +2,7 @@ package com.team5.HAPark.Order;
 
 import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
 import com.team5.HAPark.Food.FoodService;
-import com.team5.HAPark.Order.DAO.MySQLFoodFoodOrderPersistence;
+import com.team5.HAPark.Order.DAO.MySQLFoodOrderPersistence;
 import database.mysql.MySQLDatabase;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +20,7 @@ public class FoodOrderController {
         MySQLDatabase dataBase = new MySQLDatabase();
         MySQLFoodPersistence foodPersistence = new MySQLFoodPersistence(dataBase);
         FoodService foodService = new FoodService(foodPersistence);
-        MySQLFoodFoodOrderPersistence mySQLFoodOrderPersistence = new MySQLFoodFoodOrderPersistence(dataBase,foodService);
+        MySQLFoodOrderPersistence mySQLFoodOrderPersistence = new MySQLFoodOrderPersistence(dataBase,foodService);
         FoodOrderService foodOrderService = new FoodOrderService(mySQLFoodOrderPersistence);
 
         foodOrderService.saveOrder(order);
@@ -34,7 +34,7 @@ public class FoodOrderController {
         MySQLDatabase dataBase = new MySQLDatabase();
         MySQLFoodPersistence foodPersistence = new MySQLFoodPersistence(dataBase);
         FoodService foodService = new FoodService(foodPersistence);
-        MySQLFoodFoodOrderPersistence mySQLFoodOrderPersistence = new MySQLFoodFoodOrderPersistence(dataBase,foodService);
+        MySQLFoodOrderPersistence mySQLFoodOrderPersistence = new MySQLFoodOrderPersistence(dataBase,foodService);
         FoodOrderService foodOrderService = new FoodOrderService(mySQLFoodOrderPersistence);
 
         FoodOrder order = foodOrderService.getOrder(orderId);
@@ -49,7 +49,7 @@ public class FoodOrderController {
         MySQLDatabase dataBase = new MySQLDatabase();
         MySQLFoodPersistence foodPersistence = new MySQLFoodPersistence(dataBase);
         FoodService foodService = new FoodService(foodPersistence);
-        MySQLFoodFoodOrderPersistence mySQLFoodOrderPersistence = new MySQLFoodFoodOrderPersistence(dataBase,foodService);
+        MySQLFoodOrderPersistence mySQLFoodOrderPersistence = new MySQLFoodOrderPersistence(dataBase,foodService);
         FoodOrderService foodOrderService = new FoodOrderService(mySQLFoodOrderPersistence);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

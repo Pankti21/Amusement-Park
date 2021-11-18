@@ -12,12 +12,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLFoodFoodOrderPersistence implements IFoodOrderPersistence {
+public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
 
     private MySQLDatabase mySQLDatabase;
     private FoodService foodService;
 
-    public MySQLFoodFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
+    public MySQLFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
         this.mySQLDatabase = mySQLDatabase;
         this.foodService = foodService;
     }
