@@ -69,13 +69,14 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
 
         try {
 
-            statement = mySQLDatabase.getConnection().prepareCall("{call save_ticket_order_item(?,?,?)} ");
+            statement = mySQLDatabase.getConnection().prepareCall("{call save_ticket_order_item(?,?)} ");
 
             statement.setInt(1,orderId);
             statement.setString(2, ticketType);
-            statement.setInt(3, quantity);
 
-            statement.execute();
+            for (int i = 0; i<quantity; i++) {
+                statement.execute();
+            }
 
         } finally {
 
