@@ -78,6 +78,7 @@ public class RidePersistence implements IRidePersistence{
     }
 
     @Override
+    //Get seats available for a given ride at a given timeslot
     public int getRideAvailability(int rideId, int timeSlotId) throws SQLException {
         IRidePersistence ridePersistence= new RidePersistence();
         TimeSlot timeSlot=new TimeSlot();
@@ -87,5 +88,11 @@ public class RidePersistence implements IRidePersistence{
         return availability;
     }
 
-
+    @Override
+    //Update reserved seats by user in database
+    public void updateRideAvailability(int rideId, int timeslotId, int availability) throws SQLException {
+        Connection con=mySQLDatabase.getConnection();
+        Statement stmt= con.createStatement();
+        stmt.executeUpdate("UPDATE ride_timeslot SET availability="+availability+" WHERE ride_id="+rideId+" AND timeslot_id="+timeslotId);
+    }
 }

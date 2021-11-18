@@ -34,14 +34,14 @@ public class RideController {
     }
 
     @PostMapping("/reserved") //save-project
-    public String submitForm(@ModelAttribute("ride") RideReserve ride){
+    public String submitForm(@ModelAttribute("ride") RideReserve ride) throws SQLException {
         //Save project to db
         //https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
         log.info("{}",username);
         log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
-        //rideService.reserveRide()
+        rideService.reserveSeats(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
         return "RideReserved"; // result
     }
 
