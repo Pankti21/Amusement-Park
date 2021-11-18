@@ -22,7 +22,8 @@ public class RideController {
     }
 
     @GetMapping("/reserve")
-    public String reserveForm(Model model){
+    public String reserveForm(Model model) throws SQLException {
+        model.addAttribute("allrides", rideService.getAllRides());
         model.addAttribute("ride",new RideReserve());
         return "RideForm"; //create-project
     }
