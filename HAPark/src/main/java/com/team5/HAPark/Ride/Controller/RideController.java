@@ -2,7 +2,10 @@ package com.team5.HAPark.Ride.Controller;
 
 import com.team5.HAPark.Ride.Model.RideReserve;
 import com.team5.HAPark.Ride.Model.RideService;
+import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +24,6 @@ public class RideController {
         return "RideMainPage";
     }
 
-<<<<<<< HEAD
     @GetMapping("/reserve")
     public String reserveForm(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
@@ -32,8 +34,11 @@ public class RideController {
     @PostMapping("/reserved") //save-project
     public String submitForm(@ModelAttribute("ride") RideReserve ride){
         //Save project to db
+        //https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = currentUser.getName();
+        log.info("{}",username);
         log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
-        //System.out.println(ride);
         return "RideReserved"; // result
     }
 
@@ -41,7 +46,8 @@ public class RideController {
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
         return "rideui";
-=======
+    }
+
     @GetMapping("/rides/ground")
     public String groungRides(Model model) throws SQLException {
         model.addAttribute("groundrides",rideService.getAllGroundRides());
@@ -52,6 +58,6 @@ public class RideController {
     public String waterRides(Model model) throws SQLException {
         model.addAttribute("waterrides",rideService.getAllWaterRides());
         return "WaterRides";
->>>>>>> feature/rides2
+
     }
 }
