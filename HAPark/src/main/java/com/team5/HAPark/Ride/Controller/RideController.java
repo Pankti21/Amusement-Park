@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.Arrays;
 
 @org.springframework.stereotype.Controller
+@Slf4j
 public class RideController {
 
     @Autowired
@@ -23,15 +26,16 @@ public class RideController {
 
     @GetMapping("/reserve")
     public String reserveForm(Model model){
-        Ride ride=new Ride();
-        model.addAttribute("ride",ride);
-        return "RideForm";
+        model.addAttribute("ride",new Ride());
+        return "RideForm"; //create-project
     }
 
-    @PostMapping("/reserve")
-    public String submitForm(@ModelAttribute("ride") Ride ride){
+    @PostMapping("/reserved") //save-project
+    public String submitForm(@ModelAttribute Ride ride){
+        //Save project to db
+        log.info("{}ride {}",ride.getId(),ride.getName());
         System.out.println(ride);
-        return "RideReserved";
+        return "RideReserved"; // result
     }
 
     @GetMapping("/rides/all")
