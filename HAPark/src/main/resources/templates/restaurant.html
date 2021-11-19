@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant</title>
+</head>
+<body>
+  <table style="margin-left: auto; margin-right: auto;">
+    <tbody>
+    <tr>
+      <td style="height: 50px;">Menu</td>
+    </tr>
+    </tbody>
+  </table>
+  <table style="margin-left: auto; margin-right: auto;">
+    <tbody>
+      <tr th:each="food: ${menu}">
+
+          <td style="height:50px; width:150px" th:text="${food.name}" />
+          <td style="height:50px;">$<td th:text="${food.price}" />
+          <td><input type="number" min="0" max="10" placeholder="0"/></td>
+      </tr>
+      <tr>
+        <td><input type="submit"value="Submit" /><input type="reset" value="Reset" /></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+
+<!--
+ <form action="#" th:action="@{/menu/update}" method="post" th:each= "quantity: ${quantities}">
+      <tr th:each="food: ${menu}">
+
+          <td style="height:50px; width:150px" th:text="${food.name}" />
+          <td style="height:50px;" th:text="${food.price}" />
+          <td style="height:50px; width:10px"><input type="number" th:value="${quantities.quantity}"/></td>
+          <td><input type="submit"value="Submit" /></td>
+          <td><input type="reset" value="Reset" /></td>
+
+      </tr>
+    </form>-->

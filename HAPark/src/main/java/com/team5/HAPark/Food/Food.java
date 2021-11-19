@@ -1,7 +1,9 @@
 package com.team5.HAPark.Food;
 
 import com.team5.HAPark.Order.IItem;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Food implements IItem {
 
     private String name;

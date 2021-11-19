@@ -2,17 +2,21 @@ package com.team5.HAPark.Food;
 
 import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
 import database.mysql.MySQLDatabase;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-@RestController
+@Controller
 public class FoodController {
 
-    @RequestMapping(value = "/menu")
-    public Menu getAllFoods() throws SQLException {
+    @GetMapping(value = "/menu")
+    public String getAllFoods(Model model) throws SQLException {
 
         MySQLDatabase dataBase = new MySQLDatabase();
         FoodService foodService = new FoodService(new MySQLFoodPersistence(dataBase));
@@ -20,9 +24,24 @@ public class FoodController {
         Menu menu = foodService.getMenu();
         dataBase.close();
 
-        return menu;
+        model.addAttribute("menu",menu.getFoodList());
+
+        return "restaurant";
     }
 
+    @PostMapping(value = "/menu/update")
+    public RedirectView getAllFoods(@ModelAttribute ArrayList<Number> quantities, BindingResult bindingResult){
+        System.out.println(quantities);
+        //get info from request
+        //todo;
+        //get cart, add to cart
+
+        //need info from TA
+        //move to cart controller??
+        return new RedirectView("/menu");
+    }
+
+    /*
     @RequestMapping(value = "/menu/{id}")
     public Food getFood(@PathVariable String id) throws SQLException {
 
@@ -34,5 +53,7 @@ public class FoodController {
 
         return food;
     }
+
+     */
 }
 
