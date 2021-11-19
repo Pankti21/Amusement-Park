@@ -30,7 +30,7 @@ public class FoodController {
     }
 
     @PostMapping(value = "/menu/update")
-    public RedirectView getAllFoods(@ModelAttribute ArrayList<Number> quantities, BindingResult bindingResult){
+    public RedirectView getAllFoods(@RequestParam("quantity") Integer[] quantities){
         System.out.println(quantities);
         //get info from request
         //todo;
