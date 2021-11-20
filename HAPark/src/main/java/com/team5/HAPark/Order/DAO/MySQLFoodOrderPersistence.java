@@ -14,12 +14,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLOrderPersistence implements IOrderPersistence {
+public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
     private MySQLDatabase mySQLDatabase;
     private FoodService foodService;
 
-    public MySQLOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
+    public MySQLFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
         this.mySQLDatabase = mySQLDatabase;
         this.foodService = foodService;
     }

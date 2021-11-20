@@ -2,7 +2,8 @@ package com.team5.HAPark.Order;
 
 import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
 import com.team5.HAPark.Food.FoodService;
-import com.team5.HAPark.Order.DAO.MySQLOrderPersistence;
+import com.team5.HAPark.Order.DAO.IOrderPersistence;
+import com.team5.HAPark.Order.DAO.MySQLFoodOrderPersistence;
 import database.mysql.MySQLDatabase;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,10 +19,10 @@ public class FoodOrderController {
     public void save(@RequestBody IOrder order)
     {
         MySQLDatabase dataBase = new MySQLDatabase();
-        MySQLFoodPersistence foodPersistence = new MySQLFoodPersistence(dataBase);
-        FoodService foodService = new FoodService(foodPersistence);
-        MySQLOrderPersistence mySQLFoodOrderPersistence = new MySQLOrderPersistence(dataBase,foodService);
-        OrderService orderService = new OrderService(mySQLFoodOrderPersistence);
+
+        FoodOrderFactory orderFactory = new FoodOrderFactory();
+        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
+        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
 
         orderService.saveOrder(order);
 
@@ -32,10 +33,10 @@ public class FoodOrderController {
     public IOrder getOrder(@PathVariable int orderId) {
 
         MySQLDatabase dataBase = new MySQLDatabase();
-        MySQLFoodPersistence foodPersistence = new MySQLFoodPersistence(dataBase);
-        FoodService foodService = new FoodService(foodPersistence);
-        MySQLOrderPersistence mySQLFoodOrderPersistence = new MySQLOrderPersistence(dataBase,foodService);
-        OrderService orderService = new OrderService(mySQLFoodOrderPersistence);
+
+        FoodOrderFactory orderFactory = new FoodOrderFactory();
+        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
+        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
 
         IOrder order = orderService.getOrder(orderId);
         dataBase.close();
@@ -47,10 +48,10 @@ public class FoodOrderController {
     public List<IOrder> getOrdersForCurrentUser() throws SQLException {
 
         MySQLDatabase dataBase = new MySQLDatabase();
-        MySQLFoodPersistence foodPersistence = new MySQLFoodPersistence(dataBase);
-        FoodService foodService = new FoodService(foodPersistence);
-        MySQLOrderPersistence mySQLFoodOrderPersistence = new MySQLOrderPersistence(dataBase,foodService);
-        OrderService orderService = new OrderService(mySQLFoodOrderPersistence);
+
+        FoodOrderFactory orderFactory = new FoodOrderFactory();
+        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
+        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email= authentication.getName();
