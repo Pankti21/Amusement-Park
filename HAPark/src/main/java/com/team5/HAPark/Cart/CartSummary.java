@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 public class CartSummary {
-    ArrayList<TicketOrderItem> ticket;
+    private ArrayList<TicketOrderItem> ticket;
 
     public ArrayList<TicketOrderItem> getTicket() {
         return ticket;
@@ -38,18 +38,17 @@ public class CartSummary {
         this.totalAmount = totalAmount;
     }
 
-    ArrayList<FoodOrderItem> food;
+    private ArrayList<FoodOrderItem> food;
     double ticketAmount;
     double foodAmount;
     double totalAmount;
 
-    void CartItems() {
+    public CartSummary() {
         this.ticket = new ArrayList<TicketOrderItem>();
         this.food = new ArrayList<FoodOrderItem>();
         double ticketAmount = 0;
         double foodAmount = 0;
         this.totalAmount = 0;
-
     }
 
     //Adding the tickets to cart
