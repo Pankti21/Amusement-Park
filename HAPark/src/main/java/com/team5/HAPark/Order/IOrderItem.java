@@ -1,9 +1,7 @@
 package com.team5.HAPark.Order;
 
 public interface IOrderItem {
-    int getQuantity();
-
-    void setQuantity(int quantity);
+    Integer getQuantity();
 
     double getPrice();
 
