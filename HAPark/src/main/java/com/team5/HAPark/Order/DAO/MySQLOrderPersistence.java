@@ -3,7 +3,9 @@ package com.team5.HAPark.Order.DAO;
 import com.team5.HAPark.Food.Food;
 import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Food.FoodService;
-import com.team5.HAPark.Order.FoodOrder;
+import com.team5.HAPark.Order.IOrder;
+import com.team5.HAPark.Order.IOrderItem;
+import com.team5.HAPark.Order.Order;
 import database.mysql.MySQLDatabase;
 
 import java.sql.*;
@@ -12,18 +14,18 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
+public class MySQLOrderPersistence implements IOrderPersistence {
 
     private MySQLDatabase mySQLDatabase;
     private FoodService foodService;
 
-    public MySQLFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
+    public MySQLOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
         this.mySQLDatabase = mySQLDatabase;
         this.foodService = foodService;
     }
 
     @Override
-    public void saveOrder(FoodOrder order) throws SQLException {
+    public void saveOrder(IOrder order) throws SQLException {
 
         CallableStatement statement = null;
 
@@ -41,11 +43,11 @@ public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
             int orderId = statement.getInt(4);
             order.setOrderId(orderId);
 
-            List<FoodOrderItem> orderItems = order.getOrderItems();
-            for (FoodOrderItem foodOrderItem: orderItems){
+            List<IOrderItem> orderItems = order.getOrderItems();
+            for (IOrderItem orderItem: orderItems){
 
-                String itemID = foodOrderItem.getId();
-                int quantity = foodOrderItem.getQuantity();
+                String itemID = orderItem.getId();
+                int quantity = orderItem.getQuantity();
 
                 saveOrderItem(orderId,itemID,quantity);
             }
@@ -91,9 +93,9 @@ public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
     }
 
     @Override
-    public FoodOrder loadOrder(int orderId) throws SQLException {
+    public IOrder loadOrder(int orderId) throws SQLException {
 
-        FoodOrder order;
+        IOrder order;
         CallableStatement statement = null;
 
         try {
@@ -107,14 +109,14 @@ public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
 
             statement.execute();
 
-            order = new FoodOrder();
+            order = new Order();
 
             order.setOrderId(orderId);
             order.setOrderDate(statement.getDate(2).toLocalDate());
             order.setOrderTime(statement.getTime(3).toLocalTime());
             order.setMailId(statement.getString(4));
 
-            List<FoodOrderItem> orderItems = loadOrderItems(orderId);
+            List<IOrderItem> orderItems = loadOrderItems(orderId);
             order.setOrderItems(orderItems);
 
         } finally {
@@ -132,9 +134,9 @@ public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
         return order;
     }
 
-    public List<FoodOrderItem> loadOrderItems(int orderId) throws SQLException {
+    public List<IOrderItem> loadOrderItems(int orderId) throws SQLException {
 
-        List<FoodOrderItem> orderItems = new ArrayList<>();
+        List<IOrderItem> orderItems = new ArrayList<>();
 
         CallableStatement statement = null;
         ResultSet rs = null;
@@ -175,9 +177,9 @@ public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
     }
 
     @Override
-    public List<FoodOrder> loadAllOrders(String email) throws SQLException {
+    public List<IOrder> loadAllOrders(String email) throws SQLException {
 
-        List<FoodOrder> orders = new ArrayList<>();
+        List<IOrder> orders = new ArrayList<>();
         CallableStatement statement = null;
         ResultSet rs = null;
 
@@ -195,9 +197,9 @@ public class MySQLFoodOrderPersistence implements IFoodOrderPersistence {
                 int orderId = rs.getInt("food_order_id");
                 LocalDate date = rs.getDate("order_date").toLocalDate();
                 LocalTime time = rs.getTime("order_time").toLocalTime();
-                List<FoodOrderItem> orderItems = loadOrderItems(orderId);
+                List<IOrderItem> orderItems = loadOrderItems(orderId);
 
-                FoodOrder order = new FoodOrder();
+                IOrder order = new Order();
 
                 order.setOrderId(orderId);
                 order.setMailId(email);

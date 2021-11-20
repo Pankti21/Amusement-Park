@@ -1,7 +1,6 @@
 package com.team5.HAPark.Order;
 
-import com.team5.HAPark.Food.FoodOrderItem;
-import com.team5.HAPark.Order.DAO.IFoodOrderPersistence;
+import com.team5.HAPark.Order.DAO.IOrderPersistence;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -9,30 +8,32 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodOrderService {
+public class OrderService implements IOrderService {
 
-    private IFoodOrderPersistence orderPersistence;
+    private IOrderPersistence orderPersistence;
 
-    public FoodOrderService(IFoodOrderPersistence orderPersistence){
+    public OrderService(IOrderPersistence orderPersistence){
         this.orderPersistence = orderPersistence;
     }
 
-    public FoodOrder createOrderFromItemQuantities(String userId, List<FoodOrderItem> foodOrderItems){
+    @Override
+    public IOrder createOrderFromItemQuantities(String userId, List<IOrderItem> orderItems){
 
-        FoodOrder order = null;
+        IOrder order = null;
 
-        if (foodOrderItems != null && !foodOrderItems.isEmpty()){
-            order = new FoodOrder();
+        if (orderItems != null && !orderItems.isEmpty()){
+            order = new Order();
             order.setOrderDate(LocalDate.now());
             order.setOrderTime(LocalTime.now());
             order.setMailId(userId);
-            order.setOrderItems(foodOrderItems);
+            order.setOrderItems(orderItems);
         }
 
         return order;
     }
 
-    public void saveOrder(FoodOrder order){
+    @Override
+    public void saveOrder(IOrder order){
         try {
             orderPersistence.saveOrder(order);
         } catch (SQLException e) {
@@ -40,9 +41,10 @@ public class FoodOrderService {
         }
     }
 
-    public FoodOrder getOrder(int orderId){
+    @Override
+    public IOrder getOrder(int orderId){
 
-        FoodOrder order = null;
+        IOrder order = null;
 
         try {
             order = orderPersistence.loadOrder(orderId);
@@ -53,9 +55,10 @@ public class FoodOrderService {
         return order;
     }
 
-    public List<FoodOrder> getAllOrdersForUser(String email) throws SQLException {
+    @Override
+    public List<IOrder> getAllOrdersForUser(String email) throws SQLException {
 
-        List<FoodOrder> orders = orderPersistence.loadAllOrders(email);
+        List<IOrder> orders = orderPersistence.loadAllOrders(email);
 
         if (orders == null){
             orders = new ArrayList<>();

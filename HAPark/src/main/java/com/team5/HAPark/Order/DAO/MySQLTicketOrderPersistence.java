@@ -1,6 +1,6 @@
 package com.team5.HAPark.Order.DAO;
 
-import com.team5.HAPark.Order.TicketOrder;
+import com.team5.HAPark.Order.*;
 import com.team5.HAPark.Ticket.Ticket;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 import com.team5.HAPark.Ticket.TicketService;
@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
+public class MySQLTicketOrderPersistence implements IOrderPersistence{
 
     private MySQLDatabase mySQLDatabase;
     private TicketService ticketService;
@@ -23,7 +23,7 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
     }
 
     @Override
-    public void saveOrder(TicketOrder order) throws SQLException {
+    public void saveOrder(IOrder order) throws SQLException {
 
         CallableStatement statement = null;
 
@@ -41,11 +41,11 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
             int orderId = statement.getInt(4);
             order.setOrderId(orderId);
 
-            List<TicketOrderItem> orderItems = order.getOrderItems();
-            for (TicketOrderItem ticketOrderItem: orderItems){
+            List<IOrderItem> orderItems = order.getOrderItems();
+            for (IOrderItem orderItem: orderItems){
 
-                String itemID = ticketOrderItem.getTicketType();
-                int quantity = ticketOrderItem.getQuantity();
+                String itemID = orderItem.getId();
+                int quantity = orderItem.getQuantity();
 
                 saveOrderItem(orderId,itemID,quantity);
             }
@@ -92,9 +92,9 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
     }
 
     @Override
-    public TicketOrder loadOrder(int orderId) throws SQLException {
+    public IOrder loadOrder(int orderId) throws SQLException {
 
-        TicketOrder order;
+        IOrder order;
         CallableStatement statement = null;
 
         try {
@@ -108,14 +108,14 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
 
             statement.execute();
 
-            order = new TicketOrder();
+            order = new Order();
 
             order.setOrderId(orderId);
             order.setOrderDate(statement.getDate(2).toLocalDate());
             order.setOrderTime(statement.getTime(3).toLocalTime());
             order.setMailId(statement.getString(4));
 
-            List<TicketOrderItem> orderItems = loadOrderItems(orderId);
+            List<IOrderItem> orderItems = loadOrderItems(orderId);
             order.setOrderItems(orderItems);
 
         } finally {
@@ -134,9 +134,9 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
     }
 
     @Override
-    public List<TicketOrderItem> loadOrderItems(int orderId) throws SQLException {
+    public List<IOrderItem> loadOrderItems(int orderId) throws SQLException {
 
-        List<TicketOrderItem> orderItems = new ArrayList<>();
+        List<IOrderItem> orderItems = new ArrayList<>();
 
         CallableStatement statement = null;
         ResultSet rs = null;
@@ -156,7 +156,7 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
                 String ticketType = rs.getString("ticket_type");
                 Ticket ticket = ticketService.getTicket(ticketType);
 
-                orderItems.add(new TicketOrderItem(ticket,quantity));
+                orderItems.add(new TicketOrderItemAdapter(new TicketOrderItem(ticket,quantity)));
             }
 
         } finally {
@@ -177,9 +177,9 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
     }
 
     @Override
-    public List<TicketOrder> loadAllOrders(String email) throws SQLException {
+    public List<IOrder> loadAllOrders(String email) throws SQLException {
 
-        List<TicketOrder> orders = new ArrayList<>();
+        List<IOrder> orders = new ArrayList<>();
         CallableStatement statement = null;
         ResultSet rs = null;
 
@@ -197,9 +197,9 @@ public class MySQLTicketOrderPersistence implements ITicketOrderPersistence{
                 int orderId = rs.getInt("ticket_order_id");
                 LocalDate date = rs.getDate("order_date").toLocalDate();
                 LocalTime time = rs.getTime("order_time").toLocalTime();
-                List<TicketOrderItem> orderItems = loadOrderItems(orderId);
+                List<IOrderItem> orderItems = loadOrderItems(orderId);
 
-                TicketOrder order = new TicketOrder();
+                IOrder order = new Order();
 
                 order.setOrderId(orderId);
                 order.setMailId(email);

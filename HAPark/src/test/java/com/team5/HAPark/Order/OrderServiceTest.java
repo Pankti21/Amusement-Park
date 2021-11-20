@@ -1,6 +1,6 @@
 package com.team5.HAPark.Order;
 
-import com.team5.HAPark.Order.DAO.ITicketOrderPersistence;
+import com.team5.HAPark.Order.DAO.IOrderPersistence;
 import com.team5.HAPark.Ticket.Ticket;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 import org.junit.jupiter.api.AfterEach;
@@ -17,29 +17,29 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 
-class TicketOrderServiceTest {
+class OrderServiceTest {
 
-    private static TicketOrderService ticketOrderService;
-    private static ITicketOrderPersistence orderPersistenceMock;
-    private static List<TicketOrderItem> orderItems;
+    private static IOrderService orderService;
+    private static IOrderPersistence orderPersistenceMock;
+    private static List<IOrderItem> orderItems;
     private static Ticket child;
     private static Ticket adult;
-    private static TicketOrderItem childTicketOrder;
-    private static TicketOrderItem adultTicketOrder;
-    private static TicketOrder order;
+    private static TicketOrderItemAdapter childTicketOrder;
+    private static TicketOrderItemAdapter adultTicketOrder;
+    private static IOrder order;
 
     @BeforeAll
     public static void init(){
 
-        orderPersistenceMock = Mockito.mock(ITicketOrderPersistence.class);
-        ticketOrderService = new TicketOrderService(orderPersistenceMock);
+        orderPersistenceMock = Mockito.mock(IOrderPersistence.class);
+        orderService = new OrderService(orderPersistenceMock);
         orderItems = new ArrayList<>();
 
         child = new Ticket("child",15);
         adult = new Ticket("adult",20);
 
-        childTicketOrder = new TicketOrderItem(child,3);
-        adultTicketOrder = new TicketOrderItem(adult,2);
+        childTicketOrder = new TicketOrderItemAdapter(new TicketOrderItem(child,3));
+        adultTicketOrder = new TicketOrderItemAdapter(new TicketOrderItem(adult,2));
 
         orderItems.add(childTicketOrder);
         orderItems.add(adultTicketOrder);
@@ -47,7 +47,7 @@ class TicketOrderServiceTest {
         LocalTime time = LocalTime.now();
         LocalDate date = LocalDate.now();
 
-        order = new TicketOrder();
+        order = new Order();
         order.setOrderDate(date);
         order.setOrderTime(time);
         order.setMailId("email");
@@ -61,8 +61,8 @@ class TicketOrderServiceTest {
     @Test
     public void createOrderFromItemQuantitiesHasItems() {
 
-        TicketOrder newOrder = ticketOrderService.createOrderFromItemQuantities("email", orderItems);
-        List<TicketOrderItem> orderItems = newOrder.getOrderItems();
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertTrue(orderItems.contains(childTicketOrder));
         assertTrue(orderItems.contains(adultTicketOrder));
@@ -71,8 +71,8 @@ class TicketOrderServiceTest {
     @Test
     public void createOrderFromItemQuantitiesHasCorrectEmail() {
 
-        TicketOrder newOrder = ticketOrderService.createOrderFromItemQuantities("email", orderItems);
-        List<TicketOrderItem> orderItems = newOrder.getOrderItems();
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertEquals("email",newOrder.getMailId());
     }
@@ -80,8 +80,8 @@ class TicketOrderServiceTest {
     @Test
     public void createOrderFromItemQuantitiesHasDateTime() {
 
-        TicketOrder newOrder = ticketOrderService.createOrderFromItemQuantities("email", orderItems);
-        List<TicketOrderItem> orderItems = newOrder.getOrderItems();
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertNotNull(newOrder.getOrderDate());
         assertNotNull(newOrder.getOrderDate());
@@ -90,8 +90,8 @@ class TicketOrderServiceTest {
     @Test
     public void createOrderFromItemQuantitiesDefaultHasNoOrderId() {
 
-        TicketOrder newOrder = ticketOrderService.createOrderFromItemQuantities("email", orderItems);
-        List<TicketOrderItem> orderItems = newOrder.getOrderItems();
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertNull(newOrder.getOrderId());
     }
@@ -99,7 +99,7 @@ class TicketOrderServiceTest {
     @Test
     public void createOrderFromItemQuantitiesEmptyItems() {
 
-        TicketOrder newOrder = ticketOrderService.createOrderFromItemQuantities("email", new ArrayList<>());
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", new ArrayList<>());
 
         assertNull(newOrder);
     }
@@ -107,7 +107,7 @@ class TicketOrderServiceTest {
     @Test
     public void createOrderFromItemQuantitiesNullItems() {
 
-        TicketOrder newOrder = ticketOrderService.createOrderFromItemQuantities("email",null);
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email",null);
 
         assertNull(newOrder);
     }
@@ -115,7 +115,7 @@ class TicketOrderServiceTest {
     @Test
     public void saveOrder() throws SQLException {
 
-        ticketOrderService.saveOrder(order);
+        orderService.saveOrder(order);
         Mockito.verify(orderPersistenceMock,times(1)).saveOrder(order);
 
     }
@@ -123,8 +123,8 @@ class TicketOrderServiceTest {
     @Test
     public void getOrder() throws SQLException {
 
-        Mockito.when(orderPersistenceMock.loadOrder(10)).thenReturn(new TicketOrder());
-        assertNotNull(ticketOrderService.getOrder(10));
+        Mockito.when(orderPersistenceMock.loadOrder(10)).thenReturn(new Order());
+        assertNotNull(orderService.getOrder(10));
         Mockito.verify(orderPersistenceMock,times(1)).loadOrder(10);
 
     }
@@ -133,19 +133,19 @@ class TicketOrderServiceTest {
     public void getOrderDoesntExist() throws SQLException {
 
         Mockito.when(orderPersistenceMock.loadOrder(10)).thenReturn(null);
-        assertNull(ticketOrderService.getOrder(10));
+        assertNull(orderService.getOrder(10));
         Mockito.verify(orderPersistenceMock,times(1)).loadOrder(10);
 
     }
     @Test
     public void getAllOrdersForUser() throws SQLException {
 
-        ArrayList<TicketOrder> orders = new ArrayList<>();
+        ArrayList<IOrder> orders = new ArrayList<>();
         orders.add(order);
 
         Mockito.when(orderPersistenceMock.loadAllOrders("email")).thenReturn(orders);
 
-        assertEquals(orders, ticketOrderService.getAllOrdersForUser("email"));
+        assertEquals(orders, orderService.getAllOrdersForUser("email"));
         Mockito.verify(orderPersistenceMock,times(1)).loadAllOrders("email");
 
     }
@@ -155,7 +155,7 @@ class TicketOrderServiceTest {
 
         Mockito.when(orderPersistenceMock.loadAllOrders("email")).thenReturn(null);
 
-        assertTrue(ticketOrderService.getAllOrdersForUser("email").isEmpty());
+        assertTrue(orderService.getAllOrdersForUser("email").isEmpty());
         Mockito.verify(orderPersistenceMock,times(1)).loadAllOrders("email");
 
     }

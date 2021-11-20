@@ -1,22 +1,21 @@
 package com.team5.HAPark.Order;
 
-import com.team5.HAPark.Ticket.TicketOrderItem;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class TicketOrder {
+public class Order implements IOrder{
 
     private Integer orderId;
     private String mailId;
     private LocalDate orderDate;
     private LocalTime orderTime;
-    private List<TicketOrderItem> orderItems;
+    private List<IOrderItem> orderItems;
 
-    public TicketOrder() {}
+    public Order() {
+    }
 
-    public TicketOrder(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<TicketOrderItem> orderItems) {
+    public Order(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<IOrderItem> orderItems) {
         this.orderId = orderId;
         this.mailId = mailId;
         this.orderDate = orderDate;
@@ -24,43 +23,53 @@ public class TicketOrder {
         this.orderItems = orderItems;
     }
 
+    @Override
     public Integer getOrderId() {
         return orderId;
     }
 
+    @Override
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
+    @Override
     public String getMailId() {
         return mailId;
     }
 
+    @Override
     public void setMailId(String mailId) {
         this.mailId = mailId;
     }
 
+    @Override
     public LocalDate getOrderDate() {
         return orderDate;
     }
 
+    @Override
     public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
+    @Override
     public LocalTime getOrderTime() {
         return orderTime;
     }
 
+    @Override
     public void setOrderTime(LocalTime orderTime) {
         this.orderTime = orderTime;
     }
 
-    public List<TicketOrderItem> getOrderItems() {
+    @Override
+    public List<IOrderItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<TicketOrderItem> orderItems) {
+    @Override
+    public void setOrderItems(List<IOrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 }
