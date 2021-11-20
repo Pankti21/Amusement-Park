@@ -1,4 +1,4 @@
-package com.team5.HAPark.Order;
+package com.team5.HAPark.Order.model;
 
 public interface IOrderItem {
     Integer getQuantity();

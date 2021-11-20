@@ -4,9 +4,10 @@ import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
 import com.team5.HAPark.Food.FoodService;
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
 import com.team5.HAPark.Order.DAO.MySQLFoodOrderPersistence;
+import com.team5.HAPark.Order.model.*;
 import database.mysql.MySQLDatabase;
 
-public class FoodOrderFactory implements IOrderFactory{
+public class FoodOrderFactory implements IOrderFactory {
 
     @Override
     public IOrderService createOrderService(IOrderPersistence orderPersistence) {

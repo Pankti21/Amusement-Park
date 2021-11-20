@@ -1,4 +1,4 @@
-package com.team5.HAPark.Order;
+package com.team5.HAPark.Order.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

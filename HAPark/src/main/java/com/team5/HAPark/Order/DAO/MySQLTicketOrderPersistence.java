@@ -1,6 +1,9 @@
 package com.team5.HAPark.Order.DAO;
 
-import com.team5.HAPark.Order.*;
+import com.team5.HAPark.Order.model.IOrder;
+import com.team5.HAPark.Order.model.IOrderItem;
+import com.team5.HAPark.Order.model.Order;
+import com.team5.HAPark.Order.model.TicketOrderItemAdapter;
 import com.team5.HAPark.Ticket.Ticket;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 import com.team5.HAPark.Ticket.TicketService;

@@ -1,5 +1,6 @@
-package com.team5.HAPark.Order;
+package com.team5.HAPark.Order.model;
 
+import com.team5.HAPark.Order.model.OrderItem;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 
 public class TicketOrderItemAdapter extends OrderItem {

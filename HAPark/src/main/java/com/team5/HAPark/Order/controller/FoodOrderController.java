@@ -1,9 +1,9 @@
-package com.team5.HAPark.Order;
+package com.team5.HAPark.Order.controller;
 
-import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
-import com.team5.HAPark.Food.FoodService;
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
-import com.team5.HAPark.Order.DAO.MySQLFoodOrderPersistence;
+import com.team5.HAPark.Order.FoodOrderFactory;
+import com.team5.HAPark.Order.model.IOrder;
+import com.team5.HAPark.Order.model.IOrderService;
 import database.mysql.MySQLDatabase;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -3,9 +3,9 @@ package com.team5.HAPark.Order.DAO;
 import com.team5.HAPark.Food.Food;
 import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Food.FoodService;
-import com.team5.HAPark.Order.IOrder;
-import com.team5.HAPark.Order.IOrderItem;
-import com.team5.HAPark.Order.Order;
+import com.team5.HAPark.Order.model.IOrder;
+import com.team5.HAPark.Order.model.IOrderItem;
+import com.team5.HAPark.Order.model.Order;
 import database.mysql.MySQLDatabase;
 
 import java.sql.*;

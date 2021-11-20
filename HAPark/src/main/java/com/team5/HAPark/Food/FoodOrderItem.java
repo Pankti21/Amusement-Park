@@ -1,10 +1,10 @@
 package com.team5.HAPark.Food;
 
-import com.team5.HAPark.Order.IOrderItem;
+import com.team5.HAPark.Order.model.IOrderItem;
 
 public class FoodOrderItem implements IOrderItem {
-    Food food;
-    int quantity;
+    private Food food;
+    private Integer quantity;
 
     public FoodOrderItem(Food food, int quantity) {
         this.food = food;

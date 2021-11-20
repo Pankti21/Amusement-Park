@@ -1,7 +1,7 @@
 package com.team5.HAPark.Order.DAO;
 
-import com.team5.HAPark.Order.IOrder;
-import com.team5.HAPark.Order.IOrderItem;
+import com.team5.HAPark.Order.model.IOrder;
+import com.team5.HAPark.Order.model.IOrderItem;
 
 import java.sql.SQLException;
 import java.util.List;

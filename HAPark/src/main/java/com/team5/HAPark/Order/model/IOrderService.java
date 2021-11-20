@@ -1,4 +1,4 @@
-package com.team5.HAPark.Order;
+package com.team5.HAPark.Order.model;
 
 import java.sql.SQLException;
 import java.util.List;

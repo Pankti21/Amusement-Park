@@ -2,11 +2,12 @@ package com.team5.HAPark.Order;
 
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
 import com.team5.HAPark.Order.DAO.MySQLTicketOrderPersistence;
+import com.team5.HAPark.Order.model.*;
 import com.team5.HAPark.Ticket.DAO.MySQLTicketPersistence;
 import com.team5.HAPark.Ticket.TicketService;
 import database.mysql.MySQLDatabase;
 
-public class TicketOrderFactory implements IOrderFactory{
+public class TicketOrderFactory implements IOrderFactory {
     
     @Override
     public IOrderService createOrderService(IOrderPersistence orderPersistence) {
