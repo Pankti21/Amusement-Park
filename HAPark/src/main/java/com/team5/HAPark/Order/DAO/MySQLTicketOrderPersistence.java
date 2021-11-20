@@ -1,11 +1,12 @@
 package com.team5.HAPark.Order.DAO;
 
-import com.team5.HAPark.Food.Food;
-import com.team5.HAPark.Food.FoodOrderItem;
-import com.team5.HAPark.Food.FoodService;
 import com.team5.HAPark.Order.model.IOrder;
 import com.team5.HAPark.Order.model.IOrderItem;
 import com.team5.HAPark.Order.model.Order;
+import com.team5.HAPark.Order.model.TicketOrderItemAdapter;
+import com.team5.HAPark.Ticket.Ticket;
+import com.team5.HAPark.Ticket.TicketOrderItem;
+import com.team5.HAPark.Ticket.TicketService;
 import database.mysql.MySQLDatabase;
 
 import java.sql.*;
@@ -14,14 +15,14 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLFoodOrderPersistence implements IOrderPersistence {
+public class MySQLTicketOrderPersistence implements IOrderPersistence{
 
     private MySQLDatabase mySQLDatabase;
-    private FoodService foodService;
+    private TicketService ticketService;
 
-    public MySQLFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
+    public MySQLTicketOrderPersistence(MySQLDatabase mySQLDatabase, TicketService ticketService) {
         this.mySQLDatabase = mySQLDatabase;
-        this.foodService = foodService;
+        this.ticketService = ticketService;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
         try {
 
-            statement = mySQLDatabase.getConnection().prepareCall("{call save_food_order(?,?,?,?)} ");
+            statement = mySQLDatabase.getConnection().prepareCall("{call save_ticket_order(?,?,?,?)} ");
 
             statement.setString(1,order.getMailId());
             statement.setDate(2, Date.valueOf(order.getOrderDate()));
@@ -65,19 +66,20 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
     }
 
     @Override
-    public void saveOrderItem(int orderId, String itemId, int quantity) throws SQLException {
+    public void saveOrderItem(int orderId, String ticketType, int quantity) throws SQLException {
 
         CallableStatement statement = null;
 
         try {
 
-            statement = mySQLDatabase.getConnection().prepareCall("{call save_food_order_item(?,?,?)} ");
+            statement = mySQLDatabase.getConnection().prepareCall("{call save_ticket_order_item(?,?)} ");
 
             statement.setInt(1,orderId);
-            statement.setString(2, itemId);
-            statement.setInt(3, quantity);
+            statement.setString(2, ticketType);
 
-            statement.execute();
+            for (int i = 0; i<quantity; i++) {
+                statement.execute();
+            }
 
         } finally {
 
@@ -100,7 +102,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
         try {
 
-            statement = mySQLDatabase.getConnection().prepareCall("{call load_food_order(?,?,?,?)} ");
+            statement = mySQLDatabase.getConnection().prepareCall("{call load_Ticket_order(?,?,?,?)} ");
 
             statement.setInt(1,orderId);
             statement.registerOutParameter(2,Types.DATE);
@@ -134,6 +136,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
         return order;
     }
 
+    @Override
     public List<IOrderItem> loadOrderItems(int orderId) throws SQLException {
 
         List<IOrderItem> orderItems = new ArrayList<>();
@@ -143,7 +146,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
         try {
 
-            statement = mySQLDatabase.getConnection().prepareCall("{call load_food_order_items(?)} ");
+            statement = mySQLDatabase.getConnection().prepareCall("{call load_ticket_order_items(?)} ");
 
             statement.setInt(1,orderId);
             statement.execute();
@@ -153,10 +156,10 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
             while (rs.next()) {
 
                 int quantity = rs.getInt("quantity");
-                String foodId = rs.getString("food_id");
-                Food food = foodService.getFood(foodId);
+                String ticketType = rs.getString("ticket_type");
+                Ticket ticket = ticketService.getTicket(ticketType);
 
-                orderItems.add(new FoodOrderItem(food,quantity));
+                orderItems.add(new TicketOrderItemAdapter(new TicketOrderItem(ticket,quantity)));
             }
 
         } finally {
@@ -185,7 +188,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
         try {
 
-            statement = mySQLDatabase.getConnection().prepareCall("{call load_food_orders_for_user(?)} ");
+            statement = mySQLDatabase.getConnection().prepareCall("{call load_ticket_orders_for_user(?)} ");
 
             statement.setString(1,email);
             statement.execute();
@@ -194,7 +197,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
             while (rs.next()) {
 
-                int orderId = rs.getInt("food_order_id");
+                int orderId = rs.getInt("ticket_order_id");
                 LocalDate date = rs.getDate("order_date").toLocalDate();
                 LocalTime time = rs.getTime("order_time").toLocalTime();
                 List<IOrderItem> orderItems = loadOrderItems(orderId);

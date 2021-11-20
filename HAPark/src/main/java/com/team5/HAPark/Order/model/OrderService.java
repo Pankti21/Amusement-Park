@@ -1,4 +1,4 @@
-package com.team5.HAPark.Order;
+package com.team5.HAPark.Order.model;
 
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
 
@@ -7,9 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class OrderService {
+public class OrderService implements IOrderService {
 
     private IOrderPersistence orderPersistence;
 
@@ -17,22 +16,24 @@ public class OrderService {
         this.orderPersistence = orderPersistence;
     }
 
-    public Order createOrderFromItemQuantities(String userId, Map<IItem,Integer> items){
+    @Override
+    public IOrder createOrderFromItemQuantities(String userId, List<IOrderItem> orderItems){
 
-        Order order = null;
+        IOrder order = null;
 
-        if (items != null && !items.isEmpty()){
+        if (orderItems != null && !orderItems.isEmpty()){
             order = new Order();
             order.setOrderDate(LocalDate.now());
             order.setOrderTime(LocalTime.now());
             order.setMailId(userId);
-            order.setOrderItemQuantities(items);
+            order.setOrderItems(orderItems);
         }
 
         return order;
     }
 
-    public void saveOrder(Order order){
+    @Override
+    public void saveOrder(IOrder order){
         try {
             orderPersistence.saveOrder(order);
         } catch (SQLException e) {
@@ -40,9 +41,10 @@ public class OrderService {
         }
     }
 
-    public Order getOrder(int orderId){
+    @Override
+    public IOrder getOrder(int orderId){
 
-        Order order = null;
+        IOrder order = null;
 
         try {
             order = orderPersistence.loadOrder(orderId);
@@ -53,9 +55,10 @@ public class OrderService {
         return order;
     }
 
-    public List<Order> getAllOrdersForUser(String email) throws SQLException {
+    @Override
+    public List<IOrder> getAllOrdersForUser(String email) throws SQLException {
 
-        List<Order> orders = orderPersistence.loadAllOrders(email);
+        List<IOrder> orders = orderPersistence.loadAllOrders(email);
 
         if (orders == null){
             orders = new ArrayList<>();

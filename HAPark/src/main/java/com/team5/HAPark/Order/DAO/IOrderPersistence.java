@@ -1,16 +1,15 @@
 package com.team5.HAPark.Order.DAO;
 
-import com.team5.HAPark.Order.IItem;
-import com.team5.HAPark.Order.Order;
+import com.team5.HAPark.Order.model.IOrder;
+import com.team5.HAPark.Order.model.IOrderItem;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 public interface IOrderPersistence {
-    void saveOrder(Order order) throws SQLException;
+    void saveOrder(IOrder order) throws SQLException;
     void saveOrderItem(int orderId, String itemId, int quantity) throws SQLException;
-    Order loadOrder(int orderId) throws SQLException;
-    Map<IItem,Integer> loadOrderItems(int orderId) throws SQLException;
-    List<Order> loadAllOrders(String email) throws SQLException;
+    IOrder loadOrder(int orderId) throws SQLException;
+    List<IOrderItem> loadOrderItems(int orderId) throws SQLException;
+    List<IOrder> loadAllOrders(String email) throws SQLException;
 }

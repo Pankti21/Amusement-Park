@@ -1,6 +1,6 @@
-package com.team5.HAPark.userAuthentication;
+package com.team5.HAPark.User;
 
-import database.IUserPersistence;
+import com.team5.HAPark.User.DAO.IUserPersistence;
 
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
@@ -10,8 +10,11 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 
-@RunWith(MockitoJUnitRunner.class)
+
+@SpringBootTest
 class RegisterTest {
     private static Register register;
     private static User user;
@@ -22,6 +25,7 @@ class RegisterTest {
         user = new User("fname","lname","email@testmail.com","Password@123");
         register = new Register(user);
         userPersistenceMock = Mockito.mock(IUserPersistence.class);
+
     }
 
     @Nested
@@ -29,69 +33,81 @@ class RegisterTest {
     class RegistrationTests {
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsEmailEmpty() throws SQLException {
             user.setEmail("");
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsFnameEmpty() throws SQLException {
             user.setFirstName("");
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsLnameEmpty() throws SQLException {
             user.setLastName("");
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsPasswordEmpty() throws SQLException {
             user.setPassword("");
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsConfirmPasswordEmpty() throws SQLException {
             assertFalse(register.register(userPersistenceMock,""));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsEmailNull() throws SQLException {
             user.setEmail(null);
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsFnameNull() throws SQLException {
             user.setFirstName(null);
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsLnameNull() throws SQLException {
             user.setLastName(null);
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsPasswordNull() throws SQLException {
             user.setPassword(null);
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsConfirmPasswordNull() throws SQLException {
             assertFalse(register.register(userPersistenceMock,null));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsPasswordsDontMatch() throws SQLException {
             assertFalse(register.register(userPersistenceMock,"diffPassword"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsUserAlreadyExists() throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
             assertFalse(register.register(userPersistenceMock,"Password@123"));
@@ -99,18 +115,21 @@ class RegisterTest {
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsBadEmailFormat() throws SQLException {
             user.setEmail("notAnEmail");
             assertFalse(register.register(userPersistenceMock,"Password@123"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerFailsBadPasswordFormat() throws SQLException {
             user.setPassword("badPassword");
             assertFalse(register.register(userPersistenceMock,"badPassword"));
         }
 
         @Test
+        @WithMockUser(username = "user123")
         void registerSuccessful() throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(false);
             assertTrue(register.register(userPersistenceMock,"Password@123"));
@@ -120,117 +139,6 @@ class RegisterTest {
         }
     }
 
-    @Nested
-    @DisplayName("validate password method tests")
-    class ValidatePasswordTests {
-        /* Test cases for Password Validation */
-        @Test
-        void validatePasswordFormatHasMinimum8Chars() {
-            User user = new User();
-            user.setPassword("Dal@123");
-            Register register = new Register(user);
-            assertFalse(register.validatePasswordFormat());
-        }
 
-        @Test
-        void validatePasswordFormatHasMaximum12Chars() {
-            User user = new User();
-            user.setPassword("Dalhousie@123");
-            Register register = new Register(user);
-            assertFalse(register.validatePasswordFormat());
-        }
-
-        @Test
-        void validatePasswordFormatHasAtleastOneUpperCaseChar() {
-            User user = new User();
-            user.setPassword("dal@1234");
-            Register register = new Register(user);
-            assertFalse(register.validatePasswordFormat());
-        }
-
-        @Test
-        void validatePasswordFormatHasAtleastOneLowerCaseChar() {
-            User user = new User();
-            user.setPassword("DAL@1234");
-            Register register = new Register(user);
-            assertFalse(register.validatePasswordFormat());
-        }
-
-        @Test
-        void validatePasswordFormatHasAtleastOneNumber() {
-            User user = new User();
-            user.setPassword("Dal@housie");
-            Register register = new Register(user);
-            assertFalse(register.validatePasswordFormat());
-        }
-
-        @Test
-        void validatePasswordFormatHasAtleastOneSpecialChar() {
-            User user = new User();
-            user.setPassword("Dalhousie123");
-            Register register = new Register(user);
-            assertFalse(register.validatePasswordFormat());
-        }
-    }
-
-    @Nested
-    @DisplayName("validate email method tests")
-    class ValidateEmailTests {
-        @Test
-        void validateEmailFormatNoAtSymbol() {
-            User user = new User();
-            user.setEmail("sample.gmail.com");
-            Register register = new Register(user);
-            assertFalse(register.validateEmailFormat());
-        }
-
-        @Test
-        void validateEmailFormatMultipleAtSymbol() {
-            User user = new User();
-            user.setEmail("sample@email@gmail.com");
-            Register register = new Register(user);
-            assertFalse(register.validateEmailFormat());
-        }
-
-        @Test
-        void validateEmailFormatNoDomain() {
-            User user = new User();
-            user.setEmail("sample@com");
-            Register register = new Register(user);
-            assertFalse(register.validateEmailFormat());
-        }
-
-        @Test
-        void validateEmailFormatLocalLongerThan64Char() {
-            User user = new User();
-            user.setEmail("samplesamplesamplesamplesamplesamplesamplesamplesamplesample12345@email.com");
-            Register register = new Register(user);
-            assertFalse(register.validateEmailFormat());
-        }
-
-        @Test
-        void validateEmailFormatStartsWithPeriod() {
-            User user = new User();
-            user.setEmail(".sample@email.com");
-            Register register = new Register(user);
-            assertFalse(register.validateEmailFormat());
-        }
-
-        @Test
-        void validateEmailFormatEndsWithPeriod() {
-            User user = new User();
-            user.setEmail("sample@email.com.");
-            Register register = new Register(user);
-            assertFalse(register.validateEmailFormat());
-        }
-
-        @Test
-        void validateEmailFormatValidEmail() {
-            User user = new User();
-            user.setEmail("emailsample@email.com");
-            Register register = new Register(user);
-            assertTrue(register.validateEmailFormat());
-        }
-    }
 }
 
