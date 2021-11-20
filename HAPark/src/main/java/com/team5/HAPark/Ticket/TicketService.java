@@ -2,6 +2,8 @@ package com.team5.HAPark.Ticket;
 
 import com.team5.HAPark.Ticket.DAO.ITicketPersistence;
 
+import java.util.List;
+
 public class TicketService {
 
     private ITicketPersistence ticketPersistence;
@@ -11,6 +13,10 @@ public class TicketService {
     }
 
     public Ticket getTicket(String ticketType) {
+        return null;
+    }
+
+    public List<Ticket> getAllTickets() {
         return null;
     }
 }

@@ -17,7 +17,7 @@ public class MenuController {
     @Autowired private CartSummary cart;
 
     @GetMapping(value = "/menu")
-    public String getAllFoods(Model model) throws SQLException {
+    public String displayFoods(Model model) throws SQLException {
 
         MySQLDatabase dataBase = new MySQLDatabase();
         FoodService foodService = new FoodService(new MySQLFoodPersistence(dataBase));
@@ -31,7 +31,7 @@ public class MenuController {
     }
 
     @PostMapping(value = "/menu/update")
-    public RedirectView getAllFoods(@ModelAttribute("foodOrderList") FoodOrderList foodOrderList){
+    public RedirectView addFoodsToCart(@ModelAttribute("foodOrderList") FoodOrderList foodOrderList){
         for(FoodOrderItem foodOrderItem: foodOrderList.getFoodOrderList()){
             if (foodOrderItem.getQuantity()!=null && foodOrderItem.getQuantity()>0){
                 cart.addFoodToCart(foodOrderItem);
