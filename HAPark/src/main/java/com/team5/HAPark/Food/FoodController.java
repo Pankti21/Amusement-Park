@@ -30,16 +30,15 @@ public class FoodController {
     }
 
     @PostMapping(value = "/menu/update")
-    public RedirectView getAllFoods(@RequestParam("quantity") Integer[] quantities){
-        System.out.println(quantities);
-        //get info from request
-        //todo;
-        //get cart, add to cart
+    public RedirectView getAllFoods(@RequestParam("quantity") Integer[] quantities,@RequestParam("name") String[] names,
+                                    @RequestParam("id") String[] ids, @RequestParam("price") String[] prices){
 
-        //need info from TA
-        //move to cart controller??
         return new RedirectView("/menu");
     }
+
+
+
+
 
     /*
     @RequestMapping(value = "/menu/{id}")

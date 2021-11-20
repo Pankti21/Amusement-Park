@@ -14,17 +14,24 @@
   </table>
   <table style="margin-left: auto; margin-right: auto;">
     <tbody>
-    <form action="#" th:action="@{/menu/update}" method="post">
-    <tr th:each="food: ${menu}">
+      <form action="#" th:action="@{/menu/update}" method="post">
+        <tr th:each="food : ${menu}">
 
-          <td style="height:50px; width:150px" th:text="${food.name}" />
-          <td style="height:50px;">$<td th:text="${food.price}" />
-          <td><input type="number" min="0" max="10" placeholder="0" name="quantity"/></td>
-      </tr>
-      <tr>
-        <td><input type="submit"value="Submit" /><input type="reset" value="Reset" /></td>
-      </tr>
-    </form>
+            <td style="height:50px; width:150px" th:text="${food.name}" />
+            <td style="height:50px;">$<td th:text="${food.price}" />
+
+            <td>
+              <input type="number" min="0" max="10" placeholder="0" name="quantity"/>
+              <input type="hidden" th:value="${food.id}" name="id"/>
+              <input type="hidden" th:value="${food.price}" name="price"/>
+              <input type="hidden" th:value="${food.name}" name="name"/>
+            </td>
+
+        </tr>
+        <tr>
+          <td><input type="submit"value="Submit" /><input type="reset" value="Reset" /></td>
+        </tr>
+      </form>
     </tbody>
   </table>
 </body>
