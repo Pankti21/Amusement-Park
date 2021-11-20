@@ -10,12 +10,12 @@ public class Order implements IOrder{
     private String mailId;
     private LocalDate orderDate;
     private LocalTime orderTime;
-    private List<IOrderItem> orderItems;
+    private List<? extends IOrderItem> orderItems;
 
     public Order() {
     }
 
-    public Order(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<IOrderItem> orderItems) {
+    public Order(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<? extends IOrderItem> orderItems) {
         this.orderId = orderId;
         this.mailId = mailId;
         this.orderDate = orderDate;
@@ -64,12 +64,12 @@ public class Order implements IOrder{
     }
 
     @Override
-    public List<IOrderItem> getOrderItems() {
+    public List<? extends IOrderItem> getOrderItems() {
         return orderItems;
     }
 
     @Override
-    public void setOrderItems(List<IOrderItem> orderItems) {
+    public void setOrderItems(List<? extends IOrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 }

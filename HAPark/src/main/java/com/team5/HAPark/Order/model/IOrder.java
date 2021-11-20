@@ -21,7 +21,7 @@ public interface IOrder {
 
     void setOrderTime(LocalTime orderTime);
 
-    List<IOrderItem> getOrderItems();
+    List<? extends IOrderItem> getOrderItems();
 
-    void setOrderItems(List<IOrderItem> orderItems);
+    void setOrderItems(List<? extends IOrderItem> orderItems);
 }

@@ -63,7 +63,7 @@ class OrderServiceTest {
     public void createOrderFromItemQuantitiesHasItems() {
 
         IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
-        List<IOrderItem> orderItems = newOrder.getOrderItems();
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertTrue(orderItems.contains(childTicketOrder));
         assertTrue(orderItems.contains(adultTicketOrder));
@@ -73,7 +73,7 @@ class OrderServiceTest {
     public void createOrderFromItemQuantitiesHasCorrectEmail() {
 
         IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
-        List<IOrderItem> orderItems = newOrder.getOrderItems();
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertEquals("email",newOrder.getMailId());
     }
@@ -82,7 +82,7 @@ class OrderServiceTest {
     public void createOrderFromItemQuantitiesHasDateTime() {
 
         IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
-        List<IOrderItem> orderItems = newOrder.getOrderItems();
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertNotNull(newOrder.getOrderDate());
         assertNotNull(newOrder.getOrderDate());
@@ -92,7 +92,7 @@ class OrderServiceTest {
     public void createOrderFromItemQuantitiesDefaultHasNoOrderId() {
 
         IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
-        List<IOrderItem> orderItems = newOrder.getOrderItems();
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertNull(newOrder.getOrderId());
     }

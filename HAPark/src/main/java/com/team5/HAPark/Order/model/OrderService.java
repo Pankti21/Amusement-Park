@@ -17,7 +17,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public IOrder createOrderFromItemQuantities(String userId, List<IOrderItem> orderItems){
+    public IOrder createOrderFromItemQuantities(String userId, List<? extends IOrderItem> orderItems){
 
         IOrder order = null;
 

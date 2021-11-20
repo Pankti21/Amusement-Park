@@ -1,19 +1,20 @@
 package com.team5.HAPark.Food;
 
+import com.team5.HAPark.Cart.CartSummary;
 import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
 import database.mysql.MySQLDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
-public class FoodController {
+public class MenuController {
+
+    @Autowired private CartSummary cart;
 
     @GetMapping(value = "/menu")
     public String getAllFoods(Model model) throws SQLException {
@@ -30,28 +31,13 @@ public class FoodController {
     }
 
     @PostMapping(value = "/menu/update")
-    public RedirectView getAllFoods(@ModelAttribute("foodList") FoodList foodList){
-
+    public RedirectView getAllFoods(@ModelAttribute("foodOrderList") FoodOrderList foodOrderList){
+        for(FoodOrderItem foodOrderItem: foodOrderList.getFoodOrderList()){
+            if (foodOrderItem.getQuantity()!=null && foodOrderItem.getQuantity()>0){
+                cart.addFoodToCart(foodOrderItem);
+            }
+        }
         return new RedirectView("/menu");
     }
-
-
-
-
-
-    /*
-    @RequestMapping(value = "/menu/{id}")
-    public Food getFood(@PathVariable String id) throws SQLException {
-
-        MySQLDatabase dataBase = new MySQLDatabase();
-        FoodService foodService = new FoodService(new MySQLFoodPersistence(dataBase));
-
-        Food food = foodService.getFood(id);
-        dataBase.close();
-
-        return food;
-    }
-
-     */
 }
 

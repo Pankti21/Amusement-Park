@@ -43,7 +43,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
             int orderId = statement.getInt(4);
             order.setOrderId(orderId);
 
-            List<IOrderItem> orderItems = order.getOrderItems();
+            List<? extends IOrderItem> orderItems = order.getOrderItems();
             for (IOrderItem orderItem: orderItems){
 
                 String itemID = orderItem.getId();

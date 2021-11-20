@@ -14,7 +14,7 @@
   </table>
   <table style="margin-left: auto; margin-right: auto;">
     <tbody>
-      <form action="#" th:action="@{/menu/update}" method="post" th:object="${foodList}">
+      <form action="#" th:action="@{/menu/update}" method="post" th:object="${foodOrderList}">
         <tr th:each="food,stat : ${menu}">
 
             <td style="height:50px; width:150px" th:text="${food.name}" />
@@ -22,17 +22,17 @@
 
             <td>
               <input type="number" min="0" max="10" placeholder="0"
-                     th:name="*{'foodList[__${stat.index}__].quantity'}"/>
+                     th:name="*{'foodOrderList[__${stat.index}__].quantity'}"/>
 
               <input type="hidden"
                      th:value="${food.id}"
-                     th:name="*{'foodList[__${stat.index}__].id'}"/>
+                     th:name="*{'foodOrderList[__${stat.index}__].id'}"/>
               <input type="hidden"
                      th:value="${food.price}"
-                     th:name="*{'foodList[__${stat.index}__].price'}"/>
+                     th:name="*{'foodOrderList[__${stat.index}__].price'}"/>
               <input type="hidden"
                      th:value="${food.name}"
-                     th:name="*{'foodList[__${stat.index}__].name'}"/>
+                     th:name="*{'foodOrderList[__${stat.index}__].name'}"/>
             </td>
 
         </tr>

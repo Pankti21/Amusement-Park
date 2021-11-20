@@ -6,17 +6,13 @@ public class FoodOrderItem implements IOrderItem {
     private Food food;
     private Integer quantity;
 
-    public FoodOrderItem(Food food, int quantity) {
+    public FoodOrderItem() {
+        food = new Food();
+    }
+
+    public FoodOrderItem(Food food, Integer quantity) {
         this.food = food;
         this.quantity = quantity;
-    }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
     }
 
     public Integer getQuantity() {
@@ -31,11 +27,23 @@ public class FoodOrderItem implements IOrderItem {
         return food.getPrice();
     }
 
+    public void setPrice(Double price){
+        food.setPrice(price);
+    }
+
     public String getName(){
         return food.getName();
     }
 
+    public void setName(String name){
+        food.setName(name);
+    }
+
     public String getId(){
         return food.getId();
+    }
+
+    public void setId(String id){
+        food.setId(id);
     }
 }

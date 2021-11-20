@@ -5,11 +5,11 @@ public class Food {
     private String name;
     private String id;
     private double price;
-    private int quantity;
+    private Integer quantity;
 
     public Food(){}
 
-    public Food(String name, String id, double price, int quantity) {
+    public Food(String name, String id, double price, Integer quantity) {
         this.name = name;
         this.id = id;
         this.price = price;
@@ -46,11 +46,11 @@ public class Food {
         this.price = price;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 }
