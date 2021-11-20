@@ -14,17 +14,25 @@
   </table>
   <table style="margin-left: auto; margin-right: auto;">
     <tbody>
-      <form action="#" th:action="@{/menu/update}" method="post">
-        <tr th:each="food : ${menu}">
+      <form action="#" th:action="@{/menu/update}" method="post" th:object="${foodList}">
+        <tr th:each="food,stat : ${menu}">
 
             <td style="height:50px; width:150px" th:text="${food.name}" />
             <td style="height:50px;">$<td th:text="${food.price}" />
 
             <td>
-              <input type="number" min="0" max="10" placeholder="0" name="quantity"/>
-              <input type="hidden" th:value="${food.id}" name="id"/>
-              <input type="hidden" th:value="${food.price}" name="price"/>
-              <input type="hidden" th:value="${food.name}" name="name"/>
+              <input type="number" min="0" max="10" placeholder="0"
+                     th:name="*{'foodList[__${stat.index}__].quantity'}"/>
+
+              <input type="hidden"
+                     th:value="${food.id}"
+                     th:name="*{'foodList[__${stat.index}__].id'}"/>
+              <input type="hidden"
+                     th:value="${food.price}"
+                     th:name="*{'foodList[__${stat.index}__].price'}"/>
+              <input type="hidden"
+                     th:value="${food.name}"
+                     th:name="*{'foodList[__${stat.index}__].name'}"/>
             </td>
 
         </tr>

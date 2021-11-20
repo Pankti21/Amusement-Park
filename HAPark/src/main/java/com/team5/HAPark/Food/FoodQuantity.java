@@ -1,19 +1,18 @@
 package com.team5.HAPark.Food;
 
-import com.team5.HAPark.Order.IItem;
-
-public class Food implements IItem {
-
+public class FoodQuantity {
     private String name;
     private String id;
     private double price;
+    private Integer quantity;
 
-    public Food(){}
+    public FoodQuantity() {}
 
-    public Food(String name, String id, double price) {
+    public FoodQuantity(String name, String id, double price, Integer quantity) {
         this.name = name;
         this.id = id;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -32,11 +31,19 @@ public class Food implements IItem {
         this.id = id;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

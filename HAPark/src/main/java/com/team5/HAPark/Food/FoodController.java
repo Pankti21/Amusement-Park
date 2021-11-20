@@ -30,8 +30,7 @@ public class FoodController {
     }
 
     @PostMapping(value = "/menu/update")
-    public RedirectView getAllFoods(@RequestParam("quantity") Integer[] quantities,@RequestParam("name") String[] names,
-                                    @RequestParam("id") String[] ids, @RequestParam("price") String[] prices){
+    public RedirectView getAllFoods(@ModelAttribute("foodList") FoodList foodList){
 
         return new RedirectView("/menu");
     }
