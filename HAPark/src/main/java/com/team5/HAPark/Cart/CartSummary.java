@@ -3,10 +3,14 @@ package com.team5.HAPark.Cart;
 import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 import com.team5.HAPark.Food.Food;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+@Component
+@SessionScope
 public class CartSummary {
     private ArrayList<TicketOrderItem> ticket;
 
