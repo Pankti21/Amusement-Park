@@ -107,4 +107,14 @@ public class RideService implements IRideService {
                 rides.remove(id-1);
         }
     }
+
+    public String getTimeSlotName(int timeslotId) {
+        if(timeslotId==1){
+            return "Morning timeslot at 10:00AM";
+        }
+        if (timeslotId==2){
+            return "Afternoon timeslot at 2:00PM";
+        }
+            return "Evening timeslot at 6:00PM";
+    }
 }

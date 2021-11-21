@@ -32,7 +32,7 @@ public class RidePersistence implements IRidePersistence{
                 r.setMaxOccupancy(rs.getInt("max_occupancy"));
                 r.setDuration(rs.getTime("total_duration"));
                 r.setTimeSlot(getRideTimeSlot(r.getId()));
-            }
+        }
         return r;
     }
 
