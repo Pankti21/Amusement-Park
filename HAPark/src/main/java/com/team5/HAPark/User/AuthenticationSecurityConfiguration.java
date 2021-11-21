@@ -29,6 +29,7 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                     antMatchers("/savefoodorder").permitAll().
                     antMatchers("/foodorder/**").permitAll().
                     antMatchers(HttpMethod.GET,"/menu/**").permitAll().
+                    antMatchers(HttpMethod.GET,"/tickets/**").permitAll().
                     antMatchers("/Main").permitAll().
                   antMatchers("/**").authenticated()
                   .and().formLogin();

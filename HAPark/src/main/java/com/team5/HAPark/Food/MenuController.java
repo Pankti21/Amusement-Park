@@ -32,7 +32,9 @@ public class MenuController {
 
     @PostMapping(value = "/menu/update")
     public RedirectView addFoodsToCart(@ModelAttribute("foodOrderList") FoodOrderList foodOrderList){
+
         for(FoodOrderItem foodOrderItem: foodOrderList.getFoodOrderList()){
+
             if (foodOrderItem.getQuantity()!=null && foodOrderItem.getQuantity()>0){
                 cart.addFoodToCart(foodOrderItem);
             }
