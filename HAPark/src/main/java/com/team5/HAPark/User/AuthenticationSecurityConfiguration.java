@@ -1,5 +1,6 @@
-package com.team5.HAPark.userAuthentication;
+package com.team5.HAPark.User;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,14 +28,13 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                     antMatchers("/ridetest").permitAll().
                     antMatchers("/savefoodorder").permitAll().
                     antMatchers("/foodorder/**").permitAll().
-                    antMatchers("/menu/**").permitAll().
+                    antMatchers(HttpMethod.GET,"/menu/**").permitAll().
+                    antMatchers(HttpMethod.GET,"/tickets/**").permitAll().
                     antMatchers("/Main").permitAll().
                   antMatchers("/**").authenticated()
                   .and().formLogin();
           http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-
     }
-
 }
 
 

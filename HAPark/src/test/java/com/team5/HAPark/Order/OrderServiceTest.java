@@ -1,7 +1,9 @@
 package com.team5.HAPark.Order;
 
-import com.team5.HAPark.Food.Food;
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
+import com.team5.HAPark.Order.model.*;
+import com.team5.HAPark.Ticket.Ticket;
+import com.team5.HAPark.Ticket.TicketOrderItem;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,37 +13,37 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class OrderServiceTest {
 
-    private static OrderService orderService;
+    private static IOrderService orderService;
     private static IOrderPersistence orderPersistenceMock;
-    private static Map<IItem,Integer> itemQuantities;
-    private static IItem pizza;
-    private static IItem burger;
-    private static IItem fries;
-    private static Order order;
+    private static List<IOrderItem> orderItems;
+    private static Ticket child;
+    private static Ticket adult;
+    private static TicketOrderItemAdapter childTicketOrder;
+    private static TicketOrderItemAdapter adultTicketOrder;
+    private static IOrder order;
 
     @BeforeAll
     public static void init(){
 
         orderPersistenceMock = Mockito.mock(IOrderPersistence.class);
         orderService = new OrderService(orderPersistenceMock);
-        itemQuantities = new HashMap<>();
+        orderItems = new ArrayList<>();
 
-        pizza = new Food("pizza","1",5);
-        burger = new Food("burger","2",10);
-        fries = new Food("fries","3",4);
+        child = new Ticket("child",15);
+        adult = new Ticket("adult",20);
 
-        itemQuantities.put(pizza,2);
-        itemQuantities.put(burger,1);
-        itemQuantities.put(fries,3);
+        childTicketOrder = new TicketOrderItemAdapter(new TicketOrderItem(child,3));
+        adultTicketOrder = new TicketOrderItemAdapter(new TicketOrderItem(adult,2));
+
+        orderItems.add(childTicketOrder);
+        orderItems.add(adultTicketOrder);
 
         LocalTime time = LocalTime.now();
         LocalDate date = LocalDate.now();
@@ -58,24 +60,47 @@ class OrderServiceTest {
     }
 
     @Test
-    public void createOrderFromItemQuantities() {
+    public void createOrderFromItemQuantitiesHasItems() {
 
-        Order newOrder = orderService.createOrderFromItemQuantities("email",itemQuantities);
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
-        assertEquals(2,newOrder.getOrderItemQuantities().get(pizza));
-        assertEquals(1,newOrder.getOrderItemQuantities().get(burger));
-        assertEquals(3,newOrder.getOrderItemQuantities().get(fries));
+        assertTrue(orderItems.contains(childTicketOrder));
+        assertTrue(orderItems.contains(adultTicketOrder));
+    }
+
+    @Test
+    public void createOrderFromItemQuantitiesHasCorrectEmail() {
+
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
+
         assertEquals("email",newOrder.getMailId());
+    }
+
+    @Test
+    public void createOrderFromItemQuantitiesHasDateTime() {
+
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertNotNull(newOrder.getOrderDate());
         assertNotNull(newOrder.getOrderDate());
+    }
+
+    @Test
+    public void createOrderFromItemQuantitiesDefaultHasNoOrderId() {
+
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
+        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
+
         assertNull(newOrder.getOrderId());
     }
 
     @Test
     public void createOrderFromItemQuantitiesEmptyItems() {
 
-        Order newOrder = orderService.createOrderFromItemQuantities("email", new HashMap<IItem,Integer>());
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email", new ArrayList<>());
 
         assertNull(newOrder);
     }
@@ -83,7 +108,7 @@ class OrderServiceTest {
     @Test
     public void createOrderFromItemQuantitiesNullItems() {
 
-        Order newOrder = orderService.createOrderFromItemQuantities("email",null);
+        IOrder newOrder = orderService.createOrderFromItemQuantities("email",null);
 
         assertNull(newOrder);
     }
@@ -116,12 +141,12 @@ class OrderServiceTest {
     @Test
     public void getAllOrdersForUser() throws SQLException {
 
-        ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<IOrder> orders = new ArrayList<>();
         orders.add(order);
 
         Mockito.when(orderPersistenceMock.loadAllOrders("email")).thenReturn(orders);
 
-        assertEquals(orders,orderService.getAllOrdersForUser("email"));
+        assertEquals(orders, orderService.getAllOrdersForUser("email"));
         Mockito.verify(orderPersistenceMock,times(1)).loadAllOrders("email");
 
     }
@@ -136,4 +161,3 @@ class OrderServiceTest {
 
     }
 }
-
