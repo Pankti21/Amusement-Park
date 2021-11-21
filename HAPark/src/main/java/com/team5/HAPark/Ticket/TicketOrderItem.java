@@ -10,6 +10,10 @@ public class TicketOrderItem {
         this.quantity = quantity;
     }
 
+    public TicketOrderItem() {
+
+    }
+
 
     public int getQuantity() {
         return this.quantity;

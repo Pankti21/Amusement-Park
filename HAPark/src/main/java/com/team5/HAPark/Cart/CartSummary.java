@@ -93,7 +93,7 @@ public class CartSummary {
     }
 
     //Remove Food items from cart
-    public void removeFoodFromCart(Food f) {
+    public void removeFoodFromCart(FoodOrderItem f) {
         ListIterator<FoodOrderItem> foodIterator = food.listIterator();
         while  (foodIterator.hasNext()){
             FoodOrderItem foodItem = foodIterator.next();
