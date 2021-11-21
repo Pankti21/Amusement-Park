@@ -30,28 +30,25 @@ public class RideController {
         model.addAttribute("allrides", rideService.getAllRides());
         model.addAttribute("ride",new RideReserve());
         model.addAttribute("maps",rideService.getAllTimeSlots());
-        return "RideForm"; //create-project
+        return "RideForm";
     }
 
-    @PostMapping("/reserved") //save-project
+    @PostMapping("/reserved")
     public String submitForm(@ModelAttribute("ride") RideReserve ride) throws SQLException {
-        //Save project to db
         //https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
         log.info("{}",username);
         log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
         rideService.reserveSeats(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
-        return "RideReserved"; // result
+        return "RideReserved";
     }
 
     @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
         RidePersistence ridePersistence = new RidePersistence();
-        //List<Integer> keys=List.of(1,2,3);
         model.addAttribute("maps",ridePersistence.getAllTimeSlots());
-        //model.addAttribute("alltimeslots", ridePersistence.getAllTimeSlots());
         return "rideui";
     }
 
