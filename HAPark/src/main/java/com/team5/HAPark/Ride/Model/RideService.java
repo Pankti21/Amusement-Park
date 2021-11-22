@@ -79,14 +79,6 @@ public class RideService implements IRideService {
         return ride;
     }
 
-    //reserves number of seats entered by the user for the given ride id and timeslot id
-    public void reserveSeats(int rideId, int timeslotId, int seats) throws SQLException {
-        int availability=ridePersistence.getRideAvailability(rideId,timeslotId);
-        availability-=seats;
-        ridePersistence.updateRideAvailability(rideId,timeslotId,availability);
-    }
-
-
     private List<Ride> rides= new ArrayList<>(Arrays.asList(
            // new Ride(1,"RollarCoaster","Ground",5),
             //new Ride(2,"WaterSlide","Water",6,LocalTime.of(00,10,00))

@@ -45,7 +45,7 @@ public class RideController {
         log.info("{}",username);
         log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
         //Reduces availability of rides
-        rideService.reserveSeats(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
+        rideReserveService.reserveSeats(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
         //Saves to database
         rideReserveService.reserve(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
         model.addAttribute("rideReserved",rideService.getRide(ride.getRideId()));

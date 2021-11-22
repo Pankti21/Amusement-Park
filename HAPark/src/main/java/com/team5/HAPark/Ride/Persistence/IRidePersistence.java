@@ -12,8 +12,6 @@ public interface IRidePersistence {
     Ride getRide(int id) throws SQLException;
     List<Ride> getAllRides() throws SQLException;
     TimeSlot getRideTimeSlot(int id) throws SQLException;
-    int getRideAvailability(int rideId, int timeSlotId) throws SQLException;
     List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException;
-    void updateRideAvailability(int rideId, int timeslotId, int availability) throws SQLException;
 }
 
