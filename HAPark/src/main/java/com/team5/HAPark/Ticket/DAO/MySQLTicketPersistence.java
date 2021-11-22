@@ -1,6 +1,6 @@
 package com.team5.HAPark.Ticket.DAO;
 
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 public class MySQLTicketPersistence implements ITicketPersistence{
 

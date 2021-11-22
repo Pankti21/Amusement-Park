@@ -1,8 +1,4 @@
-<<<<<<< HEAD:HAPark/src/main/java/com/team5/HAPark/database/mysql/IUserPersistence.java
-package com.team5.HAPark.database.mysql;
-=======
 package com.team5.HAPark.User.DAO;
->>>>>>> 778932d59e2a554be39ea78c21e0641f84831d5d:HAPark/src/main/java/com/team5/HAPark/User/DAO/IUserPersistence.java
 
 import com.team5.HAPark.User.User;
 

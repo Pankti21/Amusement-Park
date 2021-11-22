@@ -1,13 +1,7 @@
 package com.team5.HAPark.User;
 
-<<<<<<< HEAD:HAPark/src/main/java/com/team5/HAPark/userAuthentication/Authenticator.java
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import com.team5.HAPark.database.mysql.MySQLUserPersistence;
-=======
-import database.mysql.MySQLDatabase;
-import com.team5.HAPark.User.DAO.MySQLUserPersistence;
->>>>>>> 778932d59e2a554be39ea78c21e0641f84831d5d:HAPark/src/main/java/com/team5/HAPark/User/Authenticator.java
-
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

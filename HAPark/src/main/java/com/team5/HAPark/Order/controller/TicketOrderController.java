@@ -7,7 +7,7 @@ import com.team5.HAPark.Order.model.IOrder;
 import com.team5.HAPark.Order.model.IOrderService;
 import com.team5.HAPark.Order.model.TicketOrderItemAdapter;
 import com.team5.HAPark.Ticket.TicketOrderItem;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,6 +1,8 @@
 package com.team5.HAPark.userAuthentication;
 
-import com.team5.HAPark.database.mysql.IUserPersistence;
+import com.team5.HAPark.User.DAO.IUserPersistence;
+import com.team5.HAPark.User.Encryption;
+import com.team5.HAPark.User.User;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;

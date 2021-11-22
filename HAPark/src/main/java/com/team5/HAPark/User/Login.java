@@ -1,10 +1,5 @@
 package com.team5.HAPark.User;
-
-<<<<<<< HEAD:HAPark/src/main/java/com/team5/HAPark/userAuthentication/Login.java
-import com.team5.HAPark.database.mysql.IUserPersistence;
-=======
 import com.team5.HAPark.User.DAO.IUserPersistence;
->>>>>>> 778932d59e2a554be39ea78c21e0641f84831d5d:HAPark/src/main/java/com/team5/HAPark/User/Login.java
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;

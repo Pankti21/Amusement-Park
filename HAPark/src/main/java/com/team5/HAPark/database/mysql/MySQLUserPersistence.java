@@ -1,15 +1,7 @@
-<<<<<<< HEAD:HAPark/src/main/java/com/team5/HAPark/database/mysql/MySQLUserPersistence.java
 package com.team5.HAPark.database.mysql;
 
-import com.team5.HAPark.userAuthentication.User;
-=======
-package com.team5.HAPark.User.DAO;
-
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import com.team5.HAPark.User.DAO.IUserPersistence;
 import com.team5.HAPark.User.User;
-import database.mysql.MySQLDatabase;
->>>>>>> 778932d59e2a554be39ea78c21e0641f84831d5d:HAPark/src/main/java/com/team5/HAPark/User/DAO/MySQLUserPersistence.java
 
 import java.sql.CallableStatement;
 import java.sql.SQLException;

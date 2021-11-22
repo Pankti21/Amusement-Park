@@ -2,7 +2,7 @@ package com.team5.HAPark.Ticket;
 
 import com.team5.HAPark.Cart.CartSummary;
 import com.team5.HAPark.Ticket.DAO.MySQLTicketPersistence;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
