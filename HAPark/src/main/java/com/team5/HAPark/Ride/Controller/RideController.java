@@ -4,6 +4,7 @@ import com.team5.HAPark.Ride.Model.RideReserve;
 import com.team5.HAPark.Ride.Model.RideReserveService;
 import com.team5.HAPark.Ride.Model.RideService;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
+import com.team5.HAPark.Ride.Persistence.RideReservePersistence;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -50,7 +51,6 @@ public class RideController {
         rideReserveService.reserve(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
         model.addAttribute("rideReserved",rideService.getRide(ride.getRideId()));
         model.addAttribute("timeslot",rideService.getTimeSlotName(ride.getTimeslotId()));
-
         return "RideReserved";
     }
 
@@ -76,6 +76,12 @@ public class RideController {
     public String waterRides(Model model) throws SQLException {
         model.addAttribute("waterrides",rideService.getAllWaterRides());
         return "WaterRides";
+    }
 
+    @GetMapping("/reservations")
+    public String getAllReservations(Model model) throws SQLException {
+        RideReservePersistence rideReservePersistence=new RideReservePersistence();
+        model.addAttribute("reservations",rideReservePersistence.getReservations());
+        return "RideReservations";
     }
 }
