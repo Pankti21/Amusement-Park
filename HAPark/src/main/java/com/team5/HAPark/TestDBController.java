@@ -1,9 +1,15 @@
 package com.team5.HAPark;
 
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
+<<<<<<< HEAD
 import com.team5.HAPark.database.mysql.IUserPersistence;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import com.team5.HAPark.database.mysql.MySQLUserPersistence;
+=======
+import com.team5.HAPark.User.DAO.IUserPersistence;
+import com.team5.HAPark.User.DAO.MySQLUserPersistence;
+import database.mysql.MySQLDatabase;
+>>>>>>> 778932d59e2a554be39ea78c21e0641f84831d5d
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

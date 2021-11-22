@@ -29,7 +29,8 @@ public class MySQLFoodPersistence implements IFoodPersistence{
             while(resultSet.next()){
                  String name = resultSet.getString("food_name");
                  double price = resultSet.getDouble("food_price");
-                 food = new Food(name,id,price);
+                 int quantity = resultSet.getInt("food_quantity");
+                 food = new Food(name,id,price,quantity);
             }
 
         } finally {

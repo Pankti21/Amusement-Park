@@ -1,6 +1,10 @@
-package com.team5.HAPark.userAuthentication;
+package com.team5.HAPark.User;
 
+<<<<<<< HEAD:HAPark/src/main/java/com/team5/HAPark/userAuthentication/Login.java
 import com.team5.HAPark.database.mysql.IUserPersistence;
+=======
+import com.team5.HAPark.User.DAO.IUserPersistence;
+>>>>>>> 778932d59e2a554be39ea78c21e0641f84831d5d:HAPark/src/main/java/com/team5/HAPark/User/Login.java
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -18,7 +22,6 @@ public class Login {
         boolean loggedIn = false;
 
         try {
-
             if (userPersistence.doesUserExist(user.getEmail())) {
                 Encryption encryption = new Encryption();
                 String enteredEncryptedPassword = encryption.encryptPassword(user.getPassword());

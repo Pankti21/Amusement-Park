@@ -1,6 +1,10 @@
-package com.team5.HAPark.userAuthentication;
+package com.team5.HAPark.User;
 
+<<<<<<< HEAD:HAPark/src/test/java/com/team5/HAPark/userAuthentication/LoginTest.java
 import com.team5.HAPark.database.mysql.IUserPersistence;
+=======
+import com.team5.HAPark.User.DAO.IUserPersistence;
+>>>>>>> 778932d59e2a554be39ea78c21e0641f84831d5d:HAPark/src/test/java/com/team5/HAPark/User/LoginTest.java
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
