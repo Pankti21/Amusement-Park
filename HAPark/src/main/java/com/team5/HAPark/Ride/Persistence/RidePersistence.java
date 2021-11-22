@@ -2,7 +2,7 @@ package com.team5.HAPark.Ride.Persistence;
 
 import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ride.Model.TimeSlot;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,11 @@ import java.util.List;
 @Slf4j
 @Component
 public class RidePersistence implements IRidePersistence{
-    MySQLDatabase mySQLDatabase = new MySQLDatabase();
+    MySQLDatabase mySQLDatabase;
+
+    public RidePersistence(MySQLDatabase mySQLDatabase) {
+        this.mySQLDatabase = mySQLDatabase;
+    }
 
     @Override
     public Ride getRide(int id) throws SQLException {
@@ -56,7 +60,7 @@ public class RidePersistence implements IRidePersistence{
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        IRidePersistence ridePersistence=new RidePersistence();
+        IRidePersistence ridePersistence=new RidePersistence(new MySQLDatabase());
         List<Ride> Rides= ridePersistence.getAllRides();
         List<HashMap<Integer,Integer>> maps = new ArrayList<>();
         for (Ride ride:Rides){
@@ -80,7 +84,7 @@ public class RidePersistence implements IRidePersistence{
     @Override
     //Get seats available for a given ride at a given timeslot
     public int getRideAvailability(int rideId, int timeSlotId) throws SQLException {
-        IRidePersistence ridePersistence= new RidePersistence();
+        IRidePersistence ridePersistence= new RidePersistence(new MySQLDatabase());
         TimeSlot timeSlot=new TimeSlot();
         timeSlot=ridePersistence.getRideTimeSlot(rideId);
         HashMap<Integer,Integer> map = timeSlot.getMap();
@@ -89,7 +93,7 @@ public class RidePersistence implements IRidePersistence{
     }
 
     @Override
-    //Update reserved seats by user in database
+    //Update reserved seats by user in com.team5.HAPark.database
     public void updateRideAvailability(int rideId, int timeslotId, int availability) throws SQLException {
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();

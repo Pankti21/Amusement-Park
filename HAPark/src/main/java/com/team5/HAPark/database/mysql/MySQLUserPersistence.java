@@ -1,6 +1,5 @@
-package database.mysql;
+package com.team5.HAPark.database.mysql;
 
-import database.IUserPersistence;
 import com.team5.HAPark.userAuthentication.User;
 
 import java.sql.CallableStatement;

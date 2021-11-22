@@ -1,7 +1,7 @@
 package com.team5.HAPark.Food;
 
 import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

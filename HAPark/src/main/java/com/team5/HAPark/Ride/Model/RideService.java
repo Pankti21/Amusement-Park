@@ -2,6 +2,7 @@ package com.team5.HAPark.Ride.Model;
 
 import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,9 @@ import java.util.*;
 @Service
 public class RideService implements IRideService {
 
-    private IRidePersistence ridePersistence= new RidePersistence();
+    private IRidePersistence ridePersistence;
 
-    public RideService(IRidePersistence ridePersistence) {
+    public RideService(IRidePersistence ridePersistence) throws SQLException {
         this.ridePersistence = ridePersistence;
     }
 
@@ -45,7 +46,7 @@ public class RideService implements IRideService {
     }
 
     public List<Ride> getAllGroundRides() throws SQLException {
-        RidePersistence ridePersistence=new RidePersistence();
+        RidePersistence ridePersistence=new RidePersistence(new MySQLDatabase());
 
         List<Ride> Rides=ridePersistence.getAllRides();
         List<Ride> groundRides=new ArrayList<>();
@@ -58,7 +59,7 @@ public class RideService implements IRideService {
     }
 
     public List<Ride> getAllWaterRides() throws SQLException {
-        RidePersistence ridePersistence=new RidePersistence();
+        RidePersistence ridePersistence=new RidePersistence(new MySQLDatabase());
         List<Ride> Rides=ridePersistence.getAllRides();
         List<Ride> waterRides=new ArrayList<>();
         for(Ride ride:Rides) {

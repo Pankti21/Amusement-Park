@@ -1,6 +1,6 @@
 package com.team5.HAPark.userAuthentication;
 
-import database.IUserPersistence;
+import com.team5.HAPark.database.mysql.IUserPersistence;
 
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;

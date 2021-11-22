@@ -1,4 +1,4 @@
-package database;
+package com.team5.HAPark.database.mysql;
 
 import com.team5.HAPark.userAuthentication.User;
 

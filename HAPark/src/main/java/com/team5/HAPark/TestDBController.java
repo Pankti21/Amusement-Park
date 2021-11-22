@@ -1,9 +1,9 @@
 package com.team5.HAPark;
 
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
-import database.IUserPersistence;
-import database.mysql.MySQLDatabase;
-import database.mysql.MySQLUserPersistence;
+import com.team5.HAPark.database.mysql.IUserPersistence;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLUserPersistence;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,7 @@ public class TestDBController {
         //get logged in user's email
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         IUserPersistence userPersistence = new MySQLUserPersistence(db);
-        RidePersistence ridePersistence = new RidePersistence();
+        RidePersistence ridePersistence = new RidePersistence(new MySQLDatabase());
 
         //data added to model will be accessible in html file
         model.addAttribute("email",email);

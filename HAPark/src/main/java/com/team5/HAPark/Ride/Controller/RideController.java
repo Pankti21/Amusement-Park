@@ -1,9 +1,9 @@
 package com.team5.HAPark.Ride.Controller;
 
-import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ride.Model.RideReserve;
 import com.team5.HAPark.Ride.Model.RideService;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.SQLException;
-import java.util.List;
 
 @org.springframework.stereotype.Controller
 @Slf4j
@@ -57,7 +56,7 @@ public class RideController {
     }
 
     public void allTimeSlots(Model model) throws SQLException {
-        RidePersistence ridePersistence = new RidePersistence();
+        RidePersistence ridePersistence = new RidePersistence(new MySQLDatabase());
         model.addAttribute("alltimeslots", ridePersistence.getAllTimeSlots());
     }
 

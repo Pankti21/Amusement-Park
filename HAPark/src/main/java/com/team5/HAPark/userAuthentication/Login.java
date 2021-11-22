@@ -1,6 +1,6 @@
 package com.team5.HAPark.userAuthentication;
 
-import database.IUserPersistence;
+import com.team5.HAPark.database.mysql.IUserPersistence;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
