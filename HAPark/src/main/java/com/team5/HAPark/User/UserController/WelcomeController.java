@@ -1,13 +1,13 @@
-package com.team5.HAPark;
+package com.team5.HAPark.User.UserController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MainController {
+public class WelcomeController {
 
-    @RequestMapping("/Main")
+    @RequestMapping("/Welcome")
     public String welcome() {
-        return "mainpageui";
+        return "welcomeui";
     }
 }

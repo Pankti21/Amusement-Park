@@ -1,8 +1,7 @@
-package com.team5.HAPark;
+package com.team5.HAPark.User.UserController;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class HAParkApplication {

@@ -1,4 +1,4 @@
-package com.team5.HAPark;
+package com.team5.HAPark.User.UserController;
 
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import com.team5.HAPark.User.DAO.IUserPersistence;

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<table border="black">
+    <tr>
+        <td>TICKET TYPE</td>
+        <td>TICKET QUANTITY</td>
+        <td>TICKET PRICE</td>
+    </tr>
+    <tr th:each="ticket:${allTickets}">
+        <td th:text="${ticket.id}"></td>
+        <td th:text="${ticket.quantity}"></td>
+        <td th:text="${ticket.price}"></td>
+    </tr>
+    <tr>
+        <td>FOOD ID</td>
+        <td>FOOD QUANTITY</td>
+        <td>FOOD PRICE</td>
+    </tr>
+    <tr th:each="food:${allFood}">
+        <td th:text="${food.id}"></td>
+        <td th:text="${food.quantity}"></td>
+        <td th:text="${food.price}"></td>
+    </tr>
+</table>
+
+<body>
+</body>
+</html>
