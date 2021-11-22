@@ -3,16 +3,10 @@ package com.team5.HAPark.Ride.Model;
 import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @Slf4j
@@ -30,24 +24,49 @@ public class RideService implements IRideService {
         List<Ride> Rides=ridePersistence.getAllRides();
         for(Ride ride:Rides) {
             log.info("ride id: {}", ride.getId());
-            log.info("ride name: {}", ride.getName());
-            log.info("ride type: {}", ride.getType());
-            log.info("ride max_occupancy: {}", ride.getMaxOccupancy());
-            log.info("ride duration: {}", ride.getDuration());
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(1));
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(2));
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(3));
         }
         return Rides;
     }
 
+    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException{
+        List<HashMap<Integer,Integer>> maps= new ArrayList<>();
+        maps=ridePersistence.getAllTimeSlots();
+        return maps;
+    }
+
     public List<String> getAllRideNames() throws SQLException {
-        List<String> names= new ArrayList<>();
+        List<String> names = new ArrayList<>();
         List<Ride> Rides=ridePersistence.getAllRides();
-        for(Ride ride:Rides) {
+        for (Ride ride:Rides){
             names.add(ride.getName());
         }
         return names;
+
+    }
+
+    public List<Ride> getAllGroundRides() throws SQLException {
+        RidePersistence ridePersistence=new RidePersistence();
+
+        List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> groundRides=new ArrayList<>();
+        for(Ride ride:Rides) {
+            if(Objects.equals(ride.getType(), "Ground")){
+                groundRides.add(ride);
+            }
+        }
+        return groundRides;
+    }
+
+    public List<Ride> getAllWaterRides() throws SQLException {
+        RidePersistence ridePersistence=new RidePersistence();
+        List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> waterRides=new ArrayList<>();
+        for(Ride ride:Rides) {
+            if(Objects.equals(ride.getType(), "Water")){
+                waterRides.add(ride);
+            }
+        }
+        return waterRides;
     }
 
     public Ride getRide(int id) throws SQLException {
@@ -55,11 +74,12 @@ public class RideService implements IRideService {
         return ride;
     }
 
-   public Ride reserveRide(int id) throws SQLException {
-        Ride ride = ridePersistence.getRide(id);
-        //ride.getTimeSlot().setAvailability();
-        return null;
-        }
+    //reserves number of seats entered by the user for the given ride id and timeslot id
+    public void reserveSeats(int rideId, int timeslotId, int seats) throws SQLException {
+        int availability=ridePersistence.getRideAvailability(rideId,timeslotId);
+        availability-=seats;
+        ridePersistence.updateRideAvailability(rideId,timeslotId,availability);
+    }
 
 
     private List<Ride> rides= new ArrayList<>(Arrays.asList(
@@ -88,4 +108,13 @@ public class RideService implements IRideService {
         }
     }
 
+    public String getTimeSlotName(int timeslotId) {
+        if(timeslotId==1){
+            return "Morning timeslot at 10:00AM";
+        }
+        if (timeslotId==2){
+            return "Afternoon timeslot at 2:00PM";
+        }
+            return "Evening timeslot at 6:00PM";
+    }
 }

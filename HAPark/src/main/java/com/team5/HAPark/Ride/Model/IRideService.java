@@ -9,5 +9,6 @@ public interface IRideService {
     IRidePersistence ridePersistence = null;
     public List<Ride> getAllRides() throws SQLException;
     public Ride getRide(int id) throws SQLException;
-    public Ride reserveRide(int id) throws SQLException;
+    //public Ride reserveRide(int id) throws SQLException;
+
 }
