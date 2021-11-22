@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-    @org.springframework.stereotype.Controller
+    @Controller
     public class CartSummaryController {
 
         @Autowired
@@ -29,7 +29,7 @@ import java.util.Arrays;
         private Ticket ticket;
         private Food food;
 
-        @GetMapping("/cartsummary")
+        @GetMapping("/cartsummarytickets")
         public String allTicketItems(Model model) throws SQLException {
             model.addAttribute("allTickets", ticket.getTicketType());
             model.addAttribute("allTickets", ticket.getTicketType());
@@ -37,7 +37,7 @@ import java.util.Arrays;
             return "cartsummaryui";
         }
 
-        @GetMapping("/cartsummary")
+        @GetMapping("/cartsummaryfoods")
         public String allFoodItems(Model model) throws SQLException {
             model.addAttribute("allFood", food.getId());
             model.addAttribute("allFood", food.getQuantity());

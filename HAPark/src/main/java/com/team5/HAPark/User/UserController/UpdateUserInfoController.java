@@ -15,8 +15,6 @@ import java.sql.SQLException;
 @org.springframework.stereotype.Controller
 public class UpdateUserInfoController {
 
-    @Autowired
-    //private UpdateUserInformation updateUserInformation;
     private User user;
 
     @GetMapping("/updateuserinfo")
