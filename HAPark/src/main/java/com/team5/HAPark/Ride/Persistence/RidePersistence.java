@@ -17,14 +17,19 @@ import java.util.List;
 @Slf4j
 @Component
 public class RidePersistence implements IRidePersistence{
-    MySQLDatabase mySQLDatabase;
+   MySQLDatabase mySQLDatabase;
 
     public RidePersistence(MySQLDatabase mySQLDatabase) {
-        this.mySQLDatabase = mySQLDatabase;
+        this.mySQLDatabase=mySQLDatabase;
+    }
+
+    public RidePersistence() {
+
     }
 
     @Override
     public Ride getRide(int id) throws SQLException {
+        MySQLDatabase mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+id+";");
@@ -37,11 +42,14 @@ public class RidePersistence implements IRidePersistence{
                 r.setDuration(rs.getTime("total_duration"));
                 r.setTimeSlot(getRideTimeSlot(r.getId()));
         }
+        mySQLDatabase.close();
         return r;
     }
 
     @Override
     public List<Ride> getAllRides() throws SQLException {
+
+        MySQLDatabase mySQLDatabase=new MySQLDatabase();
         List<Ride> Rides= new ArrayList<Ride>();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
@@ -56,20 +64,25 @@ public class RidePersistence implements IRidePersistence{
             r.setTimeSlot(getRideTimeSlot(r.getId()));
             Rides.add(r);
         }
+        mySQLDatabase.close();
         return Rides;
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        IRidePersistence ridePersistence=new RidePersistence(new MySQLDatabase());
+        MySQLDatabase mySQLDatabase=new MySQLDatabase();
+        IRidePersistence ridePersistence=new RidePersistence(mySQLDatabase);
         List<Ride> Rides= ridePersistence.getAllRides();
         List<HashMap<Integer,Integer>> maps = new ArrayList<>();
         for (Ride ride:Rides){
             maps.add(ridePersistence.getRideTimeSlot(ride.getId()).getMap());
         }
+        mySQLDatabase.close();
         return maps;
     }
 
     public TimeSlot getRideTimeSlot(int id) throws SQLException {
+
+        MySQLDatabase mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
@@ -95,6 +108,8 @@ public class RidePersistence implements IRidePersistence{
     @Override
     //Update reserved seats by user in com.team5.HAPark.database
     public void updateRideAvailability(int rideId, int timeslotId, int availability) throws SQLException {
+
+        MySQLDatabase mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         stmt.executeUpdate("UPDATE ride_timeslot SET availability="+availability+" WHERE ride_id="+rideId+" AND timeslot_id="+timeslotId);

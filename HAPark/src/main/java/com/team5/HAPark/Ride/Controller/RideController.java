@@ -1,6 +1,7 @@
 package com.team5.HAPark.Ride.Controller;
 
 import com.team5.HAPark.Ride.Model.RideReserve;
+import com.team5.HAPark.Ride.Model.RideReserveService;
 import com.team5.HAPark.Ride.Model.RideService;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
@@ -19,9 +20,12 @@ public class RideController {
 
     @Autowired
     private RideService rideService;
+    @Autowired
+    private RideReserveService rideReserveService;
 
     @GetMapping("/rides")
-    public String rides(Model model){
+    public String rides(Model model) throws SQLException {
+        RideReserveService rideReserveService=new RideReserveService();
         return "RideMainPage";
     }
 
@@ -40,8 +44,10 @@ public class RideController {
         String username = currentUser.getName();
         log.info("{}",username);
         log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
+        //Reduces availability of rides
         rideService.reserveSeats(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
-
+        //Saves to database
+        rideReserveService.reserve(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
         model.addAttribute("rideReserved",rideService.getRide(ride.getRideId()));
         model.addAttribute("timeslot",rideService.getTimeSlotName(ride.getTimeslotId()));
 

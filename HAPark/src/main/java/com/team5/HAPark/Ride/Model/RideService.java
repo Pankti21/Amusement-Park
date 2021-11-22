@@ -14,10 +14,14 @@ import java.util.*;
 @Service
 public class RideService implements IRideService {
 
-    private IRidePersistence ridePersistence;
+    private IRidePersistence ridePersistence=new RidePersistence();
 
     public RideService(IRidePersistence ridePersistence) throws SQLException {
         this.ridePersistence = ridePersistence;
+    }
+
+    public RideService() {
+
     }
 
     public List<Ride> getAllRides() throws SQLException {
