@@ -80,8 +80,7 @@ public class RideController {
 
     @GetMapping("/reservations")
     public String getAllReservations(Model model) throws SQLException {
-        RideReservePersistence rideReservePersistence=new RideReservePersistence();
-        model.addAttribute("reservations",rideReservePersistence.getReservations());
+        model.addAttribute("reservations",rideReserveService.getReservations());
         return "RideReservations";
     }
 }

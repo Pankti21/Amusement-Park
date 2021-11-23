@@ -4,6 +4,7 @@ import com.team5.HAPark.Ride.Persistence.RideReservePersistence;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class RideReserveService {
@@ -19,6 +20,11 @@ public class RideReserveService {
         int availability=rideReservePersistence.getRideAvailability(rideId,timeslotId);
         availability-=seats;
         rideReservePersistence.updateRideAvailability(rideId,timeslotId,availability);
+    }
+
+    public List<RideReserve> getReservations() throws SQLException {
+        List<RideReserve> ridesReserved=rideReservePersistence.getReservations();
+        return ridesReserved;
     }
 
 }

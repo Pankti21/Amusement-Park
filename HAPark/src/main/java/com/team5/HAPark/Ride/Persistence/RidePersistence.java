@@ -29,7 +29,7 @@ public class RidePersistence implements IRidePersistence{
 
     @Override
     public Ride getRide(int id) throws SQLException {
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
+        mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+id+";");
@@ -43,14 +43,14 @@ public class RidePersistence implements IRidePersistence{
                 r.setTimeSlot(getRideTimeSlot(r.getId()));
         }
         mySQLDatabase.close();
+        con.close();
         return r;
     }
 
     @Override
     public List<Ride> getAllRides() throws SQLException {
-
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
         List<Ride> Rides= new ArrayList<Ride>();
+        mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info;");
@@ -65,11 +65,12 @@ public class RidePersistence implements IRidePersistence{
             Rides.add(r);
         }
         mySQLDatabase.close();
+        con.close();
         return Rides;
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
+        mySQLDatabase=new MySQLDatabase();
         IRidePersistence ridePersistence=new RidePersistence(mySQLDatabase);
         List<Ride> Rides= ridePersistence.getAllRides();
         List<HashMap<Integer,Integer>> maps = new ArrayList<>();
@@ -81,8 +82,7 @@ public class RidePersistence implements IRidePersistence{
     }
 
     public TimeSlot getRideTimeSlot(int id) throws SQLException {
-
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
+        mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
@@ -91,6 +91,8 @@ public class RidePersistence implements IRidePersistence{
             map.put(rs.getInt("timeslot_id"),rs.getInt("availability"));
         }
         TimeSlot timeSlot=new TimeSlot(map);
+        mySQLDatabase.close();
+        con.close();
         return timeSlot;
     }
 
