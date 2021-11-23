@@ -14,10 +14,14 @@ import java.util.*;
 @Service
 public class RideService implements IRideService {
 
-    private IRidePersistence ridePersistence;
+    private IRidePersistence ridePersistence=new RidePersistence();
 
     public RideService(IRidePersistence ridePersistence) throws SQLException {
         this.ridePersistence = ridePersistence;
+    }
+
+    public RideService() {
+
     }
 
     public List<Ride> getAllRides() throws SQLException {
@@ -74,14 +78,6 @@ public class RideService implements IRideService {
         Ride ride=ridePersistence.getRide(id);
         return ride;
     }
-
-    //reserves number of seats entered by the user for the given ride id and timeslot id
-    public void reserveSeats(int rideId, int timeslotId, int seats) throws SQLException {
-        int availability=ridePersistence.getRideAvailability(rideId,timeslotId);
-        availability-=seats;
-        ridePersistence.updateRideAvailability(rideId,timeslotId,availability);
-    }
-
 
     private List<Ride> rides= new ArrayList<>(Arrays.asList(
            // new Ride(1,"RollarCoaster","Ground",5),

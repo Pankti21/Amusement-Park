@@ -33,6 +33,7 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                     antMatchers("/Main").permitAll().
                     antMatchers("/reserve").permitAll().
                     antMatchers("/reserved").permitAll().
+                    antMatchers("/reservations").permitAll().
                   antMatchers("/**").authenticated()
                   .and().formLogin();
           http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
