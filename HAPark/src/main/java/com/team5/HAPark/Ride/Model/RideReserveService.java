@@ -1,5 +1,6 @@
 package com.team5.HAPark.Ride.Model;
 
+import com.team5.HAPark.Ride.Persistence.IRideReservePersistence;
 import com.team5.HAPark.Ride.Persistence.RideReservePersistence;
 import org.springframework.stereotype.Service;
 
@@ -7,9 +8,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class RideReserveService {
+public class RideReserveService implements IRideReserveService{
 
-    RideReservePersistence rideReservePersistence=new RideReservePersistence();
+    IRideReservePersistence rideReservePersistence=new RideReservePersistence();
 
     public void reserve(int rideId, int timeslotId, int reserveSeats) throws SQLException {
         rideReservePersistence.addReservationToDB(rideId,timeslotId,reserveSeats);

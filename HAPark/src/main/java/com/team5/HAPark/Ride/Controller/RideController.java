@@ -1,5 +1,6 @@
 package com.team5.HAPark.Ride.Controller;
 
+import com.team5.HAPark.Ride.Model.IRideReserveService;
 import com.team5.HAPark.Ride.Model.RideReserve;
 import com.team5.HAPark.Ride.Model.RideReserveService;
 import com.team5.HAPark.Ride.Model.RideService;
@@ -22,7 +23,7 @@ public class RideController {
     @Autowired
     private RideService rideService;
     @Autowired
-    private RideReserveService rideReserveService;
+    private IRideReserveService rideReserveService;
 
     @GetMapping("/rides")
     public String rides(Model model) throws SQLException {
