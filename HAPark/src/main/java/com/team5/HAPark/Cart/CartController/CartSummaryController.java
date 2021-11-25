@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 import com.team5.HAPark.Cart.CartSummary;
 
-    @org.springframework.stereotype.Controller
+    @Controller
     public class CartSummaryController {
 
         @Autowired
@@ -20,6 +20,7 @@ import com.team5.HAPark.Cart.CartSummary;
         private Ticket ticket;
         private Food food;
 
+<<<<<<< HEAD
         @GetMapping("/cartsummary")
         public String allCartItems(Model model) throws SQLException {
             model.addAttribute("ticketType", ticket.getTicketType());
@@ -28,6 +29,21 @@ import com.team5.HAPark.Cart.CartSummary;
             model.addAttribute("foodId", food.getId());
             model.addAttribute("foodQuantity", food.getQuantity());
             model.addAttribute("foodPrice", food.getPrice());
+=======
+        @GetMapping("/cartsummarytickets")
+        public String allTicketItems(Model model) throws SQLException {
+            model.addAttribute("allTickets", ticket.getTicketType());
+            model.addAttribute("allTickets", ticket.getTicketType());
+            model.addAttribute("allTickets", ticketOrderItem.getQuantity());
+            return "cartsummaryui";
+        }
+
+        @GetMapping("/cartsummaryfoods")
+        public String allFoodItems(Model model) throws SQLException {
+            model.addAttribute("allFood", food.getId());
+            model.addAttribute("allFood", food.getQuantity());
+            model.addAttribute("allFood", food.getPrice());
+>>>>>>> 28920861c9dc60c9b3d58673c4214280758f0719
             return "cartsummaryui";
         }
 }
