@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
-public class RideReservePersistence {
+public class RideReservePersistence implements IRideReservePersistence {
     public void addReservationToDB(int rideId,int timeSlotId,int seats) throws SQLException {
         String auth =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         MySQLDatabase mySQLDatabase=new MySQLDatabase();

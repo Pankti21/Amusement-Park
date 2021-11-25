@@ -33,7 +33,7 @@ public class RideService implements IRideService {
         return Rides;
     }
 
-    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException{
+    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
         List<HashMap<Integer,Integer>> maps= new ArrayList<>();
         maps=ridePersistence.getAllTimeSlots();
         return maps;
@@ -50,8 +50,6 @@ public class RideService implements IRideService {
     }
 
     public List<Ride> getAllGroundRides() throws SQLException {
-        RidePersistence ridePersistence=new RidePersistence(new MySQLDatabase());
-
         List<Ride> Rides=ridePersistence.getAllRides();
         List<Ride> groundRides=new ArrayList<>();
         for(Ride ride:Rides) {
@@ -63,7 +61,6 @@ public class RideService implements IRideService {
     }
 
     public List<Ride> getAllWaterRides() throws SQLException {
-        RidePersistence ridePersistence=new RidePersistence(new MySQLDatabase());
         List<Ride> Rides=ridePersistence.getAllRides();
         List<Ride> waterRides=new ArrayList<>();
         for(Ride ride:Rides) {
@@ -77,32 +74,6 @@ public class RideService implements IRideService {
     public Ride getRide(int id) throws SQLException {
         Ride ride=ridePersistence.getRide(id);
         return ride;
-    }
-
-    private List<Ride> rides= new ArrayList<>(Arrays.asList(
-           // new Ride(1,"RollarCoaster","Ground",5),
-            //new Ride(2,"WaterSlide","Water",6,LocalTime.of(00,10,00))
-    ));
-
-
-
-
-    public void addRide(Ride ride) {
-        rides.add(ride);
-    }
-
-    public void updateRide(Ride ride,int id) {
-        for(Ride r:rides){
-            if (r.getId() == id)
-                rides.set(id-1,ride);
-        }
-    }
-
-    public void deleteRide(int id) {
-        for(Ride r:rides){
-            if (r.getId() == id)
-                rides.remove(id-1);
-        }
     }
 
     public String getTimeSlotName(int timeslotId) {
