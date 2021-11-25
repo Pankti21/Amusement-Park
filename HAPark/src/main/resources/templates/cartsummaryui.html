@@ -5,16 +5,16 @@
     <title>Title</title>
 </head>
 <table border="black">
-    <tr>
-        <td>TICKET TYPE</td>        <td th:text="${ticketType}"></td>
-        <td>TICKET QUANTITY</td>    <td th:text="${ticketQuantity}"></td>
-        <td>TICKET PRICE</td>       <td th:text="${ticketPrice}"></td>
+    <tr th:each="ticketOrderItem:${cartSummary.ticket}">
+        <td>TICKET TYPE</td>        <td th:text="${ticketOrderItem.ticketType}"></td>
+        <td>TICKET QUANTITY</td>    <td th:text="${ticketOrderItem.ticketQuantity}"></td>
+        <td>TICKET PRICE</td>       <td th:text="${ticketOrderItem.ticketPrice}"></td>
     </tr>
-    <tr>
-        <td>FOOD ID</td>        <td th:text="${foodId}"></td>
-        <td>FOOD QUANTITY</td>  <td th:text="${foodQuantity}"></td>
-        <td>FOOD PRICE</td>     <td th:text="${foodPrice}"></td>
-    </tr>
+   <!-- <tr th:each="foodOrderItem:$allCartItems">>
+        <td>FOOD ID</td>        <td th:text="${foodOrderItem.name}"></td>
+        <td>FOOD QUANTITY</td>  <td th:text="${foodOrderItem:quantity}"></td>
+        <td>FOOD PRICE</td>     <td th:text="${foodOrderItem:price}"></td>
+    </tr>-->
 </table>
 
 <body>
