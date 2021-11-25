@@ -1,18 +1,31 @@
 package com.team5.HAPark.Ride.Model;
-
-import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.HashMap;
-import java.util.List;
 
 public class WaitTime {
+    //Stores timeslot id and waittime for that timeslot
+    HashMap<Integer, LocalTime> waitTime=new HashMap<>();
 
-    RideService rideService=new RideService();
-
-    public WaitTime() throws SQLException {
+    public WaitTime(HashMap<Integer, LocalTime> waitTime) {
+        this.waitTime = waitTime;
     }
 
-    void method() throws SQLException {
-        Ride ride=rideService.getRide(1);
-        List<HashMap<Integer,Integer>> ts=rideService.getAllTimeSlots();
+    public WaitTime() {
+    }
+
+    public HashMap<Integer, LocalTime> getWaitTime() {
+        return waitTime;
+    }
+
+    public void setWaitTime(HashMap<Integer, LocalTime> waitTime) {
+        this.waitTime = waitTime;
+    }
+
+    @Override
+    public String toString() {
+        return "WaitTime{" +
+                "waitTime=" + waitTime +
+                '}';
     }
 }

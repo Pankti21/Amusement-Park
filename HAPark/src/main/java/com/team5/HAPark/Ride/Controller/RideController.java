@@ -1,9 +1,6 @@
 package com.team5.HAPark.Ride.Controller;
 
-import com.team5.HAPark.Ride.Model.IRideReserveService;
-import com.team5.HAPark.Ride.Model.RideReserve;
-import com.team5.HAPark.Ride.Model.RideReserveService;
-import com.team5.HAPark.Ride.Model.RideService;
+import com.team5.HAPark.Ride.Model.*;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import com.team5.HAPark.Ride.Persistence.RideReservePersistence;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
@@ -24,6 +21,8 @@ public class RideController {
     private RideService rideService;
     @Autowired
     private IRideReserveService rideReserveService;
+    @Autowired
+    WaitTimeService waitTimeService=new WaitTimeService();
 
     @GetMapping("/rides")
     public String rides(Model model) throws SQLException {
@@ -53,6 +52,13 @@ public class RideController {
         model.addAttribute("rideReserved",rideService.getRide(ride.getRideId()));
         model.addAttribute("timeslot",rideService.getTimeSlotName(ride.getTimeslotId()));
         return "RideReserved";
+    }
+
+    @GetMapping("/rides/waittime")
+    public String waitTime(Model model) throws SQLException {
+        model.addAttribute("wt",waitTimeService.calculateWaitTime(1).getWaitTime());
+        model.addAttribute("wts",waitTimeService.getWaitTimes());
+        return "WaitTime";
     }
 
     @GetMapping("/rides/all")
