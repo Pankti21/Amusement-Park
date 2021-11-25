@@ -17,6 +17,16 @@ public class WaitTimeService {
 
     RidePersistence ridePersistence=new RidePersistence();
 
+    public List<HashMap<Integer,LocalTime>> getWaitTimes() throws SQLException {
+        List<Ride> rides= ridePersistence.getAllRides();
+        List<HashMap<Integer,LocalTime>> waitTimes=new ArrayList<>();
+        for (Ride ride:rides){
+            WaitTimeService waitTimeService=new WaitTimeService();
+            WaitTime waitTime=waitTimeService.calculateWaitTime(ride.getId());
+            waitTimes.add(waitTime.getWaitTime());
+        }
+        return waitTimes;
+    }
 
     public WaitTime calculateWaitTime(int rideId) throws SQLException {
         WaitTime waitTime = new WaitTime();
