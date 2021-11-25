@@ -2,12 +2,8 @@ package com.team5.HAPark.Cart;
 
 import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Ticket.TicketOrderItem;
-import com.team5.HAPark.User.DAO.IUserPersistence;
-import com.team5.HAPark.User.Register;
-import com.team5.HAPark.User.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;

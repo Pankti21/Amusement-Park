@@ -1,7 +1,5 @@
 package com.team5.HAPark.User.DAO;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
-import com.team5.HAPark.User.DAO.IUserPersistence;
 import com.team5.HAPark.User.User;
 import database.mysql.MySQLDatabase;
 

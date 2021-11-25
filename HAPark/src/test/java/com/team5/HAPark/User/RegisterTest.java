@@ -1,11 +1,9 @@
 package com.team5.HAPark.User;
 
 import com.team5.HAPark.User.DAO.IUserPersistence;
-
 import org.junit.jupiter.api.*;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -13,13 +13,13 @@
     <td>NEW PASSWORD<</td>
     <td>CONFIRM NEW PASSWORD</td>
   </tr>
-  <tr th:each="user:${allUserInfo}">
-    <td th:text="${user.firstname}"></td>
-    <td th:text="${user.lastname}"></td>
-    <td th:text="${user.email}"></td>
-    <td th:text="${user.password}"></td>
-    <td th:text="${user.newpassword}"></td>
-    <td th:text="${user.confirmnewpassword}"></td>
+  <tr >
+    <td th:text="${userFirstName}"></td>
+    <td th:text="${userLastName}"></td>
+    <td th:text="${userEmail}"></td>
+    <td th:text="${userPassword}"></td>
+    <td th:text="${userNewpassword}"></td>
+    <td th:text="${userConfirmNewPassword}"></td>
   </tr>
 
 </table>

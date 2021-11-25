@@ -6,24 +6,14 @@
 </head>
 <table border="black">
     <tr>
-        <td>TICKET TYPE</td>
-        <td>TICKET QUANTITY</td>
-        <td>TICKET PRICE</td>
-    </tr>
-    <tr th:each="ticket:${allTickets}">
-        <td th:text="${ticket.id}"></td>
-        <td th:text="${ticket.quantity}"></td>
-        <td th:text="${ticket.price}"></td>
+        <td>TICKET TYPE</td>        <td th:text="${ticketType}"></td>
+        <td>TICKET QUANTITY</td>    <td th:text="${ticketQuantity}"></td>
+        <td>TICKET PRICE</td>       <td th:text="${ticketPrice}"></td>
     </tr>
     <tr>
-        <td>FOOD ID</td>
-        <td>FOOD QUANTITY</td>
-        <td>FOOD PRICE</td>
-    </tr>
-    <tr th:each="food:${allFood}">
-        <td th:text="${food.id}"></td>
-        <td th:text="${food.quantity}"></td>
-        <td th:text="${food.price}"></td>
+        <td>FOOD ID</td>        <td th:text="${foodId}"></td>
+        <td>FOOD QUANTITY</td>  <td th:text="${foodQuantity}"></td>
+        <td>FOOD PRICE</td>     <td th:text="${foodPrice}"></td>
     </tr>
 </table>
 
