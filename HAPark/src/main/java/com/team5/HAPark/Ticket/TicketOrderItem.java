@@ -46,7 +46,7 @@ public class TicketOrderItem {
         return ticketPrice;
     }
 
-    public void setTicketPrice(Double ticketPrice) {
+    public void setTicketPrice(double ticketPrice) {
         this.ticket.setTicketPrice(ticketPrice);
     }
 }

@@ -6,8 +6,7 @@ public class OrderItem implements IOrderItem{
     private String id;
     private String name;
 
-    public OrderItem() {
-    }
+    public OrderItem() {}
 
     public OrderItem(Integer quantity, double price, String id, String name) {
         this.quantity = quantity;
@@ -24,6 +23,11 @@ public class OrderItem implements IOrderItem{
     @Override
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public double getTotalPrice() {
+        return quantity * price;
     }
 
     @Override

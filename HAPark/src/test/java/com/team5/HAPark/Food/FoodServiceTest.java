@@ -19,7 +19,7 @@ class FoodServiceTest {
     @BeforeAll
     static void init() throws SQLException {
 
-        pizza = new Food("pizza","1",5, 4);
+        pizza = new Food("pizza","1",5);
         menu = new Menu();
         menu.addFoodToMenu(pizza);
 
