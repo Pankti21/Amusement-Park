@@ -1,5 +1,6 @@
-package database.mysql;
-import database.IDataBase;
+package com.team5.HAPark.database.mysql;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,7 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MySQLDatabase implements IDataBase {
+@ComponentScan
+@Component
+public class MySQLDatabase implements IDataBase{
 
     private ResultSet resultSet;
     private Connection conn;

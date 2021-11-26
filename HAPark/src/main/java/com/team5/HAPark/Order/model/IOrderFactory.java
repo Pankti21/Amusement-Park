@@ -1,7 +1,8 @@
 package com.team5.HAPark.Order.model;
 
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
+
 
 public interface IOrderFactory {
     public IOrderService createOrderService(IOrderPersistence orderPersistence);

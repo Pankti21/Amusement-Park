@@ -2,27 +2,26 @@ package com.team5.HAPark.Ride.Model;
 
 import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @Slf4j
 @Service
 public class RideService implements IRideService {
 
-    private IRidePersistence ridePersistence= new RidePersistence();
+    private IRidePersistence ridePersistence=new RidePersistence();
 
-    public RideService(IRidePersistence ridePersistence) {
+    public RideService(IRidePersistence ridePersistence) throws SQLException {
         this.ridePersistence = ridePersistence;
+    }
+
+    public RideService() {
+
     }
 
     public List<Ride> getAllRides() throws SQLException {
@@ -30,24 +29,46 @@ public class RideService implements IRideService {
         List<Ride> Rides=ridePersistence.getAllRides();
         for(Ride ride:Rides) {
             log.info("ride id: {}", ride.getId());
-            log.info("ride name: {}", ride.getName());
-            log.info("ride type: {}", ride.getType());
-            log.info("ride max_occupancy: {}", ride.getMaxOccupancy());
-            log.info("ride duration: {}", ride.getDuration());
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(1));
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(2));
-            log.info("timeslot: {}",ride.getTimeSlot().map.get(3));
         }
         return Rides;
     }
 
+    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
+        List<HashMap<Integer,Integer>> maps= new ArrayList<>();
+        maps=ridePersistence.getAllTimeSlots();
+        return maps;
+    }
+
     public List<String> getAllRideNames() throws SQLException {
-        List<String> names= new ArrayList<>();
+        List<String> names = new ArrayList<>();
         List<Ride> Rides=ridePersistence.getAllRides();
-        for(Ride ride:Rides) {
+        for (Ride ride:Rides){
             names.add(ride.getName());
         }
         return names;
+
+    }
+
+    public List<Ride> getAllGroundRides() throws SQLException {
+        List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> groundRides=new ArrayList<>();
+        for(Ride ride:Rides) {
+            if(Objects.equals(ride.getType(), "Ground")){
+                groundRides.add(ride);
+            }
+        }
+        return groundRides;
+    }
+
+    public List<Ride> getAllWaterRides() throws SQLException {
+        List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> waterRides=new ArrayList<>();
+        for(Ride ride:Rides) {
+            if(Objects.equals(ride.getType(), "Water")){
+                waterRides.add(ride);
+            }
+        }
+        return waterRides;
     }
 
     public Ride getRide(int id) throws SQLException {
@@ -55,37 +76,13 @@ public class RideService implements IRideService {
         return ride;
     }
 
-   public Ride reserveRide(int id) throws SQLException {
-        Ride ride = ridePersistence.getRide(id);
-        //ride.getTimeSlot().setAvailability();
-        return null;
+    public String getTimeSlotName(int timeslotId) {
+        if(timeslotId==1){
+            return "Morning timeslot at 10:00AM";
         }
-
-
-    private List<Ride> rides= new ArrayList<>(Arrays.asList(
-           // new Ride(1,"RollarCoaster","Ground",5),
-            //new Ride(2,"WaterSlide","Water",6,LocalTime.of(00,10,00))
-    ));
-
-
-
-
-    public void addRide(Ride ride) {
-        rides.add(ride);
-    }
-
-    public void updateRide(Ride ride,int id) {
-        for(Ride r:rides){
-            if (r.getId() == id)
-                rides.set(id-1,ride);
+        if (timeslotId==2){
+            return "Afternoon timeslot at 2:00PM";
         }
+            return "Evening timeslot at 6:00PM";
     }
-
-    public void deleteRide(int id) {
-        for(Ride r:rides){
-            if (r.getId() == id)
-                rides.remove(id-1);
-        }
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.team5.HAPark.User;
 
+
 import com.team5.HAPark.User.DAO.IUserPersistence;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
@@ -41,7 +42,7 @@ class RegisterTest {
         @WithMockUser(username = "user123")
         void registerFailsFnameEmpty() throws SQLException {
             user.setFirstName("");
-            assertFalse(register.register(userPersistenceMock,"Password@123"));
+            assertFalse(register.register( userPersistenceMock,"Password@123"));
         }
 
         @Test
@@ -55,13 +56,13 @@ class RegisterTest {
         @WithMockUser(username = "user123")
         void registerFailsPasswordEmpty() throws SQLException {
             user.setPassword("");
-            assertFalse(register.register(userPersistenceMock,"Password@123"));
+            assertFalse(register.register( userPersistenceMock,"Password@123"));
         }
 
         @Test
         @WithMockUser(username = "user123")
         void registerFailsConfirmPasswordEmpty() throws SQLException {
-            assertFalse(register.register(userPersistenceMock,""));
+            assertFalse(register.register( userPersistenceMock,""));
         }
 
         @Test

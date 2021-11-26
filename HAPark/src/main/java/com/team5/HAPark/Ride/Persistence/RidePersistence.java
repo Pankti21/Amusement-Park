@@ -2,10 +2,8 @@ package com.team5.HAPark.Ride.Persistence;
 
 import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ride.Model.TimeSlot;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -19,10 +17,19 @@ import java.util.List;
 @Slf4j
 @Component
 public class RidePersistence implements IRidePersistence{
-    MySQLDatabase mySQLDatabase = new MySQLDatabase();
+   MySQLDatabase mySQLDatabase;
+
+    public RidePersistence(MySQLDatabase mySQLDatabase) {
+        this.mySQLDatabase=mySQLDatabase;
+    }
+
+    public RidePersistence() {
+
+    }
 
     @Override
     public Ride getRide(int id) throws SQLException {
+        mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+id+";");
@@ -33,14 +40,17 @@ public class RidePersistence implements IRidePersistence{
                 r.setType(rs.getString("ride_type"));
                 r.setMaxOccupancy(rs.getInt("max_occupancy"));
                 r.setDuration(rs.getTime("total_duration"));
-                r.setTimeSlot(getRideavailability(r.getId()));
-            }
+                r.setTimeSlot(getRideTimeSlot(r.getId()));
+        }
+        mySQLDatabase.close();
+        con.close();
         return r;
     }
 
     @Override
     public List<Ride> getAllRides() throws SQLException {
         List<Ride> Rides= new ArrayList<Ride>();
+        mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info;");
@@ -51,14 +61,28 @@ public class RidePersistence implements IRidePersistence{
             r.setType(rs.getString("ride_type"));
             r.setMaxOccupancy(rs.getInt("max_occupancy"));
             r.setDuration(rs.getTime("total_duration"));
-            r.setTimeSlot(getRideavailability(r.getId()));
+            r.setTimeSlot(getRideTimeSlot(r.getId()));
             Rides.add(r);
         }
+        mySQLDatabase.close();
+        con.close();
         return Rides;
     }
 
-    @Override
-    public TimeSlot getRideavailability(int id) throws SQLException {
+    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
+        mySQLDatabase=new MySQLDatabase();
+        IRidePersistence ridePersistence=new RidePersistence(mySQLDatabase);
+        List<Ride> Rides= ridePersistence.getAllRides();
+        List<HashMap<Integer,Integer>> maps = new ArrayList<>();
+        for (Ride ride:Rides){
+            maps.add(ridePersistence.getRideTimeSlot(ride.getId()).getMap());
+        }
+        mySQLDatabase.close();
+        return maps;
+    }
+
+    public TimeSlot getRideTimeSlot(int id) throws SQLException {
+        mySQLDatabase=new MySQLDatabase();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
@@ -67,6 +91,8 @@ public class RidePersistence implements IRidePersistence{
             map.put(rs.getInt("timeslot_id"),rs.getInt("availability"));
         }
         TimeSlot timeSlot=new TimeSlot(map);
+        mySQLDatabase.close();
+        con.close();
         return timeSlot;
     }
 

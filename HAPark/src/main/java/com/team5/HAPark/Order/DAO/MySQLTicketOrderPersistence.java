@@ -7,7 +7,7 @@ import com.team5.HAPark.Order.model.TicketOrderItemAdapter;
 import com.team5.HAPark.Ticket.Ticket;
 import com.team5.HAPark.Ticket.TicketOrderItem;
 import com.team5.HAPark.Ticket.TicketService;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 import java.sql.*;
 import java.time.LocalDate;

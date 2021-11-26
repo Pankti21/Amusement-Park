@@ -5,7 +5,7 @@ import com.team5.HAPark.Food.FoodService;
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
 import com.team5.HAPark.Order.DAO.MySQLFoodOrderPersistence;
 import com.team5.HAPark.Order.model.*;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 public class FoodOrderFactory implements IOrderFactory {
 
@@ -24,7 +24,6 @@ public class FoodOrderFactory implements IOrderFactory {
         return new OrderItem();
     }
 
-    @Override
     public IOrderPersistence createOrderPersistence(MySQLDatabase database) {
         return new MySQLFoodOrderPersistence(database,new FoodService(new MySQLFoodPersistence(database)));
     }

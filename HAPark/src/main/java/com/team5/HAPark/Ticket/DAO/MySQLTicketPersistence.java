@@ -1,8 +1,12 @@
 package com.team5.HAPark.Ticket.DAO;
 
+
 import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ticket.Ticket;
-import database.mysql.MySQLDatabase;
+
+
+import com.team5.HAPark.database.mysql.MySQLDatabase;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;

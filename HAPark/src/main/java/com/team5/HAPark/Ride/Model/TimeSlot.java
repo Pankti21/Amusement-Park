@@ -13,4 +13,19 @@ public class TimeSlot {
     public TimeSlot() {
     }
 
+    public HashMap<Integer, Integer> getMap() {
+        return map;
+    }
+
+    public void setMap(HashMap<Integer, Integer> map) {
+        this.map = map;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeSlot{" +
+                "map=" + map +
+                '}';
+    }
 }
+

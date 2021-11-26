@@ -6,7 +6,7 @@ import com.team5.HAPark.Food.FoodService;
 import com.team5.HAPark.Order.model.IOrder;
 import com.team5.HAPark.Order.model.IOrderItem;
 import com.team5.HAPark.Order.model.Order;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 import java.sql.*;
 import java.time.LocalDate;

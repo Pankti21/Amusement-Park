@@ -4,7 +4,7 @@ import com.team5.HAPark.Ticket.DAO.ITicketPersistence;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class TicketService {
 
@@ -21,13 +21,12 @@ public class TicketService {
         return ticket;
     }
 
-    public List<String> getAllTickets() throws SQLException {
-        List<String> tickets= new ArrayList<>();
+       public List<Ticket> getAllTickets() throws SQLException {
         List<Ticket> Tickets =ticketPersistence.getAllTickets();
-        for(Ticket ticket: Tickets) {
-            tickets.add(ticket.getTicketType());
-        }
-        return tickets;
+        return Tickets;
     }
     }
+
+
+}
 

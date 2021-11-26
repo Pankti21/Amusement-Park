@@ -2,20 +2,21 @@ package com.team5.HAPark.Ticket;
 
 public class TicketOrderItem {
     private Ticket ticket;
-    private  int quantity;
+    private Integer quantity;
 
+    public TicketOrderItem() {
+        this.ticket = new Ticket();
+    }
 
-    public TicketOrderItem(Ticket ticket, int quantity) {
+    public TicketOrderItem(Ticket ticket, Integer quantity) {
         this.ticket = ticket;
         this.quantity = quantity;
     }
 
-    public TicketOrderItem() {
-
-    }
 
 
-    public int getQuantity() {
+    public Integer getQuantity() {
+
         return this.quantity;
     }
 
@@ -27,7 +28,7 @@ public class TicketOrderItem {
         this.ticket = ticket;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -36,8 +37,16 @@ public class TicketOrderItem {
         return ticketType;
     }
 
+    public void setTicketType(String ticketType) {
+        this.ticket.setTicketType(ticketType);
+    }
+
     public double getTicketPrice() {
         double ticketPrice = ticket.getTicketPrice();
         return ticketPrice;
+    }
+
+    public void setTicketPrice(Double ticketPrice) {
+        this.ticket.setTicketPrice(ticketPrice);
     }
 }

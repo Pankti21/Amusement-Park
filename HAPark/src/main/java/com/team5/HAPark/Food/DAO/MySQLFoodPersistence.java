@@ -2,7 +2,7 @@ package com.team5.HAPark.Food.DAO;
 
 import com.team5.HAPark.Food.Food;
 import com.team5.HAPark.Food.Menu;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 import java.sql.*;
 

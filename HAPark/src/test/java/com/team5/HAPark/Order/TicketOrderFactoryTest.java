@@ -1,7 +1,7 @@
 package com.team5.HAPark.Order;
 
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
-import database.mysql.MySQLDatabase;
+import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
