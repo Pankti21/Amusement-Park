@@ -10,6 +10,14 @@ public class FoodOrderItem implements IOrderItem {
         food = new Food();
     }
 
+
+
+
+    public Food getFood() {
+        return food;
+    }
+
+
     public FoodOrderItem(Food food, Integer quantity) {
         this.food = food;
         this.quantity = quantity;

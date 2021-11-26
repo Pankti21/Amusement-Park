@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<table border="black">
+  <tr>
+    <td>FIRST NAME</td>
+    <td>LAST NAME</td>
+    <td>EMAIL</td>
+    <td>OLD PASSWORD</td>
+    <td>NEW PASSWORD<</td>
+    <td>CONFIRM NEW PASSWORD</td>
+  </tr>
+  <tr >
+    <td th:text="${userFirstName}"></td>
+    <td th:text="${userLastName}"></td>
+    <td th:text="${userEmail}"></td>
+    <td th:text="${userPassword}"></td>
+    <td th:text="${userNewpassword}"></td>
+    <td th:text="${userConfirmNewPassword}"></td>
+  </tr>
+
+</table>
+
+<body>
+</body>
+</html>
