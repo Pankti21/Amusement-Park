@@ -7,13 +7,16 @@
 <table border="black">
     <tr th:each="ticketOrderItem:${cartSummary.ticket}">
         <td>TICKET TYPE</td>        <td th:text="${ticketOrderItem.ticketType}"></td>
-        <td>TICKET QUANTITY</td>    <td th:text="${ticketOrderItem.ticketQuantity}"></td>
+        <td>TICKET QUANTITY</td>    <td th:text="${ticketOrderItem.quantity}"></td>
         <td>TICKET PRICE</td>       <td th:text="${ticketOrderItem.ticketPrice}"></td>
     </tr>
-    <tr th:each="foodOrderItem:$allCartItems">>
+    <tr th:each="foodOrderItem:${cartSummary.food}">>
         <td>FOOD ID</td>        <td th:text="${foodOrderItem.name}"></td>
         <td>FOOD QUANTITY</td>  <td th:text="${foodOrderItem.quantity}"></td>
         <td>FOOD PRICE</td>     <td th:text="${foodOrderItem.price}"></td>
+    </tr>
+    <tr>
+        <td>TOTAL AMOUNT</td>    <td th:text="${cartSummary.totalAmount}"></td>
     </tr>
 </table>
 

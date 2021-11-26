@@ -13,8 +13,6 @@ public class TicketOrderItem {
         this.quantity = quantity;
     }
 
-
-
     public Integer getQuantity() {
 
         return this.quantity;
