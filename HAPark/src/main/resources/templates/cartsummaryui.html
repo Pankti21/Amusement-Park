@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CART SUMMARY</title>
 </head>
 <table border="black">
     <tr th:each="ticketOrderItem:${cartSummary.ticket}">
@@ -17,6 +17,9 @@
     </tr>
     <tr>
         <td>TOTAL AMOUNT</td>    <td th:text="${cartSummary.totalAmount}"></td>
+    </tr>
+    <tr>
+        <td><input type="submit"value="Payment" /></td>
     </tr>
 </table>
 
