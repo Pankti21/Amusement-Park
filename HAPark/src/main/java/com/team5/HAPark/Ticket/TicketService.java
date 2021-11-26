@@ -22,12 +22,12 @@ public class TicketService {
     }
 
     public List<String> getAllTickets() throws SQLException {
-        List<String> names= new ArrayList<>();
+        List<String> tickets= new ArrayList<>();
         List<Ticket> Tickets =ticketPersistence.getAllTickets();
         for(Ticket ticket: Tickets) {
-            names.add(ticket.getTicketType());
+            tickets.add(ticket.getTicketType());
         }
-        return names;
+        return tickets;
     }
     }
 
