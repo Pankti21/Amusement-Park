@@ -3,7 +3,7 @@ package com.team5.HAPark.Ticket;
 import com.team5.HAPark.Ticket.DAO.ITicketPersistence;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class TicketService {
@@ -28,5 +28,4 @@ public class TicketService {
     }
 
 
-}
 
