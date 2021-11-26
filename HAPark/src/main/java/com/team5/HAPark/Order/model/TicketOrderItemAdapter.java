@@ -31,7 +31,7 @@ public class TicketOrderItemAdapter implements IOrderItem {
 
     @Override
     public double getTotalPrice() {
-        return getPrice() * getQuantity();
+        return ticketOrderItem.getTotalPrice();
     }
 
     @Override

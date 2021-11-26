@@ -44,6 +44,10 @@ public class TicketOrderItem {
         return ticketPrice;
     }
 
+    public double getTotalPrice() {
+        return getTicketPrice() * getQuantity();
+    }
+
     public void setTicketPrice(double ticketPrice) {
         this.ticket.setTicketPrice(ticketPrice);
     }
