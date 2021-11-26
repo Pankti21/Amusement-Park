@@ -11,23 +11,24 @@ import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 public class TicketOrderController {
 
     @Autowired
     private CartSummary cart;
 
-    @RequestMapping(method = RequestMethod.GET,value = "/saveticketorder")
-    public void save() {
+    @RequestMapping(value = "/saveticketorder", method = RequestMethod.GET)
+    public void saveTicketOrder() {
 
         ArrayList<TicketOrderItem> ticketOrderItems = cart.getTicket();
         MySQLDatabase dataBase = new MySQLDatabase();
@@ -51,23 +52,8 @@ public class TicketOrderController {
         dataBase.close();
     }
 
-    @RequestMapping(value = "/ticketorder/{orderId}", method = RequestMethod.GET)
-    public IOrder getOrder(@PathVariable int orderId) {
-
-        MySQLDatabase dataBase = new MySQLDatabase();
-
-        TicketOrderFactory orderFactory = new TicketOrderFactory();
-        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
-        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
-
-        IOrder order = orderService.getOrder(orderId);
-        dataBase.close();
-
-        return order;
-    }
-
-    @RequestMapping(value = "/ticketorder/",method = RequestMethod.GET)
-    public List<IOrder> getOrdersForCurrentUser() throws SQLException {
+    @GetMapping(value = "/orders/tickets")
+    public String ticketOrderHistory(Model model) throws SQLException {
 
         MySQLDatabase dataBase = new MySQLDatabase();
 
@@ -77,9 +63,13 @@ public class TicketOrderController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email= authentication.getName();
+
         List<IOrder> orders = orderService.getAllOrdersForUser(email);
         dataBase.close();
 
-        return orders;
+        model.addAttribute("orders",orders);
+
+        return "OrderHistory";
     }
+
 }

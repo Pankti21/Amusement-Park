@@ -27,6 +27,11 @@ public class FoodOrderItem implements IOrderItem {
         return food.getPrice();
     }
 
+    @Override
+    public double getTotalPrice() {
+        return getPrice() * getQuantity();
+    }
+
     public void setPrice(Double price){
         food.setPrice(price);
     }

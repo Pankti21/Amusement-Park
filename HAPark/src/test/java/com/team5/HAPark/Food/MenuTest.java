@@ -16,9 +16,9 @@ class MenuTest {
     @BeforeAll
     static void init(){
         menu = new Menu();
-        pizza = new Food("pizza","1",5,2);
-        burger = new Food("burger","2",10,3);
-        fries = new Food("fries","3",4,4);
+        pizza = new Food("pizza","1",5);
+        burger = new Food("burger","2",10);
+        fries = new Food("fries","3",4);
         menu.addFoodToMenu(pizza);
         menu.addFoodToMenu(fries);
     }

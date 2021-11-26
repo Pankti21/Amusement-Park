@@ -12,8 +12,7 @@ public class Order implements IOrder{
     private LocalTime orderTime;
     private List<? extends IOrderItem> orderItems;
 
-    public Order() {
-    }
+    public Order() {}
 
     public Order(Integer orderId, String mailId, LocalDate orderDate, LocalTime orderTime, List<? extends IOrderItem> orderItems) {
         this.orderId = orderId;
