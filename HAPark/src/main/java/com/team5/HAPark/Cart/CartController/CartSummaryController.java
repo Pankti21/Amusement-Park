@@ -24,10 +24,10 @@ import com.team5.HAPark.Cart.CartSummary;
 
         @GetMapping("/cartsummary")
         public String allCartItems(Model model) throws SQLException {
-            List<TicketOrderItem> ticketOrderItemList = cartSummary.getTicket() ;
+            //List<TicketOrderItem> ticketOrderItemList = cartSummary.getTicket() ;
+           // model.addAttribute("cartSummary", cartSummary);
+            //List<FoodOrderItem> foodOrderItemList = cartSummary.getFood() ;
             model.addAttribute("cartSummary", cartSummary);
-           /* List<FoodOrderItem> foodOrderItemList = cartSummary.getFood() ;
-            model.addAttribute("foodList", foodOrderItemList);*/
             return "cartsummaryui";
         }
 }
