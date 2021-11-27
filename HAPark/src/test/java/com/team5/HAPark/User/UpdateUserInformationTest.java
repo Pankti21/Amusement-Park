@@ -22,6 +22,7 @@ public class UpdateUserInformationTest {
     @BeforeEach
     void init(){
         user = new User();
+        user.setPassword("OldPassword@123");
         user.setConfirmedPassword("NewPassword@123");
         user.setReconfirmedPassword("NewPassword@123");
         updateUserInformation = new UpdateUserInformation(user);
@@ -34,6 +35,6 @@ public class UpdateUserInformationTest {
 
         assertEquals(false,
                 updateUserInformation.updateUserPassword
-                        (userPersistenceMock, user.getConfirmedPassword(), user.getReconfirmedPassword()));
+                        (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
     }
 }

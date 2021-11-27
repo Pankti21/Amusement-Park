@@ -31,38 +31,28 @@ import java.util.List;
 @Slf4j
 public class UpdateUserInfoController {
 
-    private User user;
+    private User user = new User();
     private UpdateUserInformation updateUserInformation;
-    private MySQLUserPersistence mySQLUserPersistence;
-    private IUserPersistence iUserPersistence;
+    private MySQLDatabase dataBase = new MySQLDatabase();
+    private MySQLUserPersistence mySQLUserPersistence = new MySQLUserPersistence(dataBase);
+    private IUserPersistence iUserPersistence= new MySQLUserPersistence(dataBase);
 
     @GetMapping("/updateuserinfo")
     public String allUpdateUser(Model model) throws SQLException {
         UpdateUserInformation updateUserInformation = new UpdateUserInformation(user);
-
-        model.addAttribute("userFirstName", user.getFirstName());
-        model.addAttribute("userLastName", user.getLastName());
-        model.addAttribute("userEmail", user.getEmail());
-        model.addAttribute("userPassword", user.getPassword());
-        model.addAttribute("userNewPassword", user.getConfirmedPassword());
-        model.addAttribute("userConfirmNewPassword", user.getReconfirmedPassword());
         return "updateuserinformationui";
     }
 
     @PostMapping(value = "/updateUserInfo/update")
-    public RedirectView updateUserInfo(Model model,@ModelAttribute("update") User user) throws SQLException, NoSuchAlgorithmException {
-        MySQLDatabase dataBase = new MySQLDatabase();
-        MySQLUserPersistence mySQLUserPersistence = new MySQLUserPersistence(dataBase);
+    public RedirectView updateUserInfo(@ModelAttribute("update") User user) throws SQLException, NoSuchAlgorithmException {
+
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
         log.info("{}",username);
-        log.info("{}first name {} last name {} email {} password {} confirm password {} reconfirm password ",
+        log.info("{}first name {} last name {} email {} old password {} confirm password {} reconfirm password ",
                 user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getConfirmedPassword(),user.getReconfirmedPassword());
-        updateUserInformation.updateUserPassword(iUserPersistence,user.getConfirmedPassword(),user.getReconfirmedPassword());
-        //Saves to database
-        mySQLUserPersistence.userUpdatedPassword(user.getEmail(),user.getConfirmedPassword());
-        model.addAttribute("userEmail",user.getEmail());
-        model.addAttribute("userNewPassword", user.getConfirmedPassword());
+        updateUserInformation.updateUserPassword(iUserPersistence,user.getPassword(),user.getConfirmedPassword(),user.getReconfirmedPassword());
+
 
         return new RedirectView("/updateuserinfo");
     }

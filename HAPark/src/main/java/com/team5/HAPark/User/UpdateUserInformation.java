@@ -30,13 +30,16 @@ public class UpdateUserInformation {
             }
             return false;
             }*/
-    public boolean updateUserPassword(IUserPersistence userPersistence, String confirmedPassword, String reconfirmPassword) throws SQLException, NoSuchAlgorithmException {
+    public boolean updateUserPassword(IUserPersistence userPersistence, String oldPassword,String confirmedPassword, String reconfirmPassword) throws SQLException, NoSuchAlgorithmException {
 
         String email = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
         String currentPassword = userPersistence.getPassword(email);
         confirmedPassword = Encryption.encryptPassword(confirmedPassword);
 
-        if ((reconfirmPassword.matches(confirmedPassword) )&& (!(currentPassword.matches(confirmedPassword)))) {
+        //Validating the old password is not same as new password and new password is as same confirmed password and old password
+        //is same as the current password
+        if ((reconfirmPassword.matches(confirmedPassword) )&& (!(currentPassword.matches(confirmedPassword))) &&
+                oldPassword.matches(currentPassword)) {
 
             if (emailPasswordValidation.validatePasswordFormat()) {
                 userPersistence.userUpdatedPassword(confirmedPassword,email);

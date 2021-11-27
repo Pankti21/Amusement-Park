@@ -14,27 +14,19 @@
 </table>
 <table style="margin-left: auto; margin-right: auto;">
   <tbody>
-  <form action="#" th:action="@{/menu/update}" method="post" th:object="${foodOrderList}">
-    <tr th:each="food,stat : ${menu}">
-
-      <td style="height:50px; width:150px" th:text="${food.name}" />
-      <td style="height:50px;">$<td th:text="${food.price}" />
-
-      <td>
-        <input type="number" min="0" max="10" placeholder="0"
-               th:name="*{'foodOrderList[__${stat.index}__].quantity'}"/>
-
-        <input type="hidden"
-               th:value="${food.id}"
-               th:name="*{'foodOrderList[__${stat.index}__].id'}"/>
-        <input type="hidden"
-               th:value="${food.price}"
-               th:name="*{'foodOrderList[__${stat.index}__].price'}"/>
-        <input type="hidden"
-               th:value="${food.name}"
-               th:name="*{'foodOrderList[__${stat.index}__].name'}"/>
-      </td>
-
+  <form action="#" th:action="@{/updateuserinfo}" method="post" th:object="${updateUserInfo}">
+    <label>Old Password</label>
+    <input type="text" th:field="*{oldpassword}"/>
+    <br>
+    <br>
+    <label>New Password</label>
+    <input type="text" th:field="*{confirmpassword}"/>
+    <br>
+    <br>
+    <label>Confirm Password</label>
+    <input type="text" th:field="*{reconfirmpassword}"/>
+    <br>
+    <br>
     </tr>
     <tr>
       <td><input type="submit"value="Submit" /><input type="reset" value="Reset" /></td>
