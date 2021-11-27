@@ -40,10 +40,10 @@ public class UpdateUserInfoController {
     @GetMapping("/updateuserinfo")
     public String allUpdateUser(Model model) throws SQLException {
         UpdateUserInformation updateUserInformation = new UpdateUserInformation(user);
-        return "updateuserinformationui";
+        return "updateuserinfonui";
     }
 
-    @PostMapping(value = "/updateUserInfo/update")
+    @PostMapping(value = "/updateuserinfo")
     public RedirectView updateUserInfo(@ModelAttribute("update") User user) throws SQLException, NoSuchAlgorithmException {
 
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
