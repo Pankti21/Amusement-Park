@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <title>CART SUMMARY</title>
 </head>
-<table border="black">
+<table style="margin-left: auto; margin-right: auto;">
+    <tr>
+        <td style="height: 50px;">CART SUMMARY</td>
+    </tr>
+</table>
+<table border="black" style="margin-left: auto; margin-right: auto;">
     <tr th:each="ticketOrderItem:${cartSummary.ticket}">
         <td>TICKET TYPE</td>        <td th:text="${ticketOrderItem.ticketType}"></td>
         <td>TICKET QUANTITY</td>    <td th:text="${ticketOrderItem.quantity}"></td>
         <td>TICKET PRICE</td>       <td th:text="${ticketOrderItem.totalPrice}"></td>
     </tr>
-    <tr th:each="foodOrderItem:${cartSummary.food}">>
+    <tr th:each="foodOrderItem:${cartSummary.food}">
         <td>FOOD ID</td>        <td th:text="${foodOrderItem.name}"></td>
         <td>FOOD QUANTITY</td>  <td th:text="${foodOrderItem.quantity}"></td>
         <td>FOOD PRICE</td>     <td th:text="${foodOrderItem.totalPrice}"></td>
