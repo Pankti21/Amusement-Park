@@ -36,7 +36,7 @@ public class UpdateUserInfoController {
     private MySQLUserPersistence mySQLUserPersistence;
     private IUserPersistence iUserPersistence;
 
-    @GetMapping("/updateUserInfo")
+    @GetMapping("/updateuserinfo")
     public String allUpdateUser(Model model) throws SQLException {
         UpdateUserInformation updateUserInformation = new UpdateUserInformation(user);
 
@@ -64,7 +64,7 @@ public class UpdateUserInfoController {
         model.addAttribute("userEmail",user.getEmail());
         model.addAttribute("userNewPassword", user.getConfirmedPassword());
 
-        return new RedirectView("/updateUserInfo");
+        return new RedirectView("/updateuserinfo");
     }
 
 
