@@ -28,26 +28,37 @@ public class WaitTimeService {
         return waitTimes;
     }
 
+    public LocalTime getDuration(int rideId) throws SQLException {
+        Time duration = ridePersistence.getRideDuration(rideId);
+        LocalTime durationInLocalTime = duration.toLocalTime();
+        return durationInLocalTime;
+    }
+
+    public String getDurationString(int rideId) throws SQLException {
+        Time duration = ridePersistence.getRideDuration(rideId);
+        return duration.toString();
+    }
+
     public WaitTime calculateWaitTime(int rideId) throws SQLException {
         WaitTime waitTime = new WaitTime();
         LocalTime temp = LocalTime.of(00,00,00);
-        log.info("temp:{}",temp);
+        //log.info("temp:{}",temp);
         TimeSlot timeSlot = ridePersistence.getRideTimeSlot(rideId);
 
         for (Integer key : timeSlot.getMap().keySet()) {
             //numberOfSeatsReserved=max_occupancy-availability;
             int numberOfSeatsReserved = ridePersistence.getRideMaxOccupancy(rideId) - timeSlot.getMap().get(key);
-            log.info("max occupancy {}",ridePersistence.getRideMaxOccupancy(1));
-            log.info("availability {}",timeSlot.getMap().get(key));
-            log.info("number of seats reserve {}",numberOfSeatsReserved);
+           // log.info("max occupancy {}",ridePersistence.getRideMaxOccupancy(1));
+            //log.info("availability {}",timeSlot.getMap().get(key));
+            //log.info("number of seats reserve {}",numberOfSeatsReserved);
             int rideRounds = numberOfSeatsReserved / 10;
-            log.info("ride rounds {}",rideRounds);
+            //log.info("ride rounds {}",rideRounds);
 
-            Time duration = ridePersistence.getRideDuration(rideId);
-            log.info("duration {}",duration);
-            LocalTime durationInLocalTime = duration.toLocalTime();
-            String durationString = duration.toString();
-            log.info("duration in local time {}",durationInLocalTime);
+            //log.info("duration {}",duration);
+            LocalTime durationInLocalTime = getDuration(rideId);
+            String durationString=getDurationString(rideId);
+
+            //log.info("duration in local time {}",durationInLocalTime);
 
             Long hours = Long.parseLong(durationString.substring(0, 2));
             Long mins = Long.parseLong(durationString.substring(3, 5));
