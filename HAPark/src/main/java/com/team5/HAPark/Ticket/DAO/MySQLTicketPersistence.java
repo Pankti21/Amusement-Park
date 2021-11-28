@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MySQLTicketPersistence implements ITicketPersistence{
 
-    MySQLDatabase mySQLDatabase = new MySQLDatabase();
+    MySQLDatabase mySQLDatabase =  MySQLDatabase.getInstance();
 
     public MySQLTicketPersistence(MySQLDatabase database) {
         this.mySQLDatabase = database;

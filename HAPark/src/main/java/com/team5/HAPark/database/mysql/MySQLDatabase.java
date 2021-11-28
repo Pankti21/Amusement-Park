@@ -15,6 +15,16 @@ public class MySQLDatabase implements IDataBase{
     private ResultSet resultSet;
     private Connection conn;
     private Statement statement;
+    private static MySQLDatabase database;
+
+    private MySQLDatabase(){}
+
+    public static MySQLDatabase getInstance(){
+      if (database == null){
+          database = new MySQLDatabase();
+      }
+      return database;
+    }
 
     @Override
     public void connect() {

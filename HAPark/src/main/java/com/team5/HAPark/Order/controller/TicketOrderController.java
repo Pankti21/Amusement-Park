@@ -31,7 +31,7 @@ public class TicketOrderController {
     public void saveTicketOrder() {
 
         ArrayList<TicketOrderItem> ticketOrderItems = cart.getTicket();
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         TicketOrderFactory orderFactory = new TicketOrderFactory();
         IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
@@ -55,7 +55,7 @@ public class TicketOrderController {
     @GetMapping(value = "/orders/tickets")
     public String ticketOrderHistory(Model model) throws SQLException {
 
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         TicketOrderFactory orderFactory = new TicketOrderFactory();
         IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);

@@ -26,10 +26,10 @@ public class RidePersistence implements IRidePersistence{
 
     @Override
     public Ride getRide(int id) throws SQLException {
-        mySQLDatabase=new MySQLDatabase();
-        Connection con=mySQLDatabase.getConnection();
-        Statement stmt= con.createStatement();
-        ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+id+";");
+        mySQLDatabase = MySQLDatabase.getInstance();
+        Connection con = mySQLDatabase.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+id+";");
         Ride r = new Ride();
         while (rs.next()){
                 r.setId(rs.getInt("ride_id"));
@@ -47,7 +47,7 @@ public class RidePersistence implements IRidePersistence{
     @Override
     public List<Ride> getAllRides() throws SQLException {
         List<Ride> Rides= new ArrayList<Ride>();
-        mySQLDatabase=new MySQLDatabase();
+        mySQLDatabase = MySQLDatabase.getInstance();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info;");
@@ -68,10 +68,10 @@ public class RidePersistence implements IRidePersistence{
 
     public int getRideMaxOccupancy(int rideId) throws SQLException {
         int maxOccupancy=0;
-        mySQLDatabase=new MySQLDatabase();
-        Connection con=mySQLDatabase.getConnection();
-        Statement stmt= con.createStatement();
-        ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+rideId);
+        mySQLDatabase =  MySQLDatabase.getInstance();
+        Connection con = mySQLDatabase.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+rideId);
         while (rs.next()){
             maxOccupancy=rs.getInt("max_occupancy");
         }
@@ -82,7 +82,7 @@ public class RidePersistence implements IRidePersistence{
 
     public Time getRideDuration(int rideId) throws SQLException {
         Time duration = null;
-        mySQLDatabase=new MySQLDatabase();
+        mySQLDatabase = MySQLDatabase.getInstance();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+rideId);
@@ -95,9 +95,9 @@ public class RidePersistence implements IRidePersistence{
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        mySQLDatabase=new MySQLDatabase();
+        mySQLDatabase = MySQLDatabase.getInstance();
         IRidePersistence ridePersistence=new RidePersistence(mySQLDatabase);
-        List<Ride> Rides= ridePersistence.getAllRides();
+        List<Ride> Rides = ridePersistence.getAllRides();
         List<HashMap<Integer,Integer>> maps = new ArrayList<>();
         for (Ride ride:Rides){
             maps.add(ridePersistence.getRideTimeSlot(ride.getId()).getMap());
@@ -107,10 +107,10 @@ public class RidePersistence implements IRidePersistence{
     }
 
     public TimeSlot getRideTimeSlot(int id) throws SQLException {
-        mySQLDatabase=new MySQLDatabase();
-        Connection con=mySQLDatabase.getConnection();
-        Statement stmt= con.createStatement();
-        ResultSet rs= stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
+        mySQLDatabase = MySQLDatabase.getInstance();
+        Connection con = mySQLDatabase.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ride_timeslot WHERE ride_id="+id);
         HashMap<Integer,Integer> map= new HashMap<>();
         while (rs.next()){
             map.put(rs.getInt("timeslot_id"),rs.getInt("availability"));

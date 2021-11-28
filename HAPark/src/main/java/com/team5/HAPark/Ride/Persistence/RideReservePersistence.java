@@ -19,7 +19,7 @@ import java.util.List;
 public class RideReservePersistence implements IRideReservePersistence {
     public void addReservationToDB(int rideId,int timeSlotId,int seats) throws SQLException {
         String auth =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
+        MySQLDatabase mySQLDatabase = MySQLDatabase.getInstance();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         stmt.executeUpdate("INSERT INTO ride_reserve (user_mail_id,ride_id,timeslot_id,seats) VALUES (\""+auth+"\","+rideId+","+timeSlotId+","+seats+");");
@@ -30,8 +30,8 @@ public class RideReservePersistence implements IRideReservePersistence {
 
     //Get seats available for a given ride at a given timeslot
     public int getRideAvailability(int rideId, int timeSlotId) throws SQLException {
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
-        IRidePersistence ridePersistence= new RidePersistence(mySQLDatabase);
+        MySQLDatabase mySQLDatabase = MySQLDatabase.getInstance();
+        IRidePersistence ridePersistence = new RidePersistence(mySQLDatabase);
         TimeSlot timeSlot=new TimeSlot();
         timeSlot=ridePersistence.getRideTimeSlot(rideId);
         HashMap<Integer,Integer> map = timeSlot.getMap();
@@ -42,7 +42,7 @@ public class RideReservePersistence implements IRideReservePersistence {
 
     //Update reserved seats by user in com.team5.HAPark.database
     public void updateRideAvailability(int rideId, int timeslotId, int availability) throws SQLException {
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
+        MySQLDatabase mySQLDatabase =  MySQLDatabase.getInstance();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         stmt.executeUpdate("UPDATE ride_timeslot SET availability="+availability+" WHERE ride_id="+rideId+" AND timeslot_id="+timeslotId);
@@ -54,7 +54,7 @@ public class RideReservePersistence implements IRideReservePersistence {
     public List<RideReserve> getReservations() throws SQLException {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
-        MySQLDatabase mySQLDatabase=new MySQLDatabase();
+        MySQLDatabase mySQLDatabase = MySQLDatabase.getInstance();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ride_reserve WHERE user_mail_id=\""+username+"\"");
