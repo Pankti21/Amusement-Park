@@ -6,10 +6,7 @@ import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +64,34 @@ public class RidePersistence implements IRidePersistence{
         mySQLDatabase.close();
         con.close();
         return Rides;
+    }
+
+    public int getRideMaxOccupancy(int rideId) throws SQLException {
+        int maxOccupancy=0;
+        mySQLDatabase=new MySQLDatabase();
+        Connection con=mySQLDatabase.getConnection();
+        Statement stmt= con.createStatement();
+        ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+rideId);
+        while (rs.next()){
+            maxOccupancy=rs.getInt("max_occupancy");
+        }
+        mySQLDatabase.close();
+        con.close();
+        return maxOccupancy;
+    }
+
+    public Time getRideDuration(int rideId) throws SQLException {
+        Time duration = null;
+        mySQLDatabase=new MySQLDatabase();
+        Connection con=mySQLDatabase.getConnection();
+        Statement stmt= con.createStatement();
+        ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+rideId);
+        while (rs.next()){
+            duration=rs.getTime("total_duration");
+        }
+        mySQLDatabase.close();
+        con.close();
+        return duration;
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {

@@ -20,11 +20,13 @@ public class RideReserveService implements IRideReserveService{
     }
 
     public void reserve(int rideId, int timeslotId, int reserveSeats) throws SQLException {
+        RideReservePersistence rideReservePersistence=new RideReservePersistence();
         rideReservePersistence.addReservationToDB(rideId,timeslotId,reserveSeats);
     }
 
     //reserves number of seats entered by the user for the given ride id and timeslot id
     public int reserveSeats(int rideId, int timeslotId, int seats) throws SQLException {
+        RideReservePersistence rideReservePersistence=new RideReservePersistence();
         int availability=rideReservePersistence.getRideAvailability(rideId,timeslotId);
         availability-=seats;
         rideReservePersistence.updateRideAvailability(rideId,timeslotId,availability);
@@ -32,6 +34,7 @@ public class RideReserveService implements IRideReserveService{
     }
 
     public List<RideReserve> getReservations() throws SQLException {
+        RideReservePersistence rideReservePersistence=new RideReservePersistence();
         List<RideReserve> ridesReserved=rideReservePersistence.getReservations();
         return ridesReserved;
     }
