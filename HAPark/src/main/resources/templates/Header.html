@@ -3,15 +3,18 @@
 <div th:fragment="header">
     <table style="border-collapse: collapse; width: 100%; text-align: right;" border="1">
         <tr>
-            <td style="width: 20%;"><a href="/Main">Main</a></td>
-            <td style="width: 20%;"><a href="/CartSummary">Cart</a></td>
-            <div sec:authorize="isAuthenticated()">
-                <td style="width: 20%;"><a href="/reservations">Reservations</a></td>
-                <td style="width: 20%;"><a href="/account">Account</a></td>
-                <td style="width: 20%;"><a href="/logout">Logout</a></td>
+            <td><a href="/main">Main</a></td>
+            <td><a href="/cartsummary">Cart</a></td>
+
+            <div sec:authorize="!hasRole('ROLE_ANONYMOUS')">
+                <td><a href="/reservations">Reservations</a></td>
+                <td><a href="/account">Account</a></td>
+                <td><a href="/logout">Logout</a></td>
             </div>
-            <div sec:authorize="!isAuthenticated()">
-                <td style="width: 20%;"><a href="/login">Login</a></td>
+
+            <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+                <td><a href="/login">Login</a></td>
+                <td><a href="/register">Register</a></td>
             </div>
         </tr>
     </table>
