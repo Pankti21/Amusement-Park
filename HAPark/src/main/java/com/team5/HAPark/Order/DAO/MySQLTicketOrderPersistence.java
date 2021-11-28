@@ -198,8 +198,8 @@ public class MySQLTicketOrderPersistence implements IOrderPersistence{
             while (rs.next()) {
 
                 int orderId = rs.getInt("ticket_order_id");
-                LocalDate date = rs.getDate("order_date").toLocalDate();
-                LocalTime time = rs.getTime("order_time").toLocalTime();
+                LocalDate date = rs.getDate("ticket_order_date").toLocalDate();
+                LocalTime time = rs.getTime("ticket_order_time").toLocalTime();
                 List<IOrderItem> orderItems = loadOrderItems(orderId);
 
                 IOrder order = new Order();
