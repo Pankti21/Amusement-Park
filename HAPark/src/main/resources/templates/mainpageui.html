@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MainPage</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div th:replace="Header :: header"/>
+<div class="main">
+    <!--inserting main text on the main page-->
+    MAIN PAGE
+</div>
+<div class="container_class">
+
+    <div class="main_container">
+
+        <!--inserting buttons on the welcome page-->
+        <button class="waitcoaster-class" style="background-color:rgb(167, 159, 211)" type="button" >
+            Coaster Waitlist
+        </button>
+
+        <button class="waitwaterrides-class" style="background-color: rgb(167, 159, 211)" type="button" >
+            Water Ride Waitlist
+        </button>
+    </div>
+
+    <br><br>
+
+    <!--inserting images on the welcome page   -->
+    <a href="/rides"><img class = "mainimg2-class" src="pics/water.jfif" alt="HAP Rides"> </a>
+    <a href="/menu"><img class = "mainimg3-class" src="pics/food.jfif" alt="HAP Food"> </a>
+    <a href="/tickets"><img class = "mainimg3-class" src="pics/food.jfif" alt="HAP Tickets"> </a>
+
+
+</div>
+</div>
+</body>
+
+</html>
+
+
