@@ -14,7 +14,7 @@ public class FoodController {
     @RequestMapping(value = "/menu")
     public Menu getAllFoods() throws SQLException {
 
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
         FoodService foodService = new FoodService(new MySQLFoodPersistence(dataBase));
 
         Menu menu = foodService.getMenu();
@@ -26,7 +26,7 @@ public class FoodController {
     @RequestMapping(value = "/menu/{id}")
     public Food getFood(@PathVariable String id) throws SQLException {
 
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
         FoodService foodService = new FoodService(new MySQLFoodPersistence(dataBase));
 
         Food food = foodService.getFood(id);

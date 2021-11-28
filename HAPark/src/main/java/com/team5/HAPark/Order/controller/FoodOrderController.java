@@ -30,7 +30,7 @@ public class FoodOrderController {
     public void saveFoodOrder() {
 
         ArrayList<FoodOrderItem> foodOrderItems = cart.getFood();
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         FoodOrderFactory orderFactory = new FoodOrderFactory();
         IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
@@ -48,7 +48,7 @@ public class FoodOrderController {
     @GetMapping(value = "/orders/food")
     public String foodOrderHistory(Model model) throws SQLException {
 
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         FoodOrderFactory orderFactory = new FoodOrderFactory();
         IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);

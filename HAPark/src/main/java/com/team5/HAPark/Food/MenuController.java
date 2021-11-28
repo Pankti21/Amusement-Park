@@ -19,7 +19,7 @@ public class MenuController {
     @GetMapping(value = "/menu")
     public String displayFoods(Model model) throws SQLException {
 
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
         FoodService foodService = new FoodService(new MySQLFoodPersistence(dataBase));
 
         Menu menu = foodService.getMenu();

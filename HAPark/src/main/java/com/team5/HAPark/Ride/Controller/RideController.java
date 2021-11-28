@@ -69,7 +69,7 @@ public class RideController {
     }
 
     public void allTimeSlots(Model model) throws SQLException {
-        RidePersistence ridePersistence = new RidePersistence(new MySQLDatabase());
+        RidePersistence ridePersistence = new RidePersistence(MySQLDatabase.getInstance());
         model.addAttribute("alltimeslots", ridePersistence.getAllTimeSlots());
     }
 

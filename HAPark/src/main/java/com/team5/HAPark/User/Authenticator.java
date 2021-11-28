@@ -25,7 +25,7 @@ public class Authenticator implements AuthenticationProvider {
         user.setPassword(password);
 
         Login login = new Login(user);
-        MySQLDatabase mySQLDatabase = new MySQLDatabase();
+        MySQLDatabase mySQLDatabase =  MySQLDatabase.getInstance();
 
         if (login.login(new MySQLUserPersistence(mySQLDatabase))){
             mySQLDatabase.close();

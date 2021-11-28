@@ -9,7 +9,7 @@ import java.sql.Types;
 
 public class MySQLUserPersistence implements IUserPersistence {
 
-    MySQLDatabase mySQLDatabase;
+    private MySQLDatabase mySQLDatabase;
 
     public MySQLUserPersistence(MySQLDatabase mySQLDatabase){
         this.mySQLDatabase = mySQLDatabase;

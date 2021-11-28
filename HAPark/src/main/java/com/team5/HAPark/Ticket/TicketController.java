@@ -24,7 +24,7 @@ public class TicketController {
     @GetMapping(value = "/tickets")
     public String displayTickets(Model model) throws SQLException {
 
-        MySQLDatabase dataBase = new MySQLDatabase();
+        MySQLDatabase dataBase = MySQLDatabase.getInstance();
         TicketService ticketService = new TicketService(new MySQLTicketPersistence(dataBase));
 
         List<Ticket> tickets = ticketService.getAllTickets();
