@@ -31,6 +31,7 @@ public class Authenticator implements AuthenticationProvider {
             mySQLDatabase.close();
             return new UsernamePasswordAuthenticationToken(email, password, Collections.emptyList());
         } else {
+            mySQLDatabase.close();
             throw new BadCredentialsException("Invalid credentials");
         }
     }
