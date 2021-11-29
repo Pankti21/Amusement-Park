@@ -108,7 +108,7 @@ public class MySQLUserPersistence implements IUserPersistence {
 
         try {
 
-            statement = mySQLDatabase.getConnection().prepareCall("{call update_user_password_info(?,?,?,?)} ");
+            statement = mySQLDatabase.getConnection().prepareCall("{call update_user_password(?,?)} ");
 
             statement.setString(1,new_password);
             statement.setString(2,email);

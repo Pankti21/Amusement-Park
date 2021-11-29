@@ -1,31 +1,24 @@
 package com.team5.HAPark.Cart.CartController;
 
-import com.team5.HAPark.Food.Food;
-import com.team5.HAPark.Ticket.model.Ticket;
-import com.team5.HAPark.Ticket.model.TicketOrderItem;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.team5.HAPark.Cart.model.ICartFactory;
+import com.team5.HAPark.Cart.model.FactoryProducer;
+import com.team5.HAPark.Cart.model.ICartSummary;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.sql.SQLException;
 
-import com.team5.HAPark.Cart.model.CartSummary;
-
-    @org.springframework.stereotype.Controller
+@org.springframework.stereotype.Controller
     public class CartSummaryController {
 
-        @Autowired
-        private CartSummary cartSummary;
-        private TicketOrderItem ticketOrderItem;
-        private Ticket ticket;
-        private Food food;
+        //@Autowired
+        ICartFactory iCartFactory = FactoryProducer.getFactory(false);
+        ICartSummary iCartSummary = iCartFactory.getCart("CartSummary");
+
 
         @GetMapping("/cartsummary")
         public String allCartItems(Model model) throws SQLException {
-            //List<TicketOrderItem> ticketOrderItemList = cartSummary.getTicket() ;
-           // model.addAttribute("cartSummary", cartSummary);
-            //List<FoodOrderItem> foodOrderItemList = cartSummary.getFood() ;
-            model.addAttribute("cartSummary", cartSummary);
+            model.addAttribute("cartSummary", iCartSummary);
             return "CartSummary";
         }
 }

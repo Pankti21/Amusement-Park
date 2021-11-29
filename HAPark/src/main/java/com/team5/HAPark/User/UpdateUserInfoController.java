@@ -28,8 +28,8 @@ public class UpdateUserInfoController {
     private IUserPersistence iUserPersistence= new MySQLUserPersistence(dataBase);
 
     @GetMapping("/updateuserinfo")
-    public String allUpdateUser() throws SQLException {
-
+    public String allUpdateUser(Model model) throws SQLException {
+        model.addAttribute("user", new User());
         return "UpdateUserInfo";
     }
 
@@ -39,9 +39,8 @@ public class UpdateUserInfoController {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
         log.info("{}",username);
-        log.info("{}first name {} last name {} email {} old password {} confirm password {} reconfirm password ",
-                username,user.getLastName(),user.getEmail(),user.getPassword(),user.getConfirmedPassword(),user.getReconfirmedPassword());
-        log.info("{}", "hello world");
+        log.info("{} firstname {} lastname {} email {} oldpassword {} confirmedpassword {} reconfirmpassword ",
+                user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getConfirmedPassword(),user.getReconfirmedPassword());
         updateUserInformation2.updateUserPassword(iUserPersistence,user.getPassword(),user.getConfirmedPassword(),user.getReconfirmedPassword());
 
         return "UpdateUserInfo";
