@@ -34,6 +34,6 @@ public class TestDBController {
         model.addAttribute("ride_name",ridePersistence.getRide(1));
 
         db.close();
-        return "testui"; //name of html file in resources/templates
+        return "Test"; //name of html file in resources/templates
     }
 }

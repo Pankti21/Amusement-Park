@@ -4,7 +4,7 @@ import com.team5.HAPark.Order.DAO.IOrderPersistence;
 import com.team5.HAPark.Order.DAO.MySQLTicketOrderPersistence;
 import com.team5.HAPark.Order.model.*;
 import com.team5.HAPark.Ticket.DAO.MySQLTicketPersistence;
-import com.team5.HAPark.Ticket.TicketService;
+import com.team5.HAPark.Ticket.model.TicketService;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 public class TicketOrderFactory implements IOrderFactory {

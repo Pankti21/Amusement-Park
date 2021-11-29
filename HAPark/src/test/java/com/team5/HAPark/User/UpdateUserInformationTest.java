@@ -17,6 +17,7 @@ public class UpdateUserInformationTest {
 
     private static UpdateUserInformation updateUserInformation;
     private static User user;
+    private static User user1;
     private static IUserPersistence userPersistenceMock;
 
     @BeforeEach
@@ -26,6 +27,11 @@ public class UpdateUserInformationTest {
         user.setConfirmedPassword("NewPassword@123");
         user.setReconfirmedPassword("NewPassword@123");
         updateUserInformation = new UpdateUserInformation(user);
+        user1 = new User();
+        user1.setPassword("OldPassword2@123");
+        user1.setConfirmedPassword("NewPassword2@123");
+        user1.setReconfirmedPassword("NewPassword2@123");
+        updateUserInformation = new UpdateUserInformation(user1);
         userPersistenceMock = Mockito.mock(IUserPersistence.class);
     }
 
@@ -36,5 +42,14 @@ public class UpdateUserInformationTest {
         assertEquals(false,
                 updateUserInformation.updateUserPassword
                         (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
+    }
+
+    @Test
+    @WithMockUser(username = "user123")
+    public void validUpdatedUserPassword2() throws SQLException, NoSuchAlgorithmException {
+
+        assertEquals(false,
+                updateUserInformation.updateUserPassword
+                        (userPersistenceMock, user1.getPassword(),user1.getConfirmedPassword(), user1.getReconfirmedPassword()));
     }
 }

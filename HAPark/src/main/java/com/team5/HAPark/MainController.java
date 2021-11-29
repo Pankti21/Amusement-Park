@@ -8,6 +8,6 @@ public class MainController {
 
     @RequestMapping("/Main")
     public String welcome() {
-        return "mainpageui";
+        return "MainPage";
     }
 }

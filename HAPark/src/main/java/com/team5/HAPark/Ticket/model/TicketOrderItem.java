@@ -1,4 +1,6 @@
-package com.team5.HAPark.Ticket;
+package com.team5.HAPark.Ticket.model;
+
+import com.team5.HAPark.Ticket.model.Ticket;
 
 public class TicketOrderItem {
     private Ticket ticket;

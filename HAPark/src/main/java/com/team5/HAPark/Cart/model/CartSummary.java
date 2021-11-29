@@ -1,8 +1,7 @@
-package com.team5.HAPark.Cart;
+package com.team5.HAPark.Cart.model;
 
 import com.team5.HAPark.Food.FoodOrderItem;
-import com.team5.HAPark.Ticket.TicketOrderItem;
-import com.team5.HAPark.Food.Food;
+import com.team5.HAPark.Ticket.model.TicketOrderItem;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -11,7 +10,7 @@ import java.util.ListIterator;
 
 @Component
 @SessionScope
-public class CartSummary {
+public class CartSummary {//implements ICartSummary {
     private ArrayList<TicketOrderItem> ticket;
 
     public ArrayList<TicketOrderItem> getTicket() {

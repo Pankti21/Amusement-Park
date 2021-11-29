@@ -59,7 +59,7 @@ public class RideController {
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
         model.addAttribute("maps",rideService.getAllTimeSlots());
-        return "rideui";
+        return "Ride";
     }
 
     public void allTimeSlots(Model model) throws SQLException {

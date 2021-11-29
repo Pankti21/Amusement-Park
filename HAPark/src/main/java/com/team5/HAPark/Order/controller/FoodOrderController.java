@@ -1,6 +1,6 @@
 package com.team5.HAPark.Order.controller;
 
-import com.team5.HAPark.Cart.CartSummary;
+import com.team5.HAPark.Cart.model.CartSummary;
 import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
 import com.team5.HAPark.Order.FoodOrderFactory;

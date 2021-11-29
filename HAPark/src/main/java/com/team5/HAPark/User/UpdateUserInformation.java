@@ -10,6 +10,23 @@ import java.sql.SQLException;
 public class UpdateUserInformation {
 
     private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public EmailPasswordValidation getEmailPasswordValidation() {
+        return emailPasswordValidation;
+    }
+
+    public void setEmailPasswordValidation(EmailPasswordValidation emailPasswordValidation) {
+        this.emailPasswordValidation = emailPasswordValidation;
+    }
+
     private EmailPasswordValidation emailPasswordValidation;
 
     public UpdateUserInformation(User user) {

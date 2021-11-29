@@ -1,7 +1,6 @@
 package com.team5.HAPark.Ticket.DAO;
 
-import com.team5.HAPark.Ride.Model.Ride;
-import com.team5.HAPark.Ticket.Ticket;
+import com.team5.HAPark.Ticket.model.Ticket;
 
 import java.sql.SQLException;
 import java.util.List;

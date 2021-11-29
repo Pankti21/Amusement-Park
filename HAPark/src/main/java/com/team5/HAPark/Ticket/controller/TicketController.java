@@ -1,7 +1,11 @@
-package com.team5.HAPark.Ticket;
+package com.team5.HAPark.Ticket.controller;
 
-import com.team5.HAPark.Cart.CartSummary;
+import com.team5.HAPark.Cart.model.CartSummary;
 import com.team5.HAPark.Ticket.DAO.MySQLTicketPersistence;
+import com.team5.HAPark.Ticket.model.Ticket;
+import com.team5.HAPark.Ticket.model.TicketOrderItem;
+import com.team5.HAPark.Ticket.model.TicketOrderList;
+import com.team5.HAPark.Ticket.model.TicketService;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,7 +36,7 @@ public class TicketController {
 
         model.addAttribute("tickets",tickets);
 
-        return "tickets";
+        return "Tickets";
     }
 
     @PostMapping(value = "/tickets/update")

@@ -1,6 +1,6 @@
 package com.team5.HAPark.Order.model;
 
-import com.team5.HAPark.Ticket.TicketOrderItem;
+import com.team5.HAPark.Ticket.model.TicketOrderItem;
 
 public class TicketOrderItemAdapter implements IOrderItem {
 

@@ -14,17 +14,29 @@
 </table>
 <table style="margin-left: auto; margin-right: auto;">
   <tbody>
-  <form action="#" th:action="@{/updateuserinfo}" method="post" th:object="${updateUserInformation}">
+  <form action="#" th:action="@{/updateuserinfo}" th:object="${user}" method="post" >
+   <label>First Name</label>
+    <input type="text" th:field="*{firstName}"/>
+    <br>
+    <br>
+    <label>Last Name</label>
+    <input type="text" th:field="*{lastName}"/>
+    <br>
+    <br>
+    <label>Email</label>
+    <input type="text" th:field="*{email}"/>
+    <br>
+    <br>
     <label>Old Password</label>
-    <input type="text" th:field="*{oldpassword}"/>
+   <input type="text" th:field="*{password}"/>
     <br>
     <br>
-    <label>New Password</label>
-    <input type="text" th:field="*{confirmpassword}"/>
+   <label>New Password</label>
+    <input type="text" th:field="*{confirmedPassword}"/>
     <br>
     <br>
     <label>Confirm Password</label>
-    <input type="text" th:field="*{reconfirmpassword}"/>
+    <input type="text" th:field="*{reconfirmedPassword}"/>
     <br>
     <br>
     </tr>

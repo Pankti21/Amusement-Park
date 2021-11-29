@@ -1,6 +1,9 @@
 package com.team5.HAPark.Ticket;
 
 import com.team5.HAPark.Ticket.DAO.ITicketPersistence;
+import com.team5.HAPark.Ticket.model.Ticket;
+import com.team5.HAPark.Ticket.model.TicketOrderItem;
+import com.team5.HAPark.Ticket.model.TicketService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

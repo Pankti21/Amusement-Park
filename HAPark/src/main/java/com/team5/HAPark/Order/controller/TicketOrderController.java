@@ -1,12 +1,12 @@
 package com.team5.HAPark.Order.controller;
 
-import com.team5.HAPark.Cart.CartSummary;
+import com.team5.HAPark.Cart.model.CartSummary;
 import com.team5.HAPark.Order.DAO.IOrderPersistence;
 import com.team5.HAPark.Order.TicketOrderFactory;
 import com.team5.HAPark.Order.model.IOrder;
 import com.team5.HAPark.Order.model.IOrderService;
 import com.team5.HAPark.Order.model.TicketOrderItemAdapter;
-import com.team5.HAPark.Ticket.TicketOrderItem;
+import com.team5.HAPark.Ticket.model.TicketOrderItem;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

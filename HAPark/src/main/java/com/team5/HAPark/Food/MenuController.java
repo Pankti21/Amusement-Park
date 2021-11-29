@@ -1,6 +1,6 @@
 package com.team5.HAPark.Food;
 
-import com.team5.HAPark.Cart.CartSummary;
+import com.team5.HAPark.Cart.model.CartSummary;
 import com.team5.HAPark.Food.DAO.MySQLFoodPersistence;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class MenuController {
 
         model.addAttribute("menu",menu.getFoodList());
 
-        return "restaurant";
+        return "Restaurant";
     }
 
     @PostMapping(value = "/menu/update")
