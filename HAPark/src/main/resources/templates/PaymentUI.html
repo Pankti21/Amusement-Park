@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Payment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+            $(document).ready(function(){
+
+              $("#btnsubmit").click(function(){
+
+                var cardnumber=$("#txtcardnumber").val();
+                var cardtype=$('input[name=rdcardtype]:checked').val();
+                var expiredate=$("#txtdate").val();
+                var cvv=$("#txtsecuritycode").val();
+
+                    $.ajax({
+    				url: "http://localhost:8080/payment/add",
+    				type: "POST",
+    				contentType: 'application/json; charset=utf-8',
+    				data: JSON.stringify({
+    					'paymentType': cardtype,
+    					'cardNumber': cardnumber,
+    					'dateMM': expiredate,
+    					'securityCode': cvv
+    				}),
+    				success: function(res) {
+                        alert(res);
+    				}
+    			});
+
+
+              });
+
+            });
+</script>
+
+
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Payment</h2>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="radio">
+                <label><input type="radio" name="rdcardtype" value="Debit" checked>Debit</label>
+                <label><input type="radio" name="rdcardtype" value="Credit">Credit</label>
+            </div>
+
+            <input type="text" id="txtcardnumber" class="form-control" placeholder="Card Number">
+            <input type="date" id="txtdate" class="form-control">
+            <input type="text" id="txtsecuritycode" class="form-control" placeholder="CVV">
+            <input type="submit" id="btnsubmit" class="btn btn-primary">
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
