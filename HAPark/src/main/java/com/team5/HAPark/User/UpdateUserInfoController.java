@@ -2,8 +2,6 @@ package com.team5.HAPark.User;
 
 import com.team5.HAPark.User.DAO.IUserPersistence;
 import com.team5.HAPark.User.DAO.MySQLUserPersistence;
-import com.team5.HAPark.User.UpdateUserInformation;
-import com.team5.HAPark.User.User;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -12,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;

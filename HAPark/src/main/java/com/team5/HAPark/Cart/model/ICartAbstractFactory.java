@@ -1,5 +1,5 @@
 package com.team5.HAPark.Cart.model;
 
-public interface ICartFactory {
+public interface ICartAbstractFactory {
     public  ICartSummary getCart(String cartSummary);
 }

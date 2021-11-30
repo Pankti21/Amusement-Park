@@ -23,13 +23,13 @@ public class UpdateUserInformationTest {
     @BeforeEach
     void init(){
         user = new User();
-        user.setPassword("OldPassword@123");
+        //user.setPassword("OldPassword@123");
         user.setConfirmedPassword("NewPassword@123");
         user.setReconfirmedPassword("NewPassword@123");
         user.setEmail("test@gmail.com");
         updateUserInformation = new UpdateUserInformation(user);
         user1 = new User();
-        user1.setPassword("OldPassword2@123");
+      //  user1.setPassword("OldPassword2@123");
         user1.setConfirmedPassword("NewPassword2@123");
         user1.setReconfirmedPassword("NewPassword2@123");
         updateUserInformation = new UpdateUserInformation(user1);
@@ -38,7 +38,7 @@ public class UpdateUserInformationTest {
 
     @Test
     @WithMockUser(username = "user123")
-    public void validUpdatedUserPassword() throws SQLException, NoSuchAlgorithmException {
+    public void validateUpdatedUserPassword() throws SQLException, NoSuchAlgorithmException {
         assertEquals(false,
                 updateUserInformation.updateUserPassword
                         (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
@@ -47,7 +47,7 @@ public class UpdateUserInformationTest {
     @Test
     @WithMockUser(username = "user123")
     public void validUpdatedUserPassword2() throws SQLException, NoSuchAlgorithmException {
-        System.out.println("password :" + user1.getPassword());
+        //System.out.println("password :" + user1.getPassword());
         assertEquals(false,
                 updateUserInformation.updateUserPassword
                         (userPersistenceMock, user1.getPassword(),user1.getConfirmedPassword(), user1.getReconfirmedPassword()));

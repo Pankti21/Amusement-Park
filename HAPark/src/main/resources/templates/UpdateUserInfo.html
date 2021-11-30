@@ -12,9 +12,9 @@
   </tr>
   </tbody>
 </table>
-<table style="margin-left: auto; margin-right: auto;">
+<table border="black" style="margin-left: auto; margin-right: auto;">
   <tbody>
-  <form action="#" th:action="@{/updateuserinfo}" th:object="${user}" method="post" >
+  <form class="pure-form" action="#" th:action="@{/updateuserinfo}" th:object="${user}" method="post" >
    <label>First Name</label>
     <input type="text" th:field="*{firstName}"/>
     <br>
@@ -28,25 +28,41 @@
     <br>
     <br>
     <label>Old Password</label>
-   <input type="text" th:field="*{password}"/>
+      <!--https://www.w3schools.com/howto/howto_js_password_validation.asp-->
+   <input type="password"  id="txtOldPassword" placeholder="Old Password" th:field="*{password}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
     <br>
     <br>
    <label>New Password</label>
-    <input type="text" th:field="*{confirmedPassword}"/>
+    <input type="password" id="txtNewPassword" placeholder="New Password" th:field="*{confirmedPassword}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
     <br>
     <br>
     <label>Confirm Password</label>
-    <input type="text" th:field="*{reconfirmedPassword}"/>
+    <input type="password" id="txtConfirmPassword" placeholder="Confirm Password"th:field="*{reconfirmedPassword}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
     <br>
     <br>
     </tr>
     <tr>
       <td>
-          <button type="submit">Submit</button>
-        <button type="reset">Reset</button>
-
+          <button type="submit" id="btnSubmit" value="Submit" onclick="return Validate()">Submit</button>
     </tr>
   </form>
+  <script type="text/javascript">
+    function Validate() {
+        var oldPassword = document.getElementById("txtOldPassword").value;
+        var newPassword = document.getElementById("txtNewPassword").value;
+        var confirmPassword = document.getElementById("txtConfirmPassword").value;
+
+        if((oldPassword == newPassword)) {
+         alert("Old and New Passwords should not be same.");
+        return false;
+        }
+        else if((newPassword != confirmPassword) ){
+            alert("New and Confirm Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
   </tbody>
 </table>
 </body>

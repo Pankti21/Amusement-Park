@@ -1,7 +1,5 @@
 package com.team5.HAPark.Ticket.model;
 
-import com.team5.HAPark.Ticket.model.TicketOrderItem;
-
 import java.util.List;
 
 public class TicketOrderList {
