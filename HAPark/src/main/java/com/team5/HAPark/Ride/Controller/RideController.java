@@ -1,6 +1,7 @@
 package com.team5.HAPark.Ride.Controller;
 
 import com.team5.HAPark.Ride.Model.*;
+import com.team5.HAPark.Ride.Persistence.IRideReservePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
 import com.team5.HAPark.Ride.Persistence.RideReservePersistence;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
@@ -19,8 +20,7 @@ public class RideController {
 
     @Autowired
     private RideService rideService;
-    @Autowired
-    private IRideReserveService rideReserveService;
+
     @Autowired
     WaitTimeService waitTimeService=new WaitTimeService();
 
@@ -40,6 +40,8 @@ public class RideController {
 
     @PostMapping("/reserved")
     public String submitForm(Model model,@ModelAttribute("ride") RideReserve ride) throws SQLException {
+        IRideReservePersistence rideReservePersistence=new RideReservePersistence();
+        IRideReserveService rideReserveService=new RideReserveService(rideReservePersistence);
         //https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
@@ -87,6 +89,8 @@ public class RideController {
 
     @GetMapping("/reservations")
     public String getAllReservations(Model model) throws SQLException {
+        IRideReservePersistence rideReservePersistence= new RideReservePersistence();
+        IRideReserveService rideReserveService=new RideReserveService(rideReservePersistence);
         model.addAttribute("reservations",rideReserveService.getReservations());
         return "RideReservations";
     }

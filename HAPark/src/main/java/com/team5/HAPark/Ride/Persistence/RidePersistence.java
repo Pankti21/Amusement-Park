@@ -39,8 +39,7 @@ public class RidePersistence implements IRidePersistence{
                 r.setDuration(rs.getTime("total_duration"));
                 r.setTimeSlot(getRideTimeSlot(r.getId()));
         }
-        mySQLDatabase.close();
-        con.close();
+
         return r;
     }
 
@@ -61,8 +60,6 @@ public class RidePersistence implements IRidePersistence{
             r.setTimeSlot(getRideTimeSlot(r.getId()));
             Rides.add(r);
         }
-        mySQLDatabase.close();
-        con.close();
         return Rides;
     }
 
@@ -75,8 +72,6 @@ public class RidePersistence implements IRidePersistence{
         while (rs.next()){
             maxOccupancy=rs.getInt("max_occupancy");
         }
-        mySQLDatabase.close();
-        con.close();
         return maxOccupancy;
     }
 
@@ -89,8 +84,7 @@ public class RidePersistence implements IRidePersistence{
         while (rs.next()){
             duration=rs.getTime("total_duration");
         }
-        mySQLDatabase.close();
-        con.close();
+
         return duration;
     }
 
@@ -102,7 +96,6 @@ public class RidePersistence implements IRidePersistence{
         for (Ride ride:Rides){
             maps.add(ridePersistence.getRideTimeSlot(ride.getId()).getMap());
         }
-        mySQLDatabase.close();
         return maps;
     }
 
@@ -116,8 +109,6 @@ public class RidePersistence implements IRidePersistence{
             map.put(rs.getInt("timeslot_id"),rs.getInt("availability"));
         }
         TimeSlot timeSlot=new TimeSlot(map);
-        mySQLDatabase.close();
-        con.close();
         return timeSlot;
     }
 
