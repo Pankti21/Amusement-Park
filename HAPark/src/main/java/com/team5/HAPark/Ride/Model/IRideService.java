@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface IRideService {
-    IRidePersistence ridePersistence = null;
     List<Ride> getAllRides() throws SQLException;
     Ride getRide(int id) throws SQLException;
     List<String> getAllRideNames() throws SQLException;
