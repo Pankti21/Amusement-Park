@@ -23,9 +23,6 @@ public class RideReservePersistence implements IRideReservePersistence {
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         stmt.executeUpdate("INSERT INTO ride_reserve (user_mail_id,ride_id,timeslot_id,seats) VALUES (\""+auth+"\","+rideId+","+timeSlotId+","+seats+");");
-        mySQLDatabase.close();
-        stmt.close();
-        con.close();
     }
 
     //Get seats available for a given ride at a given timeslot
@@ -36,7 +33,6 @@ public class RideReservePersistence implements IRideReservePersistence {
         timeSlot=ridePersistence.getRideTimeSlot(rideId);
         HashMap<Integer,Integer> map = timeSlot.getMap();
         int availability=map.get(timeSlotId);
-        mySQLDatabase.close();
         return availability;
     }
 
@@ -46,9 +42,6 @@ public class RideReservePersistence implements IRideReservePersistence {
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         stmt.executeUpdate("UPDATE ride_timeslot SET availability="+availability+" WHERE ride_id="+rideId+" AND timeslot_id="+timeslotId);
-        mySQLDatabase.close();
-        stmt.close();
-        con.close();
     }
 
     public List<RideReserve> getReservations() throws SQLException {
@@ -66,9 +59,7 @@ public class RideReservePersistence implements IRideReservePersistence {
             rideReserve.setReserveSeats(rs.getInt("seats"));
             ridesReserved.add(rideReserve);
         }
-        mySQLDatabase.close();
-        con.close();
-        stmt.close();
+
         return ridesReserved;
     }
 

@@ -27,6 +27,7 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                 antMatchers("/welcome").anonymous().
                 antMatchers("/main").permitAll().
                 antMatchers("/register").permitAll().
+                antMatchers("/reservations").permitAll().
                 antMatchers("/rides").permitAll().
                 antMatchers("/rides/*").permitAll().
                 antMatchers("/test").permitAll().
