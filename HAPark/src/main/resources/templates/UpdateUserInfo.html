@@ -15,25 +15,18 @@
 <table border="black" style="margin-left: auto; margin-right: auto;">
   <tbody>
   <form class="pure-form" action="#" th:action="@{/updateuserinfo}" th:object="${user}" method="post" >
-   <tr><td>
-      <label>First Name</label>
-      </td><td><input type="text" th:field="*{firstName}"/></td>
-   </tr><tr><td>
-    <label>Last Name</label>
-   </td><td><input type="text" th:field="*{lastName}"/></td>
-   </tr><tr><td>
-   <label>Email</label>
+
    </td><td><input type="text" th:field="*{email}"/></td>
    </tr><tr><td>
     <label>Old Password</label>
       <!--https://www.w3schools.com/howto/howto_js_password_validation.asp-->
-  </td><td><input type="password"  id="txtOldPassword" placeholder="Old Password" th:field="*{password}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/></td>
+  </td><td><input type="password"  id="txtOldPassword" placeholder="Old Password" th:field="*{password}" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/></td>
   </tr><tr><td>
    <label>New Password</label>
-  </td><td><input type="password" id="txtNewPassword" placeholder="New Password" th:field="*{confirmedPassword}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/></td>
+  </td><td><input type="password" id="txtNewPassword" placeholder="New Password" th:field="*{confirmedPassword}" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/></td>
   </tr><tr><td>
     <label>Confirm Password</label>
-  </td><td><input type="password" id="txtConfirmPassword" placeholder="Confirm Password"th:field="*{reconfirmedPassword}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/></td>
+  </td><td><input type="password" id="txtConfirmPassword" placeholder="Confirm Password"th:field="*{reconfirmedPassword}" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/></td>
   </tr>
     <tr>
       <td>
@@ -47,22 +40,31 @@
         var newPassword = document.getElementById("txtNewPassword").value;
         var confirmPassword = document.getElementById("txtConfirmPassword").value;
 
-        if((oldPassword == newPassword)) {
-         alert("Old and New Passwords should not be same.");
+    if((oldPassword == newPassword) && (newPassword == confirmPassword)) {
+       alert("Old and New Passwords should not be same.");
+       return false;
+    }
+    else if(newPassword != confirmPassword){
+        alert("New and Confirm Passwords do not match.");
         return false;
-        }
-        else if((newPassword != confirmPassword) ){
-            alert("New and Confirm Passwords do not match.");
-            return false;
-        }
-        else
-        {
-         alert("Your password is changed.");
-         return true;
-        }
+    }
+    else if((newPassword.length < 8) || (newPassword.length > 12)){
+        alert("Password length should have 8 characters and must not exceed 12 characters.");
+        return false;
+    }
+    else if(!(newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$"))) {
+        alert("Password should have alteast one uppercase, one lower case, one special character,one digit.");
+        return false;
+    }
+    else
+    {
+        alert("Your password is changed.");
         return true;
     }
-</script>
+
+    return true;
+    }
+    </script>
   </tbody>
 </table>
 </body>

@@ -29,10 +29,11 @@ public class UpdateUserInformation {
         this.emailPasswordValidation = emailPasswordValidation;
     }
 
-    private EmailPasswordValidation emailPasswordValidation;
+    private EmailPasswordValidation emailPasswordValidation ;
 
     public UpdateUserInformation(User user) {
         this.user = user;
+        emailPasswordValidation = new EmailPasswordValidation(user);
     }
 
     public boolean updateUserPassword(IUserPersistence userPersistence,
@@ -48,9 +49,9 @@ public class UpdateUserInformation {
         if ((reconfirmPassword.matches(confirmedPassword) )&& (!(currentPassword.matches(confirmedPassword))) &&
                 (oldPassword.matches(currentPassword))) {
 
-           // if (emailPasswordValidation.validatePasswordFormat()) {
+            if (emailPasswordValidation.validatePasswordFormat()) {
                 userPersistence.userUpdatedPassword(reconfirmPassword,email);
-          //  }
+            }
 
 
         }

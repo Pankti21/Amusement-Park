@@ -1,4 +1,4 @@
-// package com.team5.HAPark.User;
+ //package com.team5.HAPark.User;
 /*
 import com.team5.HAPark.User.DAO.IUserPersistence;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,22 +22,22 @@ public class UpdateUserInformationTest {
 
     @BeforeEach
     void init(){
+        user1 = new User();
+        user1.setPassword("OldPassword2@123");
+        user1.setConfirmedPassword("NewPassword2@123");
+        user1.setReconfirmedPassword("NewPassword2@123");
+        updateUserInformation = new UpdateUserInformation(user1);
         user = new User();
-        //user.setPassword("OldPassword@123");
+        user.setPassword("OldPassword@123");
         user.setConfirmedPassword("NewPassword@123");
         user.setReconfirmedPassword("NewPassword@123");
         user.setEmail("test@gmail.com");
         updateUserInformation = new UpdateUserInformation(user);
-        user1 = new User();
-      //  user1.setPassword("OldPassword2@123");
-        user1.setConfirmedPassword("NewPassword2@123");
-        user1.setReconfirmedPassword("NewPassword2@123");
-        updateUserInformation = new UpdateUserInformation(user1);
         userPersistenceMock = Mockito.mock(IUserPersistence.class);
     }
 
     @Test
-    @WithMockUser(username = "user123")
+    @WithMockUser(username = "user123",password = "password")
     public void validateUpdatedUserPassword() throws SQLException, NoSuchAlgorithmException {
         assertEquals(false,
                 updateUserInformation.updateUserPassword
@@ -45,7 +45,7 @@ public class UpdateUserInformationTest {
     }
 
     @Test
-    @WithMockUser(username = "user123")
+    @WithMockUser(username = "user123",password = "password")
     public void validUpdatedUserPassword2() throws SQLException, NoSuchAlgorithmException {
         //System.out.println("password :" + user1.getPassword());
         assertEquals(false,
