@@ -58,22 +58,15 @@ public class Payment {
     public PaymentError Validate() {
         PaymentError paymentError;
 
-        if(PaymentType=="" || CardNumber=="" || DateMM=="" || SecurityCode=="")
-        {
+        if(PaymentType.equals("") || CardNumber.equals("") || DateMM.equals("") || SecurityCode.equals("")) {
             paymentError = PaymentError.EMPTYFIELD;
-        }
-        else{
-            if(SecurityCode.length()!=3 || CardNumber.length()!=16)
-            {
+        } else {
+            if(SecurityCode.length()!=3 || CardNumber.length()!=16) {
                 paymentError = PaymentError.INVALIDNUMBERLENGTH;
-            }
-            else
-            {
-                if(SecurityCode.chars().allMatch( Character::isDigit)==false || CardNumber.chars().allMatch( Character::isDigit)==false)
-                {
+            } else {
+                if(!SecurityCode.chars().allMatch(Character::isDigit) || !CardNumber.chars().allMatch(Character::isDigit)) {
                     paymentError = PaymentError.INVALIDIGITFORMAT;
-                }
-                else {
+                } else {
                     paymentError = PaymentError.SUCCESSFUL;
                 }
             }
