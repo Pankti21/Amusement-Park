@@ -38,6 +38,7 @@ public class WaitTimeService {
         this.ridePersistence=ridePersistence;
     }
 
+    //Get wait times for all rides
     public List<HashMap<Integer,LocalTime>> getWaitTimes() throws SQLException {
         List<Ride> rides= ridePersistence.getAllRides();
         List<HashMap<Integer,LocalTime>> waitTimes=new ArrayList<>();
@@ -49,42 +50,40 @@ public class WaitTimeService {
         return waitTimes;
     }
 
+    //Get duration in LocalTime format
     public LocalTime getDuration(int rideId) throws SQLException {
         Time duration = waitTimePersistence.getRideDuration(rideId);
         LocalTime durationInLocalTime = duration.toLocalTime();
         return durationInLocalTime;
     }
 
+    //Get duration in string format
     public String getDurationString(int rideId) throws SQLException {
         Time duration = waitTimePersistence.getRideDuration(rideId);
         return duration.toString();
     }
 
+    //Number of currently reservated seats = max occupancy for a time slot - available seats for a time slot
+    //Rounds of rides according to reservations = number of seats reserved / capacity per round
+    //WaitTime = Rounds of rides * duration of ride per round
     public WaitTime calculateWaitTime(int rideId) throws SQLException {
         WaitTime waitTime = new WaitTime();
         LocalTime temp = LocalTime.of(00,00,00);
-        //log.info("temp:{}",temp);
+
         TimeSlot timeSlot = ridePersistence.getRideTimeSlot(rideId);
 
         for (Integer key : timeSlot.getMap().keySet()) {
-            //numberOfSeatsReserved=max_occupancy-availability;
             int numberOfSeatsReserved = waitTimePersistence.getRideMaxOccupancy(rideId) - timeSlot.getMap().get(key);
-           // log.info("max occupancy {}",ridePersistence.getRideMaxOccupancy(1));
-            //log.info("availability {}",timeSlot.getMap().get(key));
-            //log.info("number of seats reserve {}",numberOfSeatsReserved);
-            int rideRounds = numberOfSeatsReserved / 10;
-            //log.info("ride rounds {}",rideRounds);
 
-            //log.info("duration {}",duration);
+            //Each round of ride takes 10 people
+            int rideRounds = numberOfSeatsReserved / 10;
+
             LocalTime durationInLocalTime = getDuration(rideId);
             String durationString=getDurationString(rideId);
-
-            //log.info("duration in local time {}",durationInLocalTime);
 
             Long hours = Long.parseLong(durationString.substring(0, 2));
             Long mins = Long.parseLong(durationString.substring(3, 5));
             Long secs = Long.parseLong(durationString.substring(7));
-            log.info("{} {} {}",hours,mins,secs);
 
             if(rideRounds>0) {
                 for (int i = 0; i < rideRounds - 1; i++) {
@@ -103,8 +102,6 @@ public class WaitTimeService {
                 waitTime.getWaitTime().put(key,LocalTime.of(00,00,00));
             }
         }
-
-        log.info("waittime:{}",waitTime.toString());
         return waitTime;
     }
 }
