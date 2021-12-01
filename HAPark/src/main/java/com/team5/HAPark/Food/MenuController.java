@@ -27,7 +27,7 @@ public class MenuController {
 
         model.addAttribute("menu",menu.getFoodList());
 
-        return "restaurant";
+        return "Menu";
     }
 
     @PostMapping(value = "/menu/update")

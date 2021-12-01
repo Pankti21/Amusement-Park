@@ -11,7 +11,7 @@ public class PaymentController {
     @RequestMapping("/payment")
     public ModelAndView paymentmethod(){
     ModelAndView m = new ModelAndView();
-    m.setViewName("PaymentUI");
+    m.setViewName("Payment");
     return m;
 }
 
