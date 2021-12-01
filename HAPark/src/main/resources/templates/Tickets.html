@@ -6,6 +6,8 @@
 </head>
 <body>
 <div th:replace="Header :: header"/>
+<div style=" padding: 20px; background-color: #DEDEDE; text-align: center"
+     th:text="${message}" th:if="${message != null}"></div>
 <table style="margin-left: auto; margin-right: auto;">
     <tbody>
     <tr>
