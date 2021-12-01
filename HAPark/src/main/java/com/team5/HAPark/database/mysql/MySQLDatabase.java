@@ -58,8 +58,8 @@ public class MySQLDatabase implements IDataBase{
         }
     }
 
-    public Connection getConnection(){
-        if (conn == null){
+    public Connection getConnection() throws SQLException {
+        if (conn == null || conn.isClosed()){
             connect();
         }
         return conn;

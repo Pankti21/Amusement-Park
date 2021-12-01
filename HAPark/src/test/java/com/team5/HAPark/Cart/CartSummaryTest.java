@@ -71,4 +71,12 @@ class CartSummaryTest {
         double foodAmount = cartSummary.getFoodAmount();
         assertEquals(cartAmount, (ticketAmount+foodAmount));
     }
+
+    @Test
+    void empty() {
+        cartSummary.addFoodToCart(foodOrderItem);
+        cartSummary.addTicketToCart(ticketOrderItem);
+        cartSummary.empty();
+        assertTrue(cartSummary.getFood().isEmpty()&&cartSummary.getTicket().isEmpty());
+    }
 }

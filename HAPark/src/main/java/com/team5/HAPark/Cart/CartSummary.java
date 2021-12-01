@@ -136,8 +136,10 @@ public class CartSummary {
         return this.totalAmount;
     }
 
-
-
+    public void empty() {
+        ticket.clear();
+        food.clear();
+    }
 }
 
 

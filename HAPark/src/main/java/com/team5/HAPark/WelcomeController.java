@@ -12,24 +12,15 @@ public class WelcomeController {
 
     @RequestMapping("/welcome")
     public String welcome(ModelAndView modelAndView) {
-
-        return "welcomeui";
-        //fix logic here don't show to logged in users
-        //check login/out button dispaly
-        //add header to all pages
-        //check links and program flow
-    }
-
-    public String welcome() {
-        return "welcomeui";
+        return "Welcome";
     }
 
     @RequestMapping("/")
     public RedirectView directHomeToWelcome() {
         RedirectView redirectView;
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String name = authentication.getName();
+
         if (name.equals("anonymousUser")) {
             redirectView = new RedirectView("/welcome");
         } else {
@@ -37,5 +28,4 @@ public class WelcomeController {
         }
         return redirectView;
     }
-
 }

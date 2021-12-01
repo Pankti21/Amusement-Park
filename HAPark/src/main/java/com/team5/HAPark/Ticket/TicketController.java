@@ -33,7 +33,7 @@ public class TicketController {
 
         model.addAttribute("tickets",tickets);
 
-        return "tickets";
+        return "Tickets";
     }
 
     @PostMapping(value = "/tickets/update")
