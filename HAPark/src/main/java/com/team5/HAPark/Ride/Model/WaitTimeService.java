@@ -33,6 +33,11 @@ public class WaitTimeService {
 
     }
 
+    public WaitTimeService(IRidePersistence ridePersistence, IWaitTimePersistence waitTimePersistence) {
+        this.waitTimePersistence=waitTimePersistence;
+        this.ridePersistence=ridePersistence;
+    }
+
     public List<HashMap<Integer,LocalTime>> getWaitTimes() throws SQLException {
         List<Ride> rides= ridePersistence.getAllRides();
         List<HashMap<Integer,LocalTime>> waitTimes=new ArrayList<>();
