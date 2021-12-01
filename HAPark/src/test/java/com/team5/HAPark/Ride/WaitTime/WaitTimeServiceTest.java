@@ -82,5 +82,23 @@ public class WaitTimeServiceTest {
     void checkWaitTime() throws SQLException {
         assertEquals(3,waitTimeService.calculateWaitTime(1).getWaitTime().values().size());
     }
+    
+    @Test
+    void calculateWaitTime() throws SQLException {
+        HashMap<Integer, LocalTime> waitTime=new HashMap<>();
+        waitTime.put(1,LocalTime.of(02,30));
+        waitTime.put(2,LocalTime.of(02,00));
+        waitTime.put(3,LocalTime.of(01,30));
+        assertEquals(waitTime,waitTimeService.calculateWaitTime(1).getWaitTime());
+    }
 
+    @Test
+        //Boundry conditon: When reserved seats are zero, the waittime would also be zero
+    void calculateWaitTimeWhenZeroRideRounds() throws SQLException {
+        HashMap<Integer, LocalTime> waitTime=new HashMap<>();
+        waitTime.put(1,LocalTime.of(00,00));
+        waitTime.put(2,LocalTime.of(00,00));
+        waitTime.put(3,LocalTime.of(00,00));
+        assertEquals(waitTime,waitTimeService.calculateWaitTime(2).getWaitTime());
+    }
 }
