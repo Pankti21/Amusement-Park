@@ -55,28 +55,29 @@ public class Payment {
         SecurityCode = securityCode;
     }
 
-    public String Validate() {
+    public PaymentError Validate() {
+        PaymentError paymentError;
 
         if(PaymentType=="" || CardNumber=="" || DateMM=="" || SecurityCode=="")
         {
-            return "emptyfield";
+            paymentError = PaymentError.EMPTYFIELD;
         }
         else{
             if(SecurityCode.length()!=3 || CardNumber.length()!=16)
             {
-                return "invalid digits";
+                paymentError = PaymentError.INVALIDNUMBERLENGTH;
             }
             else
             {
                 if(SecurityCode.chars().allMatch( Character::isDigit)==false || CardNumber.chars().allMatch( Character::isDigit)==false)
                 {
-                    return "CVV and Card number should be numeric";
+                    paymentError = PaymentError.INVALIDIGITFORMAT;
                 }
                 else {
-                    return "Success";
+                    paymentError = PaymentError.SUCCESSFUL;
                 }
             }
         }
-
+        return paymentError;
     }
 }
