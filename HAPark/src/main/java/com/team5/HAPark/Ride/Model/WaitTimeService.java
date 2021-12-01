@@ -1,6 +1,9 @@
 package com.team5.HAPark.Ride.Model;
 
+import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
+import com.team5.HAPark.Ride.Persistence.WaitTime.IWaitTimePersistence;
+import com.team5.HAPark.Ride.Persistence.WaitTime.WaitTimePersistence;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,20 @@ import java.util.List;
 @Slf4j
 public class WaitTimeService {
 
-    RidePersistence ridePersistence=new RidePersistence();
+    IRidePersistence ridePersistence=new RidePersistence();
+    IWaitTimePersistence waitTimePersistence=new WaitTimePersistence();
+
+    public WaitTimeService(IRidePersistence ridePersistence) {
+        this.ridePersistence = ridePersistence;
+    }
+
+    public WaitTimeService(IWaitTimePersistence waitTimePersistence) {
+        this.waitTimePersistence=waitTimePersistence;
+    }
+
+    public WaitTimeService() {
+
+    }
 
     public List<HashMap<Integer,LocalTime>> getWaitTimes() throws SQLException {
         List<Ride> rides= ridePersistence.getAllRides();
@@ -29,13 +45,13 @@ public class WaitTimeService {
     }
 
     public LocalTime getDuration(int rideId) throws SQLException {
-        Time duration = ridePersistence.getRideDuration(rideId);
+        Time duration = waitTimePersistence.getRideDuration(rideId);
         LocalTime durationInLocalTime = duration.toLocalTime();
         return durationInLocalTime;
     }
 
     public String getDurationString(int rideId) throws SQLException {
-        Time duration = ridePersistence.getRideDuration(rideId);
+        Time duration = waitTimePersistence.getRideDuration(rideId);
         return duration.toString();
     }
 
@@ -47,7 +63,7 @@ public class WaitTimeService {
 
         for (Integer key : timeSlot.getMap().keySet()) {
             //numberOfSeatsReserved=max_occupancy-availability;
-            int numberOfSeatsReserved = ridePersistence.getRideMaxOccupancy(rideId) - timeSlot.getMap().get(key);
+            int numberOfSeatsReserved = waitTimePersistence.getRideMaxOccupancy(rideId) - timeSlot.getMap().get(key);
            // log.info("max occupancy {}",ridePersistence.getRideMaxOccupancy(1));
             //log.info("availability {}",timeSlot.getMap().get(key));
             //log.info("number of seats reserve {}",numberOfSeatsReserved);
