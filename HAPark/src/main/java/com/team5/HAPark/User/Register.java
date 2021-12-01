@@ -7,15 +7,15 @@ import java.sql.SQLException;
 
 public class Register {
 
-    private User user;
-    private  EmailPasswordValidation emailPasswordValidation ;
+    private final User user;
+    private final EmailPasswordValidation emailPasswordValidation ;
 
     public Register(User user) {
         this.user = user;
         emailPasswordValidation = new EmailPasswordValidation(this.user);
     }
 
-    public boolean register(IUserPersistence userPersistence, String confirmedPassword) throws SQLException {
+    public boolean register(IUserPersistence userPersistence, String confirmedPassword) {
 
         if (user.getPassword()!=null && !user.getPassword().isEmpty()
                 && user.getEmail()!=null && !user.getEmail().isEmpty()
@@ -29,14 +29,11 @@ public class Register {
 
                     try {
                         if (!userPersistence.doesUserExist(user.getEmail())) {
-                            Encryption encryption = new Encryption();
                             userPersistence.saveUser(user.getEmail(), user.getFirstName(),
-                                    user.getLastName(),encryption.encryptPassword(user.getPassword()));
+                                    user.getLastName(),Encryption.encryptPassword(user.getPassword()));
                             return true;
                         }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchAlgorithmException e) {
+                    } catch (SQLException | NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     }
                 }

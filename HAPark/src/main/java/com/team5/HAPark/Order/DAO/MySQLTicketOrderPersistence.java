@@ -17,8 +17,8 @@ import java.util.List;
 
 public class MySQLTicketOrderPersistence implements IOrderPersistence{
 
-    private MySQLDatabase mySQLDatabase;
-    private TicketService ticketService;
+    private final MySQLDatabase mySQLDatabase;
+    private final TicketService ticketService;
 
     public MySQLTicketOrderPersistence(MySQLDatabase mySQLDatabase, TicketService ticketService) {
         this.mySQLDatabase = mySQLDatabase;

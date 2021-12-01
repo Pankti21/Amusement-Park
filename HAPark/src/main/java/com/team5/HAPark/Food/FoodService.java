@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class FoodService {
 
-    private IFoodPersistence foodPersistence;
+    private final IFoodPersistence foodPersistence;
 
     public FoodService(IFoodPersistence foodPersistence){
         this.foodPersistence = foodPersistence;
@@ -14,17 +14,14 @@ public class FoodService {
 
     public Food getFood(String id) throws SQLException {
 
-        Food food = null;
-        food = foodPersistence.loadFood(id);
+        Food food = foodPersistence.loadFood(id);
 
         return food;
     }
 
     public Menu getMenu() throws SQLException {
 
-        Menu menu = null;
-
-        menu = foodPersistence.loadMenu();
+        Menu menu = foodPersistence.loadMenu();
 
         return menu;
     }

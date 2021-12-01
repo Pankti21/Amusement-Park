@@ -1,7 +1,6 @@
 package com.team5.HAPark.Ticket.DAO;
 
 
-import com.team5.HAPark.Ride.Model.Ride;
 import com.team5.HAPark.Ticket.Ticket;
 
 
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class MySQLTicketPersistence implements ITicketPersistence{
 
-    MySQLDatabase mySQLDatabase =  MySQLDatabase.getInstance();
+    MySQLDatabase mySQLDatabase;
 
     public MySQLTicketPersistence(MySQLDatabase database) {
         this.mySQLDatabase = database;
@@ -60,7 +59,7 @@ public class MySQLTicketPersistence implements ITicketPersistence{
 
     @Override
     public List<Ticket> getAllTickets() throws SQLException {
-        List<Ticket> Tickets= new ArrayList<Ticket>();
+        List<Ticket> Tickets= new ArrayList<>();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ticket;");

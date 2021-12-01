@@ -8,15 +8,14 @@ import java.util.List;
 
 public class TicketService {
 
-    private ITicketPersistence ticketPersistence;
+    private final ITicketPersistence ticketPersistence;
 
     public TicketService(ITicketPersistence ticketPersistence) {
         this.ticketPersistence = ticketPersistence;
     }
 
     public Ticket getTicket(String ticketType) throws SQLException {
-        Ticket ticket = null;
-        ticket = ticketPersistence.loadTicket(ticketType);
+        Ticket ticket = ticketPersistence.loadTicket(ticketType);
 
         return ticket;
     }

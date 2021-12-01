@@ -3,20 +3,16 @@ package com.team5.HAPark.Food;
 import com.team5.HAPark.Order.model.IOrderItem;
 
 public class FoodOrderItem implements IOrderItem {
-    private Food food;
+    private final Food food;
     private Integer quantity;
 
     public FoodOrderItem() {
         food = new Food();
     }
 
-
-
-
     public Food getFood() {
         return food;
     }
-
 
     public FoodOrderItem(Food food, Integer quantity) {
         this.food = food;

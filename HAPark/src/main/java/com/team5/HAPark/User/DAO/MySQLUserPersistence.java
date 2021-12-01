@@ -19,7 +19,7 @@ public class MySQLUserPersistence implements IUserPersistence {
     public boolean doesUserExist(String email) throws SQLException {
 
         CallableStatement statement = null;
-        boolean userExists = false;
+        boolean userExists;
 
         try {
 
@@ -48,7 +48,7 @@ public class MySQLUserPersistence implements IUserPersistence {
     public String getPassword(String email) throws SQLException {
 
         CallableStatement statement = null;
-        String password = null;
+        String password;
 
         try {
 
@@ -132,7 +132,7 @@ public class MySQLUserPersistence implements IUserPersistence {
     public User loadUser(String email) throws SQLException {
 
         CallableStatement statement = null;
-        User loadedUser = null;
+        User loadedUser;
 
         try {
 

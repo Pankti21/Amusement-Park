@@ -3,10 +3,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @ComponentScan
 @Component
@@ -66,22 +62,6 @@ public class MySQLDatabase implements IDataBase{
     }
 
     @Override
-    public List<Map<String, Object>> query(String query) {
-        List<Map<String, Object>> rows = new ArrayList<>();
-
-        try {
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(query);
-            rows = convertResultSetToListOfMaps(resultSet);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return rows;
-    }
-
-    @Override
     public void close() {
 
         if (resultSet != null) {
@@ -108,25 +88,4 @@ public class MySQLDatabase implements IDataBase{
             }
         }
     }
-
-    public List<Map<String, Object>> convertResultSetToListOfMaps(ResultSet rs) throws SQLException {
-
-        List<Map<String, Object>> rows = new ArrayList<>();
-        ResultSetMetaData metaData = rs.getMetaData();
-        int col = metaData.getColumnCount();
-
-        while (rs.next()) {
-            Map<String, Object> row = new HashMap<>();
-            for (int i = 1; i<=col; i++) {
-                String key = metaData.getColumnName(i);
-                Object value = rs.getObject(i);
-                row.put(key,value);
-            }
-            rows.add(row);
-        }
-
-        return rows;
-
-    }
-
 }

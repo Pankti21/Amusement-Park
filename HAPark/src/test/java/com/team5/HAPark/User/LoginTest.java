@@ -54,7 +54,7 @@ class LoginTest {
         when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
         when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
         when(userPersistenceMock.loadUser(user.getEmail())).thenReturn(new User("fname", "lname", user.getEmail(),"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"));
-        Login Login = new Login(user);
+        Login login = new Login(user);
         assertTrue(login.login(userPersistenceMock));
     }
 

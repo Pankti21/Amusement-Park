@@ -1,11 +1,10 @@
 package com.team5.HAPark.User;
 
-import com.team5.HAPark.User.DAO.IUserPersistence;
 import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.springframework.security.test.context.support.WithMockUser;
@@ -15,16 +14,14 @@ import java.sql.SQLException;
 @SpringBootTest
 public class EmailPasswordValidationTest {
 
-    private static User user;
-    private static IUserPersistence userPersistenceMock;
-    EmailPasswordValidation emailPasswordValidation ;
+    private User user;
+    private EmailPasswordValidation emailPasswordValidation ;
 
     @BeforeEach
     void init(){
         user = new User();
         user.setEmail("emailsample@email.com@123");
         emailPasswordValidation = new EmailPasswordValidation(user);
-        userPersistenceMock = Mockito.mock(IUserPersistence.class);
     }
 
     @Nested
@@ -35,7 +32,7 @@ public class EmailPasswordValidationTest {
         @WithMockUser(username = "user123")
         void validatePasswordFormatHasMinimum8Chars() throws SQLException {
             user.setPassword("Dal@123");
-            assertEquals(false,emailPasswordValidation.validatePasswordFormat());
+            assertFalse(emailPasswordValidation.validatePasswordFormat());
         }
 
         @Test

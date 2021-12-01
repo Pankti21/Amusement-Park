@@ -45,7 +45,7 @@ public class RidePersistence implements IRidePersistence{
 
     @Override
     public List<Ride> getAllRides() throws SQLException {
-        List<Ride> Rides= new ArrayList<Ride>();
+        List<Ride> Rides= new ArrayList<>();
         mySQLDatabase = MySQLDatabase.getInstance();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();

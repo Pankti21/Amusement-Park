@@ -29,10 +29,9 @@ public class RideReservePersistence implements IRideReservePersistence {
     public int getRideAvailability(int rideId, int timeSlotId) throws SQLException {
         MySQLDatabase mySQLDatabase = MySQLDatabase.getInstance();
         IRidePersistence ridePersistence = new RidePersistence(mySQLDatabase);
-        TimeSlot timeSlot=new TimeSlot();
-        timeSlot=ridePersistence.getRideTimeSlot(rideId);
+        TimeSlot timeSlot = ridePersistence.getRideTimeSlot(rideId);
         HashMap<Integer,Integer> map = timeSlot.getMap();
-        int availability=map.get(timeSlotId);
+        int availability = map.get(timeSlotId);
         return availability;
     }
 

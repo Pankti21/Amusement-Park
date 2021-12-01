@@ -10,7 +10,7 @@ public class Menu {
     LinkedHashMap<String,Food> menu;
 
     public Menu(){
-        menu = new LinkedHashMap<String,Food>();
+        menu = new LinkedHashMap<>();
     }
 
     public String getName(String id){

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @SpringBootTest
 public class UpdateUserInformationTest {
@@ -32,8 +33,7 @@ public class UpdateUserInformationTest {
     @WithMockUser(username = "user123")
     public void validUpdatedUserPassword() throws SQLException, NoSuchAlgorithmException {
 
-        assertEquals(false,
-                updateUserInformation.updateUserPassword
-                        (userPersistenceMock, user.getConfirmedPassword(), user.getReconfirmedPassword()));
+        assertFalse(updateUserInformation.updateUserPassword
+                (userPersistenceMock, user.getConfirmedPassword(), user.getReconfirmedPassword()));
     }
 }

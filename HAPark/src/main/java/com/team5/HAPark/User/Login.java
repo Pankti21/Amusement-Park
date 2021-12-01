@@ -18,8 +18,7 @@ public class Login {
 
         try {
             if (userPersistence.doesUserExist(user.getEmail())) {
-                Encryption encryption = new Encryption();
-                String enteredEncryptedPassword = encryption.encryptPassword(user.getPassword());
+                String enteredEncryptedPassword = Encryption.encryptPassword(user.getPassword());
                 String savedPassword = userPersistence.getPassword(user.getEmail());
                 if (enteredEncryptedPassword.equals(savedPassword)) {
                     user = userPersistence.loadUser(user.getEmail());

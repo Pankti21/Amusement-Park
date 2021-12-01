@@ -7,13 +7,13 @@ public enum PaymentError {
     INVALIDIGITFORMAT("CVV and Card number should be numeric");
 
 
-    private String result;
+    private final String result;
 
     public String getResultMessage() {
         return result;
     }
 
-    private PaymentError(String result) {
+    PaymentError(String result) {
         this.result = result;
     }
 }

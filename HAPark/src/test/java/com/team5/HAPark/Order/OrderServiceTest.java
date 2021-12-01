@@ -23,8 +23,6 @@ class OrderServiceTest {
     private static IOrderService orderService;
     private static IOrderPersistence orderPersistenceMock;
     private static List<IOrderItem> orderItems;
-    private static Ticket child;
-    private static Ticket adult;
     private static TicketOrderItemAdapter childTicketOrder;
     private static TicketOrderItemAdapter adultTicketOrder;
     private static IOrder order;
@@ -36,8 +34,8 @@ class OrderServiceTest {
         orderService = new OrderService(orderPersistenceMock);
         orderItems = new ArrayList<>();
 
-        child = new Ticket("child",15);
-        adult = new Ticket("adult",20);
+        Ticket child = new Ticket("child", 15);
+        Ticket adult = new Ticket("adult", 20);
 
         childTicketOrder = new TicketOrderItemAdapter(new TicketOrderItem(child,3));
         adultTicketOrder = new TicketOrderItemAdapter(new TicketOrderItem(adult,2));
@@ -73,7 +71,6 @@ class OrderServiceTest {
     public void createOrderFromItemQuantitiesHasCorrectEmail() {
 
         IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
-        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertEquals("email",newOrder.getMailId());
     }
@@ -82,7 +79,6 @@ class OrderServiceTest {
     public void createOrderFromItemQuantitiesHasDateTime() {
 
         IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
-        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertNotNull(newOrder.getOrderDate());
         assertNotNull(newOrder.getOrderDate());
@@ -92,7 +88,6 @@ class OrderServiceTest {
     public void createOrderFromItemQuantitiesDefaultHasNoOrderId() {
 
         IOrder newOrder = orderService.createOrderFromItemQuantities("email", orderItems);
-        List<? extends IOrderItem> orderItems = newOrder.getOrderItems();
 
         assertNull(newOrder.getOrderId());
     }

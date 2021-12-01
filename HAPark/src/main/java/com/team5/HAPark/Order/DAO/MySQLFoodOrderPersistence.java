@@ -16,8 +16,8 @@ import java.util.List;
 
 public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
-    private MySQLDatabase mySQLDatabase;
-    private FoodService foodService;
+    private final MySQLDatabase mySQLDatabase;
+    private final FoodService foodService;
 
     public MySQLFoodOrderPersistence(MySQLDatabase mySQLDatabase, FoodService foodService){
         this.mySQLDatabase = mySQLDatabase;

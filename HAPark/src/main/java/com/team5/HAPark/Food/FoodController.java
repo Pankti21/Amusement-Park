@@ -22,17 +22,5 @@ public class FoodController {
 
         return menu;
     }
-
-    @RequestMapping(value = "/menu/{id}")
-    public Food getFood(@PathVariable String id) throws SQLException {
-
-        MySQLDatabase dataBase = MySQLDatabase.getInstance();
-        FoodService foodService = new FoodService(new MySQLFoodPersistence(dataBase));
-
-        Food food = foodService.getFood(id);
-        dataBase.close();
-
-        return food;
-    }
 }
 

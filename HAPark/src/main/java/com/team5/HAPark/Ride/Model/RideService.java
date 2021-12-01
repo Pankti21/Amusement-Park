@@ -2,7 +2,6 @@ package com.team5.HAPark.Ride.Model;
 
 import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import com.team5.HAPark.Ride.Persistence.RidePersistence;
-import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +33,7 @@ public class RideService implements IRideService {
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        List<HashMap<Integer,Integer>> maps= new ArrayList<>();
-        maps=ridePersistence.getAllTimeSlots();
+        List<HashMap<Integer,Integer>> maps = ridePersistence.getAllTimeSlots();
         return maps;
     }
 

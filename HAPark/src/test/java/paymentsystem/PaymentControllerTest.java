@@ -5,7 +5,6 @@ import com.team5.HAPark.paymentsystem.PaymentController;
 import com.team5.HAPark.paymentsystem.PaymentError;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.web.servlet.ModelAndView;
 
 public class PaymentControllerTest {
 

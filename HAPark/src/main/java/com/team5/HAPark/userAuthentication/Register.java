@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class Register {
 
-    private User user;
+    private final User user;
 
     public Register(User user) {
         this.user = user;
@@ -29,14 +29,11 @@ public class Register {
 
                     try {
                         if (!userPersistence.doesUserExist(user.getEmail())) {
-                            Encryption encryption = new Encryption();
                             userPersistence.saveUser(user.getEmail(), user.getFirstName(),
-                                    user.getLastName(),encryption.encryptPassword(user.getPassword()));
+                                    user.getLastName(),Encryption.encryptPassword(user.getPassword()));
                             return true;
                         }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchAlgorithmException e) {
+                    } catch (SQLException | NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     }
                 }

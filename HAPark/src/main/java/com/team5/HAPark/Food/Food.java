@@ -5,16 +5,8 @@ public class Food {
     private String name;
     private String id;
     private double price;
-    private Integer quantity;
 
     public Food(){}
-
-    public Food(String name, String id, double price, Integer quantity) {
-        this.name = name;
-        this.id = id;
-        this.price = price;
-        this.quantity = quantity;
-    }
 
     public Food(String name, String id, double price) {
         this.name = name;
@@ -46,11 +38,4 @@ public class Food {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 }

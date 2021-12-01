@@ -1,5 +1,4 @@
 package com.team5.HAPark.Ride.Model;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashMap;
 

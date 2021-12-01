@@ -6,11 +6,11 @@ import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 public interface IOrderFactory {
 
-    public IOrderService createOrderService(IOrderPersistence orderPersistence);
+    IOrderService createOrderService(IOrderPersistence orderPersistence);
 
-    public IOrder createOrder();
+    IOrder createOrder();
 
-    public IOrderItem createOrderItem();
+    IOrderItem createOrderItem();
 
-    public IOrderPersistence createOrderPersistence(MySQLDatabase database);
+    IOrderPersistence createOrderPersistence(MySQLDatabase database);
 }

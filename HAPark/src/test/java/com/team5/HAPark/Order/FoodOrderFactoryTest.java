@@ -26,13 +26,13 @@ class FoodOrderFactoryTest {
     }
 
     @Test
-    void createOrderPersistenceNotNull() throws SQLException {
+    void createOrderPersistenceNotNull() {
         IOrderPersistence orderPersistence = foodOrderFactory.createOrderPersistence(database);
         assertNotNull(orderPersistence);
     }
 
     @Test
-    void createOrderPersistence() throws SQLException {
+    void createOrderPersistence() {
         IOrderPersistence orderPersistence = foodOrderFactory.createOrderPersistence(database);
         assertTrue(orderPersistence instanceof MySQLFoodOrderPersistence);
     }

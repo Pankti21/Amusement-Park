@@ -10,7 +10,7 @@ import java.util.List;
 
 public class OrderService implements IOrderService {
 
-    private IOrderPersistence orderPersistence;
+    private final IOrderPersistence orderPersistence;
 
     public OrderService(IOrderPersistence orderPersistence){
         this.orderPersistence = orderPersistence;

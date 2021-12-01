@@ -27,13 +27,13 @@ class TicketOrderFactoryTest {
     }
 
     @Test
-    void createOrderPersistenceNotNull() throws SQLException {
+    void createOrderPersistenceNotNull() {
         IOrderPersistence orderPersistence = ticketOrderFactory.createOrderPersistence(database);
         assertNotNull(orderPersistence);
     }
 
     @Test
-    void createOrderPersistence() throws SQLException {
+    void createOrderPersistence() {
         IOrderPersistence orderPersistence = ticketOrderFactory.createOrderPersistence(database);
         assertTrue(orderPersistence instanceof MySQLTicketOrderPersistence);
     }
