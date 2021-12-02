@@ -34,10 +34,12 @@ public class OrderService implements IOrderService {
 
     @Override
     public void saveOrder(IOrder order){
-        try {
-            orderPersistence.saveOrder(order);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (order != null) {
+            try {
+                orderPersistence.saveOrder(order);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

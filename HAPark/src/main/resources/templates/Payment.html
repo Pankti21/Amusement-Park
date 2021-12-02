@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <div th:replace="Header :: header"/>
     <title>Payment</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +33,9 @@
     				}),
     				success: function(res) {
                         alert(res);
+                        if (res === "success"){
+                            window.location='submitorder'
+                        }
     				}
     			});
 
@@ -40,9 +44,6 @@
 
             });
 </script>
-
-
-
 </head>
 <body>
 
