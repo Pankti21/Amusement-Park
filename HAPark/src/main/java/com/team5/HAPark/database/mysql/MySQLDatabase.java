@@ -6,11 +6,9 @@ import java.sql.*;
 
 @ComponentScan
 @Component
-public class MySQLDatabase implements IDataBase{
+public class MySQLDatabase implements IMySQLDatabase {
 
-    private ResultSet resultSet;
     private Connection conn;
-    private Statement statement;
     private static MySQLDatabase database;
 
     private MySQLDatabase(){}
@@ -54,6 +52,7 @@ public class MySQLDatabase implements IDataBase{
         }
     }
 
+    @Override
     public Connection getConnection() throws SQLException {
         if (conn == null || conn.isClosed()){
             connect();
@@ -63,23 +62,6 @@ public class MySQLDatabase implements IDataBase{
 
     @Override
     public void close() {
-
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
         if (conn != null) {
             try {
                 conn.close();
