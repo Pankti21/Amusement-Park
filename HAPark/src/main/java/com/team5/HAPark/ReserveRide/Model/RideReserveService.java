@@ -1,14 +1,14 @@
-package com.team5.HAPark.Ride.Model;
+package com.team5.HAPark.ReserveRide.Model;
 
-import com.team5.HAPark.Ride.Persistence.IRideReservePersistence;
-import com.team5.HAPark.Ride.Persistence.RideReservePersistence;
+import com.team5.HAPark.ReserveRide.Persistence.IRideReservePersistence;
+import com.team5.HAPark.ReserveRide.Persistence.RideReservePersistence;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class RideReserveService implements IRideReserveService{
+public class RideReserveService implements IRideReserveService {
 
     IRideReservePersistence rideReservePersistence;
 

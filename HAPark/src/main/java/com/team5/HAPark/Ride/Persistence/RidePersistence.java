@@ -1,6 +1,7 @@
 package com.team5.HAPark.Ride.Persistence;
 
 import com.team5.HAPark.Ride.Model.Ride;
+import com.team5.HAPark.Ride.Model.RideFactory;
 import com.team5.HAPark.Ride.Model.TimeSlot;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import lombok.extern.slf4j.*;
@@ -14,7 +15,9 @@ import java.util.List;
 @Slf4j
 @Component
 public class RidePersistence implements IRidePersistence{
-   MySQLDatabase mySQLDatabase;
+    MySQLDatabase mySQLDatabase;
+
+    RideFactory rideFactory= new RideFactory();
 
     public RidePersistence(MySQLDatabase mySQLDatabase) {
         this.mySQLDatabase=mySQLDatabase;
@@ -30,7 +33,7 @@ public class RidePersistence implements IRidePersistence{
         Connection con = mySQLDatabase.getConnection();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM rides_info WHERE ride_id="+id+";");
-        Ride r = new Ride();
+        Ride r=rideFactory.getRide("Ride");
         while (rs.next()){
                 r.setId(rs.getInt("ride_id"));
                 r.setName(rs.getString("ride_name"));
@@ -51,7 +54,7 @@ public class RidePersistence implements IRidePersistence{
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM rides_info;");
         while (rs.next()){
-            Ride r = new Ride();
+            Ride r = rideFactory.getRide("Ride");
             r.setId(rs.getInt("ride_id"));
             r.setName(rs.getString("ride_name"));
             r.setType(rs.getString("ride_type"));
