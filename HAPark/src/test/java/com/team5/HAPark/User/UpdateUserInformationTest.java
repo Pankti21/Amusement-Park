@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -24,8 +25,8 @@ public class UpdateUserInformationTest {
     @BeforeEach
     void init() {
         user = new User();
-        user.setConfirmedPassword("NewPassword@123");
-        user.setReconfirmedPassword("NewPassword@123");
+        user.setConfirmedPassword("NewPass@123");
+        user.setReconfirmedPassword("NewPass@123");
         user.setEmail("test@gmail.com");
         user.setPassword("password");
         updateUserInformation = new UpdateUserInformation(user);
@@ -40,16 +41,22 @@ public class UpdateUserInformationTest {
                         (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
     }
 
-   /* @Test
+    @Test
     @WithMockUser(username = "test@gmail.com")
     public void validatingNewAndConfirmedPasswordAreSame() throws SQLException, NoSuchAlgorithmException {
         user.setReconfirmedPassword("ConfPassword@123");
         String oldPassword = Encryption.encryptPassword("password");
         when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
-        assertEquals("Password don't match",
-                updateUserInformation.updateUserPassword(userPersistenceMock, user.getPassword(),
-                        user.getConfirmedPassword(), user.getReconfirmedPassword()));
-    }*/
+        try{
+            updateUserInformation.updateUserPassword(userPersistenceMock, user.getPassword(),
+                user.getConfirmedPassword(), user.getReconfirmedPassword());
+
+
+        }catch (NoSuchAlgorithmException e)
+        {
+            assertEquals("Password don't match",e.getMessage());
+        }
+    }
 
     @Test
     @WithMockUser(username = "test@gmail.com")

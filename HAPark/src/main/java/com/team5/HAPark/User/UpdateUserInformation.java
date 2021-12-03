@@ -53,6 +53,7 @@ public class UpdateUserInformation {
 
             if (emailPasswordValidation.validatePasswordFormat()) {
                 userPersistence.userUpdatedPassword(reconfirmPassword,email);
+                return true;
             }
             else {
                 System.out.println("Password format is not correct");

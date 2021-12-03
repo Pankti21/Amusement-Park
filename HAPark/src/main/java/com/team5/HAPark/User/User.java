@@ -11,8 +11,8 @@ public class User {
     public User(){}
 
     public User(String confirmedPassword, String reconfirmedPassword) {
-        this.confirmedPassword = confirmedPassword;
-        this.reconfirmedPassword = reconfirmedPassword;
+        this.password = confirmedPassword;
+        this.confirmedPassword = reconfirmedPassword;
     }
     public User(String firstName, String lastName, String email, String password){
         this.firstName = firstName;
