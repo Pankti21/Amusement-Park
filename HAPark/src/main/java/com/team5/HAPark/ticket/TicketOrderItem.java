@@ -14,7 +14,6 @@ public class TicketOrderItem {
     }
 
     public Integer getQuantity() {
-
         return this.quantity;
     }
 
