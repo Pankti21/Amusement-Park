@@ -1,6 +1,7 @@
 package com.team5.HAPark.User;
 
 import com.team5.HAPark.User.DAO.IUserPersistence;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,21 +33,91 @@ public class UpdateUserInformationTest {
     }
     @Test
     @WithMockUser(username = "test@gmail.com")
-    public void validateUpdatedUserPassword() throws SQLException, NoSuchAlgorithmException {
+    public void validatingOldAndCurrentPasswordAreSame() throws SQLException, NoSuchAlgorithmException {
         String oldPassword = Encryption.encryptPassword("password");
         when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
         assertFalse( updateUserInformation.updateUserPassword
                         (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
     }
 
+   /* @Test
+    @WithMockUser(username = "test@gmail.com")
+    public void validatingNewAndConfirmedPasswordAreSame() throws SQLException, NoSuchAlgorithmException {
+        user.setReconfirmedPassword("ConfPassword@123");
+        String oldPassword = Encryption.encryptPassword("password");
+        when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
+        assertEquals("Password don't match",
+                updateUserInformation.updateUserPassword(userPersistenceMock, user.getPassword(),
+                        user.getConfirmedPassword(), user.getReconfirmedPassword()));
+    }*/
+
     @Test
     @WithMockUser(username = "test@gmail.com")
-    public void validateUpdatedOtherUserPassword() throws SQLException, NoSuchAlgorithmException {
-        user.setPassword("otherPassword");
-        String oldPassword = Encryption.encryptPassword("otherPassword");
+    public void validatingOldAndNewPasswordAreNotSame() throws SQLException, NoSuchAlgorithmException {
+        user.setConfirmedPassword("password");
+        user.setReconfirmedPassword("password");
+        String oldPassword = Encryption.encryptPassword("password");
+        when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
+        assertFalse("Password don't match",
+                updateUserInformation.updateUserPassword(userPersistenceMock, user.getPassword(),
+                        user.getConfirmedPassword(), user.getReconfirmedPassword()));
+    }
+
+    @Test
+    @WithMockUser(username = "test@gmail.com")
+    public void validatingThePasswordUpdatedIsInCorrectFormat() throws SQLException, NoSuchAlgorithmException {
+        String oldPassword = Encryption.encryptPassword("password");
+        user.setConfirmedPassword("NewPassword@123");
+        user.setReconfirmedPassword("NewPassword@123");
         when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
         assertFalse( updateUserInformation.updateUserPassword
                 (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
     }
+
+
+    @Test
+    @WithMockUser(username = "test@gmail.com")
+    public void validatingUpdatedPasswordHasAtleastOneDigit() throws SQLException, NoSuchAlgorithmException {
+        String oldPassword = Encryption.encryptPassword("password");
+        user.setConfirmedPassword("NewPassword@");
+        user.setReconfirmedPassword("NewPassword@");
+        when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
+        assertFalse("Password format is not correct", updateUserInformation.updateUserPassword
+                (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
+    }
+    @Test
+    @WithMockUser(username = "test@gmail.com")
+    public void validatingUpdatedPasswordHasAtleastOneSpecialCharacter() throws SQLException, NoSuchAlgorithmException {
+        String oldPassword = Encryption.encryptPassword("password");
+        user.setConfirmedPassword("NewPassword123");
+        user.setReconfirmedPassword("NewPassword123");
+        when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
+        assertFalse("Password format is not correct", updateUserInformation.updateUserPassword
+                (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
+    }
+
+    @Test
+    @WithMockUser(username = "test@gmail.com")
+    public void validatingUpdatedPasswordHasAtleastOneCapitalCharacter() throws SQLException, NoSuchAlgorithmException {
+        String oldPassword = Encryption.encryptPassword("password");
+        user.setConfirmedPassword("newpass@123");
+        user.setReconfirmedPassword("newpass@123");
+        when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
+        assertFalse("Password format is not correct", updateUserInformation.updateUserPassword
+                (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
+    }
+
+
+    @Test
+    @WithMockUser(username = "test@gmail.com")
+    public void validatingUpdatedPasswordHasAtleastOneSmallCharacter() throws SQLException, NoSuchAlgorithmException {
+        String oldPassword = Encryption.encryptPassword("password");
+        user.setConfirmedPassword("NEWPASSWORD@123");
+        user.setReconfirmedPassword("NEWPASSWORD@123");
+        when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
+        assertFalse("Password format is not correct", updateUserInformation.updateUserPassword
+                (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
+    }
+
 
 }

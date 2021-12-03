@@ -43,6 +43,8 @@ public class UpdateUserInformation {
         String email = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
         String currentPassword = userPersistence.getPassword(email);
         oldPassword = Encryption.encryptPassword(oldPassword);
+        System.out.println(confirmedPassword);
+        System.out.println(reconfirmPassword);
 
         //Validating the old password is not same as new password and new password is as same confirmed password and old password
         //is same as the current password
@@ -52,10 +54,12 @@ public class UpdateUserInformation {
             if (emailPasswordValidation.validatePasswordFormat()) {
                 userPersistence.userUpdatedPassword(reconfirmPassword,email);
             }
-
-
+            else {
+                System.out.println("Password format is not correct");
+            }
         }
         else {
+            System.out.println("Password don't match");
             throw new NoSuchAlgorithmException("Password don't match");
         }
         return false;
