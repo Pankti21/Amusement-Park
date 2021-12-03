@@ -4,33 +4,16 @@ import com.team5.HAPark.order.DAO.IOrderPersistence;
 import com.team5.HAPark.order.DAO.IOrderPersistenceFactory;
 import com.team5.HAPark.order.DAO.OrderPersistenceFactory;
 import com.team5.HAPark.order.model.*;
-import com.team5.HAPark.database.mysql.MySQLDatabase;
 
 public class TicketOrderFactory implements IOrderFactory {
 
-    private IOrderPersistenceFactory orderPersistenceFactory;
-
-    public TicketOrderFactory() {
-        this.orderPersistenceFactory = new OrderPersistenceFactory();
+    @Override
+    public IOrderService createOrderService() {
+        return new OrderService(createTicketOrderPersistence());
     }
 
-    @Override
-    public IOrderService createOrderService(IOrderPersistence orderPersistence) {
-        return new OrderService(orderPersistence);
-    }
-
-    @Override
-    public IOrder createOrder() {
-        return new Order();
-    }
-
-    @Override
-    public IOrderItem createOrderItem() {
-        return new OrderItem();
-    }
-
-    @Override
-    public IOrderPersistence createOrderPersistence(MySQLDatabase database) {
+    private IOrderPersistence createTicketOrderPersistence() {
+        IOrderPersistenceFactory orderPersistenceFactory = new OrderPersistenceFactory();
         return orderPersistenceFactory.createTicketOrderPersistence();
     }
 }

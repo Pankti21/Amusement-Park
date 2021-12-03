@@ -39,8 +39,7 @@ public class SubmitOrderController {
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         TicketOrderFactory orderFactory = new TicketOrderFactory();
-        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
-        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
+        IOrderService orderService = orderFactory.createOrderService();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email= authentication.getName();
@@ -63,8 +62,7 @@ public class SubmitOrderController {
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         FoodOrderFactory orderFactory = new FoodOrderFactory();
-        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
-        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
+        IOrderService orderService = orderFactory.createOrderService();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email= authentication.getName();

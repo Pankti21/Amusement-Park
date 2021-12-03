@@ -1,6 +1,5 @@
 package com.team5.HAPark.order.controller;
 
-import com.team5.HAPark.order.DAO.IOrderPersistence;
 import com.team5.HAPark.order.FoodOrderFactory;
 import com.team5.HAPark.order.model.IOrder;
 import com.team5.HAPark.order.model.IOrderService;
@@ -23,8 +22,7 @@ public class FoodOrderController {
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         FoodOrderFactory orderFactory = new FoodOrderFactory();
-        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
-        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
+        IOrderService orderService = orderFactory.createOrderService();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email= authentication.getName();

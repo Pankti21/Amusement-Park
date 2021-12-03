@@ -1,6 +1,5 @@
 package com.team5.HAPark.order.controller;
 
-import com.team5.HAPark.order.DAO.IOrderPersistence;
 import com.team5.HAPark.order.TicketOrderFactory;
 import com.team5.HAPark.order.model.IOrder;
 import com.team5.HAPark.order.model.IOrderService;
@@ -23,8 +22,7 @@ public class TicketOrderController {
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         TicketOrderFactory orderFactory = new TicketOrderFactory();
-        IOrderPersistence orderPersistence = orderFactory.createOrderPersistence(dataBase);
-        IOrderService orderService = orderFactory.createOrderService(orderPersistence);
+        IOrderService orderService = orderFactory.createOrderService();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email= authentication.getName();
