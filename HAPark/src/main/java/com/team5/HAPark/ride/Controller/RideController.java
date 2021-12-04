@@ -1,10 +1,10 @@
 package com.team5.HAPark.ride.Controller;
 
+import com.team5.HAPark.ReserveRide.Model.RideReserveService;
 import com.team5.HAPark.ride.Model.*;
-import com.team5.HAPark.ride.Persistence.*;
+import com.team5.HAPark.ride.Persistence.IRidePersistence;
+import com.team5.HAPark.ride.Persistence.RidePersistenceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
@@ -19,38 +19,12 @@ public class RideController {
     private RideService rideService;
 
     @Autowired
-    WaitTimeService waitTimeService=new WaitTimeService();
+    WaitTimeService waitTimeService = new WaitTimeService();
 
     @GetMapping("/rides")
     public String rides(Model model) throws SQLException {
         RideReserveService rideReserveService=new RideReserveService();
         return "RideMainPage";
-    }
-
-    @GetMapping("/reserve")
-    public String reserveForm(Model model) throws SQLException {
-        model.addAttribute("allrides", rideService.getAllRides());
-        model.addAttribute("ride",new RideReserve());
-        model.addAttribute("maps",rideService.getAllTimeSlots());
-        return "RideForm";
-    }
-
-    @PostMapping("/reserved")
-    public String submitForm(Model model,@ModelAttribute("ride") RideReserve ride) throws SQLException {
-        IRideReservePersistence rideReservePersistence = new RidePersistenceFactory().createRideReservePersistence();
-        IRideReserveService rideReserveService=new RideReserveService(rideReservePersistence);
-        //https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
-        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
-        String username = currentUser.getName();
-        log.info("{}",username);
-        log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
-        //Reduces availability of rides
-        rideReserveService.reserveSeats(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
-        //Saves to database
-        rideReserveService.reserve(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
-        model.addAttribute("rideReserved",rideService.getRide(ride.getRideId()));
-        model.addAttribute("timeslot",rideService.getTimeSlotName(ride.getTimeslotId()));
-        return "RideReserved";
     }
 
     @GetMapping("/rides/waittime")
@@ -82,13 +56,5 @@ public class RideController {
     public String waterRides(Model model) throws SQLException {
         model.addAttribute("waterrides",rideService.getAllWaterRides());
         return "WaterRides";
-    }
-
-    @GetMapping("/reservations")
-    public String getAllReservations(Model model) throws SQLException {
-        IRideReservePersistence rideReservePersistence = new RidePersistenceFactory().createRideReservePersistence();
-        IRideReserveService rideReserveService = new RideReserveService(rideReservePersistence);
-        model.addAttribute("reservations",rideReserveService.getReservations());
-        return "RideReservations";
     }
 }

@@ -1,9 +1,11 @@
-package com.team5.HAPark.ride.Persistence;
+package com.team5.HAPark.ReserveRide.Persistence;
 
+import com.team5.HAPark.ReserveRide.Model.RideReserve;
+import com.team5.HAPark.ReserveRide.Persistence.IRideReservePersistence;
 import com.team5.HAPark.database.mysql.IMySQLDatabase;
-import com.team5.HAPark.ride.Model.RideReserve;
 import com.team5.HAPark.ride.Model.TimeSlot;
-import com.team5.HAPark.database.mysql.MySQLDatabase;
+import com.team5.HAPark.ride.Persistence.IRidePersistence;
+import com.team5.HAPark.ride.Persistence.RidePersistence;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

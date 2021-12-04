@@ -1,6 +1,6 @@
-package com.team5.HAPark.ride.Persistence;
+package com.team5.HAPark.ReserveRide.Persistence;
 
-import com.team5.HAPark.ride.Model.RideReserve;
+import com.team5.HAPark.ReserveRide.Model.RideReserve;
 
 import java.sql.SQLException;
 import java.util.List;

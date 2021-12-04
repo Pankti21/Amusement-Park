@@ -1,7 +1,9 @@
 package com.team5.HAPark.ride;
 
-import com.team5.HAPark.ride.Model.*;
-import com.team5.HAPark.ride.Persistence.IRideReservePersistence;
+import com.team5.HAPark.ReserveRide.Model.IRideReserveService;
+import com.team5.HAPark.ReserveRide.Model.RideReserve;
+import com.team5.HAPark.ReserveRide.Model.RideReserveService;
+import com.team5.HAPark.ReserveRide.Persistence.IRideReservePersistence;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
