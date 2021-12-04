@@ -55,13 +55,17 @@ public class CartSummary implements ICartSummary{
     //Adding the tickets to cart
     @Override
     public void addTicketToCart(TicketOrderItem ticket) {
-        this.ticket.add(ticket);
+        if (ticket.getQuantity()!=null && ticket.getQuantity()>0){
+            this.ticket.add(ticket);
+        }
     }
 
     //Adding the food items to cart
     @Override
     public void addFoodToCart(FoodOrderItem food) {
-        this.food.add(food);
+        if (food.getQuantity()!=null && food.getQuantity()>0){
+            this.food.add(food);
+        }
     }
 
     //Display the cart items

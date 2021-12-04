@@ -35,10 +35,7 @@ public class MenuController {
     public RedirectView addFoodsToCart(@ModelAttribute("foodOrderList") FoodOrderList foodOrderList, RedirectAttributes redirectAttributes){
 
         for(FoodOrderItem foodOrderItem: foodOrderList.getFoodOrderList()){
-
-            if (foodOrderItem.getQuantity()!=null && foodOrderItem.getQuantity()>0){
                 cart.addFoodToCart(foodOrderItem);
-            }
         }
         redirectAttributes.addFlashAttribute("message", "Cart updated");
         return new RedirectView("/menu");

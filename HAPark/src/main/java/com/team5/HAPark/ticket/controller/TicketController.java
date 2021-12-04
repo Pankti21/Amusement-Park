@@ -44,10 +44,7 @@ public class TicketController {
     public RedirectView addTicketsToCart(@ModelAttribute("ticketOrderList") TicketOrderList ticketOrderList, RedirectAttributes redirectAttributes){
 
         for(TicketOrderItem ticketOrderItem: ticketOrderList.getTicketOrderList()){
-
-            if (ticketOrderItem.getQuantity()!=null && ticketOrderItem.getQuantity()>0){
                 cart.addTicketToCart(ticketOrderItem);
-            }
         }
         redirectAttributes.addFlashAttribute("message", "Cart updated");
         return new RedirectView("/tickets");
