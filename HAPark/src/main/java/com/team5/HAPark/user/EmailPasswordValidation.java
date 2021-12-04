@@ -1,6 +1,6 @@
 package com.team5.HAPark.user;
 
-public class EmailPasswordValidation {
+public class EmailPasswordValidation implements IEmailPasswordValidation{
 
     private final User user;
     public EmailPasswordValidation(User user) {this.user = user;}

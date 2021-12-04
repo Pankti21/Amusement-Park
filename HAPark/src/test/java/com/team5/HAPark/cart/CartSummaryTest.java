@@ -24,49 +24,49 @@ class CartSummaryTest {
     }
 
     @Test
-    void addTicketToCart() {
+    void validateIfTicketsAreAddedToCart() {
         cartSummary.addTicketToCart(ticketOrderItem);
         ArrayList<TicketOrderItem> ticketOrderItemList = cartSummary.getTicket();
         assertTrue(ticketOrderItemList.contains(ticketOrderItem));
     }
 
     @Test
-    void addFoodToCart() {
+    void validateIfFoodIsAddedToCart() {
         cartSummary.addFoodToCart(foodOrderItem);
         List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertTrue(foodOrderItemsList.contains(foodOrderItem));
     }
 
     @Test
-    void removeTicketFromCart() {
+    void validateIfTicketsAreRemovedToCart() {
         cartSummary.removeTicketFromCart(ticketOrderItem);
         ArrayList<TicketOrderItem> ticketOrderItemList = cartSummary.getTicket();
         assertFalse(ticketOrderItemList.contains(ticketOrderItem));
     }
 
     @Test
-    void removeFoodFromCart() {
+    void validateIfFoodAreRemovedToCart() {
         cartSummary.removeFoodFromCart(foodOrderItem);
         List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertFalse(foodOrderItemsList.contains(foodOrderItem));
     }
 
     @Test
-    void getTicketAmount() {
+    void validateIfTicketsAmountIsCalculatedCorrectly() {
         cartSummary.getTicketAmount();
         ArrayList<TicketOrderItem> ticketOrderItemList = cartSummary.getTicket();
         assertFalse(ticketOrderItemList.contains(ticketOrderItem));
     }
 
     @Test
-    void getFoodAmount() {
+    void validateIfFoodAmountIsCalculatedCorrectly() {
         cartSummary.getFoodAmount();
         List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertFalse(foodOrderItemsList.contains(foodOrderItem));
     }
 
     @Test
-    void getTotalAmount() {
+    void validateIfTotalAmountIsCalculatedCorrectly() {
         double cartAmount = cartSummary.getTotalAmount();
         double ticketAmount = cartSummary.getTicketAmount();
         double foodAmount = cartSummary.getFoodAmount();
@@ -74,7 +74,7 @@ class CartSummaryTest {
     }
 
     @Test
-    void empty() {
+    void validateCartIsEmpty() {
         cartSummary.addFoodToCart(foodOrderItem);
         cartSummary.addTicketToCart(ticketOrderItem);
         cartSummary.empty();

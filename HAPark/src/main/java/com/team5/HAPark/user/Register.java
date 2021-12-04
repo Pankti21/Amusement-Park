@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class Register {
 
     private final User user;
-    private final EmailPasswordValidation emailPasswordValidation ;
+    private final IEmailPasswordValidation emailPasswordValidation ;
 
     public Register(User user) {
         this.user = user;
