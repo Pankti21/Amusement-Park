@@ -1,6 +1,6 @@
 package com.team5.HAPark.ticket.DAO;
 
-import com.team5.HAPark.database.mysql.MySQLDatabase;
+import com.team5.HAPark.Database.mysql.MySQLDatabase;
 
 public class TicketPersistenceFactory implements ITicketPersistenceFactory{
 

@@ -1,7 +1,7 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.User;
 
 
-import com.team5.HAPark.user.DAO.IUserPersistence;
+import com.team5.HAPark.User.DAO.IUserPersistence;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 

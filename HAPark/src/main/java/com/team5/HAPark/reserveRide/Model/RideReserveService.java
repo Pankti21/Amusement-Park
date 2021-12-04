@@ -1,6 +1,6 @@
 package com.team5.HAPark.reserveRide.Model;
 
-import com.team5.HAPark.ride.Persistence.RidePersistenceFactory;
+import com.team5.HAPark.Ride.Persistence.RidePersistenceFactory;
 import com.team5.HAPark.reserveRide.Persistence.IRideReservePersistence;
 import org.springframework.stereotype.Service;
 

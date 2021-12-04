@@ -1,4 +1,4 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.User;
 
 import org.junit.jupiter.api.Test;
 

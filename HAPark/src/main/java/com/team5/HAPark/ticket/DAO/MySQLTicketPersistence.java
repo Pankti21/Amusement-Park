@@ -1,6 +1,6 @@
 package com.team5.HAPark.ticket.DAO;
 
-import com.team5.HAPark.database.mysql.IMySQLDatabase;
+import com.team5.HAPark.Database.mysql.IMySQLDatabase;
 import com.team5.HAPark.ticket.Ticket;
 
 import java.sql.Connection;

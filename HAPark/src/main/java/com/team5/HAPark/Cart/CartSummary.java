@@ -1,6 +1,6 @@
 package com.team5.HAPark.Cart;
 
-import com.team5.HAPark.food.FoodOrderItem;
+import com.team5.HAPark.Food.FoodOrderItem;
 import com.team5.HAPark.ticket.TicketOrderItem;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
