@@ -1,7 +1,7 @@
 package com.team5.HAPark.Ticket.model;
 
 import com.team5.HAPark.Ticket.DAO.ITicketPersistence;
-import com.team5.HAPark.Ticket.model.Ticket;
+import com.team5.HAPark.Ticket.ITicketService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -22,12 +22,14 @@ public class TicketService implements ITicketService {
         return ticket;
     }
 
-       @Override
-       public List<Ticket> getAllTickets() throws SQLException {
+    @Override
+    public List<Ticket> getAllTickets() throws SQLException {
         List<Ticket> Tickets =ticketPersistence.getAllTickets();
         return Tickets;
     }
-    }
+}
+
+
 
 
 

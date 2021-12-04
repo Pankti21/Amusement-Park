@@ -4,7 +4,7 @@ import com.team5.HAPark.Database.mysql.MySQLDatabase;
 import com.team5.HAPark.Food.IFoodService;
 import com.team5.HAPark.Ticket.DAO.TicketPersistenceFactory;
 import com.team5.HAPark.Ticket.ITicketService;
-import com.team5.HAPark.Ticket.TicketService;
+import com.team5.HAPark.Ticket.model.TicketService;
 
 public class OrderPersistenceFactory implements IOrderPersistenceFactory{
 

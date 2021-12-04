@@ -1,6 +1,6 @@
 package com.team5.HAPark.User.DAO;
 
-import com.team5.HAPark.Database.mysql.MySQLDatabase;
+import com.team5.HAPark.Database.mysql.IMySQLDatabase;
 import com.team5.HAPark.User.User;
 
 import java.sql.CallableStatement;
@@ -9,9 +9,9 @@ import java.sql.Types;
 
 public class MySQLUserPersistence implements IUserPersistence {
 
-    private final MySQLDatabase mySQLDatabase;
+    private final IMySQLDatabase mySQLDatabase;
 
-    public MySQLUserPersistence(MySQLDatabase mySQLDatabase){
+    public MySQLUserPersistence(IMySQLDatabase mySQLDatabase){
         this.mySQLDatabase = mySQLDatabase;
     }
 

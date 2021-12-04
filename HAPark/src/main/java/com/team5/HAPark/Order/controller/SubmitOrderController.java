@@ -1,6 +1,6 @@
 package com.team5.HAPark.Order.controller;
 
-import com.team5.HAPark.Cart.CartSummary;
+import com.team5.HAPark.Cart.model.CartSummary;
 import com.team5.HAPark.Food.DAO.FoodPersistenceFactory;
 import com.team5.HAPark.Food.DAO.IFoodPersistenceFactory;
 import com.team5.HAPark.Food.FoodOrderItem;
@@ -14,9 +14,10 @@ import com.team5.HAPark.Order.model.TicketOrderItemAdapter;
 import com.team5.HAPark.Ticket.DAO.ITicketPersistenceFactory;
 import com.team5.HAPark.Ticket.DAO.TicketPersistenceFactory;
 import com.team5.HAPark.Ticket.ITicketService;
-import com.team5.HAPark.Ticket.TicketOrderItem;
+import com.team5.HAPark.Ticket.model.TicketOrderItem;
 import com.team5.HAPark.Database.mysql.MySQLDatabase;
-import com.team5.HAPark.Ticket.TicketService;
+
+import com.team5.HAPark.Ticket.model.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,18 +1,12 @@
 package com.team5.HAPark.Ticket.controller;
 
-<<<<<<< HEAD:HAPark/src/main/java/com/team5/HAPark/ticket/TicketController.java
-import com.team5.HAPark.Cart.CartSummary;
 import com.team5.HAPark.Database.mysql.MySQLDatabase;
 import com.team5.HAPark.Ticket.DAO.TicketPersistenceFactory;
-=======
 import com.team5.HAPark.Cart.model.CartSummary;
-import com.team5.HAPark.Ticket.DAO.MySQLTicketPersistence;
 import com.team5.HAPark.Ticket.model.Ticket;
 import com.team5.HAPark.Ticket.model.TicketOrderItem;
 import com.team5.HAPark.Ticket.model.TicketOrderList;
 import com.team5.HAPark.Ticket.model.TicketService;
-import com.team5.HAPark.database.mysql.MySQLDatabase;
->>>>>>> subfeature_Cart_Summary:HAPark/src/main/java/com/team5/HAPark/ticket/controller/TicketController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

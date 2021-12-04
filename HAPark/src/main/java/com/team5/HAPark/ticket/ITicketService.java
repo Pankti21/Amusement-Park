@@ -1,5 +1,7 @@
 package com.team5.HAPark.Ticket;
 
+import com.team5.HAPark.Ticket.model.Ticket;
+
 import java.sql.SQLException;
 import java.util.List;
 

@@ -1,11 +1,7 @@
 package com.team5.HAPark.Ticket.DAO;
 
-
+import com.team5.HAPark.Database.mysql.IMySQLDatabase;
 import com.team5.HAPark.Ticket.model.Ticket;
-
-
-import com.team5.HAPark.database.mysql.MySQLDatabase;
-
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,11 +12,12 @@ import java.util.List;
 
 public class MySQLTicketPersistence implements ITicketPersistence{
 
-    MySQLDatabase mySQLDatabase = new MySQLDatabase();
+    private final IMySQLDatabase mySQLDatabase;
 
-    public MySQLTicketPersistence(MySQLDatabase database) {
+    public MySQLTicketPersistence(IMySQLDatabase database) {
         this.mySQLDatabase = database;
     }
+
     public Ticket loadTicket(String type) throws SQLException {
 
         Ticket ticket = null;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,36 +8,31 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<div th:replace="Header :: header"/>
 <div class="main">
     <!--inserting main text on the main page-->
-    MAIN PAGE
+    <p>MAIN PAGE</p>
 </div>
 <div class="container_class">
 
     <div class="main_container">
 
         <!--inserting buttons on the welcome page-->
-        <button class="waitcoaster-class" style="background-color:rgb(167, 159, 211)" type="button" >
-            Coaster Waitlist
+
+        <button onclick="location.href='/rides'" type="button" style="background-color:rgb(167, 159, 211)">
+            Rides</button>
+
+        <button onclick="location.href='/menu'" style="background-color:rgb(167, 159, 211)" type="button" >
+            Menu
         </button>
 
-        <button class="waitwaterrides-class" style="background-color: rgb(167, 159, 211)" type="button" >
-            Water Ride Waitlist
+        <button onclick="location.href='/tickets'" style="background-color:rgb(167, 159, 211)" type="button" >
+            Tickets
         </button>
     </div>
-
-    <br><br>
-
-    <!--inserting images on the welcome page
-    <a href="http://127.0.0.1:5500/WelcomePage.html#" target="_blank"><img class = "mainimg-class" src="pics/m1.jpg"  alt="HAP Roller coaster" > </a>
-    <a href="http://127.0.0.1:5500/WelcomePage.html#" target="_blank"><img class = "mainimg2-class" src="pics/water.jfif" alt="HAP Water ride"> </a>
-    <a href="http://127.0.0.1:5500/WelcomePage.html#" target="_blank"><img class = "mainimg3-class" src="pics/food.jfif" alt="HAP Food"> </a>
--->
-
-</div>
 </div>
 </body>
-
 </html>
+
 
 
