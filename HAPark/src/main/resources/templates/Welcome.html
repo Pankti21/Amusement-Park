@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,13 +17,21 @@
 <div class="container">
 
     <!--inserting buttons on the welcome page-->
-    <button onclick="location.href='/main'" type="button" style="background-color:rgb(167, 159, 211)">
-        Proceed As Guest</button>
-    <button onclick="location.href='/login'" type="button" style="background-color:rgb(167, 159, 211)">
-       Login</button>
-    <button onclick="location.href='/register'" type="button" style="background-color:rgb(167, 159, 211)">
-        Register</button>
-    <br/>
+    <button class="guestbutton-class" style="background-color:rgb(167, 159, 211)" type="button" >
+        Proceed As Guest
+    </button>
+
+    <button class="loginbutton-class" style="background-color: rgb(167, 159, 211)" type="button">
+        Login
+    </button>
+
+    <br></br>
+
+    <!--inserting images on the welcome page-
+    <img class = "img-class" src="pics/1.png"  alt="HAP Roller coaster" >
+    <img class = "img2-class" src="pics/2.jfif" alt="HAP Water ride">
+    <img class = "img3-class" src="pics/3.jpg" alt="HAP Food">-->
+
 
 </div>
 </body>

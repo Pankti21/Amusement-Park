@@ -7,7 +7,7 @@ import com.team5.HAPark.Database.mysql.MySQLDatabase;
 import com.team5.HAPark.Ticket.DAO.ITicketPersistenceFactory;
 import com.team5.HAPark.Ticket.DAO.TicketPersistenceFactory;
 import com.team5.HAPark.Ticket.ITicketService;
-import com.team5.HAPark.Ticket.TicketService;
+import com.team5.HAPark.Ticket.model.TicketService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

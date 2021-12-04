@@ -1,7 +1,7 @@
-package com.team5.HAPark.Cart;
+package com.team5.HAPark.Cart.model;
 
 import com.team5.HAPark.Food.FoodOrderItem;
-import com.team5.HAPark.Ticket.TicketOrderItem;
+import com.team5.HAPark.Ticket.model.TicketOrderItem;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -10,7 +10,7 @@ import java.util.ListIterator;
 
 @Component
 @SessionScope
-public class CartSummary {
+public class CartSummary implements ICartSummary{
     private ArrayList<TicketOrderItem> ticket;
 
     public ArrayList<TicketOrderItem> getTicket() {
@@ -53,16 +53,19 @@ public class CartSummary {
     }
 
     //Adding the tickets to cart
+    @Override
     public void addTicketToCart(TicketOrderItem ticket) {
         this.ticket.add(ticket);
     }
 
     //Adding the food items to cart
+    @Override
     public void addFoodToCart(FoodOrderItem food) {
         this.food.add(food);
     }
 
     //Display the cart items
+    @Override
     public void showCart() {
         ListIterator<TicketOrderItem> ticketIterator = ticket.listIterator();
         ListIterator<FoodOrderItem> foodIterator = food.listIterator();
@@ -75,6 +78,7 @@ public class CartSummary {
     }
 
     //Remove tickets from cart
+    @Override
     public void removeTicketFromCart(TicketOrderItem t) {
         ListIterator<TicketOrderItem> ticketIterator = ticket.listIterator();
         while (ticketIterator.hasNext()) {
@@ -90,6 +94,7 @@ public class CartSummary {
     }
 
     //Remove Food items from cart
+    @Override
     public void removeFoodFromCart(FoodOrderItem f) {
         ListIterator<FoodOrderItem> foodIterator = food.listIterator();
         while  (foodIterator.hasNext()){
@@ -105,6 +110,7 @@ public class CartSummary {
     }
 
     //Get the tickets amount
+    @Override
     public double getTicketAmount() {
         ListIterator<TicketOrderItem> ticketIterator = ticket.listIterator();
         this.ticketAmount = 0;
@@ -116,6 +122,7 @@ public class CartSummary {
         }
 
     //Get the Food items amount
+    @Override
     public double getFoodAmount() {
         ListIterator<FoodOrderItem> foodIterator = food.listIterator();
         this.foodAmount = 0;
@@ -128,6 +135,7 @@ public class CartSummary {
 
 
     //Get the total amount to be paid
+    @Override
     public double getTotalAmount() {
         totalAmount = getTicketAmount() + getFoodAmount();
         return this.totalAmount;

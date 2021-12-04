@@ -1,8 +1,8 @@
 package com.team5.HAPark.Food;
 
-import com.team5.HAPark.Cart.CartSummary;
 import com.team5.HAPark.Food.DAO.FoodPersistenceFactory;
 import com.team5.HAPark.Database.mysql.MySQLDatabase;
+import com.team5.HAPark.Cart.model.CartSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,7 @@ public class MenuController {
         Menu menu = foodService.getMenu();
         dataBase.close();
 
-        model.addAttribute("menu",menu.getFoodList());
+        model.addAttribute("menu", menu.getFoodList());
 
         return "Menu";
     }

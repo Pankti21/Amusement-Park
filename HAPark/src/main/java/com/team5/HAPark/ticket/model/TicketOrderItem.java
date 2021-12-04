@@ -1,4 +1,6 @@
-package com.team5.HAPark.Ticket;
+package com.team5.HAPark.Ticket.model;
+
+import com.team5.HAPark.Ticket.model.Ticket;
 
 public class TicketOrderItem {
     private Ticket ticket;
@@ -41,6 +43,10 @@ public class TicketOrderItem {
     public double getTicketPrice() {
         double ticketPrice = ticket.getTicketPrice();
         return ticketPrice;
+    }
+
+    public double getTotalPrice() {
+        return getTicketPrice() * getQuantity();
     }
 
     public void setTicketPrice(double ticketPrice) {

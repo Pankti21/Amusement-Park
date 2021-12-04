@@ -1,7 +1,11 @@
 package com.team5.HAPark.Ticket.DAO;
 
-import com.team5.HAPark.Database.mysql.IMySQLDatabase;
-import com.team5.HAPark.Ticket.Ticket;
+
+import com.team5.HAPark.Ticket.model.Ticket;
+
+
+import com.team5.HAPark.database.mysql.MySQLDatabase;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,14 +14,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLTicketPersistence implements ITicketPersistence {
+public class MySQLTicketPersistence implements ITicketPersistence{
 
-    private final IMySQLDatabase mySQLDatabase;
+    MySQLDatabase mySQLDatabase = new MySQLDatabase();
 
-    public MySQLTicketPersistence(IMySQLDatabase database) {
+    public MySQLTicketPersistence(MySQLDatabase database) {
         this.mySQLDatabase = database;
     }
-
     public Ticket loadTicket(String type) throws SQLException {
 
         Ticket ticket = null;
@@ -28,7 +31,7 @@ public class MySQLTicketPersistence implements ITicketPersistence {
         try {
 
             statement = connection.createStatement();
-            resultSet =  statement.executeQuery("SELECT * FROM ticket WHERE ticket_type = '"+type+"';");
+            resultSet =  statement.executeQuery("SELECT * FROM ticket WHERE ticket_type = "+type+";");
 
             while(resultSet.next()){
                 String ticketType = resultSet.getString("ticket_type");
@@ -55,7 +58,7 @@ public class MySQLTicketPersistence implements ITicketPersistence {
 
     @Override
     public List<Ticket> getAllTickets() throws SQLException {
-        List<Ticket> Tickets= new ArrayList<>();
+        List<Ticket> Tickets= new ArrayList<Ticket>();
         Connection con=mySQLDatabase.getConnection();
         Statement stmt= con.createStatement();
         ResultSet rs= stmt.executeQuery("SELECT * FROM ticket;");
