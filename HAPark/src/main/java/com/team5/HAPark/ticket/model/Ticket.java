@@ -1,4 +1,4 @@
-package com.team5.HAPark.Ticket.model;
+package com.team5.HAPark.ticket.model;
 
 public class Ticket {
 

@@ -1,4 +1,4 @@
-package com.team5.HAPark.User.DAO;
+package com.team5.HAPark.user.DAO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
