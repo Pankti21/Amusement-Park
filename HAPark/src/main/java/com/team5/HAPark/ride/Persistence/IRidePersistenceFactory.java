@@ -1,6 +1,6 @@
 package com.team5.HAPark.ride.Persistence;
 
-import com.team5.HAPark.ReserveRide.Persistence.IRideReservePersistence;
+import com.team5.HAPark.reserveRide.Persistence.IRideReservePersistence;
 import com.team5.HAPark.ride.Persistence.WaitTime.IWaitTimePersistence;
 
 public interface IRidePersistenceFactory {

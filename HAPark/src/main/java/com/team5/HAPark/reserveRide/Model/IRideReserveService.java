@@ -1,4 +1,4 @@
-package com.team5.HAPark.ReserveRide.Model;
+package com.team5.HAPark.reserveRide.Model;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.team5.HAPark.ReserveRide.Model;
+package com.team5.HAPark.reserveRide.Model;
 
 import com.team5.HAPark.ride.Persistence.RidePersistenceFactory;
-import com.team5.HAPark.ReserveRide.Persistence.IRideReservePersistence;
+import com.team5.HAPark.reserveRide.Persistence.IRideReservePersistence;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;

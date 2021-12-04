@@ -1,7 +1,6 @@
-package com.team5.HAPark.ReserveRide.Persistence;
+package com.team5.HAPark.reserveRide.Persistence;
 
-import com.team5.HAPark.ReserveRide.Model.RideReserve;
-import com.team5.HAPark.ReserveRide.Persistence.IRideReservePersistence;
+import com.team5.HAPark.reserveRide.Model.RideReserve;
 import com.team5.HAPark.database.mysql.IMySQLDatabase;
 import com.team5.HAPark.ride.Model.TimeSlot;
 import com.team5.HAPark.ride.Persistence.IRidePersistence;

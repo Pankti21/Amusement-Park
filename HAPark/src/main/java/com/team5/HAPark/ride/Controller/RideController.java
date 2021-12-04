@@ -1,6 +1,6 @@
 package com.team5.HAPark.ride.Controller;
 
-import com.team5.HAPark.ReserveRide.Model.RideReserveService;
+import com.team5.HAPark.reserveRide.Model.RideReserveService;
 import com.team5.HAPark.ride.Model.*;
 import com.team5.HAPark.ride.Persistence.IRidePersistence;
 import com.team5.HAPark.ride.Persistence.RidePersistenceFactory;

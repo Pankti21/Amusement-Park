@@ -1,4 +1,4 @@
-package com.team5.HAPark.ReserveRide.Model;
+package com.team5.HAPark.reserveRide.Model;
 
 public class RideReserve {
     private int rideId;
