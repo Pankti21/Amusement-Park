@@ -1,7 +1,6 @@
 package com.team5.HAPark.ticket;
 
-import com.team5.HAPark.cart.CartSummary;
-import com.team5.HAPark.ticket.DAO.MySQLTicketPersistence;
+import com.team5.HAPark.Cart.CartSummary;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
