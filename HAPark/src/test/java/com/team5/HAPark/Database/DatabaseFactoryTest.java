@@ -1,4 +1,4 @@
-package com.team5.HAPark.database;
+package com.team5.HAPark.Database;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

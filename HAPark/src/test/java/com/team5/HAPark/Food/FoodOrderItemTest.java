@@ -1,4 +1,4 @@
-package com.team5.HAPark.food;
+package com.team5.HAPark.Food;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

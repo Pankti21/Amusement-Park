@@ -1,4 +1,4 @@
-package com.team5.HAPark.ticket;
+package com.team5.HAPark.Ticket;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

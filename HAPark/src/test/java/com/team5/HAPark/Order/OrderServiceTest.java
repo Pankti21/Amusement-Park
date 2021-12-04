@@ -1,9 +1,9 @@
-package com.team5.HAPark.order;
+package com.team5.HAPark.Order;
 
-import com.team5.HAPark.order.DAO.IOrderPersistence;
-import com.team5.HAPark.order.model.*;
-import com.team5.HAPark.ticket.Ticket;
-import com.team5.HAPark.ticket.TicketOrderItem;
+import com.team5.HAPark.Order.DAO.IOrderPersistence;
+import com.team5.HAPark.Order.model.*;
+import com.team5.HAPark.Ticket.Ticket;
+import com.team5.HAPark.Ticket.TicketOrderItem;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

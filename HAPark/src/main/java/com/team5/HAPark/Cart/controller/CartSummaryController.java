@@ -1,8 +1,8 @@
 package com.team5.HAPark.Cart.controller;
 
 import com.team5.HAPark.Food.Food;
-import com.team5.HAPark.ticket.Ticket;
-import com.team5.HAPark.ticket.TicketOrderItem;
+import com.team5.HAPark.Ticket.Ticket;
+import com.team5.HAPark.Ticket.TicketOrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
-package com.team5.HAPark.food;
+package com.team5.HAPark.Food;
 
-import com.team5.HAPark.food.DAO.IFoodPersistence;
+import com.team5.HAPark.Food.DAO.IFoodPersistence;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

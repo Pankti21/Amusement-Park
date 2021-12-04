@@ -1,7 +1,7 @@
-package com.team5.HAPark.order.DAO;
+package com.team5.HAPark.Order.DAO;
 
-import com.team5.HAPark.food.IFoodService;
-import com.team5.HAPark.ticket.ITicketService;
+import com.team5.HAPark.Food.IFoodService;
+import com.team5.HAPark.Ticket.ITicketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

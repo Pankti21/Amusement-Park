@@ -1,10 +1,10 @@
-package com.team5.HAPark.ride;
+package com.team5.HAPark.Ride;
 
-import com.team5.HAPark.ride.Model.IRideService;
-import com.team5.HAPark.ride.Model.Ride;
-import com.team5.HAPark.ride.Model.RideService;
-import com.team5.HAPark.ride.Model.TimeSlot;
-import com.team5.HAPark.ride.Persistence.IRidePersistence;
+import com.team5.HAPark.Ride.Model.IRideService;
+import com.team5.HAPark.Ride.Model.Ride;
+import com.team5.HAPark.Ride.Model.RideService;
+import com.team5.HAPark.Ride.Model.TimeSlot;
+import com.team5.HAPark.Ride.Persistence.IRidePersistence;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

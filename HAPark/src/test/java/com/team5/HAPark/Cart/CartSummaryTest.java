@@ -1,7 +1,7 @@
 package com.team5.HAPark.Cart;
 
 import com.team5.HAPark.Food.FoodOrderItem;
-import com.team5.HAPark.ticket.TicketOrderItem;
+import com.team5.HAPark.Ticket.TicketOrderItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

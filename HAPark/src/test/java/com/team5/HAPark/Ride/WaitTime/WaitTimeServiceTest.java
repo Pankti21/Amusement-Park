@@ -1,8 +1,8 @@
-package com.team5.HAPark.ride.WaitTime;
+package com.team5.HAPark.Ride.WaitTime;
 
-import com.team5.HAPark.ride.Model.*;
-import com.team5.HAPark.ride.Persistence.IRidePersistence;
-import com.team5.HAPark.ride.Persistence.WaitTime.IWaitTimePersistence;
+import com.team5.HAPark.Ride.Model.*;
+import com.team5.HAPark.Ride.Persistence.IRidePersistence;
+import com.team5.HAPark.Ride.Persistence.WaitTime.IWaitTimePersistence;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

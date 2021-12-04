@@ -1,7 +1,7 @@
-package com.team5.HAPark.order;
+package com.team5.HAPark.Order;
 
-import com.team5.HAPark.food.IFoodService;
-import com.team5.HAPark.order.model.*;
+import com.team5.HAPark.Food.IFoodService;
+import com.team5.HAPark.Order.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

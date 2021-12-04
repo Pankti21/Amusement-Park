@@ -1,7 +1,7 @@
-package com.team5.HAPark.ride.Persistence;
+package com.team5.HAPark.Ride.Persistence;
 
 import com.team5.HAPark.reserveRide.Persistence.IRideReservePersistence;
-import com.team5.HAPark.ride.Persistence.WaitTime.IWaitTimePersistence;
+import com.team5.HAPark.Ride.Persistence.WaitTime.IWaitTimePersistence;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

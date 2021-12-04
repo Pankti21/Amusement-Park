@@ -1,4 +1,4 @@
-package com.team5.HAPark.order.model;
+package com.team5.HAPark.Order.model;
 
 import org.junit.jupiter.api.Test;
 

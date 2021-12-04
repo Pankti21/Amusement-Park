@@ -2,9 +2,9 @@ package com.team5.HAPark.Order.DAO;
 
 import com.team5.HAPark.Database.mysql.MySQLDatabase;
 import com.team5.HAPark.Food.IFoodService;
-import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
-import com.team5.HAPark.ticket.ITicketService;
-import com.team5.HAPark.ticket.TicketService;
+import com.team5.HAPark.Ticket.DAO.TicketPersistenceFactory;
+import com.team5.HAPark.Ticket.ITicketService;
+import com.team5.HAPark.Ticket.TicketService;
 
 public class OrderPersistenceFactory implements IOrderPersistenceFactory{
 

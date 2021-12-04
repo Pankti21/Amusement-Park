@@ -1,7 +1,7 @@
-package com.team5.HAPark.ticket.DAO;
+package com.team5.HAPark.Ticket.DAO;
 
 import com.team5.HAPark.Database.mysql.IMySQLDatabase;
-import com.team5.HAPark.ticket.Ticket;
+import com.team5.HAPark.Ticket.Ticket;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLTicketPersistence implements ITicketPersistence{
+public class MySQLTicketPersistence implements ITicketPersistence {
 
     private final IMySQLDatabase mySQLDatabase;
 

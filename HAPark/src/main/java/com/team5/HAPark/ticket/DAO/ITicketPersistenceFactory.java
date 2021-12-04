@@ -1,4 +1,4 @@
-package com.team5.HAPark.ticket.DAO;
+package com.team5.HAPark.Ticket.DAO;
 
 public interface ITicketPersistenceFactory {
     ITicketPersistence createTicketPersistence();

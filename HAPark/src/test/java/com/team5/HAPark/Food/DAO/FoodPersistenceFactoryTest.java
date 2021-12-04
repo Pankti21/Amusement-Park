@@ -1,4 +1,4 @@
-package com.team5.HAPark.food.DAO;
+package com.team5.HAPark.Food.DAO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
