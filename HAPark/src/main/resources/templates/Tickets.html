@@ -17,7 +17,7 @@
 </table>
 <table  style="margin-left: auto; margin-right: auto;">
     <tbody>
-    <form action="#" th:action="@{/updateuserinformation/update}" method="post" th:object="${ticketOrderList}">
+    <form action="#" th:action="@{/tickets/update}" method="post" th:object="${ticketOrderList}">
         <tr th:each="ticket,stat : ${tickets}">
 
             <td style="height:50px; width:150px" th:text="${ticket.ticketType}" />

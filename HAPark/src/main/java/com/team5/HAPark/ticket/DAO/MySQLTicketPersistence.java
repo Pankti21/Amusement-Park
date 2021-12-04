@@ -28,7 +28,7 @@ public class MySQLTicketPersistence implements ITicketPersistence{
         try {
 
             statement = connection.createStatement();
-            resultSet =  statement.executeQuery("SELECT * FROM ticket WHERE ticket_type = "+type+";");
+            resultSet =  statement.executeQuery("SELECT * FROM ticket WHERE ticket_type = '"+type+"';");
 
             while(resultSet.next()){
                 String ticketType = resultSet.getString("ticket_type");
