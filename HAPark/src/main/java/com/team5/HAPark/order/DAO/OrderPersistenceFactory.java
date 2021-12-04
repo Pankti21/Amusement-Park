@@ -3,7 +3,9 @@ package com.team5.HAPark.order.DAO;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import com.team5.HAPark.food.DAO.FoodPersistenceFactory;
 import com.team5.HAPark.food.FoodService;
+import com.team5.HAPark.food.IFoodService;
 import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
+import com.team5.HAPark.ticket.ITicketService;
 import com.team5.HAPark.ticket.TicketService;
 
 public class OrderPersistenceFactory implements IOrderPersistenceFactory{
@@ -12,15 +14,15 @@ public class OrderPersistenceFactory implements IOrderPersistenceFactory{
     private static IOrderPersistence ticketOrderPersistence;
 
     @Override
-    public IOrderPersistence createFoodOrderPersistence() {
+    public IOrderPersistence createFoodOrderPersistence(IFoodService foodService) {
         if (foodOrderPersistence == null) {
-            foodOrderPersistence = new MySQLFoodOrderPersistence(MySQLDatabase.getInstance(),new FoodService(new FoodPersistenceFactory().createFoodPersistence()));
+            foodOrderPersistence = new MySQLFoodOrderPersistence(MySQLDatabase.getInstance(),foodService);
         }
         return foodOrderPersistence;
     }
 
     @Override
-    public IOrderPersistence createTicketOrderPersistence() {
+    public IOrderPersistence createTicketOrderPersistence(ITicketService ticketService) {
         if (ticketOrderPersistence == null) {
             ticketOrderPersistence = new MySQLTicketOrderPersistence(MySQLDatabase.getInstance(),new TicketService(new TicketPersistenceFactory().createTicketPersistence()));
         }

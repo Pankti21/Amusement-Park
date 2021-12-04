@@ -1,8 +1,10 @@
 package com.team5.HAPark.order;
 
+import com.team5.HAPark.food.IFoodService;
 import com.team5.HAPark.order.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +14,8 @@ class FoodOrderFactoryTest {
 
     @BeforeEach
     void setUp() {
-        foodOrderFactory = new FoodOrderFactory();
+        IFoodService foodService = Mockito.mock(IFoodService.class);
+        foodOrderFactory = new FoodOrderFactory(foodService);
     }
 
     @Test

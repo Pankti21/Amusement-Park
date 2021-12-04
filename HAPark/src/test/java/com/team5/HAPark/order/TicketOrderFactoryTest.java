@@ -1,8 +1,10 @@
 package com.team5.HAPark.order;
 
 import com.team5.HAPark.order.model.*;
+import com.team5.HAPark.ticket.ITicketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +14,8 @@ class TicketOrderFactoryTest {
 
     @BeforeEach
     void setUp() {
-        ticketOrderFactory = new TicketOrderFactory();
+        ITicketService ticketService = Mockito.mock(ITicketService.class);
+        ticketOrderFactory = new TicketOrderFactory(ticketService);
     }
 
     @Test

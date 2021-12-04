@@ -4,6 +4,10 @@ import com.team5.HAPark.order.TicketOrderFactory;
 import com.team5.HAPark.order.model.IOrder;
 import com.team5.HAPark.order.model.IOrderService;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
+import com.team5.HAPark.ticket.DAO.ITicketPersistenceFactory;
+import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
+import com.team5.HAPark.ticket.ITicketService;
+import com.team5.HAPark.ticket.TicketService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,7 +25,9 @@ public class TicketOrderController {
 
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
-        TicketOrderFactory orderFactory = new TicketOrderFactory();
+        ITicketPersistenceFactory ticketPersistenceFactory = new TicketPersistenceFactory();
+        ITicketService ticketService = new TicketService(ticketPersistenceFactory.createTicketPersistence());
+        TicketOrderFactory orderFactory = new TicketOrderFactory(ticketService);
         IOrderService orderService = orderFactory.createOrderService();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -1,5 +1,9 @@
 package com.team5.HAPark.order.controller;
 
+import com.team5.HAPark.food.DAO.FoodPersistenceFactory;
+import com.team5.HAPark.food.DAO.IFoodPersistenceFactory;
+import com.team5.HAPark.food.FoodService;
+import com.team5.HAPark.food.IFoodService;
 import com.team5.HAPark.order.FoodOrderFactory;
 import com.team5.HAPark.order.model.IOrder;
 import com.team5.HAPark.order.model.IOrderService;
@@ -21,7 +25,9 @@ public class FoodOrderController {
 
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
-        FoodOrderFactory orderFactory = new FoodOrderFactory();
+        IFoodPersistenceFactory foodPersistenceFactory = new FoodPersistenceFactory();
+        IFoodService foodService = new FoodService(foodPersistenceFactory.createFoodPersistence());
+        FoodOrderFactory orderFactory = new FoodOrderFactory(foodService);
         IOrderService orderService = orderFactory.createOrderService();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -1,7 +1,10 @@
 package com.team5.HAPark.order.DAO;
 
+import com.team5.HAPark.food.IFoodService;
+import com.team5.HAPark.ticket.ITicketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,14 +18,18 @@ class OrderPersistenceFactoryTest {
 
     @BeforeEach
     void setUp() {
+
+        IFoodService foodService = Mockito.mock(IFoodService.class);
+        ITicketService ticketService = Mockito.mock(ITicketService.class);
+
         OrderPersistenceFactory orderPersistenceFactory1 = new OrderPersistenceFactory();
         OrderPersistenceFactory orderPersistenceFactory2 = new OrderPersistenceFactory();
 
-        foodOrderPersistence1 = orderPersistenceFactory1.createFoodOrderPersistence();
-        foodOrderPersistence2 = orderPersistenceFactory2.createFoodOrderPersistence();
+        foodOrderPersistence1 = orderPersistenceFactory1.createFoodOrderPersistence(foodService);
+        foodOrderPersistence2 = orderPersistenceFactory2.createFoodOrderPersistence(foodService);
 
-        ticketOrderPersistence1 = orderPersistenceFactory1.createTicketOrderPersistence();
-        ticketOrderPersistence2 = orderPersistenceFactory2.createTicketOrderPersistence();
+        ticketOrderPersistence1 = orderPersistenceFactory1.createTicketOrderPersistence(ticketService);
+        ticketOrderPersistence2 = orderPersistenceFactory2.createTicketOrderPersistence(ticketService);
     }
 
     @Test
