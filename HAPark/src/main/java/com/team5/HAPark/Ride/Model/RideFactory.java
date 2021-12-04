@@ -1,4 +1,4 @@
-package com.team5.HAPark.Ride.Model;
+package com.team5.HAPark.ride.Model;
 
 public class RideFactory {
     public Ride getRide(String ride){

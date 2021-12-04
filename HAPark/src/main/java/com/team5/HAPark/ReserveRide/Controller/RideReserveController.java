@@ -4,8 +4,8 @@ import com.team5.HAPark.ReserveRide.Model.IRideReserveService;
 import com.team5.HAPark.ReserveRide.Model.RideReserve;
 import com.team5.HAPark.ReserveRide.Model.RideReserveService;
 import com.team5.HAPark.ReserveRide.Persistence.IRideReservePersistence;
-import com.team5.HAPark.ReserveRide.Persistence.RideReservePersistence;
-import com.team5.HAPark.Ride.Model.RideService;
+import com.team5.HAPark.ride.Model.RideService;
+import com.team5.HAPark.ride.Persistence.RidePersistenceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -34,8 +34,9 @@ public class RideReserveController {
 
     @PostMapping("/reserved")
     public String submitForm(Model model,@ModelAttribute("ride") RideReserve ride) throws SQLException {
-        IRideReservePersistence rideReservePersistence=new RideReservePersistence();
-        IRideReserveService rideReserveService=new RideReserveService(rideReservePersistence);
+        RidePersistenceFactory ridePersistenceFactory = new RidePersistenceFactory();
+        IRideReservePersistence rideReservePersistence = ridePersistenceFactory.createRideReservePersistence();
+        IRideReserveService rideReserveService = new RideReserveService(rideReservePersistence);
         //https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
@@ -52,7 +53,8 @@ public class RideReserveController {
 
     @GetMapping("/reservations")
     public String getAllReservations(Model model) throws SQLException {
-        IRideReservePersistence rideReservePersistence= new RideReservePersistence();
+        RidePersistenceFactory ridePersistenceFactory = new RidePersistenceFactory();
+        IRideReservePersistence rideReservePersistence = ridePersistenceFactory.createRideReservePersistence();
         IRideReserveService rideReserveService=new RideReserveService(rideReservePersistence);
         model.addAttribute("reservations",rideReserveService.getReservations());
         return "RideReservations";
