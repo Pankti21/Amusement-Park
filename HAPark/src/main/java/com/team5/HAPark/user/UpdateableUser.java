@@ -1,11 +1,15 @@
 package com.team5.HAPark.user;
 
-public class UpdateUser extends User{
+public class UpdateableUser extends UserCredentials {
 
     private String oldPassword;
     private String confirmedPassword;
 
-    public UpdateUser(String email, String password, String oldPassword, String confirmedPassword) {
+    public UpdateableUser() {
+        super();
+    }
+
+    public UpdateableUser(String email, String password, String oldPassword, String confirmedPassword) {
         super(email, password);
         this.oldPassword = oldPassword;
         this.confirmedPassword = confirmedPassword;

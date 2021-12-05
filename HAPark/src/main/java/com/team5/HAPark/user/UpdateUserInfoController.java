@@ -1,8 +1,7 @@
 package com.team5.HAPark.user;
 
-import com.team5.HAPark.database.mysql.MySQLDatabase;
 import com.team5.HAPark.user.DAO.IUserPersistence;
-import com.team5.HAPark.user.DAO.MySQLUserPersistence;
+import com.team5.HAPark.user.DAO.UserPersistenceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,27 +17,25 @@ import java.sql.SQLException;
 @Slf4j
 public class UpdateUserInfoController {
 
-    private User user = new User();
-    private UpdateUserInformation updateUserInformation;
-    private MySQLDatabase dataBase = MySQLDatabase.getInstance();
-    private MySQLUserPersistence mySQLUserPersistence = new MySQLUserPersistence(dataBase);
-    private IUserPersistence iUserPersistence= new MySQLUserPersistence(dataBase);
-
     @GetMapping("/updateuserinfo")
     public String allUpdateUser(Model model) throws SQLException {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UpdateableUser());
         return "UpdateUserInfo";
     }
 
     @PostMapping("/updateuserinfo")
-    public String updateUserInfo(@ModelAttribute("user") User user) throws SQLException, NoSuchAlgorithmException {
-        UpdateUserInformation updateUserInformation2 = new UpdateUserInformation(user);
+    public String updateUserInfo(@ModelAttribute("user") UpdateableUser user) throws SQLException, NoSuchAlgorithmException {
+        UpdateUserInformation updateUserInformation = new UpdateUserInformation(user);
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
+
         log.info("{}",username);
-        log.info("{} firstname {} lastname {} email {} oldpassword {} confirmedpassword {} reconfirmpassword ",
-                user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getConfirmedPassword(),user.getReconfirmedPassword());
-        updateUserInformation2.updateUserPassword(iUserPersistence,user.getPassword(),user.getConfirmedPassword(),user.getReconfirmedPassword());
+        log.info("{} email {} oldpassword {} newpassword {} confirmedpassword ",
+                user.getEmail(),user.getOldPassword(),user.getPassword(),user.getConfirmedPassword());
+
+        UserPersistenceFactory userPersistenceFactory = new UserPersistenceFactory();
+        IUserPersistence userPersistence = userPersistenceFactory.createUserPersistence();
+        updateUserInformation.updateUserPassword(userPersistence,user);
 
         return "UpdateUserInfo";
     }

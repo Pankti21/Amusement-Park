@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -18,16 +19,16 @@ import static org.mockito.Mockito.when;
 public class UpdateUserInformationTest {
 
     private static UpdateUserInformation updateUserInformation;
-    private static User user;
+    private static UpdateableUser user;
     private static IUserPersistence userPersistenceMock;
 
     @BeforeEach
     void init() {
-        user = new User();
+        user = new UpdateableUser();
+        user.setPassword("NewPass@123");
         user.setConfirmedPassword("NewPass@123");
-        user.setReconfirmedPassword("NewPass@123");
         user.setEmail("test@gmail.com");
-        user.setPassword("password");
+        user.setOldPassword("password");
         updateUserInformation = new UpdateUserInformation(user);
         userPersistenceMock = Mockito.mock(IUserPersistence.class);
     }
@@ -36,23 +37,18 @@ public class UpdateUserInformationTest {
     public void validatingOldAndCurrentPasswordAreSame() throws SQLException, NoSuchAlgorithmException {
         String oldPassword = Encryption.encryptPassword("password");
         when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
-        assertFalse( updateUserInformation.updateUserPassword
-                        (userPersistenceMock, user.getPassword(),user.getConfirmedPassword(), user.getReconfirmedPassword()));
+        assertTrue(updateUserInformation.updateUserPassword(userPersistenceMock));
     }
 
     @Test
     @WithMockUser(username = "test@gmail.com")
     public void validatingNewAndConfirmedPasswordAreSame() throws SQLException, NoSuchAlgorithmException {
-        user.setReconfirmedPassword("ConfPassword@123");
+        user.setConfirmedPassword("ConfPassword@123");
         String oldPassword = Encryption.encryptPassword("password");
         when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
-        try{
-            updateUserInformation.updateUserPassword(userPersistenceMock, user.getPassword(),
-                user.getConfirmedPassword(), user.getReconfirmedPassword());
-
-
-        }catch (NoSuchAlgorithmException e)
-        {
+        try {
+            updateUserInformation.updateUserPassword(userPersistenceMock);
+        } catch (NoSuchAlgorithmException e) {
             assertEquals("Password don't match",e.getMessage());
         }
     }

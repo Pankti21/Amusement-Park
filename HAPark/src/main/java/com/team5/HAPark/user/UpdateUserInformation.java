@@ -9,48 +9,24 @@ import java.sql.SQLException;
 
 public class UpdateUserInformation {
 
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public EmailPasswordValidation getEmailPasswordValidation() {
-        return emailPasswordValidation;
-    }
-
-    public void setEmailPasswordValidation(EmailPasswordValidation emailPasswordValidation) {
-        this.emailPasswordValidation = emailPasswordValidation;
-    }
+    private UpdateableUser user;
 
     private EmailPasswordValidation emailPasswordValidation ;
 
-    public UpdateUserInformation(User user) {
+    public UpdateUserInformation(UpdateableUser user) {
         this.user = user;
         emailPasswordValidation = new EmailPasswordValidation(user);
     }
 
-    public boolean updateUserPassword(IUserPersistence userPersistence,
-                                      String oldPassword,String confirmedPassword, String reconfirmPassword)
+    public boolean updateUserPassword(IUserPersistence userPersistence)
             throws SQLException, NoSuchAlgorithmException, AuthenticationException {
 
-        String email = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
-        String currentPassword = userPersistence.getPassword(email);
-        oldPassword = Encryption.encryptPassword(oldPassword);
-        System.out.println(confirmedPassword);
-        System.out.println(reconfirmPassword);
-
-        //Validating the old password is not same as new password and new password is as same confirmed password and old password
-        //is same as the current password
-        if ((reconfirmPassword.matches(confirmedPassword) )&& (!(currentPassword.matches(confirmedPassword))) &&
-                (oldPassword.matches(currentPassword))) {
+        if (isCurrentUser(userPersistence) && isNewPasswordDifferent()
+                && newPasswordMatchesConfirmedPassword()) {
 
             if (emailPasswordValidation.validatePasswordFormat()) {
-                userPersistence.userUpdatedPassword(reconfirmPassword,email);
+                String newPasswordEncrypted = Encryption.encryptPassword(user.getPassword());
+                userPersistence.userUpdatedPassword(newPasswordEncrypted,user.getEmail());
                 return true;
             }
             else {
@@ -62,6 +38,27 @@ public class UpdateUserInformation {
             throw new NoSuchAlgorithmException("Password don't match");
         }
         return false;
+    }
+
+    private boolean isCurrentUser(IUserPersistence userPersistence) throws SQLException, NoSuchAlgorithmException {
+        String email = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
+        String currentPasswordEncrypted = userPersistence.getPassword(email);
+        String oldPasswordEncrypted = Encryption.encryptPassword(user.getOldPassword());
+
+        boolean emailIsCurrentUser = email.matches(user.getEmail());
+        boolean oldPasswordIsCurrentPassword = currentPasswordEncrypted.matches(oldPasswordEncrypted);
+        return emailIsCurrentUser && oldPasswordIsCurrentPassword;
+    }
+
+    private boolean isNewPasswordDifferent() throws NoSuchAlgorithmException {
+        String oldPasswordEncrypted = Encryption.encryptPassword(user.getOldPassword());
+        String newPasswordEncrypted = Encryption.encryptPassword(user.getPassword());
+
+        return !oldPasswordEncrypted.matches(newPasswordEncrypted);
+    }
+
+    private boolean newPasswordMatchesConfirmedPassword() {
+        return user.getPassword().matches(user.getConfirmedPassword());
     }
 
 }

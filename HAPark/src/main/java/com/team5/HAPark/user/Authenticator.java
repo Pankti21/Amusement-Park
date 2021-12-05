@@ -19,7 +19,7 @@ public class Authenticator implements AuthenticationProvider {
 
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
-        User user = new User();
+        UserCredentials user = new UserCredentials();
 
         user.setEmail(email);
         user.setPassword(password);
