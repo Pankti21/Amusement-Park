@@ -1,6 +1,7 @@
 package com.team5.HAPark.cart.model;
 
 import com.team5.HAPark.food.FoodOrderItem;
+import com.team5.HAPark.ticket.ITicketOrderItem;
 import com.team5.HAPark.ticket.model.TicketOrderItem;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -11,13 +12,13 @@ import java.util.ListIterator;
 @Component
 @SessionScope
 public class CartSummary implements ICartSummary{
-    private ArrayList<TicketOrderItem> ticket;
+    private ArrayList<ITicketOrderItem> ticket;
 
-    public ArrayList<TicketOrderItem> getTicket() {
+    public ArrayList<ITicketOrderItem> getTicket() {
         return ticket;
     }
 
-    public void setTicket(ArrayList<TicketOrderItem> ticket) {
+    public void setTicket(ArrayList<ITicketOrderItem> ticket) {
         this.ticket = ticket;
     }
 
@@ -47,16 +48,17 @@ public class CartSummary implements ICartSummary{
     double totalAmount;
 
     public CartSummary() {
-        this.ticket = new ArrayList<TicketOrderItem>();
+        this.ticket = new ArrayList<ITicketOrderItem>();
         this.food = new ArrayList<FoodOrderItem>();
         this.totalAmount = 0;
     }
 
     //Adding the tickets to cart
-    @Override
-    public void addTicketToCart(TicketOrderItem ticket) {
+   @Override
+    public void addTicketToCart(ITicketOrderItem ticket) {
         this.ticket.add(ticket);
     }
+
 
     //Adding the food items to cart
     @Override
@@ -67,10 +69,10 @@ public class CartSummary implements ICartSummary{
     //Display the cart items
     @Override
     public void showCart() {
-        ListIterator<TicketOrderItem> ticketIterator = ticket.listIterator();
+        ListIterator<ITicketOrderItem> ticketIterator = ticket.listIterator();
         ListIterator<FoodOrderItem> foodIterator = food.listIterator();
         while ((ticketIterator.hasNext() || (foodIterator.hasNext()))){
-            TicketOrderItem ticketItem = ticketIterator.next();
+            ITicketOrderItem ticketItem = ticketIterator.next();
             FoodOrderItem foodItem = foodIterator.next();
             System.out.println(ticketItem);
             System.out.println(foodItem);
@@ -79,10 +81,10 @@ public class CartSummary implements ICartSummary{
 
     //Remove tickets from cart
     @Override
-    public void removeTicketFromCart(TicketOrderItem t) {
-        ListIterator<TicketOrderItem> ticketIterator = ticket.listIterator();
+    public void removeTicketFromCart(ITicketOrderItem t) {
+        ListIterator<ITicketOrderItem> ticketIterator = ticket.listIterator();
         while (ticketIterator.hasNext()) {
-            TicketOrderItem ticketItem = ticketIterator.next();
+            ITicketOrderItem ticketItem = ticketIterator.next();
             if (ticketItem.getTicketType().equals(t.getTicketType())) {
                 ticketItem.setQuantity(ticketItem.getQuantity()-t.getQuantity());
                 if((ticketItem.getQuantity() <= 0 )) {
@@ -112,10 +114,10 @@ public class CartSummary implements ICartSummary{
     //Get the tickets amount
     @Override
     public double getTicketAmount() {
-        ListIterator<TicketOrderItem> ticketIterator = ticket.listIterator();
+        ListIterator<ITicketOrderItem> ticketIterator = ticket.listIterator();
         this.ticketAmount = 0;
         while (ticketIterator.hasNext()) {
-            TicketOrderItem ticketItem = ticketIterator.next();
+            ITicketOrderItem ticketItem = ticketIterator.next();
             this.ticketAmount = this.ticketAmount + (ticketItem.getQuantity() * ticketItem.getTicketPrice());
             }
         return this.ticketAmount;

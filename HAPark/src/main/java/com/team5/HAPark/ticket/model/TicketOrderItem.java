@@ -1,6 +1,8 @@
 package com.team5.HAPark.ticket.model;
 
-public class TicketOrderItem {
+import com.team5.HAPark.ticket.ITicketOrderItem;
+
+public class TicketOrderItem implements ITicketOrderItem {
     private Ticket ticket;
     private Integer quantity;
 

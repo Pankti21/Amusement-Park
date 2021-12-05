@@ -1,4 +1,4 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.DAO;
 
 public interface IEmailPasswordValidation {
     public boolean validateEmailFormat();

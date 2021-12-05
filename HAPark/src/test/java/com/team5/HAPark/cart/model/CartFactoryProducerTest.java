@@ -1,6 +1,6 @@
 package com.team5.HAPark.cart.model;
 
-import org.junit.jupiter.api.Test;
+/*import org.junit.jupiter.api.Test;
 
 class CartFactoryProducerTest {
     CartAbstractFactory cartFactory = new CartAbstractFactory();
@@ -11,4 +11,4 @@ class CartFactoryProducerTest {
 
     }
 
-}
+}*/

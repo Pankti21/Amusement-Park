@@ -1,5 +1,6 @@
 package com.team5.HAPark.user;
 
+import com.team5.HAPark.user.DAO.IEmailPasswordValidation;
 import com.team5.HAPark.user.DAO.IUserPersistence;
 
 import java.security.NoSuchAlgorithmException;

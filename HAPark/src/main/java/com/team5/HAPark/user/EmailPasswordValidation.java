@@ -1,6 +1,8 @@
 package com.team5.HAPark.user;
 
-public class EmailPasswordValidation implements IEmailPasswordValidation{
+import com.team5.HAPark.user.DAO.IEmailPasswordValidation;
+
+public class EmailPasswordValidation implements IEmailPasswordValidation {
 
     private final User user;
     public EmailPasswordValidation(User user) {this.user = user;}
@@ -32,32 +34,27 @@ public class EmailPasswordValidation implements IEmailPasswordValidation{
 
         if (password.length() < 8 || password.length() > 12)
         {
-            System.out.println("User password must be 8 characters in length and should be less than 12");
             passwordValid = false;
         }
         String oneUpperCaseChar = "(.*[A-Z].*)";
         if (!password.matches(oneUpperCaseChar))
         {
-            System.out.println("User password must have at least one uppercase character");
-            passwordValid = false;
+           passwordValid = false;
         }
         String oneLowerCaseChar = "(.*[a-z].*)";
         if (!password.matches(oneLowerCaseChar))
         {
-            System.out.println("User password must have at least one lowercase character");
             passwordValid = false;
         }
         String oneNumber = "(.*[0-9].*)";
         if (!password.matches(oneNumber))
         {
-            System.out.println("User password must have at least one number");
-            passwordValid = false;
+           passwordValid = false;
         }
         String oneSpecialChars = "(.*[@#$%].*)";
         if (!password.matches(oneSpecialChars))
         {
-            System.out.println("User password must have at least one special character among @#$%");
-            passwordValid = false;
+           passwordValid = false;
         }
         return passwordValid;
     }

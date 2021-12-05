@@ -1,5 +1,6 @@
 package com.team5.HAPark.user;
 
+import com.team5.HAPark.user.DAO.IUpdateUserInformation;
 import com.team5.HAPark.user.DAO.IUserPersistence;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -7,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-public class UpdateUserInformation {
+public class UpdateUserInformation implements IUpdateUserInformation {
 
     private User user;
 
