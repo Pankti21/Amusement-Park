@@ -1,5 +1,6 @@
 package com.team5.HAPark.user;
 
+import com.team5.HAPark.user.DAO.IEmailPasswordValidation;
 import com.team5.HAPark.user.DAO.IUserPersistence;
 
 import java.security.NoSuchAlgorithmException;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 public class Register {
 
     private final User user;
-    private final EmailPasswordValidation emailPasswordValidation ;
+    private final IEmailPasswordValidation emailPasswordValidation ;
 
     public Register(User user) {
         this.user = user;

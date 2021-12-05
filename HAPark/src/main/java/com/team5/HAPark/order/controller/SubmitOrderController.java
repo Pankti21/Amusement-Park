@@ -13,6 +13,7 @@ import com.team5.HAPark.order.model.IOrderService;
 import com.team5.HAPark.order.model.TicketOrderItemAdapter;
 import com.team5.HAPark.ticket.DAO.ITicketPersistenceFactory;
 import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
+import com.team5.HAPark.ticket.ITicketOrderItem;
 import com.team5.HAPark.ticket.ITicketService;
 import com.team5.HAPark.ticket.model.TicketOrderItem;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
@@ -43,7 +44,7 @@ public class SubmitOrderController {
 
     public void saveTicketOrder() {
 
-        ArrayList<TicketOrderItem> ticketOrderItems = cart.getTicket();
+        ArrayList<ITicketOrderItem> ticketOrderItems = cart.getTicket();
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         ITicketPersistenceFactory ticketPersistenceFactory = new TicketPersistenceFactory();
@@ -56,8 +57,8 @@ public class SubmitOrderController {
 
         ArrayList<TicketOrderItemAdapter> ticketOrderItemAdapters = new ArrayList<>();
 
-        for (TicketOrderItem ticketOrderItem:ticketOrderItems){
-            ticketOrderItemAdapters.add(new TicketOrderItemAdapter(ticketOrderItem));
+        for (ITicketOrderItem ticketOrderItem:ticketOrderItems){
+            ticketOrderItemAdapters.add(new TicketOrderItemAdapter((TicketOrderItem) ticketOrderItem));
         }
 
         IOrder order = orderService.createOrderFromItemQuantities(email,ticketOrderItemAdapters);
