@@ -1,5 +1,6 @@
 package com.team5.HAPark.user;
 
+import com.team5.HAPark.user.model.Encryption;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;

@@ -1,4 +1,4 @@
-package com.team5.HAPark.user.DAO;
+package com.team5.HAPark.user.persistence;
 
 public interface IUserPersistenceFactory {
     IUserPersistence createUserPersistence();

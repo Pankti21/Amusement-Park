@@ -43,27 +43,27 @@ class TicketServiceTest {
     }
 
     @Test
-    void getChildTicket() throws SQLException {
+    void validateChildTicketIsFetched() throws SQLException {
         assertEquals(ticket1,ticketService.getTicket("Child"));
     }
 
     @Test
-    void getAdultTicket() throws SQLException {
+    void validateAdultTicketIsFetched() throws SQLException {
         assertEquals(ticket2,ticketService.getTicket("Adult"));
     }
     @Test
-    void getAllTickets() throws  SQLException {
+    void validateAllTicketAreFetched() throws  SQLException {
         assertEquals(4,ticketService.getAllTickets().size());
     }
 
     @Test
-    void getAllMoreTickets() throws  SQLException {
+    void validateTicketsAreFetchedCorrectly() throws  SQLException {
         tickets.add(ticket3);
         assertEquals(5,ticketService.getAllTickets().size());
     }
 
     @Test
-    void getAllFiveTickets() throws  SQLException {
+    void validateMoreTicketsAreFetchedCorrectly() throws  SQLException {
         tickets.add(ticket3);
         tickets.add(ticket4);
         assertEquals(4,ticketService.getAllTickets().size());

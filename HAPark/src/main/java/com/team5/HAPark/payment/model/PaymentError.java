@@ -1,4 +1,4 @@
-package com.team5.HAPark.payment;
+package com.team5.HAPark.payment.model;
 
 public enum PaymentError {
     SUCCESSFUL("success"),

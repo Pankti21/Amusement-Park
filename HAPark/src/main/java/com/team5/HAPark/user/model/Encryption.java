@@ -1,4 +1,4 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

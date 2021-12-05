@@ -1,7 +1,7 @@
-package com.team5.HAPark.user.DAO;
+package com.team5.HAPark.user.persistence;
 
 import com.team5.HAPark.database.mysql.IMySQLDatabase;
-import com.team5.HAPark.user.User;
+import com.team5.HAPark.user.model.User;
 
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -98,7 +98,6 @@ public class MySQLUserPersistence implements IUserPersistence {
             } catch (SQLException e){
                 e.printStackTrace();
             }
-
         }
     }
 

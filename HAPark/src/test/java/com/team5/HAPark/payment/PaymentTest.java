@@ -1,5 +1,7 @@
 package com.team5.HAPark.payment;
 
+import com.team5.HAPark.payment.model.Payment;
+import com.team5.HAPark.payment.model.PaymentError;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

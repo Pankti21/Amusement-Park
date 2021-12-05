@@ -1,14 +1,14 @@
-package com.team5.HAPark.user;
-import com.team5.HAPark.user.DAO.IUserPersistence;
+package com.team5.HAPark.user.model;
+import com.team5.HAPark.user.persistence.IUserPersistence;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class Login {
 
-    private User user;
+    private UserCredentials user;
 
-    public Login(User user) {
+    public Login(UserCredentials user) {
         this.user = user;
     }
 

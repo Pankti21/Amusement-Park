@@ -1,4 +1,4 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,7 +26,6 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                 antMatchers("/welcome").anonymous().
                 antMatchers("/main").permitAll().
                 antMatchers("/register").permitAll().
-                antMatchers("/reservations").permitAll().
                 antMatchers("/rides").permitAll().
                 antMatchers("/rides/*").permitAll().
                 antMatchers("/test").permitAll().
@@ -35,9 +34,7 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                 antMatchers(HttpMethod.GET, "/menu/**").permitAll().
                 antMatchers(HttpMethod.GET, "/tickets/**").permitAll().
                 antMatchers(HttpMethod.GET, "/cartsummary").permitAll().
-                antMatchers("/main").permitAll().
                 antMatchers("/reserve").permitAll().
-                antMatchers("/reserved").permitAll().
                 antMatchers("/css/**", "/images/**","/pics/**").permitAll().
                 antMatchers("/**").authenticated().
                 and().formLogin().defaultSuccessUrl("/main", false);

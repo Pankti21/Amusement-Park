@@ -1,5 +1,7 @@
-package com.team5.HAPark.payment;
+package com.team5.HAPark.payment.controller;
 
+import com.team5.HAPark.payment.model.Payment;
+import com.team5.HAPark.payment.model.PaymentError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 

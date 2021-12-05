@@ -1,4 +1,4 @@
-package com.team5.HAPark.user.DAO;
+package com.team5.HAPark.user.persistence;
 
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 

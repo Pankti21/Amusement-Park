@@ -1,13 +1,13 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-public class usertemp {
+public class UserCredentials {
 
     private String email;
     private String password;
 
-    public usertemp(){}
+    public UserCredentials(){}
 
-    public usertemp(String email,String password){
+    public UserCredentials(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -27,5 +27,4 @@ public class usertemp {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

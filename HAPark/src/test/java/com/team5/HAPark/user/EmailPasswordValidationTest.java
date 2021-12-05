@@ -1,9 +1,9 @@
 package com.team5.HAPark.user;
 
+import com.team5.HAPark.user.model.EmailPasswordValidation;
+import com.team5.HAPark.user.model.UserCredentials;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,12 +14,12 @@ import java.sql.SQLException;
 @SpringBootTest
 public class EmailPasswordValidationTest {
 
-    private User user;
+    private UserCredentials user;
     private EmailPasswordValidation emailPasswordValidation ;
 
     @BeforeEach
     void init(){
-        user = new User();
+        user = new UserCredentials();
         user.setEmail("emailsample@email.com@123");
         emailPasswordValidation = new EmailPasswordValidation(user);
     }
