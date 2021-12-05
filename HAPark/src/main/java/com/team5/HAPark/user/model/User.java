@@ -1,6 +1,6 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-public class User extends UserCredentials{
+public class User extends UserCredentials {
 
     private String firstName;
     private String lastName;

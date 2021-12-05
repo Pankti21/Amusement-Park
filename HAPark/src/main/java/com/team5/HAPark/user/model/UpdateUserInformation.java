@@ -1,7 +1,6 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-import com.team5.HAPark.user.DAO.IUpdateUserInformation;
-import com.team5.HAPark.user.DAO.IUserPersistence;
+import com.team5.HAPark.user.persistence.IUserPersistence;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -19,26 +18,28 @@ public class UpdateUserInformation implements IUpdateUserInformation {
         emailPasswordValidation = new EmailPasswordValidation(user);
     }
 
-    public boolean updateUserPassword(IUserPersistence userPersistence)
+    public UpdateUserValidationResult updateUserPassword(IUserPersistence userPersistence)
             throws SQLException, NoSuchAlgorithmException, AuthenticationException {
 
-        if (isCurrentUser(userPersistence) && isNewPasswordDifferent()
-                && newPasswordMatchesConfirmedPassword()) {
-
-            if (emailPasswordValidation.validatePasswordFormat()) {
-                String newPasswordEncrypted = Encryption.encryptPassword(user.getPassword());
-                userPersistence.userUpdatedPassword(newPasswordEncrypted,user.getEmail());
-                return true;
+        if (isCurrentUser(userPersistence)) {
+            if (isNewPasswordDifferent()) {
+                if (newPasswordMatchesConfirmedPassword()) {
+                    if (emailPasswordValidation.validatePasswordFormat()) {
+                        String newPasswordEncrypted = Encryption.encryptPassword(user.getPassword());
+                        userPersistence.userUpdatedPassword(user.getPassword(), user.getEmail());
+                        return UpdateUserValidationResult.SUCCESSFUL;
+                    } else {
+                        return UpdateUserValidationResult.INVALIDPASSWORDFORMAT;
+                    }
+                } else {
+                    return UpdateUserValidationResult.PASSWORDMISMATCH;
+                }
+            } else {
+                return UpdateUserValidationResult.NEWMATCHESOLDPASSWORD;
             }
-            else {
-                System.out.println("Password format is not correct");
-            }
+        } else {
+            return UpdateUserValidationResult.INVALIDCREDENTIALS;
         }
-        else {
-            System.out.println("Password don't match");
-            throw new NoSuchAlgorithmException("Password don't match");
-        }
-        return false;
     }
 
     private boolean isCurrentUser(IUserPersistence userPersistence) throws SQLException, NoSuchAlgorithmException {

@@ -26,16 +26,32 @@ class CartSummaryTest {
 
     @Test
     void validateIfTicketsAreAddedToCart() {
+        ticketOrderItem.setQuantity(1);
         cartSummary.addTicketToCart((TicketOrderItem) ticketOrderItem);
         ArrayList<ITicketOrderItem> ticketOrderItemList = cartSummary.getTicket();
         assertTrue(ticketOrderItemList.contains(ticketOrderItem));
     }
 
     @Test
+    void validateNoQuantityTicketsNotAddedToCart() {
+        cartSummary.addTicketToCart((TicketOrderItem) ticketOrderItem);
+        ArrayList<ITicketOrderItem> ticketOrderItemList = cartSummary.getTicket();
+        assertFalse(ticketOrderItemList.contains(ticketOrderItem));
+    }
+
+    @Test
     void validateIfFoodIsAddedToCart() {
+        foodOrderItem.setQuantity(1);
         cartSummary.addFoodToCart(foodOrderItem);
         List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertTrue(foodOrderItemsList.contains(foodOrderItem));
+    }
+
+    @Test
+    void validateNoQuantityFoodNotAddedToCart() {
+        cartSummary.addFoodToCart(foodOrderItem);
+        List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
+        assertFalse(foodOrderItemsList.contains(foodOrderItem));
     }
 
     @Test

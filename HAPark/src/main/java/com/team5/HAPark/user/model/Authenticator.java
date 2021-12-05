@@ -1,7 +1,9 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
 import com.team5.HAPark.database.mysql.MySQLDatabase;
-import com.team5.HAPark.user.DAO.UserPersistenceFactory;
+import com.team5.HAPark.user.model.Login;
+import com.team5.HAPark.user.persistence.UserPersistenceFactory;
+import com.team5.HAPark.user.model.UserCredentials;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

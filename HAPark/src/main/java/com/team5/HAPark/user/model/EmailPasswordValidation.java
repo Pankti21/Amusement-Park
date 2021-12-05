@@ -1,11 +1,12 @@
-package com.team5.HAPark.user;
-
-import com.team5.HAPark.user.DAO.IEmailPasswordValidation;
+package com.team5.HAPark.user.model;
 
 public class EmailPasswordValidation implements IEmailPasswordValidation {
 
-    private final User user;
-    public EmailPasswordValidation(User user) {this.user = user;}
+    private final UserCredentials user;
+
+    public EmailPasswordValidation(UserCredentials user) {
+        this.user = user;
+    }
 
     public boolean validateEmailFormat(){
 

@@ -1,8 +1,10 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.controller;
 
-import com.team5.HAPark.user.DAO.IUpdateUserInformation;
-import com.team5.HAPark.user.DAO.IUserPersistence;
-import com.team5.HAPark.user.DAO.UserPersistenceFactory;
+import com.team5.HAPark.user.model.IUpdateUserInformation;
+import com.team5.HAPark.user.model.UpdateUserInformation;
+import com.team5.HAPark.user.persistence.IUserPersistence;
+import com.team5.HAPark.user.persistence.UserPersistenceFactory;
+import com.team5.HAPark.user.model.UpdateableUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

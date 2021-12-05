@@ -1,6 +1,9 @@
 package com.team5.HAPark.user;
 
-import com.team5.HAPark.user.DAO.IUserPersistence;
+import com.team5.HAPark.user.model.Login;
+import com.team5.HAPark.user.persistence.IUserPersistence;
+import com.team5.HAPark.user.model.User;
+import com.team5.HAPark.user.model.UserCredentials;
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -16,6 +19,7 @@ class LoginTest {
     private static Login login;
     private static UserCredentials user;
     private static IUserPersistence userPersistenceMock;
+    private User loadedUser;
 
     @BeforeEach
     void init(){
@@ -24,6 +28,7 @@ class LoginTest {
         user.setPassword("password");
         login = new Login(user);
         userPersistenceMock = Mockito.mock(IUserPersistence.class);
+        loadedUser = new User("fname", "lname", user.getEmail(),"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
     }
 
     @Test
@@ -53,7 +58,7 @@ class LoginTest {
     void loginUserSuccessful() throws SQLException {
         when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
         when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-        when(userPersistenceMock.loadUser(user.getEmail())).thenReturn(new UserCredentials("fname", "lname", user.getEmail(),"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"));
+        when(userPersistenceMock.loadUser(user.getEmail())).thenReturn(loadedUser);
         Login login = new Login(user);
         assertTrue(login.login(userPersistenceMock));
     }

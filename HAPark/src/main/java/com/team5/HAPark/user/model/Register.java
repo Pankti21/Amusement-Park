@@ -1,7 +1,6 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-import com.team5.HAPark.user.DAO.IEmailPasswordValidation;
-import com.team5.HAPark.user.DAO.IUserPersistence;
+import com.team5.HAPark.user.persistence.IUserPersistence;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -42,6 +41,4 @@ public class Register {
         }
         return false;
     }
-
-
 }

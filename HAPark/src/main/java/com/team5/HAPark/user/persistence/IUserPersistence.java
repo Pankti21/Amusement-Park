@@ -1,6 +1,6 @@
-package com.team5.HAPark.user.DAO;
+package com.team5.HAPark.user.persistence;
 
-import com.team5.HAPark.user.User;
+import com.team5.HAPark.user.model.User;
 
 import java.sql.SQLException;
 

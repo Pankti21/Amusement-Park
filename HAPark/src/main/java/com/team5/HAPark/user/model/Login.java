@@ -1,5 +1,5 @@
-package com.team5.HAPark.user;
-import com.team5.HAPark.user.DAO.IUserPersistence;
+package com.team5.HAPark.user.model;
+import com.team5.HAPark.user.persistence.IUserPersistence;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
