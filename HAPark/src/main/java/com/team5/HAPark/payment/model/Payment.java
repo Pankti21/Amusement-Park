@@ -1,4 +1,4 @@
-package com.team5.HAPark.payment;
+package com.team5.HAPark.payment.model;
 
 public class Payment {
     private String PaymentType;

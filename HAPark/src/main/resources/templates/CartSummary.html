@@ -28,7 +28,9 @@
         <td>TOTAL AMOUNT</td>    <td th:text="${cartSummary.totalAmount}"></td>
     </tr>
     <tr>
-        <td><input type="submit"value="Payment" /></td>
+        <form action="/payment" method="GET">
+            <td><input type="submit"value="Payment" /></td>
+        </form>
     </tr>
 </table>
 

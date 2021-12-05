@@ -1,5 +1,8 @@
 package com.team5.HAPark.payment;
 
+import com.team5.HAPark.payment.controller.PaymentController;
+import com.team5.HAPark.payment.model.Payment;
+import com.team5.HAPark.payment.model.PaymentError;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
