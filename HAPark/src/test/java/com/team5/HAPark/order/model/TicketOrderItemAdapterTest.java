@@ -23,17 +23,8 @@ class TicketOrderItemAdapterTest {
     }
 
     @Test
-    void getTotalPriceWithIntegerPrice() {
-        ticketOrderItem = new TicketOrderItem(ticket1,3);
-        orderItem = new TicketOrderItemAdapter(ticketOrderItem);
+    void getTotalPrice() {
         assertEquals(45.75,orderItem.getTotalPrice());
-    }
-
-    @Test
-    void getTotalPriceWithDecimalPrice() {
-        ticketOrderItem = new TicketOrderItem(ticket2,3);
-        orderItem = new TicketOrderItemAdapter(ticketOrderItem);
-        assertEquals(45,orderItem.getTotalPrice());
     }
 
     @Test

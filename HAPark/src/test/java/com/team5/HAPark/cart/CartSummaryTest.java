@@ -2,6 +2,7 @@ package com.team5.HAPark.cart;
 
 import com.team5.HAPark.cart.model.CartSummary;
 import com.team5.HAPark.food.FoodOrderItem;
+import com.team5.HAPark.food.IFoodOrderItem;
 import com.team5.HAPark.ticket.ITicketOrderItem;
 import com.team5.HAPark.ticket.model.TicketOrderItem;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CartSummaryTest {
-    private FoodOrderItem foodOrderItem;
+    private IFoodOrderItem foodOrderItem;
     private ITicketOrderItem ticketOrderItem;
     private CartSummary cartSummary;
 
@@ -43,14 +44,14 @@ class CartSummaryTest {
     void validateIfFoodIsAddedToCart() {
         foodOrderItem.setQuantity(1);
         cartSummary.addFoodToCart(foodOrderItem);
-        List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
+        List<IFoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertTrue(foodOrderItemsList.contains(foodOrderItem));
     }
 
     @Test
     void validateNoQuantityFoodNotAddedToCart() {
         cartSummary.addFoodToCart(foodOrderItem);
-        List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
+        List<IFoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertFalse(foodOrderItemsList.contains(foodOrderItem));
     }
 
@@ -64,7 +65,7 @@ class CartSummaryTest {
     @Test
     void validateIfFoodAreRemovedToCart() {
         cartSummary.removeFoodFromCart(foodOrderItem);
-        List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
+        List<IFoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertFalse(foodOrderItemsList.contains(foodOrderItem));
     }
 
@@ -78,7 +79,7 @@ class CartSummaryTest {
     @Test
     void validateIfFoodAmountIsCalculatedCorrectly() {
         cartSummary.getFoodAmount();
-        List<FoodOrderItem> foodOrderItemsList = cartSummary.getFood();
+        List<IFoodOrderItem> foodOrderItemsList = cartSummary.getFood();
         assertFalse(foodOrderItemsList.contains(foodOrderItem));
     }
 
@@ -90,11 +91,11 @@ class CartSummaryTest {
         assertEquals(cartAmount, (ticketAmount+foodAmount));
     }
 
-    /*  @Test
+    @Test
     void validateCartIsEmpty() {
         cartSummary.addFoodToCart(foodOrderItem);
         cartSummary.addTicketToCart(ticketOrderItem);
         cartSummary.empty();
         assertTrue(cartSummary.getFood().isEmpty()&&cartSummary.getTicket().isEmpty());
-    }*/
+    }
 }

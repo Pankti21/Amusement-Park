@@ -3,8 +3,8 @@ package com.team5.HAPark.order.controller;
 import com.team5.HAPark.cart.model.CartSummary;
 import com.team5.HAPark.food.DAO.FoodPersistenceFactory;
 import com.team5.HAPark.food.DAO.IFoodPersistenceFactory;
-import com.team5.HAPark.food.FoodOrderItem;
 import com.team5.HAPark.food.FoodService;
+import com.team5.HAPark.food.IFoodOrderItem;
 import com.team5.HAPark.food.IFoodService;
 import com.team5.HAPark.order.FoodOrderFactory;
 import com.team5.HAPark.order.TicketOrderFactory;
@@ -69,7 +69,7 @@ public class SubmitOrderController {
 
     public void saveFoodOrder() {
 
-        ArrayList<FoodOrderItem> foodOrderItems = cart.getFood();
+        ArrayList<IFoodOrderItem> foodOrderItems = cart.getFood();
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
 
         IFoodPersistenceFactory foodPersistenceFactory = new FoodPersistenceFactory();
