@@ -16,8 +16,10 @@ import java.sql.SQLException;
 @Slf4j
 public class RideController {
 
+    RideServiceFactory rideServiceFactory=new RideServiceFactory();
+
     @Autowired
-    private RideService rideService;
+    private IRideService rideService=rideServiceFactory.getRideService("RIDESERVICE");
 
     @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {

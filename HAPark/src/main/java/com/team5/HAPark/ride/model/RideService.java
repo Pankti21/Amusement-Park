@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.*;
 
-
 @Slf4j
 @Service
 public class RideService implements IRideService {
@@ -20,7 +19,6 @@ public class RideService implements IRideService {
     }
 
     public RideService() {
-
     }
 
     public List<Ride> getAllRides() throws SQLException {
