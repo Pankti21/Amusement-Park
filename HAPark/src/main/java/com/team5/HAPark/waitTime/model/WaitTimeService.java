@@ -4,7 +4,7 @@ import com.team5.HAPark.ride.model.Ride;
 import com.team5.HAPark.ride.model.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
-import com.team5.HAPark.ride.persistence.WaitTime.IWaitTimePersistence;
+import com.team5.HAPark.waitTime.persistence.IWaitTimePersistence;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

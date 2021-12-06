@@ -1,4 +1,4 @@
-package com.team5.HAPark.ride.persistence.WaitTime;
+package com.team5.HAPark.waitTime.persistence;
 
 import com.team5.HAPark.database.mysql.IMySQLDatabase;
 import java.sql.*;
