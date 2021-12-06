@@ -11,6 +11,8 @@ public class User extends UserCredentials {
         this.lastName = lastName;
     }
 
+    public User() {}
+
     public String getFirstName() {
         return firstName;
     }

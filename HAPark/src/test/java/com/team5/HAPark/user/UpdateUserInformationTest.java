@@ -5,16 +5,14 @@ import com.team5.HAPark.user.model.UpdateUserInformation;
 import com.team5.HAPark.user.persistence.IUserPersistence;
 import com.team5.HAPark.user.model.UpdateUserValidationResult;
 import com.team5.HAPark.user.model.UpdateableUser;
+import com.team5.HAPark.user.persistence.mocks.UserPersistenceMockFactory;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import java.security.NoSuchAlgorithmException;
 import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
 
 @SpringBootTest
 public class UpdateUserInformationTest {
@@ -31,9 +29,10 @@ public class UpdateUserInformationTest {
         user.setEmail("test@gmail.com");
         user.setOldPassword("password");
         updateUserInformation = new UpdateUserInformation(user);
-        userPersistenceMock = Mockito.mock(IUserPersistence.class);
         String oldPassword = Encryption.encryptPassword("password");
-        when(userPersistenceMock.getPassword("test@gmail.com")).thenReturn(oldPassword);
+        UserPersistenceMockFactory userPersistenceMockFactory = new UserPersistenceMockFactory();
+        userPersistenceMock = userPersistenceMockFactory.createUserPersistenceMock();
+        userPersistenceMock.saveUser("test@gmail.com","fname","lname",oldPassword);
     }
 
     @Test
