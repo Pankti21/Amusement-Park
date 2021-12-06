@@ -1,6 +1,6 @@
 package com.team5.HAPark.cart.model;
 
-import com.team5.HAPark.food.FoodOrderItem;
+import com.team5.HAPark.food.IFoodOrderItem;
 import com.team5.HAPark.ticket.ITicketOrderItem;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -11,7 +11,18 @@ import java.util.ListIterator;
 @Component
 @SessionScope
 public class CartSummary implements ICartSummary{
+
     private ArrayList<ITicketOrderItem> ticket;
+    private ArrayList<IFoodOrderItem> food;
+    double ticketAmount;
+    double foodAmount;
+    double totalAmount;
+
+    public CartSummary() {
+        this.ticket = new ArrayList<>();
+        this.food = new ArrayList<>();
+        this.totalAmount = 0;
+    }
 
     public ArrayList<ITicketOrderItem> getTicket() {
         return ticket;
@@ -21,11 +32,11 @@ public class CartSummary implements ICartSummary{
         this.ticket = ticket;
     }
 
-    public ArrayList<FoodOrderItem> getFood() {
+    public ArrayList<IFoodOrderItem> getFood() {
         return food;
     }
 
-    public void setFood(ArrayList<FoodOrderItem> food) {
+    public void setFood(ArrayList<IFoodOrderItem> food) {
         this.food = food;
     }
 
@@ -41,17 +52,6 @@ public class CartSummary implements ICartSummary{
         this.totalAmount = totalAmount;
     }
 
-    private ArrayList<FoodOrderItem> food;
-    double ticketAmount;
-    double foodAmount;
-    double totalAmount;
-
-    public CartSummary() {
-        this.ticket = new ArrayList<ITicketOrderItem>();
-        this.food = new ArrayList<FoodOrderItem>();
-        this.totalAmount = 0;
-    }
-
     //Adding the tickets to cart
    @Override
     public void addTicketToCart(ITicketOrderItem ticket) {
@@ -62,7 +62,7 @@ public class CartSummary implements ICartSummary{
 
     //Adding the food items to cart
     @Override
-    public void addFoodToCart(FoodOrderItem food) {
+    public void addFoodToCart(IFoodOrderItem food) {
         if (food.getQuantity()!=null && food.getQuantity()>0){
             this.food.add(food);
         }
@@ -72,10 +72,10 @@ public class CartSummary implements ICartSummary{
     @Override
     public void showCart() {
         ListIterator<ITicketOrderItem> ticketIterator = ticket.listIterator();
-        ListIterator<FoodOrderItem> foodIterator = food.listIterator();
+        ListIterator<IFoodOrderItem> foodIterator = food.listIterator();
         while ((ticketIterator.hasNext() || (foodIterator.hasNext()))){
             ITicketOrderItem ticketItem = ticketIterator.next();
-            FoodOrderItem foodItem = foodIterator.next();
+            IFoodOrderItem foodItem = foodIterator.next();
             System.out.println(ticketItem);
             System.out.println(foodItem);
         }
@@ -99,10 +99,10 @@ public class CartSummary implements ICartSummary{
 
     //Remove Food items from cart
     @Override
-    public void removeFoodFromCart(FoodOrderItem f) {
-        ListIterator<FoodOrderItem> foodIterator = food.listIterator();
+    public void removeFoodFromCart(IFoodOrderItem f) {
+        ListIterator<IFoodOrderItem> foodIterator = food.listIterator();
         while  (foodIterator.hasNext()){
-            FoodOrderItem foodItem = foodIterator.next();
+            IFoodOrderItem foodItem = foodIterator.next();
             if (foodItem.getId().equals(f.getId())) {
                 foodItem.setQuantity(foodItem.getQuantity()-f.getQuantity());
                 if((foodItem.getQuantity() <= 0 )) {
@@ -128,10 +128,10 @@ public class CartSummary implements ICartSummary{
     //Get the Food items amount
     @Override
     public double getFoodAmount() {
-        ListIterator<FoodOrderItem> foodIterator = food.listIterator();
+        ListIterator<IFoodOrderItem> foodIterator = food.listIterator();
         this.foodAmount = 0;
         while (foodIterator.hasNext()) {
-            FoodOrderItem foodItem = foodIterator.next();
+            IFoodOrderItem foodItem = foodIterator.next();
             this.foodAmount = this.foodAmount + (foodItem.getPrice() * foodItem.getQuantity());
         }
         return this.foodAmount;
