@@ -1,4 +1,4 @@
-package com.team5.HAPark.ride.WaitTime;
+package com.team5.HAPark.waitTime;
 
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;

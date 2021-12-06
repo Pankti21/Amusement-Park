@@ -76,11 +76,6 @@ public class RideServiceTest {
     }
 
     @Test
-    void getAllTimeSlots() throws SQLException {
-        assertEquals(maps,timeSlotService.getAllTimeSlots());
-    }
-
-    @Test
     void getAllWaterRides() throws SQLException {
         assertEquals(List.of(ride2),rideService.getAllWaterRides());
     }
@@ -89,19 +84,5 @@ public class RideServiceTest {
     void getAllGroundRides() throws SQLException {
         assertEquals(List.of(ride1),rideService.getAllGroundRides());
     }
-
-    @Test
-    void getMorningTimeSlotName(){
-        assertEquals("Morning timeslot at 10:00AM",timeSlotService.getTimeSlotName(1));
-    }
-
-    @Test
-    void getAfternoonTimeSlotName(){
-        assertEquals("Afternoon timeslot at 2:00PM",timeSlotService.getTimeSlotName(2));
-    }
-
-    @Test
-    void getEveningTimeSlotName(){
-        assertEquals("Evening timeslot at 6:00PM",timeSlotService.getTimeSlotName(3));
-    }
+    
 }
