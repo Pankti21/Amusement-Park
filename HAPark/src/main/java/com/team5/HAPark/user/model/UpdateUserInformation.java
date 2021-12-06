@@ -25,7 +25,6 @@ public class UpdateUserInformation implements IUpdateUserInformation {
             if (isNewPasswordDifferent()) {
                 if (newPasswordMatchesConfirmedPassword()) {
                     if (emailPasswordValidation.validatePasswordFormat()) {
-                        String newPasswordEncrypted = Encryption.encryptPassword(user.getPassword());
                         userPersistence.userUpdatedPassword(user.getPassword(), user.getEmail());
                         return UpdateUserValidationResult.SUCCESSFUL;
                     } else {
