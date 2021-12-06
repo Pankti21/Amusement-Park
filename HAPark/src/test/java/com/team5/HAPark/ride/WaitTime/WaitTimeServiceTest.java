@@ -3,6 +3,7 @@ package com.team5.HAPark.ride.WaitTime;
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.WaitTime.IWaitTimePersistence;
+import com.team5.HAPark.waitTime.model.WaitTimeService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

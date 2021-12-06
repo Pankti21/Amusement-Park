@@ -4,6 +4,7 @@ import com.team5.HAPark.reserveRide.model.RideReserveService;
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
+import com.team5.HAPark.waitTime.model.WaitTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,22 +18,6 @@ public class RideController {
 
     @Autowired
     private RideService rideService;
-
-    @Autowired
-    WaitTimeService waitTimeService = new WaitTimeService();
-
-    @GetMapping("/rides")
-    public String rides(Model model) throws SQLException {
-        RideReserveService rideReserveService=new RideReserveService();
-        return "RideMainPage";
-    }
-
-    @GetMapping("/rides/waittime")
-    public String waitTime(Model model) throws SQLException {
-        model.addAttribute("wt",waitTimeService.calculateWaitTime(1).getWaitTime());
-        model.addAttribute("wts",waitTimeService.getWaitTimes());
-        return "WaitTime";
-    }
 
     @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {
