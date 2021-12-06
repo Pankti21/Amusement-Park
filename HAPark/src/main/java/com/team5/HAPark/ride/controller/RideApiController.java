@@ -1,7 +1,9 @@
 package com.team5.HAPark.ride.controller;
 
+import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.model.Ride;
 import com.team5.HAPark.ride.model.RideService;
+import com.team5.HAPark.ride.model.RideServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,7 @@ import java.util.List;
 public class RideApiController {
 
     @Autowired
-    private RideService rideService;
+    private IRideService rideService=new RideServiceFactory().getRideService("RIDESERVICE");
 
     @RequestMapping("/rides/api")
     public List<Ride> getALLRides() throws SQLException {
@@ -24,10 +26,5 @@ public class RideApiController {
         return rideService.getRide(id);
     }
 
-    @RequestMapping("/reserve/{id}")
-    public Ride reserveRide(@PathVariable int id) throws SQLException {
-        //return rideService.reserveRide(id);
-        return null;
-    }
 }
 

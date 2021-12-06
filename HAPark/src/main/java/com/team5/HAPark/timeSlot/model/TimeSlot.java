@@ -1,4 +1,4 @@
-package com.team5.HAPark.ride.model;
+package com.team5.HAPark.timeSlot.model;
 
 import java.util.HashMap;
 

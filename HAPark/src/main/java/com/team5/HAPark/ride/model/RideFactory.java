@@ -8,6 +8,7 @@ public class RideFactory {
         if(ride.equalsIgnoreCase("RIDE")){
             return new Ride();
         }
+
         return null;
     }
 }
