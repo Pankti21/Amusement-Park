@@ -2,7 +2,7 @@ package com.team5.HAPark.reserveRide.persistence;
 
 import com.team5.HAPark.reserveRide.model.RideReserve;
 import com.team5.HAPark.database.mysql.IMySQLDatabase;
-import com.team5.HAPark.ride.model.TimeSlot;
+import com.team5.HAPark.timeSlot.model.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistence;
 import lombok.extern.slf4j.Slf4j;

@@ -4,8 +4,9 @@ import com.team5.HAPark.reserveRide.model.IRideReserveService;
 import com.team5.HAPark.reserveRide.model.RideReserve;
 import com.team5.HAPark.reserveRide.model.RideReserveService;
 import com.team5.HAPark.reserveRide.persistence.IRideReservePersistence;
-import com.team5.HAPark.ride.model.RideService;
+import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
+import com.team5.HAPark.timeSlot.model.ITimeSlotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,13 +23,15 @@ import java.sql.SQLException;
 @Controller
 public class RideReserveController {
     @Autowired
-    private RideService rideService;
+    private IRideService rideService;
+    @Autowired
+    private ITimeSlotService timeSlotService;
 
     @GetMapping("/reserve")
     public String reserveForm(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
         model.addAttribute("ride",new RideReserve());
-        model.addAttribute("maps",rideService.getAllTimeSlots());
+        model.addAttribute("maps",timeSlotService.getAllTimeSlots());
         return "RideForm";
     }
 
@@ -47,7 +50,7 @@ public class RideReserveController {
         //Saves to database
         rideReserveService.reserve(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
         model.addAttribute("rideReserved",rideService.getRide(ride.getRideId()));
-        model.addAttribute("timeslot",rideService.getTimeSlotName(ride.getTimeslotId()));
+        model.addAttribute("timeslot",timeSlotService.getTimeSlotName(ride.getTimeslotId()));
         return "RideReserved";
     }
 

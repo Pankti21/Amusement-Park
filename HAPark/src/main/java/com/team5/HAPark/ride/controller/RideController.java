@@ -3,6 +3,8 @@ package com.team5.HAPark.ride.controller;
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
+import com.team5.HAPark.timeSlot.model.ITimeSlotService;
+import com.team5.HAPark.timeSlot.model.TimeSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class RideController {
     @Autowired
     private IRideService rideService=rideServiceFactory.getRideService("RIDESERVICE");
 
+    @Autowired
+    ITimeSlotService timeSlotService=new TimeSlotService();
+
     @GetMapping("/rides")
     public String rides(){
         return "RideMainPage";
@@ -27,7 +32,7 @@ public class RideController {
     @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
-        model.addAttribute("maps",rideService.getAllTimeSlots());
+        model.addAttribute("maps",timeSlotService.getAllTimeSlots());
         return "Ride";
     }
 
