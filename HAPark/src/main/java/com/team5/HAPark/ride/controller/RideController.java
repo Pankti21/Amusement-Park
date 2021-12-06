@@ -21,6 +21,11 @@ public class RideController {
     @Autowired
     private IRideService rideService=rideServiceFactory.getRideService("RIDESERVICE");
 
+    @GetMapping("/rides")
+    public String rides(){
+        return "RideMainPage";
+    }
+
     @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
