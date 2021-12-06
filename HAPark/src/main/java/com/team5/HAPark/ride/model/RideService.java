@@ -22,11 +22,7 @@ public class RideService implements IRideService {
     }
 
     public List<Ride> getAllRides() throws SQLException {
-        log.info("Hello world.");
         List<Ride> Rides=ridePersistence.getAllRides();
-        for(Ride ride:Rides) {
-            log.info("ride id: {}", ride.getId());
-        }
         return Rides;
     }
 

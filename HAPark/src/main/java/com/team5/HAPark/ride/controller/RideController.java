@@ -1,10 +1,8 @@
 package com.team5.HAPark.ride.controller;
 
-import com.team5.HAPark.reserveRide.model.RideReserveService;
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
-import com.team5.HAPark.waitTime.model.WaitTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
