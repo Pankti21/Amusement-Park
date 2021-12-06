@@ -1,9 +1,9 @@
 package com.team5.HAPark.food;
 
 import com.team5.HAPark.food.DAO.IFoodPersistence;
+import com.team5.HAPark.food.mocks.FoodPersistenceMockFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.sql.SQLException;
 
@@ -18,22 +18,14 @@ class FoodServiceTest {
 
     @BeforeAll
     static void init() throws SQLException {
-
-        pizza = new Food("pizza","1",5);
-        menu = new Menu();
-        menu.addFoodToMenu(pizza);
-
-        foodPersistenceMock = Mockito.mock(IFoodPersistence.class);
-        Mockito.when(foodPersistenceMock.loadMenu()).thenReturn(menu);
-        Mockito.when(foodPersistenceMock.loadFood("1")).thenReturn(pizza);
-        Mockito.when(foodPersistenceMock.loadFood("2")).thenReturn(null);
-
+        FoodPersistenceMockFactory factory = new FoodPersistenceMockFactory();
+        foodPersistenceMock = factory.createFoodPersistenceMock();
         foodService = new FoodService(foodPersistenceMock);
     }
 
     @Test
     void getFoodExists() throws SQLException {
-        assertEquals(pizza,foodService.getFood("1"));
+        assertEquals("pizza",foodService.getFood("1").getName());
     }
 
     @Test
@@ -42,7 +34,17 @@ class FoodServiceTest {
     }
 
     @Test
-    void getMenu() throws SQLException {
-        assertEquals(menu, foodService.getMenu());
+    void getMenuHasCorrectSize() throws SQLException {
+        assertEquals(1,foodService.getMenu().getFoodList().size());
+    }
+
+    @Test
+    void getMenuHasCorrectFoodName() throws SQLException {
+        assertEquals("pizza",foodService.getMenu().getName("1"));
+    }
+
+    @Test
+    void getMenuHasCorrectFoodPrice() throws SQLException {
+        assertEquals(5,foodService.getMenu().getPrice("1"));
     }
 }

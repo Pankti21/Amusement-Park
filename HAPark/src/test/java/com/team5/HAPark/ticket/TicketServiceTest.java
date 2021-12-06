@@ -1,71 +1,57 @@
 package com.team5.HAPark.ticket;
 
 import com.team5.HAPark.ticket.DAO.ITicketPersistence;
+import com.team5.HAPark.ticket.mocks.TicketPersistenceMockFactory;
 import com.team5.HAPark.ticket.model.Ticket;
-import com.team5.HAPark.ticket.model.TicketOrderItem;
 import com.team5.HAPark.ticket.model.TicketService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 class TicketServiceTest {
 
-    static TicketService ticketService;
-    static ITicketPersistence ticketPersistence;
-    static TicketOrderItem ticketOrderItem;
-    static Ticket ticket1;
-    static Ticket ticket2;
-    static Ticket ticket3;
-    static Ticket ticket4;
-    static List<Ticket> tickets = new ArrayList<>();
+    private static TicketService ticketService;
 
-   @BeforeAll
-    static void init() throws SQLException {
-        ticket1 = new Ticket("Child",10);
-        ticket2 = new Ticket("Adult",15);
-        ticket3 = new Ticket("Adult",15);
-        ticketOrderItem = new TicketOrderItem(ticket1,2);
-        ITicketPersistence ticketPersistenceMock = Mockito.mock(ITicketPersistence.class);
-        Mockito.when(ticketPersistenceMock.loadTicket("Child")).thenReturn(ticket1);
-       Mockito.when(ticketPersistenceMock.loadTicket("Adult")).thenReturn(ticket2);
+    @BeforeAll
+     static void setUp() {
+        TicketPersistenceMockFactory factory = new TicketPersistenceMockFactory();
+        ITicketPersistence ticketPersistenceMock = factory.getTicketPersistenceMock();
         ticketService = new TicketService(ticketPersistenceMock);
-        tickets.add(ticket1);
-        tickets.add(ticket2);
-
-        Mockito.when(ticketPersistenceMock.getAllTickets()).thenReturn(tickets);
     }
 
     @Test
     void validateChildTicketIsFetched() throws SQLException {
-        assertEquals(ticket1,ticketService.getTicket("Child"));
+        assertNotNull(ticketService.getTicket("Child"));
+    }
+
+    @Test
+    void validateChildTicketIsCorrect() throws SQLException {
+        Ticket ticket = ticketService.getTicket("Child");
+        assertEquals("Child",ticket.getTicketType());
     }
 
     @Test
     void validateAdultTicketIsFetched() throws SQLException {
-        assertEquals(ticket2,ticketService.getTicket("Adult"));
-    }
-    @Test
-    void validateAllTicketAreFetched() throws  SQLException {
-        assertEquals(4,ticketService.getAllTickets().size());
+        assertNotNull(ticketService.getTicket("Adult"));
     }
 
     @Test
-    void validateTicketsAreFetchedCorrectly() throws  SQLException {
-        tickets.add(ticket3);
-        assertEquals(5,ticketService.getAllTickets().size());
+    void validateAdultTicketIsCorrect() throws SQLException {
+        Ticket ticket = ticketService.getTicket("Adult");
+        assertEquals("Adult",ticket.getTicketType());
     }
 
     @Test
-    void validateMoreTicketsAreFetchedCorrectly() throws  SQLException {
-        tickets.add(ticket3);
-        tickets.add(ticket4);
-        assertEquals(4,ticketService.getAllTickets().size());
+    void validateTicketsAreFetchedNotNull() throws  SQLException {
+        assertNotNull(ticketService.getAllTickets());
+    }
+
+    @Test
+    void validateAllTicketAreFetchedCorrectly() throws  SQLException {
+        assertEquals(2,ticketService.getAllTickets().size());
     }
 }

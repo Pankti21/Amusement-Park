@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public interface IUserPersistence {
 
-    void saveUser(String email, String firstName, String lastName, String pw) throws SQLException;
+    void saveUser(String email, String firstName, String lastName, String password) throws SQLException;
 
     boolean doesUserExist(String email) throws SQLException;
 
