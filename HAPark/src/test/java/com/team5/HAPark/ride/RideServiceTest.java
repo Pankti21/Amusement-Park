@@ -84,5 +84,5 @@ public class RideServiceTest {
     void getAllGroundRides() throws SQLException {
         assertEquals(List.of(ride1),rideService.getAllGroundRides());
     }
-    
+
 }
