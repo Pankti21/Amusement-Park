@@ -5,6 +5,7 @@ import com.team5.HAPark.ride.model.Ride;
 import com.team5.HAPark.ride.model.RideServiceFactory;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
 import com.team5.HAPark.reserveRide.persistence.IRideReservePersistence;
+import com.team5.HAPark.timeSlot.model.TimeSlotService;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ public class RideReserveService implements IRideReserveService {
 
     private IRideReservePersistence rideReservePersistence;
     private IRideService rideService= new RideServiceFactory().getRideService("RIDESERVICE");
+    private TimeSlotService timeSlotService=new TimeSlotService();
 
     public RideReserveService(IRideReservePersistence rideReservePersistence) {
         this.rideReservePersistence=rideReservePersistence;
@@ -52,6 +54,17 @@ public class RideReserveService implements IRideReserveService {
             ReservedRideNames.add(rideName);
         }
         return ReservedRideNames;
+    }
+
+    public List<String> getReservedTimeSlots() throws SQLException {
+        List<String> ReservedTimeSlots = new ArrayList<>();
+        List<RideReserve> ridesReserved=rideReservePersistence.getReservations();
+        for (RideReserve rideReserve:ridesReserved){
+            int timeSlotId=rideReserve.getTimeslotId();
+            String timeSlotName=timeSlotService.getTimeSlotName(timeSlotId);
+            ReservedTimeSlots.add(timeSlotName);
+        }
+        return ReservedTimeSlots;
     }
 
 }
