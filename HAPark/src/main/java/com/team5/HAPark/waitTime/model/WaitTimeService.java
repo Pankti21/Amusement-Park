@@ -1,8 +1,10 @@
-package com.team5.HAPark.ride.model;
+package com.team5.HAPark.waitTime.model;
 
+import com.team5.HAPark.ride.model.Ride;
+import com.team5.HAPark.timeSlot.model.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
-import com.team5.HAPark.ride.persistence.WaitTime.IWaitTimePersistence;
+import com.team5.HAPark.waitTime.persistence.IWaitTimePersistence;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +69,7 @@ public class WaitTimeService {
     //WaitTime = Rounds of rides * duration of ride per round
     public WaitTime calculateWaitTime(int rideId) throws SQLException {
         WaitTime waitTime = new WaitTime();
-        LocalTime temp = LocalTime.of(00,00,00);
+        LocalTime initialWaitTime = LocalTime.of(00,00,00);
 
         TimeSlot timeSlot = ridePersistence.getRideTimeSlot(rideId);
 
@@ -86,19 +88,19 @@ public class WaitTimeService {
 
             if(rideRounds>0) {
                 for (int i = 0; i < rideRounds - 1; i++) {
-                    temp = durationInLocalTime.plusSeconds(secs);
-                    log.info("temp in sec:{}", temp);
-                    temp = temp.plusMinutes(mins);
-                    log.info("temp in min:{}", temp);
-                    temp = temp.plusHours(hours);
-                    log.info("temp in hours:{}", temp);
-                    log.info("temp:{}", temp);
-                    durationInLocalTime = temp;
+                    initialWaitTime = durationInLocalTime.plusSeconds(secs);
+                    log.info("initialWaitTime in sec:{}", initialWaitTime);
+                    initialWaitTime = initialWaitTime.plusMinutes(mins);
+                    log.info("initialWaitTime in min:{}", initialWaitTime);
+                    initialWaitTime = initialWaitTime.plusHours(hours);
+                    log.info("initialWaitTime in hours:{}", initialWaitTime);
+                    log.info("initialWaitTime:{}", initialWaitTime);
+                    durationInLocalTime = initialWaitTime;
                 }
-                waitTime.getWaitTime().put(key, temp);
+                waitTime.getWaitTime().put(key, initialWaitTime);
             }
             else {
-                waitTime.getWaitTime().put(key,LocalTime.of(00,00,00));
+                waitTime.getWaitTime().put(key,initialWaitTime);
             }
         }
         return waitTime;

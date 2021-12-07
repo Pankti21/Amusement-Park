@@ -13,8 +13,6 @@ public class CartSummaryController {
 
     @Autowired
     ICartSummary iCartSummary = new CartSummary();
-    // ICartSummary iCartSummary = iCartFactory.getCart("CartSummary");
-
 
     @GetMapping("/cartsummary")
     public String allCartItems(Model model) throws SQLException {

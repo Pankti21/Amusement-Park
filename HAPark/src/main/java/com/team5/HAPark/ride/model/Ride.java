@@ -1,5 +1,7 @@
 package com.team5.HAPark.ride.model;
 
+import com.team5.HAPark.timeSlot.model.TimeSlot;
+
 import java.sql.Time;
 
 public class Ride {

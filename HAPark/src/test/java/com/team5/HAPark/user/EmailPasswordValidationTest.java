@@ -111,5 +111,4 @@ public class EmailPasswordValidationTest {
             assertTrue(emailPasswordValidation.validateEmailFormat());
         }
     }
-
 }

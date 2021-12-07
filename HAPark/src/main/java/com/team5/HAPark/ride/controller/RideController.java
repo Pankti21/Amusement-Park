@@ -1,9 +1,10 @@
 package com.team5.HAPark.ride.controller;
 
-import com.team5.HAPark.reserveRide.model.RideReserveService;
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
+import com.team5.HAPark.timeSlot.model.ITimeSlotService;
+import com.team5.HAPark.timeSlot.model.TimeSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,29 +16,23 @@ import java.sql.SQLException;
 @Slf4j
 public class RideController {
 
-    @Autowired
-    private RideService rideService;
+    RideServiceFactory rideServiceFactory=new RideServiceFactory();
 
     @Autowired
-    WaitTimeService waitTimeService = new WaitTimeService();
+    private IRideService rideService=rideServiceFactory.getRideService("RIDESERVICE");
+
+    @Autowired
+    ITimeSlotService timeSlotService=new TimeSlotService();
 
     @GetMapping("/rides")
-    public String rides(Model model) throws SQLException {
-        RideReserveService rideReserveService=new RideReserveService();
+    public String rides(){
         return "RideMainPage";
-    }
-
-    @GetMapping("/rides/waittime")
-    public String waitTime(Model model) throws SQLException {
-        model.addAttribute("wt",waitTimeService.calculateWaitTime(1).getWaitTime());
-        model.addAttribute("wts",waitTimeService.getWaitTimes());
-        return "WaitTime";
     }
 
     @GetMapping("/rides/all")
     public String allrides(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
-        model.addAttribute("maps",rideService.getAllTimeSlots());
+        model.addAttribute("maps",timeSlotService.getAllTimeSlots());
         return "Ride";
     }
 

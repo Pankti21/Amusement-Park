@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.*;
 
-
 @Slf4j
 @Service
 public class RideService implements IRideService {
@@ -20,21 +19,11 @@ public class RideService implements IRideService {
     }
 
     public RideService() {
-
     }
 
     public List<Ride> getAllRides() throws SQLException {
-        log.info("Hello world.");
         List<Ride> Rides=ridePersistence.getAllRides();
-        for(Ride ride:Rides) {
-            log.info("ride id: {}", ride.getId());
-        }
         return Rides;
-    }
-
-    public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        List<HashMap<Integer,Integer>> maps = ridePersistence.getAllTimeSlots();
-        return maps;
     }
 
     public List<String> getAllRideNames() throws SQLException {
@@ -74,13 +63,4 @@ public class RideService implements IRideService {
         return ride;
     }
 
-    public String getTimeSlotName(int timeslotId) {
-        if(timeslotId==1){
-            return "Morning timeslot at 10:00AM";
-        }
-        if (timeslotId==2){
-            return "Afternoon timeslot at 2:00PM";
-        }
-            return "Evening timeslot at 6:00PM";
-    }
 }

@@ -3,8 +3,10 @@ package com.team5.HAPark.ride;
 import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.model.Ride;
 import com.team5.HAPark.ride.model.RideService;
-import com.team5.HAPark.ride.model.TimeSlot;
+import com.team5.HAPark.timeSlot.model.ITimeSlotService;
+import com.team5.HAPark.timeSlot.model.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
+import com.team5.HAPark.timeSlot.model.TimeSlotService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RideServiceTest {
     static IRideService rideService;
+    static ITimeSlotService timeSlotService=new TimeSlotService();
     public static IRidePersistence ridePersistenceMock;
     static Ride ride1;
     static Ride ride2;
@@ -73,11 +76,6 @@ public class RideServiceTest {
     }
 
     @Test
-    void getAllTimeSlots() throws SQLException {
-        assertEquals(maps,rideService.getAllTimeSlots());
-    }
-
-    @Test
     void getAllWaterRides() throws SQLException {
         assertEquals(List.of(ride2),rideService.getAllWaterRides());
     }
@@ -87,18 +85,4 @@ public class RideServiceTest {
         assertEquals(List.of(ride1),rideService.getAllGroundRides());
     }
 
-    @Test
-    void getMorningTimeSlotName(){
-        assertEquals("Morning timeslot at 10:00AM",rideService.getTimeSlotName(1));
-    }
-
-    @Test
-    void getAfternoonTimeSlotName(){
-        assertEquals("Afternoon timeslot at 2:00PM",rideService.getTimeSlotName(2));
-    }
-
-    @Test
-    void getEveningTimeSlotName(){
-        assertEquals("Evening timeslot at 6:00PM",rideService.getTimeSlotName(3));
-    }
 }

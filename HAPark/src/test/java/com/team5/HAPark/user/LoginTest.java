@@ -1,80 +1,51 @@
 package com.team5.HAPark.user;
 
+import com.team5.HAPark.user.model.Encryption;
 import com.team5.HAPark.user.model.Login;
 import com.team5.HAPark.user.persistence.IUserPersistence;
-import com.team5.HAPark.user.model.User;
 import com.team5.HAPark.user.model.UserCredentials;
+import com.team5.HAPark.user.persistence.mocks.UserPersistenceMockFactory;
 import org.junit.jupiter.api.*;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 class LoginTest {
 
     private static Login login;
     private static UserCredentials user;
     private static IUserPersistence userPersistenceMock;
-    private User loadedUser;
 
     @BeforeEach
-    void init(){
+    void init() throws SQLException, NoSuchAlgorithmException {
         user = new UserCredentials();
         user.setEmail("test@gmail.com");
         user.setPassword("password");
         login = new Login(user);
-        userPersistenceMock = Mockito.mock(IUserPersistence.class);
-        loadedUser = new User("fname", "lname", user.getEmail(),"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+        UserPersistenceMockFactory factory = new UserPersistenceMockFactory();
+        userPersistenceMock = factory.createUserPersistenceMock();
+        String encryptedPassword = Encryption.encryptPassword("password");
+        userPersistenceMock.saveUser("test@gmail.com","fname", "lname", encryptedPassword);
     }
 
     @Test
     void loginUserDoesNotExist () throws SQLException {
-        when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(false);
-        Login loginRegister = new Login(user);
-        assertFalse(loginRegister.login(userPersistenceMock));
-    }
-
-    @Test
-    void loginUserWrongPassword () throws SQLException {
-        when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
-        when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("diffPassword");
-        Login loginRegister = new Login(user);
-        assertFalse(loginRegister.login(userPersistenceMock));
-    }
-
-    @Test
-    void loginUserCorrectPassword () throws SQLException {
-        when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
-        when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-        Login Login = new Login(user);
-        assertTrue(Login.login(userPersistenceMock));
+        user.setEmail("emailNotPresent");
+        Login login = new Login(user);
+        assertFalse(login.login(userPersistenceMock));
     }
 
     @Test
     void loginUserSuccessful() throws SQLException {
-        when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
-        when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-        when(userPersistenceMock.loadUser(user.getEmail())).thenReturn(loadedUser);
         Login login = new Login(user);
         assertTrue(login.login(userPersistenceMock));
     }
 
     @Test
-    void loginUserFailsDueToEmail() throws SQLException {
-        when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(false);
-        Login login = new Login(user);
-        login.login(userPersistenceMock);
-        assertFalse(login.login(userPersistenceMock));
-    }
-
-    @Test
-    void loginUserFailsDueToPassword() throws SQLException {
-        when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
-        when(userPersistenceMock.getPassword(user.getEmail())).thenReturn("wrongPassword");
+    void loginUserWrongPassword() throws NoSuchAlgorithmException {
+        user.setPassword("wrongPassword");
         Login login = new Login(user);
         assertFalse(login.login(userPersistenceMock));
     }
