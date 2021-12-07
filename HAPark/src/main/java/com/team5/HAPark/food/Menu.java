@@ -7,14 +7,13 @@ import java.util.Map;
 
 public class Menu {
 
-    LinkedHashMap<String,Food> menu;
+    private LinkedHashMap<String,Food> menu;
 
     public Menu(){
         menu = new LinkedHashMap<>();
     }
 
     public String getName(String id){
-
         Food food = menu.get(id);
         String name = food.getName();
 
@@ -22,7 +21,6 @@ public class Menu {
     }
 
     public Double getPrice(String id){
-
         Food food = menu.get(id);
         Double price = food.getPrice();
 
@@ -30,20 +28,16 @@ public class Menu {
     }
 
     public void addFoodToMenu(Food food){
-
         String id = food.getId();
-
         menu.put(id,food);
     }
 
     public List<Food> getFoodList(){
-
         ArrayList<Food> foodList = new ArrayList<>();
 
         for (Map.Entry<String,Food> entry : menu.entrySet()){
             foodList.add(entry.getValue());
         }
-
         return foodList;
     }
 }

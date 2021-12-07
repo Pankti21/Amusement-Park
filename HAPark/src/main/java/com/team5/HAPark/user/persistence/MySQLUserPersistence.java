@@ -30,15 +30,7 @@ public class MySQLUserPersistence implements IUserPersistence {
             userExists = statement.getBoolean(2);
 
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
+            close(statement);
         }
 
         return userExists;
@@ -59,14 +51,7 @@ public class MySQLUserPersistence implements IUserPersistence {
             password = statement.getString(2);
 
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            close(statement);
         }
 
         return password;
@@ -90,14 +75,7 @@ public class MySQLUserPersistence implements IUserPersistence {
             statement.execute();
 
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            close(statement);
         }
     }
 
@@ -113,16 +91,9 @@ public class MySQLUserPersistence implements IUserPersistence {
             statement.setString(2,email);
 
             statement.execute();
+
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
+            close(statement);
         }
 
     }
@@ -151,19 +122,19 @@ public class MySQLUserPersistence implements IUserPersistence {
             loadedUser = new User(fname,lname,email,password);
 
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
+            close(statement);
         }
-
         return loadedUser;
     }
 
+    private void close(CallableStatement statement) {
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -22,7 +22,6 @@ public class MySQLFoodPersistence implements IFoodPersistence{
         Connection connection = database.getConnection();
 
         try {
-
             statement = connection.createStatement();
             resultSet =  statement.executeQuery("SELECT * FROM food WHERE food_id = "+id+";");
 
@@ -31,19 +30,8 @@ public class MySQLFoodPersistence implements IFoodPersistence{
                  double price = resultSet.getDouble("food_price");
                  food = new Food(name,id,price);
             }
-
         } finally {
-
-            try{
-                if (resultSet != null){
-                    resultSet.close();
-                }
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            close(statement, resultSet);
         }
 
         return food;
@@ -57,7 +45,6 @@ public class MySQLFoodPersistence implements IFoodPersistence{
         Connection connection = database.getConnection();
 
         try {
-
             statement = connection.createStatement();
             resultSet =  statement.executeQuery("SELECT * FROM food;");
 
@@ -68,20 +55,22 @@ public class MySQLFoodPersistence implements IFoodPersistence{
                 Food food = new Food(name,id,price);
                 menu.addFoodToMenu(food);
             }
-
         } finally {
-
-            try{
-                if (resultSet != null){
-                    resultSet.close();
-                }
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            close(statement, resultSet);
         }
         return menu;
+    }
+
+    private void close(Statement statement, ResultSet resultSet) {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
