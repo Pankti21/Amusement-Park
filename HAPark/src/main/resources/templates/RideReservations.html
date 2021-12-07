@@ -10,14 +10,26 @@
     <h1><a th:href="@{/reserve}">Make a new Reservation</a></h1>
 </div>
 <div th:unless="${#lists.isEmpty(reservations)}">
-<table border="black">
+<table style="float:left">
+    <tr>RIDE</tr>
+    <tr th:each="rideName:${rideNames}">
+        <td th:text=${rideName}></td>
+    </tr>
+</table>
+<table style="float:left">
+    <tr>TIMESLOT</tr>
+    <tr th:each="timeSlotName:${timeSlotNames}">
+        <td th:text=${timeSlotName}></td>
+    </tr>
+</table >
+<table style="float:left">
+    <tr>SEATS</tr>
     <tr th:each="r:${reservations}">
-        <td th:text="${r.rideId}"></td>
-        <td th:text="${r.timeslotId}"></td>
         <td th:text="${r.reserveSeats}"></td>
     </tr>
 </table>
 </div>
+<p><a th:href="@{/reserve}">Reserve new ride</a></p>
 <body>
 </body>
 </html>
