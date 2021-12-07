@@ -1,6 +1,7 @@
 package com.team5.HAPark.user;
 
 import com.team5.HAPark.user.model.Register;
+import com.team5.HAPark.user.model.RegisterResult;
 import com.team5.HAPark.user.model.RegisterUser;
 import com.team5.HAPark.user.persistence.IUserPersistence;
 import com.team5.HAPark.user.model.User;
@@ -34,93 +35,93 @@ class RegisterTest {
         @Test
         void registerFailsEmailEmpty() throws SQLException {
             user.setEmail("");
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsFnameEmpty() throws SQLException {
             user.setFirstName("");
-            assertFalse(register.register( userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register( userPersistenceMock));
         }
 
         @Test
         void registerFailsLnameEmpty() throws SQLException {
             user.setLastName("");
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsPasswordEmpty() throws SQLException {
             user.setPassword("");
-            assertFalse(register.register( userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register( userPersistenceMock));
         }
 
         @Test
         void registerFailsConfirmPasswordEmpty() throws SQLException {
             user.setConfirmedPassword("");
-            assertFalse(register.register( userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register( userPersistenceMock));
         }
 
         @Test
         void registerFailsEmailNull() throws SQLException {
             user.setEmail(null);
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsFnameNull() throws SQLException {
             user.setFirstName(null);
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsLnameNull() throws SQLException {
             user.setLastName(null);
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsPasswordNull() throws SQLException {
             user.setPassword(null);
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsConfirmPasswordNull() throws SQLException {
             user.setConfirmedPassword(null);
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsPasswordsDontMatch() throws SQLException {
             user.setConfirmedPassword("diffPassword");
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.PASSWORDMISMATCH,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsUserAlreadyExists() throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(true);
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.ALREADYEXISTS,register.register(userPersistenceMock));
             verify(userPersistenceMock,times(1)).doesUserExist(user.getEmail());
         }
 
         @Test
         void registerFailsBadEmailFormat() throws SQLException {
             user.setEmail("notAnEmail");
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.INVALIDEMAIL,register.register(userPersistenceMock));
         }
 
         @Test
         void registerFailsBadPasswordFormat() throws SQLException {
             user.setPassword("badPassword");
             user.setConfirmedPassword("badPassword");
-            assertFalse(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.INVALIDPASSWORD,register.register(userPersistenceMock));
         }
 
         @Test
         void registerSuccessful() throws SQLException {
             when(userPersistenceMock.doesUserExist(user.getEmail())).thenReturn(false);
-            assertTrue(register.register(userPersistenceMock));
+            assertEquals(RegisterResult.SUCCESSFUL,register.register(userPersistenceMock));
             verify(userPersistenceMock,times(1)).doesUserExist(user.getEmail());
             Mockito.verify(userPersistenceMock, times(1))
                     .saveUser(user.getEmail(),user.getFirstName(),user.getLastName(),"ff7bd97b1a7789ddd2775122fd6817f3173672da9f802ceec57f284325bf589f");

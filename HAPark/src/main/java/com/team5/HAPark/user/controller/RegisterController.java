@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 class RegisterController {
@@ -21,13 +23,13 @@ class RegisterController {
     }
 
     @PostMapping("/register")
-    public String registerSubmit(@ModelAttribute RegisterUser registerUser, Model model) {
+    public RedirectView registerSubmit(@ModelAttribute RegisterUser registerUser, Model model, RedirectAttributes redirectAttributes) {
 
         IUserPersistenceFactory factory = new UserPersistenceFactory();
         IUserPersistence userPersistence = factory.createUserPersistence();
         Register register = new Register(registerUser);
 
-        model.addAttribute("register", register.register(userPersistence));
-        return "Register";
+        redirectAttributes.addFlashAttribute("result", register.register(userPersistence));
+        return  new RedirectView("/register");
     }
 }

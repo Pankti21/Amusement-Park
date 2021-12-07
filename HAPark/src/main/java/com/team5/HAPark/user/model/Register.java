@@ -15,30 +15,41 @@ public class Register {
         emailPasswordValidation = new EmailPasswordValidation(this.user);
     }
 
-    public boolean register(IUserPersistence userPersistence) {
-        if (validateUserInfo()) {
+    public RegisterResult register(IUserPersistence userPersistence) {
+        RegisterResult registerResult = validateUserInfo();
+        if (registerResult == RegisterResult.SUCCESSFUL) {
             try {
                 if (!userPersistence.doesUserExist(user.getEmail())) {
                     userPersistence.saveUser(user.getEmail(), user.getFirstName(),
                             user.getLastName(), Encryption.encryptPassword(user.getPassword()));
-                    return true;
+                    return RegisterResult.SUCCESSFUL;
+                } else {
+                    return RegisterResult.ALREADYEXISTS;
                 }
             } catch (SQLException | NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
         }
-        return false;
+        return registerResult;
     }
 
-    private boolean validateUserInfo() {
+    private RegisterResult validateUserInfo() {
         if (fieldIsPresent(user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getConfirmedPassword())) {
-            if (emailPasswordValidation.validateEmailFormat() && emailPasswordValidation.validatePasswordFormat()) {
-                if (user.getPassword().matches(user.getConfirmedPassword())) {
-                    return true;
+            if (emailPasswordValidation.validateEmailFormat()) {
+                if (emailPasswordValidation.validatePasswordFormat()) {
+                    if (user.getPassword().matches(user.getConfirmedPassword())) {
+                        return RegisterResult.SUCCESSFUL;
+                    } else {
+                        return RegisterResult.PASSWORDMISMATCH;
+                    }
+                } else {
+                    return RegisterResult.INVALIDPASSWORD;
                 }
+            } else {
+                return RegisterResult.INVALIDEMAIL;
             }
         }
-        return false;
+        return RegisterResult.EMPTYFIELD;
     }
 
     private boolean fieldIsPresent(String ... fields) {
