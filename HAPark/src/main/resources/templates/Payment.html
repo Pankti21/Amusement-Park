@@ -17,6 +17,7 @@
     <p><input type="password" id="cvv" placeholder="CVV" th:field="*{cvv}" /></p>
     <p><input type="submit" value="Submit" onclick="return f()"/> <input type="reset" value="Reset" /></p>
 </form>
+<div th:text="${errormsg}"></div>
 
 <script type="text/javascript">
     function f() {

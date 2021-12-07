@@ -8,17 +8,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-class PaymentController {
+public class PaymentController {
 
     @GetMapping("/payment")
     public String PaymentForm(Model model) {
-        model.addAttribute("payment", new Payment());
+        model.addAttribute("payment", new Payment("","","","",""));
         return "Payment";
     }
 
     @PostMapping("/payment")
     public String PaymentSubmit(@ModelAttribute Payment payment, Model model) {
+
         model.addAttribute("payment", payment);
-        return "PaymentDone";
+        payment.setErrormsg(payment.Validate().getResultMessage());
+        return "Payment";
     }
 }

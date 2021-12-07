@@ -7,6 +7,16 @@ public class Payment {
     private String mm;
     private String yy;
     private String cvv;
+    private String errormsg;
+
+    public Payment(String ctype, String cno, String mm, String yy, String cvv) {
+        this.ctype = ctype;
+        this.cno = cno;
+        this.mm = mm;
+        this.yy = yy;
+        this.cvv = cvv;
+
+    }
 
     public String getCtype() {
         return ctype;
@@ -47,5 +57,33 @@ public class Payment {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
+
+    public String getErrormsg() {
+        return errormsg;
+    }
+
+    public void setErrormsg(String errormsg) {
+        this.errormsg = errormsg;
+    }
+
+    public PaymentError Validate() {
+        PaymentError paymentError;
+
+        if( cno.equals("") || mm.equals("") || yy.equals("") || cvv.equals("")) {
+            paymentError = PaymentError.EMPTYFIELD;
+        } else {
+            if(cvv.length()!=3 || cno.length()!=16) {
+                paymentError = PaymentError.INVALIDNUMBERLENGTH;
+            } else {
+                if(!cvv.chars().allMatch(Character::isDigit) || !cno.chars().allMatch(Character::isDigit)) {
+                    paymentError = PaymentError.INVALIDIGITFORMAT;
+                } else {
+                    paymentError = PaymentError.SUCCESSFUL;
+                }
+            }
+        }
+        return paymentError;
+    }
+
 
 }
