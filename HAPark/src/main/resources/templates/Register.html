@@ -4,6 +4,7 @@
     <title>Register Form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+<div th:replace="Header :: header"/>
 <body>
 <h1>Form</h1>
 <form action="#" th:action="@{/register}" th:object="${register}" method="post">
@@ -14,5 +15,13 @@
     <p>Confirmed Password: <input type="text" th:field="*{CPassword}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
+<div th:if="${payment.errormsg != null}">
+    <script th:inline="javascript">
+        window.alert([[${payment.errormsg.resultMessage}]]);
+        if ([[${payment.errormsg.resultMessage == 'success'}]]){
+            window.location.href = "submitorder";
+        }
+    </script>
+</div>
 </body>
 </html>

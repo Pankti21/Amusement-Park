@@ -7,16 +7,16 @@ import java.sql.SQLException;
 
 public class Register {
 
-    private final User user;
+    private final RegisterUser user;
     private final IEmailPasswordValidation emailPasswordValidation ;
 
-    public Register(User user) {
+    public Register(RegisterUser user) {
         this.user = user;
         emailPasswordValidation = new EmailPasswordValidation(this.user);
     }
 
-    public boolean register(IUserPersistence userPersistence, String confirmedPassword) {
-        if (validateUserInfo(confirmedPassword)) {
+    public boolean register(IUserPersistence userPersistence) {
+        if (validateUserInfo()) {
             try {
                 if (!userPersistence.doesUserExist(user.getEmail())) {
                     userPersistence.saveUser(user.getEmail(), user.getFirstName(),
@@ -30,10 +30,10 @@ public class Register {
         return false;
     }
 
-    private boolean validateUserInfo(String confirmedPassword) {
-        if (fieldIsPresent(user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName(), confirmedPassword)) {
+    private boolean validateUserInfo() {
+        if (fieldIsPresent(user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getConfirmedPassword())) {
             if (emailPasswordValidation.validateEmailFormat() && emailPasswordValidation.validatePasswordFormat()) {
-                if (user.getPassword().matches(confirmedPassword)) {
+                if (user.getPassword().matches(user.getConfirmedPassword())) {
                     return true;
                 }
             }
