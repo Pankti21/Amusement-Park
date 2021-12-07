@@ -7,38 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" type='text/javascript'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type='text/javascript'></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type='text/javascript'></script>-->
     <script type="text/javascript">
-            $(document).ready(function(){
+            function Validate() {
+                var cardnumber=document.getElementById("txtcardnumber").value;
+                var expiredate=document.getElementById("txtdate").value;
+                var cvv=document.getElementById("txtsecuritycode").value;
 
-              $("#btnsubmit").click(function(){
+        if(isNaN(cardnumber)) {
+           alert("Card number should only be numeric");
+           return false;
+        }
+        else if(isNaN(cvv)){
+            alert("CVV should be numeric");
+            return false;
+        }
+        else if(cardnumber.length == 0){
+            alert("Please fill 16 digit card number");
+            return false;
+        }
+        else if(cvv.length == 0){
+            alert("Please fill 3 digit cvv number");
+            return false;
+        }
+        else if(!(cardnumber.length == 16)){
+            alert("card number should be 16 digit");
+            return false;
+        }
+        else if(!(cvv.length == 3)){
+            alert("cvv number should be 3 digit");
+            return false;
+        }
+        else if(expiredate.length == 0){
+            alert("Please fill the card expiry date");
+            return false;
+        }
+        else
+        {
+            alert("Payment is successful");
+            return true;
+        }
+        return true;
 
-                var cardnumber=$("#txtcardnumber").val();
-                var cardtype=$('input[name=rdcardtype]:checked').val();
-                var expiredate=$("#txtdate").val();
-                var cvv=$("#txtsecuritycode").val();
-
-                    $.ajax({
-    				url: "http://localhost:8080/payment/add",
-    				type: "POST",
-    				contentType: 'application/json; charset=utf-8',
-    				data: JSON.stringify({
-    					'paymentType': cardtype,
-    					'cardNumber': cardnumber,
-    					'dateMM': expiredate,
-    					'securityCode': cvv
-    				}),
-    				success: function(res) {
-                        alert(res);
-                        if (res === "success"){
-                            window.location='submitorder'
-                        }
-    				}
-    			});
-
-              });
-
-            });
+        }
 </script>
 </head>
 <body>
@@ -55,10 +66,11 @@
                 <label><input type="radio" name="rdcardtype" value="Credit">Credit</label>
             </div>
 
-            <input type="text" id="txtcardnumber" class="form-control" placeholder="Card Number">
-            <input type="date" id="txtdate" class="form-control">
-            <input type="text" id="txtsecuritycode" class="form-control" placeholder="CVV">
-            <input type="submit" id="btnsubmit" class="btn btn-primary">
+            <input type="text" id="txtcardnumber" class="form-control" placeholder="Card Number" required/>
+            <input type="date" id="txtdate" class="form-control" required/>
+            <input type="text" id="txtsecuritycode" class="form-control" placeholder="CVV" required/>
+          <!--  <input type="submit" id="btnsubmit" class="btn btn-primary"> -->
+            <button type="submit" id="btnSubmit" value="Submit" onclick="return Validate()">Submit</button>
         </div>
 
     </div>
