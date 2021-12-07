@@ -7,38 +7,57 @@ import java.sql.SQLException;
 
 public class Register {
 
-    private final User user;
+    private final RegisterUser user;
     private final IEmailPasswordValidation emailPasswordValidation ;
 
-    public Register(User user) {
+    public Register(RegisterUser user) {
         this.user = user;
         emailPasswordValidation = new EmailPasswordValidation(this.user);
     }
 
-    public boolean register(IUserPersistence userPersistence, String confirmedPassword) {
-
-        if (user.getPassword()!=null && !user.getPassword().isEmpty()
-                && user.getEmail()!=null && !user.getEmail().isEmpty()
-                && user.getFirstName()!=null && !user.getFirstName().isEmpty()
-                && user.getLastName()!=null && !user.getLastName().isEmpty()
-                && confirmedPassword!=null){
-
-            if (emailPasswordValidation.validateEmailFormat() && emailPasswordValidation.validatePasswordFormat()) {
-
-                if (user.getPassword().matches(confirmedPassword)) {
-
-                    try {
-                        if (!userPersistence.doesUserExist(user.getEmail())) {
-                            userPersistence.saveUser(user.getEmail(), user.getFirstName(),
-                                    user.getLastName(),Encryption.encryptPassword(user.getPassword()));
-                            return true;
-                        }
-                    } catch (SQLException | NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
+    public RegisterResult register(IUserPersistence userPersistence) {
+        RegisterResult registerResult = validateUserInfo();
+        if (registerResult == RegisterResult.SUCCESSFUL) {
+            try {
+                if (!userPersistence.doesUserExist(user.getEmail())) {
+                    userPersistence.saveUser(user.getEmail(), user.getFirstName(),
+                            user.getLastName(), Encryption.encryptPassword(user.getPassword()));
+                    return RegisterResult.SUCCESSFUL;
+                } else {
+                    return RegisterResult.ALREADYEXISTS;
                 }
+            } catch (SQLException | NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
         }
-        return false;
+        return registerResult;
+    }
+
+    private RegisterResult validateUserInfo() {
+        if (fieldIsPresent(user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getConfirmedPassword())) {
+            if (emailPasswordValidation.validateEmailFormat()) {
+                if (emailPasswordValidation.validatePasswordFormat()) {
+                    if (user.getPassword().matches(user.getConfirmedPassword())) {
+                        return RegisterResult.SUCCESSFUL;
+                    } else {
+                        return RegisterResult.PASSWORDMISMATCH;
+                    }
+                } else {
+                    return RegisterResult.INVALIDPASSWORD;
+                }
+            } else {
+                return RegisterResult.INVALIDEMAIL;
+            }
+        }
+        return RegisterResult.EMPTYFIELD;
+    }
+
+    private boolean fieldIsPresent(String ... fields) {
+        for (String field : fields){
+            if (field == null || field.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

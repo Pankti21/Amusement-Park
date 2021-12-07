@@ -1,23 +1,25 @@
 package com.team5.HAPark.payment.controller;
 
 import com.team5.HAPark.payment.model.Payment;
-import com.team5.HAPark.payment.model.PaymentError;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@RestController
+@Controller
 public class PaymentController {
 
-    @RequestMapping("/payment")
-    public ModelAndView paymentmethod(){
-        ModelAndView m = new ModelAndView();
-        m.setViewName("Payment");
-        return m;
+    @GetMapping("/payment")
+    public String PaymentForm(Model model) {
+        model.addAttribute("payment", new Payment("","","","",""));
+        return "Payment";
     }
 
-    @RequestMapping(value = "/payment/add",method = RequestMethod.POST)
-    public String addpayment(@RequestBody Payment py) {
-        PaymentError paymentError = py.Validate();
-        return paymentError.getResultMessage();
+    @PostMapping("/payment")
+    public String PaymentSubmit(@ModelAttribute Payment payment, Model model) {
+        model.addAttribute("payment", payment);
+        payment.setErrormsg(payment.Validate());
+        return "Payment";
     }
 }

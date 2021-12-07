@@ -13,8 +13,6 @@ class FoodServiceTest {
 
     static FoodService foodService;
     static IFoodPersistence foodPersistenceMock;
-    static Menu menu;
-    static Food pizza;
 
     @BeforeAll
     static void init() throws SQLException {

@@ -1,8 +1,8 @@
 package com.team5.HAPark.food;
 
+import com.team5.HAPark.cart.model.ICartSummary;
 import com.team5.HAPark.food.DAO.FoodPersistenceFactory;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
-import com.team5.HAPark.cart.model.CartSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +15,13 @@ import java.sql.SQLException;
 @Controller
 public class MenuController {
 
-    @Autowired private CartSummary cart;
+    @Autowired private ICartSummary cart;
 
     @GetMapping(value = "/menu")
     public String displayFoods(Model model) throws SQLException {
 
         MySQLDatabase dataBase = MySQLDatabase.getInstance();
-        FoodService foodService = new FoodService(new FoodPersistenceFactory().createFoodPersistence());
+        IFoodService foodService = new FoodService(new FoodPersistenceFactory().createFoodPersistence());
 
         Menu menu = foodService.getMenu();
         dataBase.close();
@@ -34,10 +34,11 @@ public class MenuController {
     @PostMapping(value = "/menu/update")
     public RedirectView addFoodsToCart(@ModelAttribute("foodOrderList") FoodOrderList foodOrderList, RedirectAttributes redirectAttributes){
 
-        for(FoodOrderItem foodOrderItem: foodOrderList.getFoodOrderList()){
+        for(IFoodOrderItem foodOrderItem: foodOrderList.getFoodOrderList()){
                 cart.addFoodToCart(foodOrderItem);
         }
         redirectAttributes.addFlashAttribute("message", "Cart updated");
+
         return new RedirectView("/menu");
     }
 }
