@@ -7,7 +7,7 @@ public class Payment {
     private String mm;
     private String yy;
     private String cvv;
-    private String errormsg;
+    private PaymentError errormsg;
 
     public Payment(String ctype, String cno, String mm, String yy, String cvv) {
         this.ctype = ctype;
@@ -58,11 +58,10 @@ public class Payment {
         this.cvv = cvv;
     }
 
-    public String getErrormsg() {
+    public PaymentError getErrormsg() {
         return errormsg;
     }
-
-    public void setErrormsg(String errormsg) {
+    public void setErrormsg(PaymentError errormsg) {
         this.errormsg = errormsg;
     }
 

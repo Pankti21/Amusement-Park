@@ -18,9 +18,8 @@ public class PaymentController {
 
     @PostMapping("/payment")
     public String PaymentSubmit(@ModelAttribute Payment payment, Model model) {
-
         model.addAttribute("payment", payment);
-        payment.setErrormsg(payment.Validate().getResultMessage());
+        payment.setErrormsg(payment.Validate());
         return "Payment";
     }
 }
