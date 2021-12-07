@@ -21,7 +21,6 @@ public class EmailPasswordValidation implements IEmailPasswordValidation {
                 }
             }
         }
-
         return false;
     }
 
@@ -59,6 +58,5 @@ public class EmailPasswordValidation implements IEmailPasswordValidation {
         }
         return passwordValid;
     }
-
 
 }

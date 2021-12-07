@@ -18,6 +18,4 @@ public interface ITicketOrderItem {
     public double getTicketPrice() ;
 
     public double getTotalPrice() ;
-
-
 }

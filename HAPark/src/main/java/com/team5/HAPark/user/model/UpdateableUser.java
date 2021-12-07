@@ -1,7 +1,5 @@
 package com.team5.HAPark.user.model;
 
-import com.team5.HAPark.user.model.UserCredentials;
-
 public class UpdateableUser extends UserCredentials {
 
     private String oldPassword;

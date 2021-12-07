@@ -6,6 +6,7 @@ import com.team5.HAPark.food.FoodService;
 import com.team5.HAPark.food.IFoodService;
 import com.team5.HAPark.order.FoodOrderFactory;
 import com.team5.HAPark.order.model.IOrder;
+import com.team5.HAPark.order.model.IOrderFactory;
 import com.team5.HAPark.order.model.IOrderService;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 import org.springframework.security.core.Authentication;
@@ -27,7 +28,7 @@ public class FoodOrderController {
 
         IFoodPersistenceFactory foodPersistenceFactory = new FoodPersistenceFactory();
         IFoodService foodService = new FoodService(foodPersistenceFactory.createFoodPersistence());
-        FoodOrderFactory orderFactory = new FoodOrderFactory(foodService);
+        IOrderFactory orderFactory = new FoodOrderFactory(foodService);
         IOrderService orderService = orderFactory.createOrderService();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -14,17 +14,13 @@ public class FoodService implements IFoodService {
 
     @Override
     public Food getFood(String id) throws SQLException {
-
         Food food = foodPersistence.loadFood(id);
-
         return food;
     }
 
     @Override
     public Menu getMenu() throws SQLException {
-
         Menu menu = foodPersistence.loadMenu();
-
         return menu;
     }
 }
