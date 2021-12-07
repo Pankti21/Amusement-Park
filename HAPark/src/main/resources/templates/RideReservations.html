@@ -11,10 +11,15 @@
 </div>
 <div th:unless="${#lists.isEmpty(reservations)}">
 <table border="black">
+    <tr>RIDE</tr>
+    <tr th:each="ridename:${ridenames}">
+        <td th:text=${ridename}></td>
+    </tr>
+</table>
+<table border="black">
     <tr th:each="r:${reservations}">
-        <td th:text="${r.rideId}"></td>
         <td th:text="${r.timeslotId}"></td>
-        <td th:text="${r.reserveSeats}"></td>
+        <td th:text="${r.reserveSeats}"> seats</td>
     </tr>
 </table>
 </div>

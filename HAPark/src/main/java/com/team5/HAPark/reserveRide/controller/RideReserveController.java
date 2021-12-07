@@ -60,6 +60,7 @@ public class RideReserveController {
         IRideReservePersistence rideReservePersistence = ridePersistenceFactory.createRideReservePersistence();
         IRideReserveService rideReserveService=new RideReserveService(rideReservePersistence);
         model.addAttribute("reservations",rideReserveService.getReservations());
+        model.addAttribute("ridenames",rideReserveService.getReservedRideNames());
         return "RideReservations";
     }
 }

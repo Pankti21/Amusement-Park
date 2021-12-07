@@ -7,4 +7,5 @@ public interface IRideReserveService {
     void reserve(int rideId, int timeslotId, int reserveSeats) throws SQLException;
     int reserveSeats(int rideId, int timeslotId, int seats) throws SQLException;
     List<RideReserve> getReservations() throws SQLException;
+    public List<String> getReservedRideNames() throws SQLException;
 }
