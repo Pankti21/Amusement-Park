@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Menu {
 
-    LinkedHashMap<String,Food> menu;
+    private LinkedHashMap<String,Food> menu;
 
     public Menu(){
         menu = new LinkedHashMap<>();
@@ -32,7 +32,6 @@ public class Menu {
     public void addFoodToMenu(Food food){
 
         String id = food.getId();
-
         menu.put(id,food);
     }
 
@@ -43,7 +42,6 @@ public class Menu {
         for (Map.Entry<String,Food> entry : menu.entrySet()){
             foodList.add(entry.getValue());
         }
-
         return foodList;
     }
 }

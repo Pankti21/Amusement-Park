@@ -26,11 +26,8 @@ public class Login {
                 }
             }
 
-        } catch (SQLException throwables) {
+        } catch (SQLException | NoSuchAlgorithmException throwables) {
             throwables.printStackTrace();
-            return false;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
 
         return loggedIn;

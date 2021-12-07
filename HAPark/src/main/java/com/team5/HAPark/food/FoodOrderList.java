@@ -3,6 +3,7 @@ package com.team5.HAPark.food;
 import java.util.List;
 
 public class FoodOrderList {
+
     private List<FoodOrderItem> foodOrderList;
 
     public FoodOrderList(List<FoodOrderItem> foodOrderList) {
