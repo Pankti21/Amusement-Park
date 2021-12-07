@@ -46,4 +46,5 @@ class TicketOrderItemAdapterTest {
     void getName() {
         assertEquals("item",orderItem.getName());
     }
+
 }

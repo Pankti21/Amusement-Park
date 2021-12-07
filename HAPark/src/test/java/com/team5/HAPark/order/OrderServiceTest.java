@@ -113,26 +113,22 @@ class OrderServiceTest {
 
         orderService.saveOrder(order);
         Mockito.verify(orderPersistenceMock,times(1)).saveOrder(order);
-
     }
 
     @Test
     public void getOrder() throws SQLException {
-
         Mockito.when(orderPersistenceMock.loadOrder(10)).thenReturn(new Order());
         assertNotNull(orderService.getOrder(10));
         Mockito.verify(orderPersistenceMock,times(1)).loadOrder(10);
-
     }
 
     @Test
     public void getOrderDoesntExist() throws SQLException {
-
         Mockito.when(orderPersistenceMock.loadOrder(10)).thenReturn(null);
         assertNull(orderService.getOrder(10));
         Mockito.verify(orderPersistenceMock,times(1)).loadOrder(10);
-
     }
+
     @Test
     public void getAllOrdersForUser() throws SQLException {
 
@@ -143,7 +139,6 @@ class OrderServiceTest {
 
         assertEquals(orders, orderService.getAllOrdersForUser("email"));
         Mockito.verify(orderPersistenceMock,times(1)).loadAllOrders("email");
-
     }
 
     @Test
@@ -153,6 +148,5 @@ class OrderServiceTest {
 
         assertTrue(orderService.getAllOrdersForUser("email").isEmpty());
         Mockito.verify(orderPersistenceMock,times(1)).loadAllOrders("email");
-
     }
 }

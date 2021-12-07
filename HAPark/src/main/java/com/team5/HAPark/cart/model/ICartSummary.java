@@ -4,6 +4,8 @@ import com.team5.HAPark.food.IFoodOrderItem;
 import com.team5.HAPark.ticket.ITicketOrderItem;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public interface ICartSummary {
     void addTicketToCart(ITicketOrderItem ticket);
@@ -14,4 +16,7 @@ public interface ICartSummary {
     double getTicketAmount();
     double getFoodAmount();
     double getTotalAmount();
+    void empty();
+    ArrayList<ITicketOrderItem> getTicket();
+    ArrayList<IFoodOrderItem> getFood();
 }

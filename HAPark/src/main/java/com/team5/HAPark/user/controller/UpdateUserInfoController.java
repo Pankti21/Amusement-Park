@@ -20,7 +20,6 @@ import java.sql.SQLException;
 @Slf4j
 public class UpdateUserInfoController {
 
-
     @GetMapping("/updateuserinfo")
     public String allUpdateUser(Model model) throws SQLException {
         model.addAttribute("user", new UpdateableUser());

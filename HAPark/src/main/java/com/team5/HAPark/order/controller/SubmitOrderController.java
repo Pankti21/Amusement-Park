@@ -1,6 +1,7 @@
 package com.team5.HAPark.order.controller;
 
 import com.team5.HAPark.cart.model.CartSummary;
+import com.team5.HAPark.cart.model.ICartSummary;
 import com.team5.HAPark.food.DAO.FoodPersistenceFactory;
 import com.team5.HAPark.food.DAO.IFoodPersistenceFactory;
 import com.team5.HAPark.food.FoodService;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class SubmitOrderController {
 
     @Autowired
-    private CartSummary cart;
+    private ICartSummary cart;
 
     @GetMapping(value = "/submitorder")
     public RedirectView submitOrder(){

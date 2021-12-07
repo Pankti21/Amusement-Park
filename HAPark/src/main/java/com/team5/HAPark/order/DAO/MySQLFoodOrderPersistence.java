@@ -51,16 +51,8 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
 
                 saveOrderItem(orderId,itemID,quantity);
             }
-
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            close(statement);
         }
     }
 
@@ -80,15 +72,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
             statement.execute();
 
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
+            close(statement);
         }
     }
 
@@ -120,15 +104,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
             order.setOrderItems(orderItems);
 
         } finally {
-
-            try{
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-
+            close(statement);
         }
 
         return order;
@@ -160,17 +136,7 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
             }
 
         } finally {
-
-            try{
-                if (rs != null){
-                    rs.close();
-                }
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            close(statement, rs);
         }
 
         return orderItems;
@@ -211,19 +177,30 @@ public class MySQLFoodOrderPersistence implements IOrderPersistence {
             }
 
         } finally {
-
-            try{
-                if (rs != null){
-                    rs.close();
-                }
-                if (statement != null){
-                    statement.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            close(statement, rs);
         }
 
         return orders;
+    }
+
+    private void close(CallableStatement statement, ResultSet rs) {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            close(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void close(CallableStatement statement) {
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
