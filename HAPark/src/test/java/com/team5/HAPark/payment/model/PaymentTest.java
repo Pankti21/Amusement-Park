@@ -1,4 +1,4 @@
-package com.team5.HAPark.payment;
+package com.team5.HAPark.payment.model;
 
 import com.team5.HAPark.payment.model.Payment;
 import com.team5.HAPark.payment.model.PaymentError;
