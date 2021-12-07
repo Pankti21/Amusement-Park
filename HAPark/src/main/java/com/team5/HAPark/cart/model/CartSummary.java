@@ -52,6 +52,7 @@ public class CartSummary implements ICartSummary{
         this.totalAmount = totalAmount;
     }
 
+    //https://stackoverflow.com/questions/32394592/calculate-the-number-of-items-within-the-a-shopping-cart
     //Adding the tickets to cart
    @Override
     public void addTicketToCart(ITicketOrderItem ticket) {
