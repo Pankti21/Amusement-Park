@@ -1,12 +1,12 @@
 package com.team5.HAPark.order.controller;
 
-import com.team5.HAPark.order.TicketOrderFactory;
+import com.team5.HAPark.order.model.TicketOrderFactory;
 import com.team5.HAPark.order.model.IOrder;
 import com.team5.HAPark.order.model.IOrderService;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
-import com.team5.HAPark.ticket.DAO.ITicketPersistenceFactory;
-import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
-import com.team5.HAPark.ticket.ITicketService;
+import com.team5.HAPark.ticket.persistence.ITicketPersistenceFactory;
+import com.team5.HAPark.ticket.persistence.TicketPersistenceFactory;
+import com.team5.HAPark.ticket.model.ITicketService;
 import com.team5.HAPark.ticket.model.TicketService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

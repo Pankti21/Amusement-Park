@@ -1,6 +1,6 @@
 package com.team5.HAPark.ticket.mocks;
 
-import com.team5.HAPark.ticket.DAO.ITicketPersistence;
+import com.team5.HAPark.ticket.persistence.ITicketPersistence;
 import com.team5.HAPark.ticket.model.Ticket;
 
 import java.sql.SQLException;

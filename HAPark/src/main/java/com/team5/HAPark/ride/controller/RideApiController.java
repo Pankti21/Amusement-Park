@@ -2,7 +2,6 @@ package com.team5.HAPark.ride.controller;
 
 import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.model.Ride;
-import com.team5.HAPark.ride.model.RideService;
 import com.team5.HAPark.ride.model.RideServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
