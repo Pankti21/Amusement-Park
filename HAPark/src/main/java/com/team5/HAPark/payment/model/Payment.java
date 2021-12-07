@@ -1,76 +1,51 @@
 package com.team5.HAPark.payment.model;
 
 public class Payment {
-    private String PaymentType;
-    private String CardNumber;
-    private String DateMM;
-    private String DateYY;
-    private String SecurityCode;
 
-    public Payment(String paymentType, String cardNumber, String dateMM, String dateYY, String securityCode) {
-        PaymentType = paymentType;
-        CardNumber = cardNumber;
-        DateMM = dateMM;
-        DateYY = dateYY;
-        SecurityCode = securityCode;
+    private String ctype;
+    private String cno;
+    private String mm;
+    private String yy;
+    private String cvv;
+
+    public String getCtype() {
+        return ctype;
     }
 
-    public String getPaymentType() {
-        return PaymentType;
+    public void setCtype(String ctype) {
+        this.ctype = ctype;
     }
 
-    public void setPaymentType(String paymentType) {
-        PaymentType = paymentType;
+    public String getCno() {
+        return cno;
     }
 
-    public String getCardNumber() {
-        return CardNumber;
+    public void setCno(String cno) {
+        this.cno = cno;
     }
 
-    public void setCardNumber(String cardNumber) {
-        CardNumber = cardNumber;
+    public String getMm() {
+        return mm;
     }
 
-    public String getDateMM() {
-        return DateMM;
+    public void setMm(String mm) {
+        this.mm = mm;
     }
 
-    public void setDateMM(String dateMM) {
-        DateMM = dateMM;
+    public String getYy() {
+        return yy;
     }
 
-    public String getDateYY() {
-        return DateYY;
+    public void setYy(String yy) {
+        this.yy = yy;
     }
 
-    public void setDateYY(String dateYY) {
-        DateYY = dateYY;
+    public String getCvv() {
+        return cvv;
     }
 
-    public String getSecurityCode() {
-        return SecurityCode;
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
     }
 
-    public void setSecurityCode(String securityCode) {
-        SecurityCode = securityCode;
-    }
-
-    public PaymentError Validate() {
-        PaymentError paymentError;
-
-        if(PaymentType.equals("") || CardNumber.equals("") || DateMM.equals("") || SecurityCode.equals("")) {
-            paymentError = PaymentError.EMPTYFIELD;
-        } else {
-            if(SecurityCode.length()!=3 || CardNumber.length()!=16) {
-                paymentError = PaymentError.INVALIDNUMBERLENGTH;
-            } else {
-                if(!SecurityCode.chars().allMatch(Character::isDigit) || !CardNumber.chars().allMatch(Character::isDigit)) {
-                    paymentError = PaymentError.INVALIDIGITFORMAT;
-                } else {
-                    paymentError = PaymentError.SUCCESSFUL;
-                }
-            }
-        }
-        return paymentError;
-    }
 }

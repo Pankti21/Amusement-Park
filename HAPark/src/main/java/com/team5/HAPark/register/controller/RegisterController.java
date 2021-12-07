@@ -1,5 +1,6 @@
-package com.team5.HAPark.RegisterUI;
+package com.team5.HAPark.register.controller;
 
+import com.team5.HAPark.register.model.Register;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

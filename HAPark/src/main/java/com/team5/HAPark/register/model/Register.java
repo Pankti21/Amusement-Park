@@ -1,4 +1,4 @@
-package com.team5.HAPark.RegisterUI;
+package com.team5.HAPark.register.model;
 
 public class Register {
 
