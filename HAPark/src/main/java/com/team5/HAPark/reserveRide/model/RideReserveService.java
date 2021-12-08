@@ -1,11 +1,11 @@
 package com.team5.HAPark.reserveRide.model;
 
+import com.team5.HAPark.reserveRide.persistence.RideReservePersistenceFactory;
 import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.model.Ride;
 import com.team5.HAPark.ride.model.RideServiceFactory;
-import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
 import com.team5.HAPark.reserveRide.persistence.IRideReservePersistence;
-import com.team5.HAPark.timeSlot.model.TimeSlotService;
+import com.team5.HAPark.ride.timeSlot.TimeSlotService;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -27,7 +27,7 @@ public class RideReserveService implements IRideReserveService {
     }
 
     public void reserve(int rideId, int timeslotId, int reserveSeats) throws SQLException {
-        IRideReservePersistence rideReservePersistence = new RidePersistenceFactory().createRideReservePersistence();
+        IRideReservePersistence rideReservePersistence = new RideReservePersistenceFactory().createRideReservePersistence();
         rideReservePersistence.addReservationToDB(rideId,timeslotId,reserveSeats);
     }
 

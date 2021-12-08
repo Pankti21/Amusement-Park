@@ -1,7 +1,7 @@
 package com.team5.HAPark.ride.persistence;
 
 import com.team5.HAPark.ride.model.Ride;
-import com.team5.HAPark.timeSlot.model.TimeSlot;
+import com.team5.HAPark.ride.timeSlot.TimeSlot;
 
 import java.sql.SQLException;
 import java.util.HashMap;
