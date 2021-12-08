@@ -1,9 +1,7 @@
-package com.team5.HAPark.timeSlot;
+package com.team5.HAPark.ride.timeSlot;
 
 import com.team5.HAPark.ride.model.Ride;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
-import com.team5.HAPark.timeSlot.model.ITimeSlotService;
-import com.team5.HAPark.timeSlot.model.TimeSlotService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

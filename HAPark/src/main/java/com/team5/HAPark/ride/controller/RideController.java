@@ -3,8 +3,8 @@ package com.team5.HAPark.ride.controller;
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
-import com.team5.HAPark.timeSlot.model.ITimeSlotService;
-import com.team5.HAPark.timeSlot.model.TimeSlotService;
+import com.team5.HAPark.ride.timeSlot.ITimeSlotService;
+import com.team5.HAPark.ride.timeSlot.TimeSlotFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class RideController {
     private IRideService rideService=rideServiceFactory.getRideService("RIDESERVICE");
 
     @Autowired
-    ITimeSlotService timeSlotService=new TimeSlotService();
+    ITimeSlotService timeSlotService=new TimeSlotFactory().createTimeSlotService();
 
     @GetMapping("/rides")
     public String rides(){
@@ -42,7 +42,7 @@ public class RideController {
     }
 
     @GetMapping("/rides/ground")
-    public String groungRides(Model model) throws SQLException {
+    public String groundRides(Model model) throws SQLException {
         model.addAttribute("groundrides",rideService.getAllGroundRides());
         return "GroundRides";
     }

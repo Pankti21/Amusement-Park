@@ -1,6 +1,6 @@
 package com.team5.HAPark.ride.model;
 
-public class RideFactory {
+public class RideFactory implements IRideFactory{
     public Ride getRide(String ride){
         if(ride==null){
             return null;

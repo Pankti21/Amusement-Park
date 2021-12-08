@@ -2,9 +2,10 @@ package com.team5.HAPark.ride.persistence;
 
 import com.team5.HAPark.database.mysql.IMySQLDatabase;
 import com.team5.HAPark.ride.model.Ride;
-import com.team5.HAPark.timeSlot.model.TimeSlot;
+import com.team5.HAPark.ride.timeSlot.TimeSlot;
 
 import com.team5.HAPark.ride.model.RideFactory;
+import com.team5.HAPark.ride.timeSlot.TimeSlotFactory;
 import lombok.extern.slf4j.*;
 import org.springframework.stereotype.Component;
 
@@ -63,7 +64,7 @@ public class RidePersistence implements IRidePersistence{
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        IRidePersistence ridePersistence=new RidePersistence(mySQLDatabase);
+        IRidePersistence ridePersistence=new RidePersistenceFactory().createRidePersistence();
         List<Ride> Rides = ridePersistence.getAllRides();
         List<HashMap<Integer,Integer>> maps = new ArrayList<>();
         for (Ride ride:Rides){
@@ -80,7 +81,7 @@ public class RidePersistence implements IRidePersistence{
         while (rs.next()){
             map.put(rs.getInt("timeslot_id"),rs.getInt("availability"));
         }
-        TimeSlot timeSlot=new TimeSlot(map);
+        TimeSlot timeSlot=new TimeSlotFactory().createTimeSlot(map);
         return timeSlot;
     }
 
