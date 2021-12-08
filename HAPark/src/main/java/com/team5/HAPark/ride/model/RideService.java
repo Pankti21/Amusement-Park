@@ -22,23 +22,22 @@ public class RideService implements IRideService {
     }
 
     public List<Ride> getAllRides() throws SQLException {
-        List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> Rides = ridePersistence.getAllRides();
         return Rides;
     }
 
     public List<String> getAllRideNames() throws SQLException {
         List<String> names = new ArrayList<>();
-        List<Ride> Rides=ridePersistence.getAllRides();
+        List<Ride> Rides = ridePersistence.getAllRides();
         for (Ride ride:Rides){
             names.add(ride.getName());
         }
         return names;
-
     }
 
     public List<Ride> getAllGroundRides() throws SQLException {
-        List<Ride> Rides=ridePersistence.getAllRides();
-        List<Ride> groundRides=new ArrayList<>();
+        List<Ride> Rides = ridePersistence.getAllRides();
+        List<Ride> groundRides = new ArrayList<>();
         for(Ride ride:Rides) {
             if(Objects.equals(ride.getType(), "Ground")){
                 groundRides.add(ride);

@@ -32,6 +32,7 @@ public class AuthenticationSecurityConfiguration extends WebSecurityConfigurerAd
                 antMatchers("/testdb").permitAll().
                 antMatchers("/ridetest").permitAll().
                 antMatchers("/reservations").permitAll().
+                antMatchers("/rides/waittime").permitAll().
                 antMatchers(HttpMethod.GET, "/menu/**").permitAll().
                 antMatchers(HttpMethod.GET, "/tickets/**").permitAll().
                 antMatchers(HttpMethod.GET, "/cartsummary").permitAll().
