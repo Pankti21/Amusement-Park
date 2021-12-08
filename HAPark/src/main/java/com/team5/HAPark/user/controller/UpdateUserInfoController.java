@@ -2,6 +2,7 @@ package com.team5.HAPark.user.controller;
 
 import com.team5.HAPark.user.model.IUpdateUserInformation;
 import com.team5.HAPark.user.model.UpdateUserInformation;
+import com.team5.HAPark.user.model.UpdateUserValidationResult;
 import com.team5.HAPark.user.persistence.IUserPersistence;
 import com.team5.HAPark.user.persistence.UserPersistenceFactory;
 import com.team5.HAPark.user.model.UpdateableUser;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -27,7 +30,7 @@ public class UpdateUserInfoController {
     }
 
     @PostMapping("/updateuserinfo")
-    public String updateUserInfo(@ModelAttribute("user") UpdateableUser user) throws SQLException, NoSuchAlgorithmException {
+    public RedirectView updateUserInfo(@ModelAttribute("user") UpdateableUser user, RedirectAttributes redirectAttributes) throws SQLException, NoSuchAlgorithmException {
         IUpdateUserInformation updateUserInformation = new UpdateUserInformation(user);
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         String username = currentUser.getName();
@@ -38,9 +41,10 @@ public class UpdateUserInfoController {
 
         UserPersistenceFactory userPersistenceFactory = new UserPersistenceFactory();
         IUserPersistence userPersistence = userPersistenceFactory.createUserPersistence();
-        updateUserInformation.updateUserPassword(userPersistence);
+        UpdateUserValidationResult result = updateUserInformation.updateUserPassword(userPersistence);
 
-        return "UpdateUserInfo";
+        redirectAttributes.addFlashAttribute("result",result);
+        return new RedirectView("/updateuserinfo");
     }
 
 }
