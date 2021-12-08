@@ -2,7 +2,7 @@ package com.team5.HAPark.waitTime;
 
 import com.team5.HAPark.ride.model.*;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
-import com.team5.HAPark.timeSlot.model.TimeSlot;
+import com.team5.HAPark.ride.timeSlot.TimeSlot;
 import com.team5.HAPark.waitTime.persistence.IWaitTimePersistence;
 import com.team5.HAPark.waitTime.model.WaitTimeService;
 import org.junit.jupiter.api.BeforeAll;

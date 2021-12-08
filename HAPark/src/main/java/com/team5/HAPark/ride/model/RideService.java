@@ -47,8 +47,8 @@ public class RideService implements IRideService {
     }
 
     public List<Ride> getAllWaterRides() throws SQLException {
-        List<Ride> Rides=ridePersistence.getAllRides();
-        List<Ride> waterRides=new ArrayList<>();
+        List<Ride> Rides = ridePersistence.getAllRides();
+        List<Ride> waterRides = new ArrayList<>();
         for(Ride ride:Rides) {
             if(Objects.equals(ride.getType(), "Water")){
                 waterRides.add(ride);

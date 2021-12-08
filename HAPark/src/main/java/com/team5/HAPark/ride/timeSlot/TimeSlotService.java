@@ -1,4 +1,4 @@
-package com.team5.HAPark.timeSlot.model;
+package com.team5.HAPark.ride.timeSlot;
 
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
@@ -12,7 +12,7 @@ import java.util.List;
 public class TimeSlotService implements ITimeSlotService{
     private IRidePersistence ridePersistence = new RidePersistenceFactory().createRidePersistence();
 
-    public TimeSlotService(com.team5.HAPark.ride.persistence.IRidePersistence ridePersistence) throws SQLException {
+    public TimeSlotService(IRidePersistence ridePersistence) throws SQLException {
         this.ridePersistence = ridePersistence;
     }
 

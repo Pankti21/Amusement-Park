@@ -1,7 +1,7 @@
 package com.team5.HAPark.waitTime.model;
 
 import com.team5.HAPark.ride.model.Ride;
-import com.team5.HAPark.timeSlot.model.TimeSlot;
+import com.team5.HAPark.ride.timeSlot.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
 import com.team5.HAPark.waitTime.persistence.IWaitTimePersistence;
@@ -86,12 +86,8 @@ public class WaitTimeService implements IWaitTimeService{
             if(rideRounds>0) {
                 for (int i = 0; i < rideRounds - 1; i++) {
                     initialWaitTime = durationInLocalTime.plusSeconds(secs);
-                    log.info("initialWaitTime in sec:{}", initialWaitTime);
                     initialWaitTime = initialWaitTime.plusMinutes(mins);
-                    log.info("initialWaitTime in min:{}", initialWaitTime);
                     initialWaitTime = initialWaitTime.plusHours(hours);
-                    log.info("initialWaitTime in hours:{}", initialWaitTime);
-                    log.info("initialWaitTime:{}", initialWaitTime);
                     durationInLocalTime = initialWaitTime;
                 }
                 waitTime.getWaitTime().put(key, initialWaitTime);

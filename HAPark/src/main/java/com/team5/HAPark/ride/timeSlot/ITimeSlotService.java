@@ -1,4 +1,4 @@
-package com.team5.HAPark.timeSlot.model;
+package com.team5.HAPark.ride.timeSlot;
 
 import java.sql.SQLException;
 import java.util.HashMap;

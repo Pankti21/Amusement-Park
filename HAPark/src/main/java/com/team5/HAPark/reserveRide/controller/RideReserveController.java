@@ -9,7 +9,7 @@ import com.team5.HAPark.reserveRide.persistence.IRideReservePersistenceFactory;
 import com.team5.HAPark.reserveRide.persistence.RideReservePersistenceFactory;
 import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.model.RideServiceFactory;
-import com.team5.HAPark.timeSlot.model.ITimeSlotService;
+import com.team5.HAPark.ride.timeSlot.ITimeSlotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
