@@ -2,6 +2,7 @@ package com.team5.HAPark.reserveRide.persistence;
 
 import com.team5.HAPark.reserveRide.model.RideReserve;
 import com.team5.HAPark.database.mysql.IMySQLDatabase;
+import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
 import com.team5.HAPark.timeSlot.model.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistence;
@@ -35,7 +36,7 @@ public class RideReservePersistence implements IRideReservePersistence {
 
     //Get seats available for a given ride at a given timeslot
     public int getRideAvailability(int rideId, int timeSlotId) throws SQLException {
-        IRidePersistence ridePersistence = new RidePersistence(mySQLDatabase);
+        IRidePersistence ridePersistence = new RidePersistenceFactory().createRidePersistence();
         TimeSlot timeSlot = ridePersistence.getRideTimeSlot(rideId);
         HashMap<Integer,Integer> map = timeSlot.getMap();
         int availability = map.get(timeSlotId);

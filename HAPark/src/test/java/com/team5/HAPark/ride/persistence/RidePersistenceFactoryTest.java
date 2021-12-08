@@ -29,8 +29,6 @@ class RidePersistenceFactoryTest {
         ridePersistence1 = ridePersistenceFactory1.createRidePersistence();
         ridePersistence2 = ridePersistenceFactory2.createRidePersistence();
 
-        rideReservePersistence1 = ridePersistenceFactory1.createRideReservePersistence();
-        rideReservePersistence2 = ridePersistenceFactory2.createRideReservePersistence();
     }
 
     @Test

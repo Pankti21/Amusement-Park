@@ -2,12 +2,13 @@ package com.team5.HAPark.reserveRide.controller;
 
 import com.team5.HAPark.reserveRide.model.IRideReserveService;
 import com.team5.HAPark.reserveRide.model.RideReserve;
+import com.team5.HAPark.reserveRide.model.RideReserveFactory;
 import com.team5.HAPark.reserveRide.model.RideReserveService;
 import com.team5.HAPark.reserveRide.persistence.IRideReservePersistence;
 import com.team5.HAPark.reserveRide.persistence.IRideReservePersistenceFactory;
 import com.team5.HAPark.reserveRide.persistence.RideReservePersistenceFactory;
 import com.team5.HAPark.ride.model.IRideService;
-import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
+import com.team5.HAPark.ride.model.RideServiceFactory;
 import com.team5.HAPark.timeSlot.model.ITimeSlotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,15 @@ import java.sql.SQLException;
 @Controller
 public class RideReserveController {
     @Autowired
-    private IRideService rideService;
+    private IRideService rideService=new RideServiceFactory().getRideService("RIDESERVICE");
     @Autowired
     private ITimeSlotService timeSlotService;
+    private RideReserve rideReserve=new RideReserveFactory().getRideReserve();
 
     @GetMapping("/reserve")
     public String reserveForm(Model model) throws SQLException {
         model.addAttribute("allrides", rideService.getAllRides());
-        model.addAttribute("ride",new RideReserve());
+        model.addAttribute("ride",rideReserve);
         model.addAttribute("maps",timeSlotService.getAllTimeSlots());
         return "RideForm";
     }
@@ -47,9 +49,7 @@ public class RideReserveController {
         String username = currentUser.getName();
         log.info("{}",username);
         log.info("{}ride id {} reserve seats {} timeslot id",ride.getRideId(),ride.getReserveSeats(),ride.getTimeslotId());
-        //Reduces availability of rides
         rideReserveService.reserveSeats(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
-        //Saves to database
         rideReserveService.reserve(ride.getRideId(),ride.getTimeslotId(),ride.getReserveSeats());
         model.addAttribute("rideReserved",rideService.getRide(ride.getRideId()));
         model.addAttribute("timeslot",timeSlotService.getTimeSlotName(ride.getTimeslotId()));
