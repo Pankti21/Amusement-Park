@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class WaitTimeService {
+public class WaitTimeService implements IWaitTimeService{
 
     private IRidePersistence ridePersistence = new RidePersistenceFactory().createRidePersistence();
     private IWaitTimePersistence waitTimePersistence = new WaitTimePersistenceFactory().createWaitTimePersistence();
@@ -40,26 +40,23 @@ public class WaitTimeService {
         this.ridePersistence=ridePersistence;
     }
 
-    //Get wait times for all rides
     public List<HashMap<Integer,LocalTime>> getWaitTimes() throws SQLException {
         List<Ride> rides= ridePersistence.getAllRides();
         List<HashMap<Integer,LocalTime>> waitTimes=new ArrayList<>();
         for (Ride ride:rides){
-            WaitTimeService waitTimeService=new WaitTimeService();
-            WaitTime waitTime=waitTimeService.calculateWaitTime(ride.getId());
+            IWaitTimeService waitTimeService = new WaitTimeServiceFactory().createWaitTimeService();
+            WaitTime waitTime = waitTimeService.calculateWaitTime(ride.getId());
             waitTimes.add(waitTime.getWaitTime());
         }
         return waitTimes;
     }
 
-    //Get duration in LocalTime format
     public LocalTime getDuration(int rideId) throws SQLException {
         Time duration = waitTimePersistence.getRideDuration(rideId);
         LocalTime durationInLocalTime = duration.toLocalTime();
         return durationInLocalTime;
     }
 
-    //Get duration in string format
     public String getDurationString(int rideId) throws SQLException {
         Time duration = waitTimePersistence.getRideDuration(rideId);
         return duration.toString();
@@ -69,7 +66,7 @@ public class WaitTimeService {
     //Rounds of rides according to reservations = number of seats reserved / capacity per round
     //WaitTime = Rounds of rides * duration of ride per round
     public WaitTime calculateWaitTime(int rideId) throws SQLException {
-        WaitTime waitTime = new WaitTime();
+        WaitTime waitTime = new WaitTimeServiceFactory().createWaitTime();
         LocalTime initialWaitTime = LocalTime.of(00,00,00);
 
         TimeSlot timeSlot = ridePersistence.getRideTimeSlot(rideId);
@@ -77,7 +74,6 @@ public class WaitTimeService {
         for (Integer key : timeSlot.getMap().keySet()) {
             int numberOfSeatsReserved = waitTimePersistence.getRideMaxOccupancy(rideId) - timeSlot.getMap().get(key);
 
-            //Each round of ride takes 10 people
             int rideRounds = numberOfSeatsReserved / 10;
 
             LocalTime durationInLocalTime = getDuration(rideId);

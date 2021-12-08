@@ -8,15 +8,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RidePersistenceFactoryTest {
-
-    private IWaitTimePersistence waitTimePersistence1;
-    private IWaitTimePersistence waitTimePersistence2;
-
     private IRidePersistence ridePersistence1;
     private IRidePersistence ridePersistence2;
 
-    private IRideReservePersistence rideReservePersistence1;
-    private IRideReservePersistence rideReservePersistence2;
 
     @BeforeEach
     void setUp() {
@@ -29,16 +23,6 @@ class RidePersistenceFactoryTest {
     }
 
     @Test
-    void createWaitTimePersistenceNotNull() {
-        assertNotNull(waitTimePersistence1);
-    }
-
-    @Test
-    void createWaitTimePersistenceSameInstance() {
-        assertEquals(waitTimePersistence1,waitTimePersistence2);
-    }
-
-    @Test
     void createRidePersistenceNotNull() {
         assertNotNull(ridePersistence1);
     }
@@ -46,15 +30,5 @@ class RidePersistenceFactoryTest {
     @Test
     void createRidePersistenceSameInstance() {
         assertEquals(ridePersistence1,ridePersistence2);
-    }
-
-    @Test
-    void createRideReservePersistenceNotNull() {
-        assertNotNull(rideReservePersistence1);
-    }
-
-    @Test
-    void createRideReservePersistenceSameInstance() {
-        assertEquals(rideReservePersistence1,rideReservePersistence2);
     }
 }
