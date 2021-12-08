@@ -1,8 +1,7 @@
-package com.team5.HAPark.food;
+package com.team5.HAPark.food.model;
 
-import com.team5.HAPark.food.model.FoodService;
 import com.team5.HAPark.food.persistence.IFoodPersistence;
-import com.team5.HAPark.food.mocks.FoodPersistenceMockFactory;
+import com.team5.HAPark.food.persistence.mocks.FoodPersistenceMockFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class FoodServiceTest {
     static IFoodPersistence foodPersistenceMock;
 
     @BeforeAll
-    static void init() throws SQLException {
+    static void init() {
         FoodPersistenceMockFactory factory = new FoodPersistenceMockFactory();
         foodPersistenceMock = factory.createFoodPersistenceMock();
         foodService = new FoodService(foodPersistenceMock);

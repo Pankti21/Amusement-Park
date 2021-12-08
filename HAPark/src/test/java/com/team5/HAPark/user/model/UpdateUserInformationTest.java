@@ -1,10 +1,6 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-import com.team5.HAPark.user.model.Encryption;
-import com.team5.HAPark.user.model.UpdateUserInformation;
 import com.team5.HAPark.user.persistence.IUserPersistence;
-import com.team5.HAPark.user.model.UpdateUserValidationResult;
-import com.team5.HAPark.user.model.UpdateableUser;
 import com.team5.HAPark.user.persistence.mocks.UserPersistenceMockFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;

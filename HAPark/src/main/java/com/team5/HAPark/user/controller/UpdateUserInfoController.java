@@ -24,7 +24,7 @@ import java.sql.SQLException;
 public class UpdateUserInfoController {
 
     @GetMapping("/updateuserinfo")
-    public String allUpdateUser(Model model) throws SQLException {
+    public String allUpdateUser(Model model) {
         model.addAttribute("user", new UpdateableUser());
         return "UpdateUserInfo";
     }

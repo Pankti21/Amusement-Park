@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.sql.SQLException;
-
 @Controller
 public class CartSummaryController {
 
@@ -15,7 +13,7 @@ public class CartSummaryController {
     ICartSummary iCartSummary;
 
     @GetMapping("/cartsummary")
-    public String allCartItems(Model model) throws SQLException {
+    public String allCartItems(Model model) {
         model.addAttribute("cartSummary", iCartSummary);
         return "CartSummary";
     }

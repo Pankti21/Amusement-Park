@@ -8,6 +8,5 @@ import java.util.List;
 public interface ITicketPersistence {
     Ticket loadTicket(String type) throws SQLException;
 
-
-    List<Ticket> getAllTickets()  throws SQLException;;
+    List<Ticket> getAllTickets()  throws SQLException;
 }

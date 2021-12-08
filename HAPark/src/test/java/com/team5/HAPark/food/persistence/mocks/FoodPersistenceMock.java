@@ -1,10 +1,9 @@
-package com.team5.HAPark.food.mocks;
+package com.team5.HAPark.food.persistence.mocks;
 
 import com.team5.HAPark.food.persistence.IFoodPersistence;
 import com.team5.HAPark.food.model.Food;
 import com.team5.HAPark.food.model.Menu;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,12 +18,12 @@ public class FoodPersistenceMock implements IFoodPersistence {
     }
 
     @Override
-    public Food loadFood(String id) throws SQLException {
+    public Food loadFood(String id) {
         return foods.get(id);
     }
 
     @Override
-    public Menu loadMenu() throws SQLException {
+    public Menu loadMenu() {
         Menu menu = new Menu();
         for (Map.Entry<String,Food> foodEntry : foods.entrySet()) {
             menu.addFoodToMenu(foodEntry.getValue());

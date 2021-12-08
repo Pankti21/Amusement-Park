@@ -1,9 +1,6 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-import com.team5.HAPark.user.model.Encryption;
-import com.team5.HAPark.user.model.Login;
 import com.team5.HAPark.user.persistence.IUserPersistence;
-import com.team5.HAPark.user.model.UserCredentials;
 import com.team5.HAPark.user.persistence.mocks.UserPersistenceMockFactory;
 import org.junit.jupiter.api.*;
 
@@ -31,20 +28,20 @@ class LoginTest {
     }
 
     @Test
-    void loginUserDoesNotExist () throws SQLException {
+    void loginUserDoesNotExist () {
         user.setEmail("emailNotPresent");
         Login login = new Login(user);
         assertFalse(login.login(userPersistenceMock));
     }
 
     @Test
-    void loginUserSuccessful() throws SQLException {
+    void loginUserSuccessful() {
         Login login = new Login(user);
         assertTrue(login.login(userPersistenceMock));
     }
 
     @Test
-    void loginUserWrongPassword() throws NoSuchAlgorithmException {
+    void loginUserWrongPassword() {
         user.setPassword("wrongPassword");
         Login login = new Login(user);
         assertFalse(login.login(userPersistenceMock));

@@ -1,15 +1,11 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-import com.team5.HAPark.user.model.EmailPasswordValidation;
-import com.team5.HAPark.user.model.UserCredentials;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.springframework.security.test.context.support.WithMockUser;
-
-import java.sql.SQLException;
 
 @SpringBootTest
 public class EmailPasswordValidationTest {
@@ -30,7 +26,7 @@ public class EmailPasswordValidationTest {
         /* Test cases for Password Validation */
         @Test
         @WithMockUser(username = "user123")
-        void validatePasswordFormatHasMinimum8Chars() throws SQLException {
+        void validatePasswordFormatHasMinimum8Chars() {
             user.setPassword("Dal@123");
             assertFalse(emailPasswordValidation.validatePasswordFormat());
         }

@@ -1,6 +1,5 @@
-package com.team5.HAPark.cart;
+package com.team5.HAPark.cart.model;
 
-import com.team5.HAPark.cart.model.CartSummary;
 import com.team5.HAPark.food.model.FoodOrderItem;
 import com.team5.HAPark.food.model.IFoodOrderItem;
 import com.team5.HAPark.ticket.model.ITicketOrderItem;
@@ -28,14 +27,14 @@ class CartSummaryTest {
     @Test
     void validateIfTicketsAreAddedToCart() {
         ticketOrderItem.setQuantity(1);
-        cartSummary.addTicketToCart((TicketOrderItem) ticketOrderItem);
+        cartSummary.addTicketToCart(ticketOrderItem);
         ArrayList<ITicketOrderItem> ticketOrderItemList = cartSummary.getTicket();
         assertTrue(ticketOrderItemList.contains(ticketOrderItem));
     }
 
     @Test
     void validateNoQuantityTicketsNotAddedToCart() {
-        cartSummary.addTicketToCart((TicketOrderItem) ticketOrderItem);
+        cartSummary.addTicketToCart(ticketOrderItem);
         ArrayList<ITicketOrderItem> ticketOrderItemList = cartSummary.getTicket();
         assertFalse(ticketOrderItemList.contains(ticketOrderItem));
     }

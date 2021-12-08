@@ -1,10 +1,6 @@
-package com.team5.HAPark.user;
+package com.team5.HAPark.user.model;
 
-import com.team5.HAPark.user.model.Register;
-import com.team5.HAPark.user.model.RegisterResult;
-import com.team5.HAPark.user.model.RegisterUser;
 import com.team5.HAPark.user.persistence.IUserPersistence;
-import com.team5.HAPark.user.model.User;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
@@ -33,67 +29,67 @@ class RegisterTest {
     class RegistrationTests {
 
         @Test
-        void registerFailsEmailEmpty() throws SQLException {
+        void registerFailsEmailEmpty() {
             user.setEmail("");
             assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsFnameEmpty() throws SQLException {
+        void registerFailsFnameEmpty() {
             user.setFirstName("");
             assertEquals(RegisterResult.EMPTYFIELD,register.register( userPersistenceMock));
         }
 
         @Test
-        void registerFailsLnameEmpty() throws SQLException {
+        void registerFailsLnameEmpty() {
             user.setLastName("");
             assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsPasswordEmpty() throws SQLException {
+        void registerFailsPasswordEmpty() {
             user.setPassword("");
             assertEquals(RegisterResult.EMPTYFIELD,register.register( userPersistenceMock));
         }
 
         @Test
-        void registerFailsConfirmPasswordEmpty() throws SQLException {
+        void registerFailsConfirmPasswordEmpty() {
             user.setConfirmedPassword("");
             assertEquals(RegisterResult.EMPTYFIELD,register.register( userPersistenceMock));
         }
 
         @Test
-        void registerFailsEmailNull() throws SQLException {
+        void registerFailsEmailNull() {
             user.setEmail(null);
             assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsFnameNull() throws SQLException {
+        void registerFailsFnameNull() {
             user.setFirstName(null);
             assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsLnameNull() throws SQLException {
+        void registerFailsLnameNull() {
             user.setLastName(null);
             assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsPasswordNull() throws SQLException {
+        void registerFailsPasswordNull() {
             user.setPassword(null);
             assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsConfirmPasswordNull() throws SQLException {
+        void registerFailsConfirmPasswordNull() {
             user.setConfirmedPassword(null);
             assertEquals(RegisterResult.EMPTYFIELD,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsPasswordsDontMatch() throws SQLException {
+        void registerFailsPasswordsDontMatch() {
             user.setConfirmedPassword("diffPassword");
             assertEquals(RegisterResult.PASSWORDMISMATCH,register.register(userPersistenceMock));
         }
@@ -106,13 +102,13 @@ class RegisterTest {
         }
 
         @Test
-        void registerFailsBadEmailFormat() throws SQLException {
+        void registerFailsBadEmailFormat() {
             user.setEmail("notAnEmail");
             assertEquals(RegisterResult.INVALIDEMAIL,register.register(userPersistenceMock));
         }
 
         @Test
-        void registerFailsBadPasswordFormat() throws SQLException {
+        void registerFailsBadPasswordFormat() {
             user.setPassword("badPassword");
             user.setConfirmedPassword("badPassword");
             assertEquals(RegisterResult.INVALIDPASSWORD,register.register(userPersistenceMock));

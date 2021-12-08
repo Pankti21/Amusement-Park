@@ -1,7 +1,5 @@
-package com.team5.HAPark.ticket;
+package com.team5.HAPark.ticket.model;
 
-import com.team5.HAPark.ticket.model.Ticket;
-import com.team5.HAPark.ticket.model.TicketOrderItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

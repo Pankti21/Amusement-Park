@@ -1,4 +1,4 @@
-package com.team5.HAPark.order;
+package com.team5.HAPark.order.model;
 
 import com.team5.HAPark.order.persistence.IOrderPersistence;
 import com.team5.HAPark.order.model.*;

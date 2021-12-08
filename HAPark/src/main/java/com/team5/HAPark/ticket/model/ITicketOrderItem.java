@@ -1,19 +1,19 @@
 package com.team5.HAPark.ticket.model;
 
 public interface ITicketOrderItem {
-    public Integer getQuantity();
+    Integer getQuantity();
 
-    public Ticket getTicket();
+    Ticket getTicket();
 
-    public void setTicket(Ticket ticket);
+    void setTicket(Ticket ticket);
 
-    public void setQuantity(Integer quantity);
+    void setQuantity(Integer quantity);
 
-    public String getTicketType() ;
+    String getTicketType() ;
 
-    public void setTicketType(String ticketType) ;
+    void setTicketType(String ticketType) ;
 
-    public double getTicketPrice() ;
+    double getTicketPrice() ;
 
-    public double getTotalPrice() ;
+    double getTotalPrice() ;
 }
