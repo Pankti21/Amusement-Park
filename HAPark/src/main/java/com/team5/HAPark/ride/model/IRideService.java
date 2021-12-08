@@ -1,7 +1,6 @@
 package com.team5.HAPark.ride.model;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 public interface IRideService {

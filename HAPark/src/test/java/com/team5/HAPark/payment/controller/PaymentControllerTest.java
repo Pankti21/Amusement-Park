@@ -1,6 +1,5 @@
-package com.team5.HAPark.payment;
+package com.team5.HAPark.payment.controller;
 
-import com.team5.HAPark.payment.controller.PaymentController;
 import com.team5.HAPark.payment.model.Payment;
 import com.team5.HAPark.payment.model.PaymentError;
 import org.junit.*;

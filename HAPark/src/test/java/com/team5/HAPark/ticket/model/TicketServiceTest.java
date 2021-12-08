@@ -1,9 +1,7 @@
-package com.team5.HAPark.ticket;
+package com.team5.HAPark.ticket.model;
 
 import com.team5.HAPark.ticket.persistence.ITicketPersistence;
-import com.team5.HAPark.ticket.mocks.TicketPersistenceMockFactory;
-import com.team5.HAPark.ticket.model.Ticket;
-import com.team5.HAPark.ticket.model.TicketService;
+import com.team5.HAPark.ticket.persistence.mocks.TicketPersistenceMockFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -35,5 +35,4 @@ public class RidePersistenceFactory implements IRidePersistenceFactory{
         }
         return rideReservePersistence;
     }
-
 }

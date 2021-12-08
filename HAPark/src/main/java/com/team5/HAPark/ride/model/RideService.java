@@ -14,7 +14,7 @@ public class RideService implements IRideService {
 
     private IRidePersistence ridePersistence = new RidePersistenceFactory().createRidePersistence();
 
-    public RideService(IRidePersistence ridePersistence) throws SQLException {
+    public RideService(IRidePersistence ridePersistence) {
         this.ridePersistence = ridePersistence;
     }
 

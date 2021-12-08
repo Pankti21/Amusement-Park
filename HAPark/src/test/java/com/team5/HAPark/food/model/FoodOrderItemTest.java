@@ -1,7 +1,5 @@
-package com.team5.HAPark.food;
+package com.team5.HAPark.food.model;
 
-import com.team5.HAPark.food.model.Food;
-import com.team5.HAPark.food.model.FoodOrderItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

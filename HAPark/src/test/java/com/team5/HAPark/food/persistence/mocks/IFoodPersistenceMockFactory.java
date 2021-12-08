@@ -1,4 +1,4 @@
-package com.team5.HAPark.food.mocks;
+package com.team5.HAPark.food.persistence.mocks;
 
 import com.team5.HAPark.food.persistence.IFoodPersistence;
 

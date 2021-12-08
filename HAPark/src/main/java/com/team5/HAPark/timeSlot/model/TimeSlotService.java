@@ -12,7 +12,7 @@ import java.util.List;
 public class TimeSlotService implements ITimeSlotService{
     private IRidePersistence ridePersistence = new RidePersistenceFactory().createRidePersistence();
 
-    public TimeSlotService(com.team5.HAPark.ride.persistence.IRidePersistence ridePersistence) throws SQLException {
+    public TimeSlotService(com.team5.HAPark.ride.persistence.IRidePersistence ridePersistence) {
         this.ridePersistence = ridePersistence;
     }
 

@@ -1,18 +1,14 @@
 package com.team5.HAPark.timeSlot;
 
-import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.model.Ride;
-import com.team5.HAPark.ride.model.RideService;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.timeSlot.model.ITimeSlotService;
-import com.team5.HAPark.timeSlot.model.TimeSlot;
 import com.team5.HAPark.timeSlot.model.TimeSlotService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

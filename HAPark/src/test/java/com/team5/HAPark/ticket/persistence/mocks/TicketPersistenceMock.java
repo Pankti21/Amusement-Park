@@ -1,9 +1,8 @@
-package com.team5.HAPark.ticket.mocks;
+package com.team5.HAPark.ticket.persistence.mocks;
 
 import com.team5.HAPark.ticket.persistence.ITicketPersistence;
 import com.team5.HAPark.ticket.model.Ticket;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,12 +21,12 @@ public class TicketPersistenceMock implements ITicketPersistence {
     }
 
     @Override
-    public Ticket loadTicket(String type) throws SQLException {
+    public Ticket loadTicket(String type) {
         return tickets.get(type);
     }
 
     @Override
-    public List<Ticket> getAllTickets() throws SQLException {
+    public List<Ticket> getAllTickets() {
         List<Ticket> ticketList = new ArrayList<>();
         for (Map.Entry<String,Ticket> ticket : tickets.entrySet()) {
             ticketList.add(ticket.getValue());
