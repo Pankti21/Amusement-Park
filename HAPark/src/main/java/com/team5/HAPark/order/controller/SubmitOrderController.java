@@ -1,21 +1,20 @@
 package com.team5.HAPark.order.controller;
 
-import com.team5.HAPark.cart.model.CartSummary;
 import com.team5.HAPark.cart.model.ICartSummary;
-import com.team5.HAPark.food.DAO.FoodPersistenceFactory;
-import com.team5.HAPark.food.DAO.IFoodPersistenceFactory;
-import com.team5.HAPark.food.FoodService;
-import com.team5.HAPark.food.IFoodOrderItem;
-import com.team5.HAPark.food.IFoodService;
-import com.team5.HAPark.order.FoodOrderFactory;
-import com.team5.HAPark.order.TicketOrderFactory;
+import com.team5.HAPark.food.persistence.FoodPersistenceFactory;
+import com.team5.HAPark.food.persistence.IFoodPersistenceFactory;
+import com.team5.HAPark.food.model.FoodService;
+import com.team5.HAPark.food.model.IFoodOrderItem;
+import com.team5.HAPark.food.model.IFoodService;
+import com.team5.HAPark.order.model.FoodOrderFactory;
+import com.team5.HAPark.order.model.TicketOrderFactory;
 import com.team5.HAPark.order.model.IOrder;
 import com.team5.HAPark.order.model.IOrderService;
 import com.team5.HAPark.order.model.TicketOrderItemAdapter;
-import com.team5.HAPark.ticket.DAO.ITicketPersistenceFactory;
-import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
-import com.team5.HAPark.ticket.ITicketOrderItem;
-import com.team5.HAPark.ticket.ITicketService;
+import com.team5.HAPark.ticket.persistence.ITicketPersistenceFactory;
+import com.team5.HAPark.ticket.persistence.TicketPersistenceFactory;
+import com.team5.HAPark.ticket.model.ITicketOrderItem;
+import com.team5.HAPark.ticket.model.ITicketService;
 import com.team5.HAPark.ticket.model.TicketOrderItem;
 import com.team5.HAPark.database.mysql.MySQLDatabase;
 

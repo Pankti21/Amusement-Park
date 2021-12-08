@@ -1,7 +1,6 @@
 package com.team5.HAPark.ticket.model;
 
-import com.team5.HAPark.ticket.DAO.ITicketPersistence;
-import com.team5.HAPark.ticket.ITicketService;
+import com.team5.HAPark.ticket.persistence.ITicketPersistence;
 
 import java.sql.SQLException;
 import java.util.List;

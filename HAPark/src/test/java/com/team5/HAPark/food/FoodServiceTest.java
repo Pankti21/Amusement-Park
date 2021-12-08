@@ -1,6 +1,7 @@
 package com.team5.HAPark.food;
 
-import com.team5.HAPark.food.DAO.IFoodPersistence;
+import com.team5.HAPark.food.model.FoodService;
+import com.team5.HAPark.food.persistence.IFoodPersistence;
 import com.team5.HAPark.food.mocks.FoodPersistenceMockFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

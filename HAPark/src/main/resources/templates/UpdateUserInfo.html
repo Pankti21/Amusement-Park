@@ -56,6 +56,11 @@
             </td>
           </tr>
         </form>
+        <div th:if="${result != null}">
+          <script th:inline="javascript">
+            window.alert([[${result.resultMessage}]]);
+          </script>
+        </div>
 
         <!--https://www.w3schools.com/howto/howto_js_password_validation.asp-->
       <script type="text/javascript">

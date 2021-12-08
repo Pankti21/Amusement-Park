@@ -1,9 +1,9 @@
 package com.team5.HAPark.cart;
 
 import com.team5.HAPark.cart.model.CartSummary;
-import com.team5.HAPark.food.FoodOrderItem;
-import com.team5.HAPark.food.IFoodOrderItem;
-import com.team5.HAPark.ticket.ITicketOrderItem;
+import com.team5.HAPark.food.model.FoodOrderItem;
+import com.team5.HAPark.food.model.IFoodOrderItem;
+import com.team5.HAPark.ticket.model.ITicketOrderItem;
 import com.team5.HAPark.ticket.model.TicketOrderItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

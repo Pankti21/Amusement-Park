@@ -1,7 +1,7 @@
 package com.team5.HAPark.cart.model;
 
-import com.team5.HAPark.food.IFoodOrderItem;
-import com.team5.HAPark.ticket.ITicketOrderItem;
+import com.team5.HAPark.food.model.IFoodOrderItem;
+import com.team5.HAPark.ticket.model.ITicketOrderItem;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -53,7 +53,7 @@ public class CartSummary implements ICartSummary{
     }
 
     //https://stackoverflow.com/questions/32394592/calculate-the-number-of-items-within-the-a-shopping-cart
-    //Adding the tickets to cart
+
     @Override
     public void addTicketToCart(ITicketOrderItem ticket) {
         if (ticket.getQuantity()!=null && ticket.getQuantity()>0){
@@ -61,7 +61,6 @@ public class CartSummary implements ICartSummary{
         }
     }
 
-    //Adding the food items to cart
     @Override
     public void addFoodToCart(IFoodOrderItem food) {
         if (food.getQuantity()!=null && food.getQuantity()>0){
@@ -69,7 +68,6 @@ public class CartSummary implements ICartSummary{
         }
     }
 
-    //Display the cart items
     @Override
     public void showCart() {
         ListIterator<ITicketOrderItem> ticketIterator = ticket.listIterator();
@@ -82,7 +80,6 @@ public class CartSummary implements ICartSummary{
         }
     }
 
-    //Remove tickets from cart
     @Override
     public void removeTicketFromCart(ITicketOrderItem t) {
         ListIterator<ITicketOrderItem> ticketIterator = ticket.listIterator();
@@ -98,7 +95,6 @@ public class CartSummary implements ICartSummary{
         }
     }
 
-    //Remove Food items from cart
     @Override
     public void removeFoodFromCart(IFoodOrderItem f) {
         ListIterator<IFoodOrderItem> foodIterator = food.listIterator();
@@ -114,7 +110,6 @@ public class CartSummary implements ICartSummary{
         }
     }
 
-    //Get the tickets amount
     @Override
     public double getTicketAmount() {
         ListIterator<ITicketOrderItem> ticketIterator = ticket.listIterator();
@@ -124,9 +119,8 @@ public class CartSummary implements ICartSummary{
             this.ticketAmount = this.ticketAmount + (ticketItem.getQuantity() * ticketItem.getTicketPrice());
             }
         return this.ticketAmount;
-        }
+    }
 
-    //Get the Food items amount
     @Override
     public double getFoodAmount() {
         ListIterator<IFoodOrderItem> foodIterator = food.listIterator();
@@ -138,7 +132,6 @@ public class CartSummary implements ICartSummary{
         return this.foodAmount;
     }
 
-    //Get the total amount to be paid
     @Override
     public double getTotalAmount() {
         totalAmount = getTicketAmount() + getFoodAmount();

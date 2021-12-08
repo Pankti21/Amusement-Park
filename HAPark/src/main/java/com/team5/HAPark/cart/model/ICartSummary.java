@@ -1,7 +1,7 @@
 package com.team5.HAPark.cart.model;
 
-import com.team5.HAPark.food.IFoodOrderItem;
-import com.team5.HAPark.ticket.ITicketOrderItem;
+import com.team5.HAPark.food.model.IFoodOrderItem;
+import com.team5.HAPark.ticket.model.ITicketOrderItem;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.team5.HAPark.ticket.controller;
 
 import com.team5.HAPark.database.mysql.MySQLDatabase;
-import com.team5.HAPark.ticket.DAO.TicketPersistenceFactory;
+import com.team5.HAPark.ticket.persistence.TicketPersistenceFactory;
 import com.team5.HAPark.cart.model.CartSummary;
 import com.team5.HAPark.ticket.model.Ticket;
 import com.team5.HAPark.ticket.model.TicketOrderItem;

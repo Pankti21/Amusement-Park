@@ -1,6 +1,5 @@
 package com.team5.HAPark.cart.controller;
 
-import com.team5.HAPark.cart.model.CartSummary;
 import com.team5.HAPark.cart.model.ICartSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

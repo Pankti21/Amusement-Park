@@ -6,13 +6,9 @@
 </head>
 <body>
 <div th:replace="Header :: header"/>
-<div style=" padding: 20px; background-color: #DEDEDE; text-align: center"
-     th:text="${message}" th:if="${message != null}"></div>
 <table style="margin-left: auto; margin-right: auto;">
     <tbody>
-    <tr>
-        <td style="height: 50px;">Tickets</td>
-    </tr>
+    <td style="height: 50px;">Tickets</td>
     </tbody>
 </table>
 <table  style="margin-left: auto; margin-right: auto;">
@@ -40,6 +36,11 @@
             <td><input type="submit"value="Submit" /><input type="reset" value="Reset" /></td>
         </tr>
     </form>
+    <div th:if="${message != null}">
+        <script th:inline="javascript">
+            window.alert([[${message}]]);
+        </script>
+    </div>
     </tbody>
 </table>
 </body>

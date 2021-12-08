@@ -1,4 +1,5 @@
 package com.team5.HAPark.waitTime.model;
+
 import java.time.LocalTime;
 import java.util.HashMap;
 

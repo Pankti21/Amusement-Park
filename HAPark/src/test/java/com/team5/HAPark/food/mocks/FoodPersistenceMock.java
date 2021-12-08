@@ -1,8 +1,8 @@
 package com.team5.HAPark.food.mocks;
 
-import com.team5.HAPark.food.DAO.IFoodPersistence;
-import com.team5.HAPark.food.Food;
-import com.team5.HAPark.food.Menu;
+import com.team5.HAPark.food.persistence.IFoodPersistence;
+import com.team5.HAPark.food.model.Food;
+import com.team5.HAPark.food.model.Menu;
 
 import java.sql.SQLException;
 import java.util.HashMap;

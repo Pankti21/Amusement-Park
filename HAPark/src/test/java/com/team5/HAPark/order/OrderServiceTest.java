@@ -1,6 +1,6 @@
 package com.team5.HAPark.order;
 
-import com.team5.HAPark.order.DAO.IOrderPersistence;
+import com.team5.HAPark.order.persistence.IOrderPersistence;
 import com.team5.HAPark.order.model.*;
 import com.team5.HAPark.ticket.model.Ticket;
 import com.team5.HAPark.ticket.model.TicketOrderItem;
