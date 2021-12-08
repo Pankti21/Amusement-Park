@@ -5,7 +5,6 @@ import com.team5.HAPark.database.mysql.IMySQLDatabase;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
 import com.team5.HAPark.ride.timeSlot.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Slf4j
 public class RideReservePersistence implements IRideReservePersistence {
 
     private final IMySQLDatabase mySQLDatabase;
