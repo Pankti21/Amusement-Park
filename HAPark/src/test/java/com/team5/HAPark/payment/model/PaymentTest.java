@@ -32,13 +32,13 @@ public class PaymentTest {
 
     @Test
     public void invaliddigit() {
-        Payment p = new Payment("credit", "sdkljfhsdf", "17-03-2018", "2018", "841");
+        Payment p = new Payment("credit", "hs5f3hj8df46fh3r", "17-03-2018", "2018", "841");
         assertEquals(PaymentError.INVALIDIGITFORMAT, p.Validate());
     }
 
     @Test
     public void invaliddigit2() {
-        Payment p = new Payment("credit", "3574747389293745", "14-04-2013", "2013", "dsfg");
+        Payment p = new Payment("credit", "8756354624354657", "14-04-2013", "2013", "hfs");
         assertEquals(PaymentError.INVALIDIGITFORMAT, p.Validate());
     }
 }
