@@ -63,7 +63,7 @@ public class RidePersistence implements IRidePersistence{
     }
 
     public List<HashMap<Integer,Integer>> getAllTimeSlots() throws SQLException {
-        IRidePersistence ridePersistence=new RidePersistence(mySQLDatabase);
+        IRidePersistence ridePersistence=new RidePersistenceFactory().createRidePersistence();
         List<Ride> Rides = ridePersistence.getAllRides();
         List<HashMap<Integer,Integer>> maps = new ArrayList<>();
         for (Ride ride:Rides){

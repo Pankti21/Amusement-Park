@@ -1,5 +1,6 @@
 package com.team5.HAPark.reserveRide.model;
 
+import com.team5.HAPark.reserveRide.persistence.RideReservePersistenceFactory;
 import com.team5.HAPark.ride.model.IRideService;
 import com.team5.HAPark.ride.model.Ride;
 import com.team5.HAPark.ride.model.RideServiceFactory;
@@ -27,7 +28,7 @@ public class RideReserveService implements IRideReserveService {
     }
 
     public void reserve(int rideId, int timeslotId, int reserveSeats) throws SQLException {
-        IRideReservePersistence rideReservePersistence = new RidePersistenceFactory().createRideReservePersistence();
+        IRideReservePersistence rideReservePersistence = new RideReservePersistenceFactory().createRideReservePersistence();
         rideReservePersistence.addReservationToDB(rideId,timeslotId,reserveSeats);
     }
 

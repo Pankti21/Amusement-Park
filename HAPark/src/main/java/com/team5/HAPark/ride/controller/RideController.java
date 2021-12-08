@@ -42,7 +42,7 @@ public class RideController {
     }
 
     @GetMapping("/rides/ground")
-    public String groungRides(Model model) throws SQLException {
+    public String groundRides(Model model) throws SQLException {
         model.addAttribute("groundrides",rideService.getAllGroundRides());
         return "GroundRides";
     }

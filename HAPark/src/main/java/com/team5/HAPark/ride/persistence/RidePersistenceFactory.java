@@ -10,7 +10,6 @@ public class RidePersistenceFactory implements IRidePersistenceFactory{
 
     private static IWaitTimePersistence waitTimePersistence;
     private static IRidePersistence ridePersistence;
-    private static IRideReservePersistence rideReservePersistence;
 
     @Override
     public IWaitTimePersistence createWaitTimePersistence() {
@@ -28,12 +27,5 @@ public class RidePersistenceFactory implements IRidePersistenceFactory{
         return ridePersistence;
     }
 
-    @Override
-    public IRideReservePersistence createRideReservePersistence() {
-        if (rideReservePersistence == null){
-            rideReservePersistence = new RideReservePersistence(MySQLDatabase.getInstance());
-        }
-        return rideReservePersistence;
-    }
 
 }

@@ -9,6 +9,4 @@ public interface IRidePersistenceFactory {
 
     IRidePersistence createRidePersistence();
 
-    IRideReservePersistence createRideReservePersistence();
-
 }
