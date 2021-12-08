@@ -8,16 +8,7 @@ import com.team5.HAPark.waitTime.persistence.WaitTimePersistence;
 
 public class RidePersistenceFactory implements IRidePersistenceFactory{
 
-    private static IWaitTimePersistence waitTimePersistence;
     private static IRidePersistence ridePersistence;
-
-    @Override
-    public IWaitTimePersistence createWaitTimePersistence() {
-        if (waitTimePersistence == null){
-            waitTimePersistence = new WaitTimePersistence(MySQLDatabase.getInstance());
-        }
-        return waitTimePersistence;
-    }
 
     @Override
     public IRidePersistence createRidePersistence() {

@@ -1,14 +1,19 @@
-package com.team5.HAPark.ride.persistence;
+package com.team5.HAPark.waitTime;
 
 import com.team5.HAPark.reserveRide.persistence.IRideReservePersistence;
+import com.team5.HAPark.ride.persistence.IRidePersistence;
+import com.team5.HAPark.ride.persistence.IRidePersistenceFactory;
+import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
 import com.team5.HAPark.waitTime.persistence.IWaitTimePersistence;
+import com.team5.HAPark.waitTime.persistence.IWaitTimePersistenceFactory;
+import com.team5.HAPark.waitTime.persistence.WaitTimePersistenceFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class RidePersistenceFactoryTest {
-
+public class WaitTimePersistenceFactoryTest {
     private IWaitTimePersistence waitTimePersistence1;
     private IWaitTimePersistence waitTimePersistence2;
 
@@ -20,8 +25,11 @@ class RidePersistenceFactoryTest {
 
     @BeforeEach
     void setUp() {
-        IRidePersistenceFactory ridePersistenceFactory1 = new RidePersistenceFactory();
-        IRidePersistenceFactory ridePersistenceFactory2 = new RidePersistenceFactory();
+        IWaitTimePersistenceFactory waitTimePersistenceFactory1 = new WaitTimePersistenceFactory();
+        IWaitTimePersistenceFactory waitTimePersistenceFactory2 = new WaitTimePersistenceFactory();
+
+        waitTimePersistence1 = ridePersistenceFactory1.createWaitTimePersistence();
+        waitTimePersistence2 = ridePersistenceFactory2.createWaitTimePersistence();
 
         ridePersistence1 = ridePersistenceFactory1.createRidePersistence();
         ridePersistence2 = ridePersistenceFactory2.createRidePersistence();

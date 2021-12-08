@@ -5,6 +5,7 @@ import com.team5.HAPark.timeSlot.model.TimeSlot;
 import com.team5.HAPark.ride.persistence.IRidePersistence;
 import com.team5.HAPark.ride.persistence.RidePersistenceFactory;
 import com.team5.HAPark.waitTime.persistence.IWaitTimePersistence;
+import com.team5.HAPark.waitTime.persistence.WaitTimePersistenceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class WaitTimeService {
 
     private IRidePersistence ridePersistence = new RidePersistenceFactory().createRidePersistence();
-    private IWaitTimePersistence waitTimePersistence = new RidePersistenceFactory().createWaitTimePersistence();
+    private IWaitTimePersistence waitTimePersistence = new WaitTimePersistenceFactory().createWaitTimePersistence();
 
     public WaitTimeService(IRidePersistence ridePersistence) {
         this.ridePersistence = ridePersistence;
