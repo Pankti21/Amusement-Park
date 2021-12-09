@@ -68,3 +68,17 @@ deploy_prod:
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
       when: manual
+
+
+deploy_release:
+  stage: deploy
+  tags:
+    - dalfcs_docker_kvm
+    - dalfcs_gitlab_docker_ci
+  image: ruby:latest
+  script:
+    - cd HAPark
+    - dpl --provider=heroku --app=$HEROKU_APP_PROD --api-key=$HEROKU_API_KEY
+  rules:
+    - if: $CI_COMMIT_BRANCH == "release"
+      when: always
